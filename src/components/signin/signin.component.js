@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import './signin.style.scss'
+import { connect } from "react-redux";
+import { setCurrentUser } from "../../redux/user/user.actions";
 
-const SignIn = () => {
+const SignIn = ({ setCurrentUser }) => {
     const [userCredentials, setCredentials] = useState({
         email: '',
         password: ''
@@ -15,6 +17,7 @@ const SignIn = () => {
 
     const handleButtonClick = () => {
         console.log(userCredentials)
+        setCurrentUser(userCredentials.email)
     }
 
     return (
@@ -29,4 +32,8 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+const mapDispatchToProps = dispatch => ({
+    setCurrentUser: name => dispatch(setCurrentUser(name))
+})
+
+export default connect(null, mapDispatchToProps)(SignIn)
