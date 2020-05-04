@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import './signin.style.scss'
 import { connect } from "react-redux";
-import { setCurrentUser } from "../../redux/user/user.actions";
+import { loginUser } from "../../redux/user/user.actions";
 
-const SignIn = ({ setCurrentUser }) => {
+const SignIn = ({ login }) => {
     const [userCredentials, setCredentials] = useState({
         email: '',
         password: ''
@@ -15,25 +15,27 @@ const SignIn = ({ setCurrentUser }) => {
         setCredentials({ ...userCredentials, [name]: value })
     }
 
-    const handleButtonClick = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
         console.log(userCredentials)
-        setCurrentUser(userCredentials.email)
+        login(userCredentials.email, userCredentials.password)
     }
 
     return (
         <div className='sign-in'>
             <span>Sign in with your email and password</span>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input name='email' type='email' value={email} onChange={handleChange} required/>
                 <input name='password' type='password' value={password} onChange={handleChange} required/>
-                <button type='submit' onClick={handleButtonClick}> Sign in</button>
+                <button type='submit' > Sign in</button>
             </form>
         </div>
     )
 }
 
 const mapDispatchToProps = dispatch => ({
-    setCurrentUser: name => dispatch(setCurrentUser(name))
+    login: (email, password) => dispatch(loginUser(email, password))
 })
+
 
 export default connect(null, mapDispatchToProps)(SignIn)
