@@ -1,6 +1,7 @@
 import React from "react";
-import {connect} from "react-redux";
-import {fetchCategories} from '../../../redux/catalog/catalog.actions'
+import { connect } from "react-redux";
+import { fetchCategories } from '../../../redux/catalog/catalog.actions'
+import Category from "../category/category.component";
 
 class Categories extends React.Component {
 
@@ -10,9 +11,9 @@ class Categories extends React.Component {
 
     render() {
         console.log(this.props)
-        const {categories} = this.props
+        const { categories } = this.props
         return (
-            categories.map(category => <h1>{category.name}</h1>)
+            categories.map(category => <Category category={category}/>)
         )
     }
 
