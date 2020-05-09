@@ -1,18 +1,42 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import './signin.style.scss'
-import { connect } from "react-redux";
-import { loginUser } from "../../redux/user/user.actions";
+import {connect} from "react-redux";
+import {loginUser} from "../../redux/user/user.actions";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import {makeStyles} from '@material-ui/core/styles';
+import {Container, Typography, Link, TextField, CssBaseline, Button, Avatar} from '@material-ui/core';
 
-const SignIn = ({ login }) => {
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
+
+const SignIn = ({login}) => {
+    const classes = useStyles();
     const [userCredentials, setCredentials] = useState({
         email: '',
         password: ''
     })
-    const { email, password } = userCredentials;
+    const {email, password} = userCredentials;
 
     const handleChange = event => {
-        const { value, name } = event.target
-        setCredentials({ ...userCredentials, [name]: value })
+        const {value, name} = event.target
+        setCredentials({...userCredentials, [name]: value})
     }
 
     const handleSubmit = (e) => {
@@ -23,12 +47,57 @@ const SignIn = ({ login }) => {
 
     return (
         <div className='sign-in'>
-            <span>Sign in with your email and password</span>
-            <form onSubmit={handleSubmit}>
-                <input name='email' type='email' value={email} onChange={handleChange} required/>
-                <input name='password' type='password' value={password} onChange={handleChange} required/>
-                <button type='submit' > Sign in</button>
-            </form>
+            <Container component="main" maxWidth="xs">
+                <CssBaseline/>
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon/>
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
+                    </Typography>
+                    <form className={classes.form} onSubmit={handleSubmit}>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                            value={email}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            value={password}
+                            onChange={handleChange}
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Sign In
+                        </Button>
+                        <Link href="#" variant="body2">
+                            {"Don't have an account? Sign Up"}
+                        </Link>
+                    </form>
+                </div>
+            </Container>
         </div>
     )
 }
