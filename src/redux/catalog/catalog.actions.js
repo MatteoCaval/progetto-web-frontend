@@ -15,9 +15,32 @@ const categories = [
     }
 ]
 
+const products = [
+    {
+        id: 1,
+        name: "Primo Prodotto"
+    },
+    {
+        id: 2,
+        name: "Secondo Prodotto"
+    },
+    {
+        id: 3,
+        name: "Terzo Prodotto"
+    }
+]
+
+// TODO da far diventare asincrone con i vari start, success/failure
 export const fetchCategories = () => {
     return {
         type: CatalogActionType.FETCH_CATEGORIES_SUCCESS,
         payload: categories
+    }
+}
+
+export const fetchProductsForCategory = () => {
+    return {
+        type: CatalogActionType.FETCH_PRODUCT_SUCCESS,
+        payload: products
     }
 }
