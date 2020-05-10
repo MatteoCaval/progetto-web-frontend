@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { fetchCategories } from '../../../redux/catalog/catalog.actions'
 import Category from "../category/category.component";
 
-class Categories extends React.Component {
+class CategoriesPage extends React.Component {
 
     componentDidMount() {
         this.props.fetchCategories()
@@ -33,4 +33,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoriesPage)

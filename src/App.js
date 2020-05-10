@@ -4,7 +4,7 @@ import HelloUser from "./components/hellouser.component";
 import {Switch, Route} from 'react-router-dom'
 import SignIn from "./components/signin/signin.component";
 import MenuAppBar from "./components/appbar/menuappbar.component";
-import Categories from "./components/catalog/categories/categories.component";
+import Categories from "./components/catalog/categories/categoriespage.component";
 
 function App() {
     return (
