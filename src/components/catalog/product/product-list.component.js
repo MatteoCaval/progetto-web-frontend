@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 class ProductList extends React.Component {
 
     componentDidMount() {
-        console.log('a')
         this.props.fetchCategoryProducs(this.props.match.params.categoryId)
     }
 

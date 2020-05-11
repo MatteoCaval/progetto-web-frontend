@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import ProductList from "../../components/catalog/product/product-list.component";
 
 const CatalogPage = ({ match }) => {
-    console.log('b')
+
     return (
         <div>
             <Route
