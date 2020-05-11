@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import { Menu, MenuItem ,IconButton, Typography, Toolbar, AppBar} from '@material-ui/core';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -24,13 +25,17 @@ const MenuAppBar = ({ currentUser, history }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    const handleMenu = (event) => {
+    const handleProfileMenu = (event) => {
         setAnchorEl(event.currentTarget);
         console.log(currentUser)
         if (!currentUser) {
             history.push('/signin')
         }
     };
+
+    const handleCartMenu = (e) => {
+
+    }
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -56,7 +61,15 @@ const MenuAppBar = ({ currentUser, history }) => {
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
-                            onClick={handleMenu}
+                            onClick={handleCartMenu}
+                            color="inherit">
+                            <ShoppingCart/>
+                        </IconButton>
+                        <IconButton
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleProfileMenu}
                             color="inherit">
                             <AccountCircle/>
                         </IconButton>
