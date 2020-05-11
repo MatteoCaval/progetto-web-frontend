@@ -1,9 +1,9 @@
 import React from "react";
+import { fetchCategories } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
-import { fetchCategories } from '../../../redux/catalog/catalog.actions'
-import Category from "../category/category.component";
+import Category from "./category-item.component";
 
-class CategoriesPage extends React.Component {
+class CategoryList extends React.Component {
 
     componentDidMount() {
         this.props.fetchCategories()
@@ -16,10 +16,7 @@ class CategoriesPage extends React.Component {
             categories.map(category => <Category category={category}/>)
         )
     }
-
-
 }
-
 
 const mapStateToProps = (state) => {
     return {
@@ -33,4 +30,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesPage)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryList)
