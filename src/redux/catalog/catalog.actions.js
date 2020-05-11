@@ -38,7 +38,7 @@ export const fetchCategories = () => {
     }
 }
 
-export const fetchProductsForCategory = () => {
+export const fetchProductsForCategory = (categoryId) => {
     return {
         type: CatalogActionType.FETCH_PRODUCT_SUCCESS,
         payload: products

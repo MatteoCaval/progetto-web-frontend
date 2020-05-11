@@ -12,8 +12,8 @@ function App() {
             <HelloUser/>
             <MenuAppBar />
             <Switch>
-                <Route exact path='/' component={Categories} />
                 <Route exact path="/signin" component={SignIn}/>
+                <Route path='/' component={Categories} />
             </Switch>
         </div>
     );

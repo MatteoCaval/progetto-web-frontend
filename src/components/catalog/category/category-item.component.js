@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 const Category = ({ category, history, match }) => {
+    console.log(history)
     return (
         <h1
             key={category.id}
