@@ -1,5 +1,16 @@
 import React from "react";
-import {makeStyles, Card, CardMedia, CardActionArea, CardContent, Typography, CardActions, Button } from "@material-ui/core";
+import {
+    Button,
+    Card,
+    CardActionArea,
+    CardActions,
+    CardContent,
+    CardMedia,
+    makeStyles,
+    Typography
+} from "@material-ui/core";
+import { addToCart } from "../../../redux/cart/cart.actions";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
     media: {
@@ -7,8 +18,9 @@ const useStyles = makeStyles({
     },
 });
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, addProductToCart }) => {
     const classes = useStyles();
+
     return (
         <Card>
             <CardActionArea>
@@ -20,13 +32,17 @@ const ProductItem = ({ product }) => {
                     <Typography variant='h6' color='textPrimary'>
                         {product.name}
                     </Typography>
-                    <Typography variant='h7' color='textPrimary'>
+                    <Typography color='textPrimary'>
                         {product.price}
                     </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size='small' color='primary'>
+                <Button
+                    size='small'
+                    color='primary'
+                    onClick={() => addProductToCart(product)}
+                >
                     Add to cart
                 </Button>
             </CardActions>
@@ -36,4 +52,10 @@ const ProductItem = ({ product }) => {
 
 }
 
-export default ProductItem
+const mapDispatchToProps = dispatch => {
+    return {
+        addProductToCart: product => dispatch(addToCart(product))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ProductItem)

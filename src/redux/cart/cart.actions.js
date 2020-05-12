@@ -26,3 +26,15 @@ export const fetchCartFailed = (error) => {
         payload: error
     }
 }
+
+export const addToCart = (product) => {
+    return addToCartSuccess(product)
+}
+
+export const addToCartSuccess = (product) => {
+    return {
+        type: CartActionTypes.ADD_ITEM_SUCCESS,
+        payload: product
+    }
+}
+
