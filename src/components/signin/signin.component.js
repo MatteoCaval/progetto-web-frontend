@@ -65,7 +65,6 @@ const SignIn = ({login}) => {
                             label="Email Address"
                             name="email"
                             autoComplete="email"
-                            autoFocus
                             value={email}
                             onChange={handleChange}
                         />
