@@ -3,7 +3,7 @@ import './App.scss';
 import { Route, Switch } from 'react-router-dom'
 import SignIn from "./components/signin/signin.component";
 import MenuAppBar from "./components/appbar/menuappbar.component";
-import Categories from "./pages/catalog/catalogpage.component";
+import Categories from "./components/catalog/catalogpage.component";
 import CartPage from "./components/cart/cartpage.component";
 
 

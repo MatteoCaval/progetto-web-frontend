@@ -1,7 +1,7 @@
 import React from "react";
-import CategoryList from "../../components/catalog/category/category-list.component";
+import CategoryList from "./category/category-list.component";
 import { Route } from "react-router-dom";
-import ProductList from "../../components/catalog/product/product-list.component";
+import ProductList from "./product/product-list.component";
 import { Container } from '@material-ui/core'
 
 const CatalogPage = ({ match }) => {
