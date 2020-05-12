@@ -2,6 +2,7 @@ import React from "react";
 import { fetchProductsForCategory } from "../../../redux/catalog/catalog.actions";
 import ProductItem from "./product-item.component";
 import { connect } from "react-redux";
+import { Grid } from "@material-ui/core";
 
 class ProductList extends React.Component {
 
@@ -11,7 +12,20 @@ class ProductList extends React.Component {
 
     render() {
         const { products } = this.props
-        return products.map(product => <ProductItem key={product.id} product={product}/>)
+        return (
+            <Grid container spacing={3}>
+                {
+                    products.map(product => {
+                        return (
+                            <Grid item xs={12} sm={4}>
+                                <ProductItem key={product.id} product={product}/>
+                            </Grid>
+                        )
+                    })
+                }
+            </Grid>
+
+        )
     }
 
 }

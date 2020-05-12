@@ -18,15 +18,21 @@ const categories = [
 const products = [
     {
         id: 1,
-        name: "Primo Prodotto"
+        name: "Primo Prodotto",
+        price: '6€',
+        image: 'https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/05/piadina-con-il-bimby/jcr:content/header-par/image-single.img10.jpg/1560520652683.jpg'
     },
     {
         id: 2,
-        name: "Secondo Prodotto"
+        name: "Secondo Prodotto",
+        price: '5€',
+        image: 'https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/05/piadina-con-il-bimby/jcr:content/header-par/image-single.img10.jpg/1560520652683.jpg'
     },
     {
         id: 3,
-        name: "Terzo Prodotto"
+        name: "Terzo Prodotto",
+        price: '4€',
+        image: 'https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/05/piadina-con-il-bimby/jcr:content/header-par/image-single.img10.jpg/1560520652683.jpg'
     }
 ]
 
