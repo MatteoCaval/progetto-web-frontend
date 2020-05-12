@@ -35,7 +35,7 @@ const MenuAppBar = ({ currentUser, history }) => {
     };
 
     const handleCartMenu = (e) => {
-
+        history.push('/cart')
     }
 
     const handleClose = () => {
@@ -55,14 +55,16 @@ const MenuAppBar = ({ currentUser, history }) => {
                     </IconButton>
                     <Typography variant="h6" className={classes.title} onClick={handleLogoClick}>FoodDelivery</Typography>
                     <div>
-                        <IconButton
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleCartMenu}
-                            color="inherit">
-                            <ShoppingCart/>
-                        </IconButton>
+                        {currentUser && (
+                            <IconButton
+                                aria-label="account of current user"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={handleCartMenu}
+                                color="inherit">
+                                <ShoppingCart/>
+                            </IconButton>
+                        )}
                         <IconButton
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
