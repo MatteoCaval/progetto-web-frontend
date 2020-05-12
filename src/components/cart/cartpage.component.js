@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 const CartPage = ({ fetchCart, cart }) => {
     useEffect(() => {
         fetchCart()
-    }, [])
+    }, [fetchCart])
 
     return (
         <div>
