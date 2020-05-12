@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { fetchCart } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
+import CartProductItem from "./cartproductitem.component";
 
 const CartPage = ({ fetchCart, cart }) => {
     useEffect(() => {
@@ -10,7 +11,7 @@ const CartPage = ({ fetchCart, cart }) => {
     return (
         <div>
             {
-                cart.products.map(product => <h3 key={product.id}>{`${product.name} x ${product.quantity}`}</h3>)
+                cart.products.map(product => <CartProductItem key={product.id} product={product}/>)
             }
         </div>
     )
