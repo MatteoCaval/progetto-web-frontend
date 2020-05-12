@@ -1,5 +1,5 @@
 import { UserActionTypes } from '../../redux/user/user.actions'
-import AuthActionType from "../auth/authActionType";
+import AuthActionType from "../auth/auth.actionType";
 
 const INITIAL_STATE = {
     currentUser: "" // set to null

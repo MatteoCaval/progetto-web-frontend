@@ -1,5 +1,5 @@
 import axios from 'axios'
-import AuthActionType from "../auth/authActionType";
+import AuthActionType from "../auth/auth.actionType";
 
 export const UserActionTypes = {
     SET_USER: 'SET_USER'
