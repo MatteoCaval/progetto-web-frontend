@@ -17,7 +17,7 @@ class ProductList extends React.Component {
                 {
                     products.map(product => {
                         return (
-                            <Grid item xs={12} sm={4}>
+                            <Grid key={product.id} item xs={12} sm={4}>
                                 <ProductItem key={product.id} product={product}/>
                             </Grid>
                         )
