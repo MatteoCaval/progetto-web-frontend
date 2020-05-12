@@ -10,6 +10,7 @@ import { withRouter } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        marginBottom: theme.spacing(10)
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -47,15 +48,12 @@ const MenuAppBar = ({ currentUser, history }) => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="fixed">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" className={classes.title} onClick={handleLogoClick}>
-                        {currentUser ? currentUser.name : 'FoodDelivery'}
-                    </Typography>
-
+                    <Typography variant="h6" className={classes.title} onClick={handleLogoClick}>FoodDelivery</Typography>
                     <div>
                         <IconButton
                             aria-label="account of current user"
