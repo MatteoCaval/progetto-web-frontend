@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Container, Grid, Link, TextField, Button, Avatar, makeStyles, Typography } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
+import { registerUser } from "../../redux/user/user.actions";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -22,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SignUp = () => {
+const SignUp = ({ registerUser }) => {
     const classes = useStyles();
 
     const [userData, setUserData] = useState({
@@ -35,7 +37,7 @@ const SignUp = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(userData)
+        registerUser(userData)
     }
 
     const handleChange = event => {
@@ -128,4 +130,10 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+const mapDispatchToProps = dispatch => {
+    return {
+        registerUser: (userData) => dispatch(registerUser(userData))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SignUp)
