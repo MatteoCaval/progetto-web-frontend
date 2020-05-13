@@ -32,7 +32,7 @@ export const loginFailed = errorMessage => {
 // TODO create auth package and move inside it
 export const loginUser = (email, password) => {
     return dispatch => {
-        axios.post('http://localhost:3001/user/login', { email, password })
+        axios.post('http://localhost:3001/auth/signin ', { email, password })
             .then(result => {
                 dispatch(loginSuccess(result.data))
             })
