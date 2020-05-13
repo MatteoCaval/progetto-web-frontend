@@ -1,6 +1,7 @@
 import React from "react";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Container, Grid, Link, TextField, Button, Avatar, makeStyles, Typography } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -96,7 +97,7 @@ const SignUp = () => {
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link component={RouterLink} to='/signin' variant="body2">
                                 Already have an account? Sign in
                             </Link>
                         </Grid>

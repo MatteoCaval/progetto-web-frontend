@@ -5,6 +5,7 @@ import {loginUser} from "../../redux/user/user.actions";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles} from '@material-ui/core/styles';
 import {Container, Typography, Link, TextField, CssBaseline, Button, Avatar} from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -90,7 +91,7 @@ const SignIn = ({login}) => {
                         >
                             Sign In
                         </Button>
-                        <Link href="#" variant="body2">
+                        <Link component={RouterLink} to='/signup' variant="body2">
                             {"Don't have an account? Sign Up"}
                         </Link>
                     </form>
