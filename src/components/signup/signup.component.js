@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Container, Grid, Link, TextField, Button, Avatar, makeStyles, Typography } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
@@ -25,9 +25,25 @@ const useStyles = makeStyles((theme) => ({
 const SignUp = () => {
     const classes = useStyles();
 
+    const [userData, setUserData] = useState({
+        email: '',
+        password: '',
+        name: '',
+        surname: '',
+        role: 'consumer'
+    })
+
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(userData)
     }
+
+    const handleChange = event => {
+        const { value, name } = event.target
+        setUserData({ ...userData, [name]: value })
+    }
+
+    const { name, surname, email, password } = userData
 
     return (
         <Container component="main" maxWidth="xs">
@@ -42,13 +58,14 @@ const SignUp = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                autoComplete="fname"
-                                name="firstName"
+                                name="name"
                                 variant="outlined"
                                 required
                                 fullWidth
                                 id="firstName"
+                                value={name}
                                 label="First Name"
+                                onChange={handleChange}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -56,10 +73,11 @@ const SignUp = () => {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="lastName"
-                                label="Last Name"
-                                name="lastName"
-                                autoComplete="lname"
+                                id="surname"
+                                value={surname}
+                                label="Surname"
+                                name="surname"
+                                onChange={handleChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -70,7 +88,8 @@ const SignUp = () => {
                                 id="email"
                                 label="Email Address"
                                 name="email"
-                                autoComplete="email"
+                                value={email}
+                                onChange={handleChange}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -82,7 +101,8 @@ const SignUp = () => {
                                 label="Password"
                                 type="password"
                                 id="password"
-                                autoComplete="current-password"
+                                value={password}
+                                onChange={handleChange}
                             />
                         </Grid>
                     </Grid>
