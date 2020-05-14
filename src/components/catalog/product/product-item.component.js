@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Button,
     Card,
@@ -25,6 +25,10 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
     const navigateToProductDetail = () => {
         history.push(`${match.url}/${product._id}`)
     }
+
+    useEffect( () => {
+        // fare qua chiamata per dettaglio prodotto
+    }, [])
 
     return (
         <Card>
