@@ -58,3 +58,32 @@ export const fetchProductsForCategory = (categoryId) => {
         payload: products
     }
 }
+
+export const fetchProduct = (productId) => {
+    return dispatch => {
+        dispatch(fetchProductPending())
+        axios.get(`${Config.API_BASE_URL}/catalog/products/${productId}`)
+            .then(result => dispatch(fetchProductSuccess(result.data)))
+            .catch(error => dispatch(fetchProductFailed(error)))
+    }
+}
+
+export const fetchProductSuccess = (product) => {
+    return {
+        type: CatalogActionType.FETCH_PRODUCT_SUCCESS,
+        payload: product
+    }
+}
+
+export const fetchProductFailed = error => {
+    return {
+        type: CatalogActionType.FETCH_PRODUCT_FAILED,
+        payload: error
+    }
+}
+
+export const fetchProductPending = () => {
+    return {
+        type: CatalogActionType.FETCH_CATEGORIES_PENDING
+    }
+}
