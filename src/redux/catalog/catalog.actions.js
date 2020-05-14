@@ -1,19 +1,6 @@
 import CatalogActionType from "./catalog.types";
-
-const categories = [
-    {
-        id: 1,
-        name: "Prima categoria"
-    },
-    {
-        id: 2,
-        name: "Seconda categoria"
-    },
-    {
-        id: 3,
-        name: "Terza categoria"
-    }
-]
+import axios from 'axios'
+import Config from "../../config";
 
 const products = [
     {
@@ -36,11 +23,32 @@ const products = [
     }
 ]
 
-// TODO da far diventare asincrone con i vari start, success/failure
 export const fetchCategories = () => {
+    return dispatch => {
+        dispatch(fetchCategoriesPending())
+        axios.get(`${Config.API_BASE_URL}/catalog/categories`)
+            .then(result => dispatch(fetchCategoriesSuccess(result.data)))
+            .catch(error => dispatch(fetchCategoriesFailed(error)))
+    }
+}
+
+export const fetchCategoriesSuccess = (categories) => {
     return {
         type: CatalogActionType.FETCH_CATEGORIES_SUCCESS,
         payload: categories
+    }
+}
+
+export const fetchCategoriesFailed = (error) => {
+    return {
+        type: CatalogActionType.FETCH_CATEGORIES_FAILED,
+        payload: error
+    }
+}
+
+export const fetchCategoriesPending = () => {
+    return {
+        type: CatalogActionType.FETCH_CATEGORIES_PENDING
     }
 }
 
