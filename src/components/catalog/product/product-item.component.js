@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { addToCart } from "../../../redux/cart/cart.actions";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles({
     media: {
@@ -18,12 +19,16 @@ const useStyles = makeStyles({
     },
 });
 
-const ProductItem = ({ product, addProductToCart }) => {
+const ProductItem = ({ product, addProductToCart, history, match }) => {
     const classes = useStyles();
+
+    const navigateToProductDetail = () => {
+        history.push(`${match.url}/${product._id}`)
+    }
 
     return (
         <Card>
-            <CardActionArea>
+            <CardActionArea onClick={navigateToProductDetail}>
                 <CardMedia
                     className={classes.media}
                     image={product.image}
@@ -58,4 +63,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(ProductItem)
+export default withRouter(connect(null, mapDispatchToProps)(ProductItem))

@@ -3,6 +3,8 @@ import { fetchProductsForCategory } from "../../../redux/catalog/catalog.actions
 import ProductItem from "./product-item.component";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
+import ProductPage from "./product-page.component";
+import { Route, Switch } from "react-router-dom";
 
 class ProductList extends React.Component {
 
@@ -13,17 +15,26 @@ class ProductList extends React.Component {
     render() {
         const { products } = this.props
         return (
-            <Grid container spacing={3}>
-                {
-                    products.map(product => {
-                        return (
-                            <Grid key={product.id} item xs={12} sm={4}>
-                                <ProductItem key={product.id} product={product}/>
-                            </Grid>
-                        )
-                    })
-                }
-            </Grid>
+            <div>
+                <Switch>
+                    <Route path={`${this.props.match.url}/:productId`} component={ProductPage}/>
+                    <Route path={this.props.match.url}>
+                        <Grid container spacing={3}>
+                            {
+                                products.map(product => {
+                                    return (
+                                        <Grid key={product.id} item xs={12} sm={4}>
+                                            <ProductItem key={product.id} product={product}/>
+                                        </Grid>
+                                    )
+                                })
+                            }
+                        </Grid>
+                    </Route>
+                </Switch>
+
+
+            </div>
 
         )
     }
