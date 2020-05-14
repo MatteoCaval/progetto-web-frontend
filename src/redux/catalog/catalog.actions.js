@@ -2,27 +2,6 @@ import CatalogActionType from "./catalog.types";
 import axios from 'axios'
 import Config from "../../config";
 
-const products = [
-    {
-        id: 1,
-        name: "Primo Prodotto",
-        price: '6€',
-        image: 'https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/05/piadina-con-il-bimby/jcr:content/header-par/image-single.img10.jpg/1560520652683.jpg'
-    },
-    {
-        id: 2,
-        name: "Secondo Prodotto",
-        price: '5€',
-        image: 'https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/05/piadina-con-il-bimby/jcr:content/header-par/image-single.img10.jpg/1560520652683.jpg'
-    },
-    {
-        id: 3,
-        name: "Terzo Prodotto",
-        price: '4€',
-        image: 'https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/05/piadina-con-il-bimby/jcr:content/header-par/image-single.img10.jpg/1560520652683.jpg'
-    }
-]
-
 export const fetchCategories = () => {
     return dispatch => {
         dispatch(fetchCategoriesPending())
@@ -53,9 +32,32 @@ export const fetchCategoriesPending = () => {
 }
 
 export const fetchProductsForCategory = (categoryId) => {
+    return dispatch => {
+        dispatch(fetchProductForCategoryPending())
+        axios.get(`${Config.API_BASE_URL}/catalog/products/${categoryId}`)
+            .then(result => dispatch(fetchProductForCategorySuccess(result.data)))
+            .catch(error => dispatch(fetchProductForCategoryFailed(error)))
+    }
+}
+
+
+export const fetchProductForCategorySuccess = (products) => {
     return {
-        type: CatalogActionType.FETCH_PRODUCT_SUCCESS,
+        type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_SUCCESS,
         payload: products
+    }
+}
+
+export const fetchProductForCategoryFailed = (error) => {
+    return {
+        type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_FAILED,
+        payload: error
+    }
+}
+
+export const fetchProductForCategoryPending = () => {
+    return {
+        type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_PENDING
     }
 }
 

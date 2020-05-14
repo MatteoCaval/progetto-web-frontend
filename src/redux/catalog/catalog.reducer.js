@@ -17,6 +17,11 @@ const catalogReducer = (state = INITIAL_STATE, action = {}) => {
                 ...state,
                 products: action.payload
             }
+        case CatalogActionType.FETCH_CATEGORY_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                products: action.payload
+            }
         default:
             return state
     }

@@ -7,7 +7,7 @@ import { Grid } from "@material-ui/core";
 class ProductList extends React.Component {
 
     componentDidMount() {
-        this.props.fetchCategoryProducs(this.props.match.params.categoryId)
+        this.props.fetchCategoryProducs(this.props.match.params.categoryName)
     }
 
     render() {

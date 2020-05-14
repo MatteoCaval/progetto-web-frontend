@@ -5,7 +5,7 @@ const Category = ({ category, history, match }) => {
     return (
         <h1
             key={category.id}
-            onClick={() => history.push(`${match.url}${category.name}`)}>
+            onClick={() => history.push(`${match.url}${category.id}`)}>
             {category.name}
         </h1>
     )
