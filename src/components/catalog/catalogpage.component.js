@@ -13,7 +13,7 @@ const CatalogPage = ({ match }) => {
                 path={`${match.path}`}
                 component={CategoryList}/>
             <Route
-                path={`${match.path}:categoryName`}
+                path={`${match.path}:categoryId`}
                 component={ProductList}
             />
         </Container>
