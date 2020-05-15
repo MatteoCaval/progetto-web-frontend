@@ -1,0 +1,14 @@
+.root {
+    display: flex;
+    flex-direction: row;
+}
+
+.details {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.media {
+    height: 12em;
+}

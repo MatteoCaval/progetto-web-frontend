@@ -1,69 +1,58 @@
 import React, { useEffect } from "react";
 import {
-    Button,
     Card,
     CardActionArea,
-    CardActions,
     CardContent,
     CardMedia,
-    makeStyles,
     Typography,
-    Box
+    IconButton
 } from "@material-ui/core";
 import { addToCart } from "../../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
 import { withRouter } from "react-router-dom";
+import "./product-item.style.scss";
 
-const useStyles = makeStyles({
-    media: {
-        height: 140,
-    },
-});
 
 const ProductItem = ({ product, addProductToCart, history, match }) => {
-    const classes = useStyles();
 
     const navigateToProductDetail = () => {
         history.push(`${match.url}/${product._id}`)
     }
 
-    useEffect( () => {
+    useEffect(() => {
         // fare qua chiamata per dettaglio prodotto
     }, [])
 
     return (
         <Card>
-        <Box flexDirection="row">
-            <CardActionArea onClick={navigateToProductDetail}>
-                <CardMedia
-                    className={classes.media}
-                    image={product.image}
-                />
+        <CardActionArea onClick={navigateToProductDetail}>
+            <CardMedia
+                className='media'
+                image={product.image}
+            />
+
+            <div className='root'>
                 <CardContent>
                     <Typography variant='h6' color='textPrimary'>
                         {product.name}
                     </Typography>
                     <Typography color='textPrimary'>
-                        {product.price}
+                        {product.price}€
                     </Typography>
                 </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Button
-                    size='small'
-                    color='primary'
-                    variant='contained'
-                    onClick={() => addProductToCart(product)}
-                    startIcon={<AddToCartIcon/>}
-                >
-                    Add to cart
-                </Button>
-            </CardActions>
-            </Box>
-        </Card>
-    )
 
+                <div className="details">
+                    <IconButton 
+                        color='primary'
+                        onClick={() => addProductToCart(product)}>
+                    <AddToCartIcon />
+                    </IconButton>
+                </div>
+            </div>
+        </CardActionArea>
+    </Card>
+    )
 }
 
 const mapDispatchToProps = dispatch => {

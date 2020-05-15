@@ -23,11 +23,9 @@ const Category = ({ category, history, match }) => {
                 <CardMedia
                     className='media'
                     image={category.image}
-                    xs={6} sm={2}
                 />
                 <CardContent
-                    className='content'
-                    xs={6} sm={2}>
+                    className='content'>
                     <Typography className='category-title' variant='h6' color='textPrimary'>
                         {category.name}
                     </Typography>
