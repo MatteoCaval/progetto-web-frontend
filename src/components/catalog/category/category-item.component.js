@@ -3,15 +3,11 @@ import { withRouter } from "react-router-dom";
 import "./category-item.style.scss";
 
 import {
-    Button,
     Card,
     CardActionArea,
-    CardActions,
     CardContent,
     CardMedia,
-    makeStyles,
     Typography,
-    Container
 } from "@material-ui/core";
 
 const Category = ({ category, history, match }) => {
