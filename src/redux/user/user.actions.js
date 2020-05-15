@@ -65,3 +65,28 @@ export const registerUser = (user) => {
             .catch(error => dispatch(registrationFailed(error)))
     }
 }
+
+export const logout = () => {
+    return (dispatch, getState) => {
+        const token = getState().user.currentUser.token
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+        axios.post(`${Config.API_BASE_URL}/auth/logout`)
+            .then(result => {
+                dispatch(logoutSuccess())
+            })
+            .catch(error => dispatch(logoutFailed(error)))
+
+    }
+}
+
+export const logoutSuccess = () => {
+    return {
+        type: AuthActionType.LOGOUT_SUCCESS
+    }
+}
+export const logoutFailed = (error) => {
+    return {
+        type: AuthActionType.LOGOUT_FAILED,
+        payload: error
+    }
+}

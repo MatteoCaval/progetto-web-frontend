@@ -6,6 +6,7 @@ import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import { Menu, MenuItem ,IconButton, Typography, Toolbar, AppBar} from '@material-ui/core';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { logout } from "../../redux/user/user.actions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const MenuAppBar = ({ currentUser, history }) => {
+const MenuAppBar = ({ currentUser, history, logout }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -88,7 +89,7 @@ const MenuAppBar = ({ currentUser, history }) => {
                                 open={open}
                                 onClose={handleClose}>
                                 <MenuItem onClick={handleClose}>My Orders</MenuItem>
-                                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                <MenuItem onClick={() => logout()}>Logout</MenuItem>
                             </Menu>
                         )}
                     </div>
@@ -105,4 +106,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(MenuAppBar))
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logout())
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MenuAppBar))
