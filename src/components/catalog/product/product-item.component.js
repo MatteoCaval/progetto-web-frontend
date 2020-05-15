@@ -1,12 +1,5 @@
 import React, { useEffect } from "react";
-import {
-    Card,
-    CardActionArea,
-    CardContent,
-    CardMedia,
-    Typography,
-    IconButton
-} from "@material-ui/core";
+import { Card, CardActionArea, CardContent, CardMedia, IconButton, Typography } from "@material-ui/core";
 import { addToCart } from "../../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
@@ -26,32 +19,32 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
 
     return (
         <Card>
-        <CardActionArea onClick={navigateToProductDetail}>
-            <CardMedia
-                className='media'
-                image={product.image}
-            />
+            <CardActionArea onClick={navigateToProductDetail}>
+                <CardMedia
+                    className='media'
+                    image={product.image}
+                />
 
-            <div className='root'>
-                <CardContent>
-                    <Typography variant='h6' color='textPrimary'>
-                        {product.name}
-                    </Typography>
-                    <Typography color='textPrimary'>
-                        {product.price}€
-                    </Typography>
-                </CardContent>
+                <div className='root'>
+                    <CardContent>
+                        <Typography variant='h6' color='textPrimary'>
+                            {product.name}
+                        </Typography>
+                        <Typography color='textPrimary'>
+                            {product.price}€
+                        </Typography>
+                    </CardContent>
 
-                <div className="details">
-                    <IconButton 
-                        color='primary'
-                        onClick={() => addProductToCart(product)}>
-                    <AddToCartIcon />
-                    </IconButton>
+                    <div className="details">
+                        <IconButton
+                            color='primary'
+                            onClick={() => addProductToCart(product)}>
+                            <AddToCartIcon/>
+                        </IconButton>
+                    </div>
                 </div>
-            </div>
-        </CardActionArea>
-    </Card>
+            </CardActionArea>
+        </Card>
     )
 }
 

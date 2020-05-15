@@ -12,14 +12,14 @@ import {
 } from "@material-ui/core";
 
 const product =
-{
-    category_id: "5ebdbea72f597d1f281fc1c0",
-    name: "Spaghetti alla Amatriciana",
-    description: "Piatto tipico italiano, dove il guanciale è il protagonista indiscusso",
-    price: "20",
-    image: "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/12/spaghetti-al-pomodoro/jcr:content/header-par/image-single.img10.jpg/1576681061599.jpg",
-    ingredients: ["Pasta", "Pomodoro", "Guanciale", "Cipolla"]
-}
+    {
+        category_id: "5ebdbea72f597d1f281fc1c0",
+        name: "Spaghetti alla Amatriciana",
+        description: "Piatto tipico italiano, dove il guanciale è il protagonista indiscusso",
+        price: "20",
+        image: "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/12/spaghetti-al-pomodoro/jcr:content/header-par/image-single.img10.jpg/1576681061599.jpg",
+        ingredients: ["Pasta", "Pomodoro", "Guanciale", "Cipolla"]
+    }
 
 
 const ProductPage = () => {
@@ -45,11 +45,11 @@ const ProductPage = () => {
                 Ingredienti:
             </Typography>
             <ul className="ingredients">
-            {
-                product.ingredients.map((ingredient, index) => 
-                    <li key={index}>{ingredient}</li>
-                )
-            }
+                {
+                    product.ingredients.map((ingredient, index) =>
+                        <li key={index}>{ingredient}</li>
+                    )
+                }
             </ul>
             <div className='line-container'>
 
