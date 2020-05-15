@@ -7,7 +7,8 @@ import {
     CardContent,
     CardMedia,
     makeStyles,
-    Typography
+    Typography,
+    Box
 } from "@material-ui/core";
 import { addToCart } from "../../../redux/cart/cart.actions";
 import { connect } from "react-redux";
@@ -33,6 +34,7 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
 
     return (
         <Card>
+        <Box flexDirection="row">
             <CardActionArea onClick={navigateToProductDetail}>
                 <CardMedia
                     className={classes.media}
@@ -58,7 +60,7 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
                     Add to cart
                 </Button>
             </CardActions>
-
+            </Box>
         </Card>
     )
 

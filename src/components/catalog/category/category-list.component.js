@@ -15,7 +15,7 @@ class CategoryList extends React.Component {
         const { categories } = this.props
 
         return (
-            <Grid container spacing={5}>
+            <Grid container spacing={2}>
                 {
                     categories.map(category => {
                         return (

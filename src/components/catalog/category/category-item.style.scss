@@ -1,0 +1,19 @@
+.media {
+    height: 140px,
+}
+
+.category-card {
+    transform: translateZ(0);
+    transition: transform 0.5s ease-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.category-title {
+    text-align: center;
+}
+  
+
+  

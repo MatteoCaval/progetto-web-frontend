@@ -1,5 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import "./category-item.style.scss";
+
 import {
     Button,
     Card,
@@ -8,28 +10,25 @@ import {
     CardContent,
     CardMedia,
     makeStyles,
-    Typography
+    Typography,
+    Container
 } from "@material-ui/core";
 
-const useStyles = makeStyles({
-    media: {
-        height: 140,
-    },
-});
-
 const Category = ({ category, history, match }) => {
-    const classes = useStyles();
-
     return (
         <Card
+        className='category-card'
         onClick={() => history.push(`${match.url}${category.name}`)}>
             <CardActionArea>
                 <CardMedia
-                    className={classes.media}
+                    className='media'
                     image={category.image}
+                    xs={6} sm={2}
                 />
-                <CardContent>
-                    <Typography variant='h6' color='textPrimary'>
+                <CardContent
+                    className='content'
+                    xs={6} sm={2}>
+                    <Typography className='category-title' variant='h6' color='textPrimary'>
                         {category.name}
                     </Typography>
                 </CardContent>

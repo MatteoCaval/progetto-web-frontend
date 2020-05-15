@@ -19,7 +19,7 @@ class ProductList extends React.Component {
                 <Switch>
                     <Route path={`${this.props.match.url}/:productId`} component={ProductPage} />
                     <Route path={this.props.match.url}>
-                        <Grid container spacing={3}>
+                        <Grid container spacing={2}>
                             {
                                 products.map(product => {
                                     return (
