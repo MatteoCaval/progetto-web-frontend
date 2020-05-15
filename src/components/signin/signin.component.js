@@ -42,7 +42,6 @@ const SignIn = ({login}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(userCredentials)
         login(userCredentials.email, userCredentials.password)
     }
 

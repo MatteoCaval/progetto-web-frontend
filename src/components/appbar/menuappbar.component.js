@@ -27,8 +27,7 @@ const MenuAppBar = ({ currentUser, history }) => {
     const open = Boolean(anchorEl);
 
     const handleProfileMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-        console.log(currentUser)
+        setAnchorEl(event.currentTarget)
         if (!currentUser) {
             history.push('/signin')
         }
