@@ -13,27 +13,27 @@ import {
 import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
 
-const product =
-    {
-        category_id: "5ebdbea72f597d1f281fc1c0",
-        name: "Spaghetti alla Amatriciana",
-        description: "Piatto tipico italiano, dove il guanciale è il protagonista indiscusso",
-        price: "20",
-        image: "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/12/spaghetti-al-pomodoro/jcr:content/header-par/image-single.img10.jpg/1576681061599.jpg",
-        ingredients: ["Pasta", "Pomodoro", "Guanciale", "Cipolla"]
-    }
+// const product =
+//     {
+//         category_id: "5ebdbea72f597d1f281fc1c0",
+//         name: "Spaghetti alla Amatriciana",
+//         description: "Piatto tipico italiano, dove il guanciale è il protagonista indiscusso",
+//         price: "20",
+//         image: "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/12/spaghetti-al-pomodoro/jcr:content/header-par/image-single.img10.jpg/1576681061599.jpg",
+//         ingredients: ["Pasta", "Pomodoro", "Guanciale", "Cipolla"]
+//     }
 
 
-const ProductPage = ({ match, fetchProduct }) => {
+const ProductPage = ({ match, fetchProduct, product }) => {
 
     const productId = match.params.productId
 
-    // useEffect(() => {
-    //     fetchProduct(productId)
-    // }, [fetchProduct])
-
+    useEffect(() => {
+        fetchProduct(productId)
+    }, [fetchProduct])
+    
     return (
-        <Container>
+        product ? (<Container>
             <div className='line-container'>
                 <CardMedia
                     className='media'
@@ -64,9 +64,14 @@ const ProductPage = ({ match, fetchProduct }) => {
 
 
             </div>
-        </Container>
-
+        </Container>) : null
     )
+}
+
+const mapStateToProps = state => {
+    return {
+        product: state.catalog.productDetails
+    }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -75,4 +80,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(ProductPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage)

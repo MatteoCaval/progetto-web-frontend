@@ -2,7 +2,8 @@ import CatalogActionType from "./catalog.types";
 
 const INITIAL_STATE = {
     categories: [],
-    products: []
+    products: [],
+    productDetails: null
 }
 
 const catalogReducer = (state = INITIAL_STATE, action = {}) => {
@@ -15,7 +16,7 @@ const catalogReducer = (state = INITIAL_STATE, action = {}) => {
         case CatalogActionType.FETCH_PRODUCT_SUCCESS:
             return {
                 ...state,
-                products: action.payload
+                productDetails: action.payload
             }
         case CatalogActionType.FETCH_CATEGORY_PRODUCTS_SUCCESS:
             return {
