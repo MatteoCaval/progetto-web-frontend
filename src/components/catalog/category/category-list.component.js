@@ -2,6 +2,8 @@ import React from "react";
 import { fetchCategories } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
 import Category from "./category-item.component";
+import { Grid } from "@material-ui/core";
+
 
 class CategoryList extends React.Component {
 
@@ -11,8 +13,20 @@ class CategoryList extends React.Component {
 
     render() {
         const { categories } = this.props
+
         return (
-            categories.map(category => <Category key={category.id} category={category}/>)
+            <Grid container spacing={5}>
+                {
+                    categories.map(category => {
+                        return (
+                            <Grid key={category.id} item xs={6} sm={4}>
+                                <Category key={category.id} category={category}/>
+                            </Grid>
+                        )
+                    })
+                }
+            </Grid>
+
         )
     }
 }

@@ -3,15 +3,18 @@ import CatalogActionType from "./catalog.types";
 const categories = [
     {
         id: 1,
-        name: "Prima categoria"
+        name: "Prima categoria",        
+        image: 'https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/05/piadina-con-il-bimby/jcr:content/header-par/image-single.img10.jpg/1560520652683.jpg'
     },
     {
         id: 2,
-        name: "Seconda categoria"
+        name: "Seconda categoria",
+        image: 'https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/05/piadina-con-il-bimby/jcr:content/header-par/image-single.img10.jpg/1560520652683.jpg'
     },
     {
         id: 3,
-        name: "Terza categoria"
+        name: "Terza categoria",
+        image: 'https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/05/piadina-con-il-bimby/jcr:content/header-par/image-single.img10.jpg/1560520652683.jpg'
     }
 ]
 

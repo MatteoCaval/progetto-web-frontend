@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { addToCart } from "../../../redux/cart/cart.actions";
 import { connect } from "react-redux";
+import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
 
 const useStyles = makeStyles({
     media: {
@@ -41,7 +42,9 @@ const ProductItem = ({ product, addProductToCart }) => {
                 <Button
                     size='small'
                     color='primary'
+                    variant='contained'
                     onClick={() => addProductToCart(product)}
+                    startIcon={<AddToCartIcon/>}
                 >
                     Add to cart
                 </Button>
