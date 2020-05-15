@@ -2,7 +2,7 @@ import { UserActionTypes } from '../../redux/user/user.actions'
 import AuthActionType from "../auth/auth.actionType";
 
 const INITIAL_STATE = {
-    currentUser: "" // set to null
+    currentUser: null
 }
 
 const userReducer = (state = INITIAL_STATE, action = {}) => {
@@ -10,7 +10,7 @@ const userReducer = (state = INITIAL_STATE, action = {}) => {
         case AuthActionType.LOGIN_SUCCESS:
             return {
                 ...state,
-                currentUser: action.payload.email
+                currentUser: action.payload
             }
         case UserActionTypes.SET_USER:
             return {
