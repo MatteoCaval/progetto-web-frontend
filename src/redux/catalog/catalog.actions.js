@@ -61,7 +61,7 @@ export const fetchProductForCategoryPending = () => {
     }
 }
 
-export const fetchProduct = (productId) => {
+export const fetchProductDetail = (productId) => {
     return dispatch => {
         dispatch(fetchProductPending())
         axios.get(`${Config.API_BASE_URL}/catalog/products/${productId}`)

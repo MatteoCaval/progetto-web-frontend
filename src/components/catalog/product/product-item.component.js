@@ -10,12 +10,8 @@ import "./product-item.style.scss";
 const ProductItem = ({ product, addProductToCart, history, match }) => {
 
     const navigateToProductDetail = () => {
-        history.push(`${match.url}/${product._id}`)
+        history.push(`${match.url}/${product.id}`)
     }
-
-    useEffect(() => {
-        // fare qua chiamata per dettaglio prodotto
-    }, [])
 
     return (
         <Card>

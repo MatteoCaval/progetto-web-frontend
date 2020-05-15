@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./product-page.style.scss";
 
@@ -10,6 +10,8 @@ import {
     Typography,
     Container,
 } from "@material-ui/core";
+import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
+import { connect } from "react-redux";
 
 const product =
     {
@@ -22,7 +24,14 @@ const product =
     }
 
 
-const ProductPage = () => {
+const ProductPage = ({ match, fetchProduct }) => {
+
+    const productId = match.params.productId
+
+    // useEffect(() => {
+    //     fetchProduct(productId)
+    // }, [fetchProduct])
+
     return (
         <Container>
             <div className='line-container'>
@@ -60,4 +69,10 @@ const ProductPage = () => {
     )
 }
 
-export default ProductPage
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchProduct: productId => dispatch(fetchProductDetail(productId))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ProductPage)
