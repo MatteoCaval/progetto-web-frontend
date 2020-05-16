@@ -1,25 +1,33 @@
 import React from 'react';
 import './App.scss';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import SignIn from "./components/signin/signin.component";
 import MenuAppBar from "./components/appbar/menuappbar.component";
 import Categories from "./components/catalog/catalogpage.component";
 import CartPage from "./components/cart/cartpage.component";
 import SignUp from "./components/signup/signup.component";
+import { connect } from "react-redux";
 
 
-function App() {
+function App({ user }) {
     return (
         <div>
             <MenuAppBar/>
             <Switch>
-                <Route exact path="/signin" component={SignIn}/>
-                <Route exact path="/signup" component={SignUp}/>
-                <Route exact path='/cart' component={CartPage} />
+                <Route exact path="/signin" render={() => user ? <Redirect to='/'/> : <SignIn/>}/>
+                <Route exact path="/signup" render={() => user ? <Redirect to='/'/> : <SignUp/>}/>
+
+                <Route exact path='/cart' render={() => user ? <CartPage/> : <Redirect to='/signin'/>}/>
                 <Route path='/' component={Categories}/>
             </Switch>
         </div>
     );
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        user: state.user.currentUser
+    }
+}
+
+export default connect(mapStateToProps)(App);
