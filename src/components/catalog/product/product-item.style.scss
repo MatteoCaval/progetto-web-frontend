@@ -1,14 +1,17 @@
 .product-root {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .product-details {
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-end;
+    margin-left: auto !important;
 }
 
 .product-media {
     height: 12em;
+}
+
+.product-title{
+    height: 2em;
 }

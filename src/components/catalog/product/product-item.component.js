@@ -21,24 +21,24 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
                     image={product.image}
                 />
 
-                <div className='product-root'>
-                    <CardContent>
+                <CardContent>
+                    <Typography className="product-title" variant='h5' color='textPrimary'>
+                        {product.name}
+                    </Typography>
+                    <div className='product-root'>
                         <Typography variant='h6' color='textPrimary'>
-                            {product.name}
-                        </Typography>
-                        <Typography color='textPrimary'>
                             {product.price}€
                         </Typography>
-                    </CardContent>
 
-                    <div className="product-details">
                         <IconButton
+                            className="product-details"
                             color='primary'
                             onClick={() => addProductToCart(product)}>
-                            <AddToCartIcon/>
+                            <AddToCartIcon />
                         </IconButton>
                     </div>
-                </div>
+
+                </CardContent>
             </CardActionArea>
         </Card>
     )
