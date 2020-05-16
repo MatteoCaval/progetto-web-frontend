@@ -1,15 +1,14 @@
-.line-container {
+.center-container {
     display: flex;
     justify-content: center;
 }
 
-.title-container {
+.side-container {
     display: flex;
 }
 .title {
     flex: 1;
     display: flex;
-   
 }
 
 .media {
@@ -20,4 +19,23 @@
 
 .ingredients{
     margin-top: 0;
+}
+
+.ingredients-container{
+    flex-grow: 1;
+}
+
+.add-to-cart{
+    margin-left: 2em !important;
+}
+
+.add-to-cart-container{
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.info-container {
+    display:flex;
+    flex-direction: column;
 }
