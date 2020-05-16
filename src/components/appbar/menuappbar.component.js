@@ -88,7 +88,7 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
                                 }}
                                 open={open}
                                 onClose={handleClose}>
-                                <MenuItem onClick={handleClose}>My Orders</MenuItem>
+                                <MenuItem onClick={() => history.push('/orders')}>My Orders</MenuItem>
                                 <MenuItem onClick={() => logout()}>Logout</MenuItem>
                             </Menu>
                         )}
