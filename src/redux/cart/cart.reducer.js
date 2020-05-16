@@ -37,8 +37,8 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
         case CartActionTypes.FETCH_CART_SUCCESS:
             return {
                 ...state,
-                products: testCartProducts, //action.payload,
-                isPending: false,
+                products: action.payload.data,
+                isPendinlg: false,
                 error: ''
             }
         case CartActionTypes.FETCH_CART_START:

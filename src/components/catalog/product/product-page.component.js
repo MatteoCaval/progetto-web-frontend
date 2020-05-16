@@ -12,20 +12,21 @@ import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
 import QuantityPicker from "./quantity-picker.component"
 import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
+import { addToCart } from "../../../redux/cart/cart.actions";
 
 
-const product =
-{
-    category_id: "5ebdbea72f597d1f281fc1c0",
-    name: "Spaghetti alla Amatriciana",
-    description: "Piatto tipico italiano, dove il guanciale è il protagonista indiscusso",
-    price: "20",
-    image: "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/12/spaghetti-al-pomodoro/jcr:content/header-par/image-single.img10.jpg/1576681061599.jpg",
-    ingredients: ["Pasta", "Pomodoro", "Guanciale", "Cipolla"]
-}
+// const product =
+// {
+//     category_id: "5ebdbea72f597d1f281fc1c0",
+//     name: "Spaghetti alla Amatriciana",
+//     description: "Piatto tipico italiano, dove il guanciale è il protagonista indiscusso",
+//     price: "20",
+//     image: "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/12/spaghetti-al-pomodoro/jcr:content/header-par/image-single.img10.jpg/1576681061599.jpg",
+//     ingredients: ["Pasta", "Pomodoro", "Guanciale", "Cipolla"]
+// }
 
 
-const ProductPage = ({ match, fetchProduct, producta }) => {
+const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
 
     const productId = match.params.productId
 
@@ -73,6 +74,7 @@ const ProductPage = ({ match, fetchProduct, producta }) => {
                         className="add-to-cart"
                         variant="contained"
                         color="primary"
+                        onClick={() => addToCart(productId)}
                         startIcon={<AddToCartIcon />}
                     >Add to cart</Button>
                 </div>
@@ -90,7 +92,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchProduct: productId => dispatch(fetchProductDetail(productId))
+        fetchProduct: productId => dispatch(fetchProductDetail(productId)),
+        addToCart: productId => dispatch(addToCart(productId))
     }
 }
 
