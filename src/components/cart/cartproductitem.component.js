@@ -31,7 +31,7 @@ const CartProductItem = ({ product }) => {
                         <DeleteIcon/>
                     </IconButton>
                     <div className="cart-picker">
-                        <QuantityPicker  onValueChanged={onQuantityChanged} />
+                        <QuantityPicker quantity={product.quantity} onValueChanged={onQuantityChanged} />
                     </div>
                 </div>
             </div>

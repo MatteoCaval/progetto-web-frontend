@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { fetchCart } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import CartProductItem from "./cartproductitem.component";
-import { Grid, Container } from "@material-ui/core";
+import { Grid, Container, Divider, Button } from "@material-ui/core";
+import "./cartpage.style.scss"
 
 const CartPage = ({ fetchCart, cart }) => {
     useEffect(() => {
@@ -23,7 +24,20 @@ const CartPage = ({ fetchCart, cart }) => {
                         )
                     })
                 }
-                </Grid>
+            </Grid>
+
+            <Divider className='cart-total-divider' />
+            <div className="total-container">
+                <Button
+                    className="proceed-to-order">
+                    Proceed to order
+                </Button>
+                <div total-info-container>
+                    <p> Total </p>
+                    <p> 10000.00€ </p>
+                </div>
+            </div>
+
         </Container>
     )
 }
