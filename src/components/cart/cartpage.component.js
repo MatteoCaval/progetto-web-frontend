@@ -8,10 +8,12 @@ const CartPage = ({ fetchCart, cart }) => {
         fetchCart()
     }, [fetchCart])
 
+    console.log(cart.products)
+
     return (
         <div>
             {
-                cart.products.map(product => <CartProductItem key={product.id} product={product}/>)
+               cart.products.map(product => <CartProductItem key={product.id} product={product}/>)
             }
         </div>
     )
