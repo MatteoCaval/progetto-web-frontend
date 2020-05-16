@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { fetchCart } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import CartProductItem from "./cartproductitem.component";
-import { Grid, Container, Divider, Button } from "@material-ui/core";
+import { Grid, Container, Divider, Button, Typography } from "@material-ui/core";
 import "./cartpage.style.scss"
 
 const CartPage = ({ fetchCart, cart }) => {
@@ -14,7 +14,7 @@ const CartPage = ({ fetchCart, cart }) => {
 
     return (
         <Container maxWidth='md'>
-            <Grid container spacing={2}>
+            <Grid className="products-list" container spacing={2}>
                 {
                     cart.products.map(product => {
                         return (
@@ -25,19 +25,23 @@ const CartPage = ({ fetchCart, cart }) => {
                     })
                 }
             </Grid>
-
             <Divider className='cart-total-divider' />
             <div className="total-container">
                 <Button
+                    variant="contained"
+                    color="primary"
                     className="proceed-to-order">
                     Proceed to order
-                </Button>
-                <div total-info-container>
-                    <p> Total </p>
-                    <p> 10000.00€ </p>
+                        </Button>
+                <div className="total-info-container">
+                    <Typography variant='h6' color='textPrimary'>
+                        Total:
+                            </Typography>
+                    <Typography variant='h5' color='textPrimary'>
+                        1000.00€
+                            </Typography>
                 </div>
             </div>
-
         </Container>
     )
 }

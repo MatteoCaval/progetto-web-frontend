@@ -1,4 +1,5 @@
 .cart-total-divider{
+    margin: 1em !important;
     margin-top: 4em !important;
     height: 1px !important;
     background-color: #424242 !important;
@@ -7,4 +8,10 @@
 .total-container{
     display: flex;
     flex-direction: row;
+}
+
+.total-info-container{
+    display: flex;
+    margin-left: auto;
+    flex-direction: column;
 }
