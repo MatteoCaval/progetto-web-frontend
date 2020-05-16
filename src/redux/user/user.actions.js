@@ -1,19 +1,8 @@
 import axios from 'axios'
 import AuthActionType from "../auth/auth.actionType";
 import Config from '../../config'
-
-export const UserActionTypes = {
-    SET_USER: 'SET_USER'
-}
-
-export const setCurrentUser = (name) => {
-    return {
-        type: UserActionTypes.SET_USER,
-        payload: {
-            name: name
-        }
-    }
-}
+import UserActionTypes from "./user.actionTypes";
+import { fetchCategoriesPending } from "../catalog/catalog.actions";
 
 export const loginSuccess = user => {
     return {
@@ -90,3 +79,40 @@ export const logoutFailed = (error) => {
         payload: error
     }
 }
+
+export const fetchOrders = () => {
+    return (dispatch, getState) => {
+        // dispatch(fetchOrdersPending())
+        const token = getState().user.currentUser.token
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+        axios.get(`${Config.API_BASE_URL}/user/orders`)
+            .then(result => {
+                dispatch(fetchOrdersSuccess(result.data))
+            })
+            .catch(error => dispatch(fetchOrdersFailed(error)))
+    }
+}
+
+export const fetchOrdersSuccess = (orders) => {
+    return {
+        type: UserActionTypes.FETCH_ORDERS_SUCCESS,
+        payload: orders
+    }
+}
+
+export const fetchOrdersFailed = (error) => {
+    return {
+        type: UserActionTypes.FETCH_ORDERS_FAILED,
+        payload: error.message
+    }
+}
+
+export const fetchOrdersPending = () => {
+    return {
+        type: UserActionTypes.FETCH_ORDERS_PENDING
+    }
+}
+
+
+
+

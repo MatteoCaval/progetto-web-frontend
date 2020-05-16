@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { fetchOrders } from "../../redux/user/user.actions";
+import { connect } from "react-redux";
 
-const OrdersPage = () => {
+const OrdersPage = ({ orders, fetchOrders }) => {
+
+    useEffect(() => {
+        fetchOrders()
+    }, [fetchOrders])
+
     return (
-        <p>Order page</p>
+        <div>
+            {
+                orders && (
+                    orders.map(order => <p key={order._id}>{order.date}</p>)
+                )
+            }
+        </div>
     )
 }
 
-export default OrdersPage
+const mapStateToProps = state => {
+    return {
+        orders: state.user.orders
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchOrders: () => dispatch(fetchOrders())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrdersPage)
