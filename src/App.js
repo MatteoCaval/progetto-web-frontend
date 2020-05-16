@@ -8,11 +8,13 @@ import CartPage from "./components/cart/cartpage.component";
 import SignUp from "./components/signup/signup.component";
 import { connect } from "react-redux";
 import OrdersPage from "./components/orders/orders-page.component";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 
 function App({ user }) {
     return (
-        <div>
+        <React.Fragment>
+            <CssBaseline />
             <MenuAppBar/>
             <Switch>
                 <Route exact path="/signin" render={() => user ? <Redirect to='/'/> : <SignIn/>}/>
@@ -22,7 +24,7 @@ function App({ user }) {
                 <Route exact path='/cart' render={() => user ? <CartPage/> : <Redirect to='/signin'/>}/>
                 <Route path='/' component={Categories}/>
             </Switch>
-        </div>
+        </React.Fragment>
     );
 }
 

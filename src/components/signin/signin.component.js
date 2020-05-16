@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {loginUser} from "../../redux/user/user.actions";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles} from '@material-ui/core/styles';
-import {Container, Typography, Link, TextField, CssBaseline, Button, Avatar} from '@material-ui/core';
+import {Container, Typography, Link, TextField, Button, Avatar} from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({

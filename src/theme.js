@@ -6,6 +6,7 @@ let theme = createMuiTheme({
     palette: {
         primary: indigo,
         secondary: green,
+        // type: 'dark',
     },
     status: {
         danger: 'orange',
