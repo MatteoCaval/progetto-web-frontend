@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { fetchCart } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import CartProductItem from "./cartproductitem.component";
+import { Grid, Container } from "@material-ui/core";
 
 const CartPage = ({ fetchCart, cart }) => {
     useEffect(() => {
@@ -11,11 +12,19 @@ const CartPage = ({ fetchCart, cart }) => {
     console.log(cart.products)
 
     return (
-        <div>
-            {
-               cart.products.map(product => <CartProductItem key={product.id} product={product}/>)
-            }
-        </div>
+        <Container maxWidth='md'>
+            <Grid container spacing={2}>
+                {
+                    cart.products.map(product => {
+                        return (
+                            <Grid key={product.id} item xs={12} sm={12}>
+                                <CartProductItem key={product.id} product={product} />
+                            </Grid>
+                        )
+                    })
+                }
+                </Grid>
+        </Container>
     )
 }
 
