@@ -1,34 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { fetchCategories } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
 import Category from "./category-item.component";
 import { Grid } from "@material-ui/core";
 
 
-class CategoryList extends React.Component {
+const CategoryList = ({ categories, fetchCategories }) => {
 
-    componentDidMount() {
-        this.props.fetchCategories()
-    }
+    useEffect(() => {
+        fetchCategories()
+    }, [fetchCategories])
 
-    render() {
-        const { categories } = this.props
+    return (
+        <Grid container spacing={2}>
+            {
+                categories.map(category => {
+                    return (
+                        <Grid key={category.id} item xs={6} sm={4}>
+                            <Category key={category.id} category={category}/>
+                        </Grid>
+                    )
+                })
+            }
+        </Grid>
 
-        return (
-            <Grid container spacing={2}>
-                {
-                    categories.map(category => {
-                        return (
-                            <Grid key={category.id} item xs={6} sm={4}>
-                                <Category key={category.id} category={category}/>
-                            </Grid>
-                        )
-                    })
-                }
-            </Grid>
-
-        )
-    }
+    )
 }
 
 const mapStateToProps = (state) => {
