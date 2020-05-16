@@ -11,9 +11,11 @@ let theme = createMuiTheme({
         danger: 'orange',
     },
     typography: {
+        /*
         fontFamily: [
-            'Roboto'
+            'Comic Sans MS'
         ].join(','),
+        */
     }
 });
 

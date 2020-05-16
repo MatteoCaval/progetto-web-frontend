@@ -17,7 +17,7 @@ const Category = ({ category, history, match }) => {
         onClick={() => history.push(`${match.url}${category.id}`)}>
             <CardActionArea>
                 <CardMedia
-                    className='media'
+                    className='category-media'
                     image={category.image}
                 />
                 <CardContent
