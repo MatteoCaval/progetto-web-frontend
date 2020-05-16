@@ -1,0 +1,31 @@
+.cart-media {
+    width: 12em;
+    height: 12em;
+}
+
+.cart-root {
+    display: flex;
+}
+
+.cart-double-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-info {
+    display: flex;
+}
+
+.cart-actions {
+    display: flex;
+    align-items: flex-end;
+}
+
+.cart-title {
+    flex: 1;
+}
+
+.cart-picker{
+    margin-left: auto;
+}

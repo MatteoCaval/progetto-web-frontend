@@ -1,14 +1,14 @@
-.root {
+.product-root {
     display: flex;
     flex-direction: row;
 }
 
-.details {
+.product-details {
     flex-grow: 1;
     display: flex;
     justify-content: flex-end;
 }
 
-.media {
+.product-media {
     height: 12em;
 }

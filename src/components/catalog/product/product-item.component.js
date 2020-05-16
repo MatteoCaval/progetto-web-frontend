@@ -17,11 +17,11 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
         <Card>
             <CardActionArea onClick={navigateToProductDetail}>
                 <CardMedia
-                    className='media'
+                    className='product-media'
                     image={product.image}
                 />
 
-                <div className='root'>
+                <div className='product-root'>
                     <CardContent>
                         <Typography variant='h6' color='textPrimary'>
                             {product.name}
@@ -31,7 +31,7 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
                         </Typography>
                     </CardContent>
 
-                    <div className="details">
+                    <div className="product-details">
                         <IconButton
                             color='primary'
                             onClick={() => addProductToCart(product)}>

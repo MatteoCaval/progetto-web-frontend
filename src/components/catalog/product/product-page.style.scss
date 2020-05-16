@@ -1,41 +1,41 @@
-.center-container {
+.prod-details-center-container {
     display: flex;
     justify-content: center;
 }
 
-.side-container {
+.prod-details-side-container {
     display: flex;
 }
-.title {
+.prod-details-title {
     flex: 1;
     display: flex;
 }
 
-.media {
+.prod-details-media {
     width: 100%;
     height: 10em;
     margin-bottom: 2em;
 }
 
-.ingredients{
+.prod-details-ingredients{
     margin-top: 0;
 }
 
-.ingredients-container{
+.prod-details-ingredients-container{
     flex-grow: 1;
 }
 
-.add-to-cart{
+.prod-details-add-to-cart{
     margin-left: 2em !important;
 }
 
-.add-to-cart-container{
+.prod-details-add-to-cart-container{
     display: flex;
     justify-content: center;
     margin-top: auto;
 }
 
-.info-container {
+.prod-details-info-container {
     display:flex;
     flex-direction: column;
 }

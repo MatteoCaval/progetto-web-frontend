@@ -39,24 +39,24 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
 
     return (
         product ? (<Container>
-            <div className='center-container'>
+            <div className='prod-details-center-container'>
                 <CardMedia
-                    className='media'
+                    className='prod-details-media'
                     image={product.image}
                 />
             </div>
-            <div className='side-container'>
-                <Typography className='title' variant='h5' color='textPrimary'>
+            <div className='prod-details-side-container'>
+                <Typography className='prod-details-title' variant='h5' color='textPrimary'>
                     {product.name}
                 </Typography>
                 <Typography variant='h6' color='textPrimary'>
                     {product.price}€
                 </Typography>
             </div>
-            <div className="info-container">
+            <div className="prod-details-info-container">
                 <p>{product.description}</p>
-                <div className="ingredients-container">
-                    <Typography className='ingredients' variant='h6' color='textPrimary'>
+                <div className="prod-details-ingredients-container">
+                    <Typography className='prod-details-ingredients' variant='h6' color='textPrimary'>
                         Ingredienti:
                     </Typography>
                     <ul>
@@ -68,10 +68,10 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
                     </ul>
                 </div>
 
-                <div className='add-to-cart-container'>
+                <div className='prod-details-add-to-cart-container'>
                     <QuantityPicker onValueChanged={onQuantityChanged} />
                     <Button
-                        className="add-to-cart"
+                        className="prod-details-add-to-cart"
                         variant="contained"
                         color="primary"
                         onClick={() => addToCart(productId)}
