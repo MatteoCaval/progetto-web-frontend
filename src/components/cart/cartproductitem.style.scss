@@ -1,20 +1,22 @@
 .cart-media {
     width: 12em;
-    height: 12em;
+    height: 8em;
 }
 
 .cart-root {
     display: flex;
 }
 
-.cart-double-row {
+.cart-row-container {
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin: 1em;
 }
 
 .cart-info {
     display: flex;
+    flex: 1;
 }
 
 .cart-actions {
