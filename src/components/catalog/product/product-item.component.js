@@ -20,26 +20,25 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
                     className='product-media'
                     image={product.image}
                 />
-
-                <CardContent>
-                    <Typography className="product-title" variant='h5' color='textPrimary'>
-                        {product.name}
-                    </Typography>
-                    <div className='product-root'>
-                        <Typography variant='h6' color='textPrimary'>
-                            {product.price}€
-                        </Typography>
-
-                        <IconButton
-                            className="product-details"
-                            color='primary'
-                            onClick={() => addProductToCart(product)}>
-                            <AddToCartIcon />
-                        </IconButton>
-                    </div>
-
-                </CardContent>
             </CardActionArea>
+            <CardContent>
+                <Typography className="product-title" variant='h5' color='textPrimary'>
+                    {product.name}
+                </Typography>
+                <div className='product-root'>
+                    <Typography variant='h6' color='textPrimary'>
+                        {product.price}€
+                    </Typography>
+
+                    <IconButton
+                        className="product-details"
+                        color='primary'
+                        onClick={() => addProductToCart(product.id)}>
+                        <AddToCartIcon />
+                    </IconButton>
+                </div>
+
+            </CardContent>
         </Card>
     )
 }
