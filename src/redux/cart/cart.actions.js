@@ -77,7 +77,7 @@ export const removeProductFromCart = (productId) => {
         axios.delete(`${Config.API_BASE_URL}/user/cart/${productId}`)
             .then(result => {
                 dispatch(removeFromCartSuccess())
-                fetchCart()
+                dispatch(fetchCart())
             })
             .catch(error => dispatch(removeFromCartFailed(error)))
 
