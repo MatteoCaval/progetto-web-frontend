@@ -9,6 +9,7 @@ import SignUp from "./components/signup/signup.component";
 import { connect } from "react-redux";
 import OrdersPage from "./components/orders/orders-page.component";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import OrderSummaryPage from "./components/ordersummary/order-summary.component";
 
 
 function App({ user }) {
@@ -21,6 +22,7 @@ function App({ user }) {
                 <Route exact path="/signup" render={() => user ? <Redirect to='/'/> : <SignUp/>}/>
 
                 <Route exact path="/orders" render={() => user ? <OrdersPage/> : <Redirect to='/'/>}/>
+                <Route exact path="/summary" render={() => user ? <OrderSummaryPage/> : <Redirect to='/'/>}/>
                 <Route exact path='/cart' render={() => user ? <CartPage/> : <Redirect to='/signin'/>}/>
                 <Route path='/' component={Categories}/>
             </Switch>
