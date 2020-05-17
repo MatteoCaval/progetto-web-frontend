@@ -103,3 +103,37 @@ export const removeFromCartPending = () => {
 }
 
 
+export const updateCartProductQuantity = (productId ,quantity) => {
+    return (dispatch, getState) => {
+        dispatch(updateCartProductQuantityPending())
+        const token = getState().user.currentUser.token
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+        axios.put(`${Config.API_BASE_URL}/user/cart/${productId}`, {quantity: quantity})
+            .then(result => {
+                dispatch(updateCartProductQuantitySuccess())
+                dispatch(fetchCart())
+            })
+            .catch(error => dispatch(updateCartProductQuantityFailed(error)))
+
+    }
+}
+
+export const updateCartProductQuantitySuccess = () => {
+    return {
+        type: CartActionTypes.UPDATE_ITEM_QUANTITY_SUCCESS
+    }
+}
+export const updateCartProductQuantityFailed = (error) => {
+    return {
+        type: CartActionTypes.UPDATE_ITEM_QUANTITY_FAILED,
+        payload: error
+    }
+}
+
+export const updateCartProductQuantityPending = () => {
+    return {
+        type: CartActionTypes.UPDATE_ITEM_QUANTITY_PENDING
+    }
+}
+
+

@@ -4,15 +4,16 @@ import { Card, CardMedia, Typography, IconButton } from '@material-ui/core'
 import "./cartproductitem.style.scss"
 import QuantityPicker from "./../catalog/product/quantity-picker.component"
 import DeleteIcon from "@material-ui/icons/Delete"
-import { removeProductFromCart } from "../../redux/cart/cart.actions";
+import { removeProductFromCart, updateCartProductQuantity } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 
 
-const onQuantityChanged = (quantity) => {
-    console.log(quantity)
-}
+const CartProductItem = ({ product, removeFromCart, updateProductQuantity }) => {
 
-const CartProductItem = ({ product, removeFromCart }) => {
+    const onQuantityChanged = (quantity) => {
+        updateProductQuantity(product.id, quantity)
+    }
+
     return (
         <Card className='cart-root'>
             <CardMedia
@@ -44,7 +45,8 @@ const CartProductItem = ({ product, removeFromCart }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        removeFromCart: productId => dispatch(removeProductFromCart(productId))
+        removeFromCart: productId => dispatch(removeProductFromCart(productId)),
+        updateProductQuantity: (productId, quantity) => dispatch(updateCartProductQuantity(productId, quantity))
     }
 }
 
