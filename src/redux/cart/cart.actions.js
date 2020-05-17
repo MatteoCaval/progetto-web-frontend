@@ -69,3 +69,37 @@ export const addToCartPending = () => {
 }
 
 
+export const removeProductFromCart = (productId) => {
+    return (dispatch, getState) => {
+        dispatch(removeFromCartPending())
+        const token = getState().user.currentUser.token
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+        axios.delete(`${Config.API_BASE_URL}/user/cart/${productId}`)
+            .then(result => {
+                dispatch(removeFromCartSuccess())
+                fetchCart()
+            })
+            .catch(error => dispatch(removeFromCartFailed(error)))
+
+    }
+}
+
+export const removeFromCartSuccess = () => {
+    return {
+        type: CartActionTypes.REMOVE_ITEM_SUCCESS
+    }
+}
+export const removeFromCartFailed = (error) => {
+    return {
+        type: CartActionTypes.REMOVE_ITEM_FAILED,
+        payload: error
+    }
+}
+
+export const removeFromCartPending = () => {
+    return {
+        type: CartActionTypes.REMOVE_ITEM_PENDING
+    }
+}
+
+
