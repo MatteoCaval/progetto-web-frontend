@@ -1,45 +1,61 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { fetchProductsForCategory } from "../../../redux/catalog/catalog.actions";
 import ProductItem from "./product-item.component";
 import { connect } from "react-redux";
-import { Grid } from "@material-ui/core";
+import { Fab, Grid, makeStyles } from "@material-ui/core";
 import ProductPage from "./product-page.component";
-import { Route, Switch } from "react-router-dom";
+import { Link as RouterLink, Route, Switch } from "react-router-dom";
+import AddIcon from "@material-ui/icons/Add";
 
-class ProductList extends React.Component {
 
-    componentDidMount() {
-        this.props.fetchCategoryProducs(this.props.match.params.categoryId)
+const useStyles = makeStyles((theme) => ({
+    fabAdd: {
+        position: 'absolute',
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
     }
+}))
 
-    render() {
-        const { products } = this.props
-        return (
-            <div>
-                <Switch>
-                    <Route path={`${this.props.match.url}/:productId`} component={ProductPage} />
-                    <Route path={this.props.match.url}>
+const ProductList = ({ fetchCategoryProducs, match, products }) => {
+
+    const categoryId = match.params.categoryId
+
+    useEffect(() => {
+        fetchCategoryProducs(categoryId)
+    }, [fetchCategoryProducs])
+
+    const classes = useStyles()
+    return (
+        <div>
+            <Switch>
+                <Route path={`${match.url}/:productId`} component={ProductPage}/>
+                <Route path={match.url}>
+                    <React.Fragment>
                         <Grid container spacing={2}>
                             {
                                 products.map(product => {
                                     return (
                                         <Grid key={product.id} item xs={6} sm={4}>
-                                            <ProductItem key={product.id} product={product} />
+                                            <ProductItem key={product.id} product={product}/>
                                         </Grid>
                                     )
                                 })
                             }
                         </Grid>
-                    </Route>
-                </Switch>
-
-
-            </div>
-
-        )
-    }
-
+                        <Fab className={classes.fabAdd}
+                             color="primary"
+                             aria-label="add"
+                             component={RouterLink}
+                             to={`${categoryId}/createproduct`}>
+                            <AddIcon/>
+                        </Fab>
+                    </React.Fragment>
+                </Route>
+            </Switch>
+        </div>
+    )
 }
+
 
 const mapStateToProps = (state) => {
     return {

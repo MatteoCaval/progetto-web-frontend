@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Category from "./category-item.component";
 import { Grid, Fab, makeStyles } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     fabAdd: {
@@ -34,7 +35,11 @@ const CategoryList = ({ categories, fetchCategories }) => {
                     })
                 }
             </Grid>
-            <Fab className={classes.fabAdd} color="primary" aria-label="add">
+            <Fab className={classes.fabAdd}
+                 color="primary"
+                 aria-label="add"
+                 component={RouterLink}
+                 to="/createcategory">
                 <AddIcon/>
             </Fab>
         </React.Fragment>
