@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Container, Grid, TextField, makeStyles, Button } from "@material-ui/core";
+import axios from 'axios'
+import Config from "../../../config";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,7 +35,11 @@ const CategoryForm = () => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        console.log(categoryData)
+        axios.post(`${Config.API_BASE_URL}/catalog/categories`, {
+            name: categoryData.name,
+            image: categoryData.imageUrl
+        }).then(result => console.log('success'))
+            .catch(error => console.log('error'))
     }
 
     return (
@@ -63,6 +69,7 @@ const CategoryForm = () => {
                             id='image'
                             name='imageUrl'
                             variant='outlined'
+                            autoComplete='off'
                             required
                             fullWidth
                             value={categoryData.imageUrl}
