@@ -4,6 +4,8 @@ import { Route, Switch } from "react-router-dom";
 import ProductList from "./product/product-list.component";
 import { Container } from '@material-ui/core'
 import ProductForm from "./product/product-form.component";
+import CategoryForm from "./category/category-form.component";
+import ProductPage from "./product/product-page.component";
 
 const CatalogPage = ({ match }) => {
 
@@ -18,6 +20,11 @@ const CatalogPage = ({ match }) => {
                     path={`${match.path}:categoryId/createproduct`}
                     component={ProductForm}
                 />
+                <Route
+                    path={`${match.path}:categoryId/edit`}
+                    render={() => <CategoryForm editMode/>}
+                />
+                <Route path={`${match.path}:categoryId/:productId`} component={ProductPage}/>
                 <Route
                     path={`${match.path}:categoryId`}
                     component={ProductList}
