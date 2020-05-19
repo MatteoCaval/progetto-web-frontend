@@ -20,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const ProductForm = ({ match }) => {
+const ProductForm = ({ match, editMode }) => {
 
-    const categoryId = match.params.categoryId
+    const { productId, categoryId } = match.params
 
     const classes = useStyles();
 

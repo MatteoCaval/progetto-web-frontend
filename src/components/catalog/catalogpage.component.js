@@ -22,8 +22,12 @@ const CatalogPage = ({ match }) => {
                 />
                 <Route
                     path={`${match.path}:categoryId/edit`}
-                    render={() => <CategoryForm editMode/>}
+                    render={(routeProps) => <CategoryForm editMode {...routeProps}/>}
                 />
+                <Route
+                    path={`${match.path}:categoryId/:productId/edit`}
+                    render={(routeProps) => <ProductForm editMode {...routeProps}/>} />
+
                 <Route path={`${match.path}:categoryId/:productId`} component={ProductPage}/>
                 <Route
                     path={`${match.path}:categoryId`}

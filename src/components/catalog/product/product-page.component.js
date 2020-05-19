@@ -6,13 +6,16 @@ import {
     CardMedia,
     Typography,
     Container,
-    Button
+    Button,
+    Fab
 } from "@material-ui/core";
 import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
 import QuantityPicker from "./quantity-picker.component"
 import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
+import EditIcon from "@material-ui/icons/Edit"
 import { addToCart } from "../../../redux/cart/cart.actions";
+import { Link as RouterLink } from 'react-router-dom'
 
 
 // const product =
@@ -69,16 +72,22 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
                 </div>
 
                 <div className='prod-details-add-to-cart-container'>
-                    <QuantityPicker onValueChanged={onQuantityChanged} />
+                    <QuantityPicker onValueChanged={onQuantityChanged}/>
                     <Button
                         className="prod-details-add-to-cart"
                         variant="contained"
                         color="primary"
                         onClick={() => addToCart(productId)}
-                        startIcon={<AddToCartIcon />}
+                        startIcon={<AddToCartIcon/>}
                     >Add to cart</Button>
                 </div>
             </div>
+            <Fab color="primary"
+                 aria-label="add"
+                 component={RouterLink}
+                 to={`${productId}/edit`}>
+                <EditIcon/>
+            </Fab>
 
         </Container>) : null
     )

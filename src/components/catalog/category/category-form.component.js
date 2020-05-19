@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const CategoryForm = () => {
+const CategoryForm = ({ match }) => {
+
     const classes = useStyles();
 
     const [categoryData, setCategoryData] = useState({
