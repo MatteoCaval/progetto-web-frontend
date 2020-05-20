@@ -18,6 +18,11 @@ const catalogReducer = (state = INITIAL_STATE, action = {}) => {
                 ...state,
                 productDetails: action.payload
             }
+        case CatalogActionType.FETCH_PRODUCT_PENDING:
+            return {
+                ...state,
+                productDetails: null
+            }
         case CatalogActionType.FETCH_CATEGORY_PRODUCTS_SUCCESS:
             return {
                 ...state,

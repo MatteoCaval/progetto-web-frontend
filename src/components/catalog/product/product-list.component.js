@@ -19,6 +19,8 @@ const ProductList = ({ fetchCategoryProducs, match, products }) => {
 
     const categoryId = match.params.categoryId
 
+    console.log(products)
+
     useEffect(() => {
         fetchCategoryProducs(categoryId)
     }, [fetchCategoryProducs])
@@ -51,9 +53,10 @@ const ProductList = ({ fetchCategoryProducs, match, products }) => {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+    const categoryId = ownProps.match.params.categoryId
     return {
-        products: state.catalog.products
+        products: state.catalog.products.filter(product => product.categoryId === categoryId)
     }
 }
 
