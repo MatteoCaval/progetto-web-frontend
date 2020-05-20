@@ -1,0 +1,17 @@
+.state-pending {
+    background-color: #3f51b5 !important;
+    .MuiChip-label {
+        color: white !important;
+    }
+}
+
+.state-in-delivery {
+    background-color: yellow;
+}
+
+.state-state-delivered {
+    background-color: green;
+    .MuiChip-label {
+        color: white !important;
+    }
+}

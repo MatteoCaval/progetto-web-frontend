@@ -8,7 +8,8 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from 'redux-persist/integration/react';
 import theme from './theme'
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+
 
 ReactDOM.render(
     <Provider store={store}>

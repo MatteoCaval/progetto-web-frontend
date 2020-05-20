@@ -15,7 +15,7 @@ const CartPage = ({ fetchCart, cart, completeOrder }) => {
         <Container maxWidth='md'>
             <Grid className="products-list" container spacing={2}>
                 {
-                    cart.products.map(product => {
+                    cart.prodcuts && cart.products.map(product => {
                         return (
                             <Grid key={product.id} item xs={12} sm={12}>
                                 <CartProductItem key={product.id} product={product}/>
