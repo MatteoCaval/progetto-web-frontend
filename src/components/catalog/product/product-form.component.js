@@ -43,7 +43,7 @@ const ProductForm = ({ match, startingProduct, editMode, fetchProductDetail, upd
     }, [fetchProductDetail])
 
     useEffect(() => {
-        if (startingProduct) {
+        if (startingProduct && editMode) {
             setProductData({
                 ...productData,
                 name: startingProduct.name,
