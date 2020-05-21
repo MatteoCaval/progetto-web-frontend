@@ -1,7 +1,3 @@
-.category-media {
-    position: absolute;
-}
-
 .category-card {
     transform: translateZ(0);
     transition: transform 0.5s ease-out;
@@ -21,12 +17,12 @@
     padding-bottom: 100%;
 }
 
-.category-image-container img{
+.category-image-container .category-media{
     position: absolute;
-    max-height:100%;
-    //height:100%;
-    //width: 100%;
+    height:100%;
+    width: 100%;
     vertical-align: middle;
     margin-left: auto;
     margin-right: auto;
+    background: center center;
 }
