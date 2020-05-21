@@ -1,0 +1,50 @@
+.payment-card {
+    height: 12em;
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start !important;
+}
+
+.payment-card-content {
+    margin-bottom: auto !important;
+    padding: 1em  !important;
+    width: 100%;
+}
+
+.summary-total-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.summary-divider {
+    margin: 1em !important;
+    margin-bottom: 2em !important;
+    height: 1px !important;
+    background-color: #424242 !important;
+}
+
+.place-order {
+    padding: 1em;
+}
+
+.summary-button-container {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.card-selected {
+    border: 2px solid !important;
+    border-color: green !important;
+    .payment-title {
+        color: green !important;
+    }
+}
+
+.summary-payment-buttons {
+    display: flex;
+    margin-top: 5em;
+}
