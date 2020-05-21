@@ -46,7 +46,7 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addProductToCart: product => dispatch(addToCart(product))
+        addProductToCart: product => dispatch(addToCart(product, 1))
     }
 }
 

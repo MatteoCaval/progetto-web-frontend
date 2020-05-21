@@ -36,12 +36,12 @@ export const fetchCartPending = () => {
     }
 }
 
-export const addToCart = (productId) => {
+export const addToCart = (productId, quantity) => {
     return (dispatch, getState) => {
         dispatch(addToCartPending())
         const token = getState().user.currentUser.token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-        axios.post(`${Config.API_BASE_URL}/user/cart`, { productId })
+        axios.post(`${Config.API_BASE_URL}/user/cart`, { productId, quantity })
             .then(result => {
                 dispatch(addToCartSuccess())
             })
