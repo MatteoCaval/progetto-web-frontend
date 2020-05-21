@@ -13,13 +13,13 @@ import {
 const Category = ({ category, history, match }) => {
     return (
         <Card
-        className='category-card'
-        onClick={() => history.push(`${match.url}${category.id}`)}>
+            className='category-card'
+            onClick={() => history.push(`${match.url}${category.id}`)}>
             <CardActionArea>
-                <CardMedia
-                    className='category-media'
-                    image={category.image}
-                />
+                <div className="category-image-container">
+                    <img src={category.image} class="img" />
+           
+                </div>
                 <CardContent
                     className='content'>
                     <Typography className='category-title' variant='h6' color='textPrimary'>
