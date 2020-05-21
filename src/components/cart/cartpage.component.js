@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import CartProductItem from "./cartproductitem.component";
 import { Grid, Container, Divider, Button, Typography } from "@material-ui/core";
 import "./cartpage.style.scss"
-import { completeOrder } from "../../redux/orders/orders.actions";
 
-const CartPage = ({ fetchCart, cart, completeOrder }) => {
+const CartPage = ({ fetchCart, cart }) => {
     useEffect(() => {
         fetchCart()
     }, [fetchCart])
@@ -29,9 +28,7 @@ const CartPage = ({ fetchCart, cart, completeOrder }) => {
                 <Button
                     variant="contained"
                     color="primary"
-                    className="proceed-to-order"
-                    onClick={() => completeOrder()}
-                >
+                    className="proceed-to-order">
                     Proceed to order
                 </Button>
                 <div className="total-info-container">
@@ -52,7 +49,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchCart: () => dispatch(fetchCart()),
-        completeOrder: () => dispatch(completeOrder())
     }
 }
 

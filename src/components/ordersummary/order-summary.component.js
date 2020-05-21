@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Button, Divider, Container, CardActionArea, Typography, Card, Grid, FormControl, TextField, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { completeOrder } from "../../redux/orders/orders.actions";
+import { connect } from "react-redux";
+
 import "./order-summary.style.scss"
 const cities = [
     'San Mauro Pascoli',
@@ -32,7 +35,7 @@ const time_slots = [
     '22.00'
 ]
 
-const OrderSummaryPage = () => {
+const OrderSummaryPage = ( {completeOrder}) => {
     const [cashPayment, setCashPayment] = useState(1);
 
     const handleCashPaymentSelect = () => {
@@ -181,6 +184,7 @@ const OrderSummaryPage = () => {
             </Grid>
             <div className="summary-button-container">
                 <Button className="place-order" variant='contained'
+                    onClick={() => completeOrder()}
                     color='primary'>
                     Concludi l'ordine
             </Button>
@@ -189,4 +193,10 @@ const OrderSummaryPage = () => {
     )
 }
 
-export default OrderSummaryPage
+const mapDispatchToProps = dispatch => {
+    return {
+        completeOrder: () => dispatch(completeOrder())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(OrderSummaryPage)
