@@ -32,9 +32,9 @@ export const fetchCategoriesPending = () => {
     }
 }
 
-export const fetchProductsForCategory = (categoryId) => {
+export const fetchProductsForCategory = (categoryId, cached = true) => {
     return (dispatch, getState) => {
-        if (getState().catalog.products.filter(product => product.categoryId === categoryId).length) return
+        if (cached && getState().catalog.products.filter(product => product.categoryId === categoryId).length) return
         dispatch(fetchProductForCategoryPending())
         axios.get(`${Config.API_BASE_URL}/catalog/products?categoryId=${categoryId}`)
             .then(result => dispatch(fetchProductForCategorySuccess(result.data)))

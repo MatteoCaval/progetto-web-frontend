@@ -78,7 +78,8 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
         if (editMode) {
             updateProduct({
                 ...productData,
-                productId
+                productId,
+                category_id: categoryId
             })
         } else {
             createProduct({

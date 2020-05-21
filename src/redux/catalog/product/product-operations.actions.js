@@ -1,12 +1,16 @@
 import axios from "axios";
 import Config from "../../../config";
 import ProductOperationType from "./product-operations.type";
+import { fetchProductsForCategory } from "../catalog.actions";
 
 export const createProduct = (product) => {
     return dispatch => {
         dispatch(createProductPending())
         axios.post(`${Config.API_BASE_URL}/catalog/products`, product)
-            .then(result => dispatch(createProductSuccess()))
+            .then(result => {
+                dispatch(createProductSuccess())
+                dispatch(fetchProductsForCategory(product.category_id, false))
+            })
             .catch(error => dispatch(createProductFailed(error.message)))
     }
 }
@@ -34,7 +38,10 @@ export const updateProduct = (updatedProduct) => {
     return dispatch => {
         dispatch(updateProductPending())
         axios.put(`${Config.API_BASE_URL}/catalog/products/${updatedProduct.productId}`, updatedProduct)
-            .then(result => dispatch(updateProductSuccess()))
+            .then(result => {
+                dispatch(updateProductSuccess())
+                dispatch(fetchProductsForCategory(updatedProduct.category_id, false))
+            })
             .catch(error => dispatch(updateProductFailed(error.message)))
     }
 }

@@ -2,7 +2,6 @@ import axios from 'axios'
 import AuthActionType from "../auth/auth.actionType";
 import Config from '../../config'
 import UserActionTypes from "./user.actionTypes";
-import { fetchCategoriesPending } from "../catalog/catalog.actions";
 
 export const loginSuccess = user => {
     return {
