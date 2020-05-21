@@ -16,10 +16,11 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
     return (
         <Card>
             <CardActionArea onClick={navigateToProductDetail}>
-                <CardMedia
-                    className='product-media'
-                    image={product.image}
-                />
+                <div className="product-image-container">
+                    <CardMedia
+                        className='product-media'
+                        image={product.image}/>
+                </div>
             </CardActionArea>
             <CardContent>
                 <Typography className="product-title" variant='h5' color='textPrimary'>

@@ -1,10 +1,6 @@
-.cart-media {
-    width: 12em;
-    height: 8em;
-}
-
 .cart-root {
     display: flex;
+    height: 10em;
 }
 
 .cart-row-container {
@@ -30,4 +26,19 @@
 
 .cart-picker{
     margin-left: auto;
+}
+
+.cart-image-container {
+    position: relative;
+    overflow: hidden;
+    padding-right: 10em;
+
+    .cart-media {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

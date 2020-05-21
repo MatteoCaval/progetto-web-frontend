@@ -16,9 +16,11 @@ const CartProductItem = ({ product, removeFromCart, updateProductQuantity }) => 
 
     return (
         <Card className='cart-root'>
-            <CardMedia
-                className="cart-media"
-                image={product.image}/>
+            <div className="cart-image-container">
+                <CardMedia
+                    className="cart-media"
+                    image={product.image} />
+            </div>
             <div className="cart-row-container">
                 <div className="cart-info">
                     <Typography className='cart-title' variant='h5' color='textPrimary'>
@@ -32,10 +34,10 @@ const CartProductItem = ({ product, removeFromCart, updateProductQuantity }) => 
                     <IconButton
                         color="primary"
                         onClick={() => removeFromCart(product.id)}>
-                        <DeleteIcon/>
+                        <DeleteIcon />
                     </IconButton>
                     <div className="cart-picker">
-                        <QuantityPicker quantity={product.quantity} onValueChanged={onQuantityChanged}/>
+                        <QuantityPicker quantity={product.quantity} onValueChanged={onQuantityChanged} />
                     </div>
                 </div>
             </div>
