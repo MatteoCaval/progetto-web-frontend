@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Divider, Container, CardActionArea, Typography, Card, Grid, FormControl, TextField, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { completeOrder } from "../../redux/orders/orders.actions";
 import { connect } from "react-redux";
+import PaymentType from "./payment-type"
 
 import "./order-summary.style.scss"
 const cities = [
@@ -38,12 +39,31 @@ const time_slots = [
 const OrderSummaryPage = ({ completeOrder }) => {
     const [cashPayment, setCashPayment] = useState(1);
 
+    const[orderData, setOrderData] = useState({
+            name:'',
+            surname:'',
+            address:'',
+            city:'',
+            timeSlot:'',
+            telephoneNumber:'',
+            paymentType:''
+    })
+
+    useEffect(() => {
+        setOrderData({...orderData, ['paymentType']: cashPayment ? PaymentType.ON_DELIVERY : PaymentType.ONLINE})
+    }, [cashPayment])
+
     const handleCashPaymentSelect = () => {
         setCashPayment(true)
     }
 
     const handlePayNowSelect = () => {
         setCashPayment(false)
+    }
+
+    const handleChange = event => {
+        const { value, name } = event.target
+        setOrderData({ ...orderData, [name]: value })
     }
 
     return (
@@ -65,6 +85,7 @@ const OrderSummaryPage = ({ completeOrder }) => {
                         autoComplete='off'
                         required
                         fullWidth
+                        onChange={handleChange}
                         label='Name' />
                 </Grid>
 
@@ -76,6 +97,7 @@ const OrderSummaryPage = ({ completeOrder }) => {
                         autoComplete='off'
                         required
                         fullWidth
+                        onChange={handleChange}
                         label='Surname' />
                 </Grid>
 
@@ -87,6 +109,7 @@ const OrderSummaryPage = ({ completeOrder }) => {
                         autoComplete='off'
                         required
                         fullWidth
+                        onChange={handleChange}
                         label='Address' />
                 </Grid>
 
@@ -94,10 +117,12 @@ const OrderSummaryPage = ({ completeOrder }) => {
                     <TextField
                         id="city"
                         name="city"
+                        value={orderData.city}
                         select
                         required
                         label="Città"
                         fullWidth
+                        onChange={handleChange}
                         variant="outlined">
                         {
                             cities.map((city, index) =>
@@ -109,24 +134,27 @@ const OrderSummaryPage = ({ completeOrder }) => {
 
                 <Grid item xs={12} sm={6}>
                     <TextField
-                        id='telephone'
-                        name='telephone'
+                        id='telephoneNumber'
+                        name='telephoneNumber'
                         variant='outlined'
                         autoComplete='off'
                         required
                         fullWidth
                         type='tel'
+                        onChange={handleChange}
                         label='Telephone Number' />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
                     <TextField
-                        id="time-slot"
-                        name="time-slot"
+                        id="timeSlot"
+                        name="timeSlot"
+                        value={orderData.timeSlot}
                         select
                         required
                         label="Orario di consegna"
                         fullWidth
+                        onChange={handleChange}
                         variant="outlined">
                         {
                             time_slots.map((slot, index) =>
@@ -179,7 +207,7 @@ const OrderSummaryPage = ({ completeOrder }) => {
             </Grid>
             <div className="summary-button-container">
                 <Button className="place-order" variant='contained'
-                    onClick={() => completeOrder()}
+                    onClick={() => completeOrder(orderData)}
                     color='primary'>
                     Concludi l'ordine
             </Button>
@@ -190,7 +218,7 @@ const OrderSummaryPage = ({ completeOrder }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        completeOrder: () => dispatch(completeOrder())
+        completeOrder: (orderData) => dispatch(completeOrder(orderData))
     }
 }
 
