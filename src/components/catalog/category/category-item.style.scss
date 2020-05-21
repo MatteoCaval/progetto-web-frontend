@@ -15,14 +15,13 @@
     position: relative;
     overflow: hidden;
     padding-bottom: 100%;
-}
 
-.category-image-container .category-media{
-    position: absolute;
-    height:100%;
-    width: 100%;
-    vertical-align: middle;
-    margin-left: auto;
-    margin-right: auto;
-    background: center center;
+    .category-media {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
