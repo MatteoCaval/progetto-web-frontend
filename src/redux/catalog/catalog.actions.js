@@ -92,30 +92,3 @@ export const fetchProductPending = () => {
     }
 }
 
-export const updateProduct = (updatedProduct) => {
-    return dispatch => {
-        dispatch(updateProductPending())
-        axios.put(`${Config.API_BASE_URL}/catalog/products/${updatedProduct.productId}`, updatedProduct)
-            .then(result => dispatch(updateProductSuccess()))
-            .catch(error => dispatch(updateProductFailed(error.message)))
-    }
-}
-
-export const updateProductSuccess = () => {
-    return {
-        type: CatalogActionType.UPDATE_PRODUCT_SUCCESS
-    }
-}
-
-export const updateProductFailed = error => {
-    return {
-        type: CatalogActionType.UPDATE_PRODUCT_FAILED,
-        payload: error
-    }
-}
-
-export const updateProductPending = () => {
-    return {
-        type: CatalogActionType.UPDATE_PRODUCT_PENDING
-    }
-}

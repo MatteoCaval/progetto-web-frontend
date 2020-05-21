@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Grid, makeStyles, TextField } from "@material-ui/core";
-import axios from "axios";
-import Config from "../../../config";
 import { connect } from "react-redux";
-import { fetchProductDetail, updateProduct } from "../../../redux/catalog/catalog.actions";
+import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
+import {
+    createProduct,
+    resetProductOperationsState,
+    updateProduct
+} from "../../../redux/catalog/product/product-operations.actions";
+import Progress from "../../common/progress.component";
+import ErrorSnackbar from "../../common/error-snackbar.component";
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,9 +28,14 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const ProductForm = ({ match, startingProduct, editMode, fetchProductDetail, updateProduct }) => {
+const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDetail, updateProduct, createProduct, loading, error, completed, resetProductOperationsState }) => {
 
     const { categoryId, productId } = match.params
+
+    if (completed) {
+        history.push(`/${categoryId}`)
+        resetProductOperationsState()
+    }
 
     const classes = useStyles();
 
@@ -42,6 +53,7 @@ const ProductForm = ({ match, startingProduct, editMode, fetchProductDetail, upd
         }
     }, [fetchProductDetail])
 
+    // precompila in campi in caso di edit
     useEffect(() => {
         if (startingProduct && editMode) {
             setProductData({
@@ -63,18 +75,16 @@ const ProductForm = ({ match, startingProduct, editMode, fetchProductDetail, upd
 
     const handleSubmit = event => {
         event.preventDefault()
-        console.log('handleSubmit')
         if (editMode) {
             updateProduct({
                 ...productData,
                 productId
             })
         } else {
-            axios.post(`${Config.API_BASE_URL}/catalog/products`, {
+            createProduct({
                 ...productData,
                 category_id: categoryId
-            }).then(result => console.log('success'))
-                .catch(error => console.log('error'))
+            })
         }
 
     }
@@ -153,17 +163,27 @@ const ProductForm = ({ match, startingProduct, editMode, fetchProductDetail, upd
 
                 </Grid>
             </form>
+            <Progress loading={loading}/>
+            <ErrorSnackbar errorMessage={error}/>
         </Container>
     )
 }
 
 const mapStateToProps = (state, ownProps) => {
     const { productId } = ownProps.match
-
+    const { loading, error, completed } = state.productOperations
     return {
-        startingProduct: state.catalog.productDetails
+        startingProduct: state.catalog.productDetails,
+        loading,
+        error,
+        completed
     }
 }
 
 
-export default connect(mapStateToProps, { fetchProductDetail, updateProduct })(ProductForm)
+export default withRouter(connect(mapStateToProps, {
+    fetchProductDetail,
+    updateProduct,
+    createProduct,
+    resetProductOperationsState
+})(ProductForm))
