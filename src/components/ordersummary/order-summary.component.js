@@ -35,7 +35,7 @@ const time_slots = [
     '22.00'
 ]
 
-const OrderSummaryPage = ( {completeOrder}) => {
+const OrderSummaryPage = ({ completeOrder }) => {
     const [cashPayment, setCashPayment] = useState(1);
 
     const handleCashPaymentSelect = () => {
@@ -91,22 +91,20 @@ const OrderSummaryPage = ( {completeOrder}) => {
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                    <FormControl
-                        id='city'
-                        name='city'
-                        variant='outlined'
+                    <TextField
+                        id="city"
+                        name="city"
+                        select
                         required
-                        fullWidth>
-                        <InputLabel>City</InputLabel>
-                        <Select>
-                            {
-                                cities.map((city) =>
-                                    <MenuItem value={city}>{city}</MenuItem>
-                                )
-                            }
-
-                        </Select>
-                    </FormControl>
+                        label="Città"
+                        fullWidth
+                        variant="outlined">
+                        {
+                            cities.map((city, index) =>
+                                <MenuItem key={index} value={city}>{city}</MenuItem>
+                            )
+                        }
+                    </TextField>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -122,64 +120,61 @@ const OrderSummaryPage = ( {completeOrder}) => {
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                    <FormControl
-                        id='time-slot'
-                        name='time-slot'
-                        variant='outlined'
+                    <TextField
+                        id="time-slot"
+                        name="time-slot"
+                        select
                         required
-                        fullWidth>
-                        <InputLabel>Orario di consegna</InputLabel>
-                        <Select>
-                            {
-                                time_slots.map((slot) =>
-                                    <MenuItem value={slot}>{slot}</MenuItem>
+                        label="Orario di consegna"
+                        fullWidth
+                        variant="outlined">
+                        {
+                            time_slots.map((slot, index) =>
+                                    <MenuItem key={index} value={slot}>{slot}</MenuItem>
                                 )
-                            }
-
-                        </Select>
-                    </FormControl>
+                        }
+                    </TextField>
                 </Grid>
 
-                <div className="summary-payment-buttons">
-                    <Grid item xs={12} sm={6}>
-                        <Card className={cashPayment ? 'card-selected' : ''}
-                            variant='outlined'>
-                            <CardActionArea className='payment-card'
-                                onClick={handleCashPaymentSelect}>
-                                <div
-                                    className='payment-card-content'>
-                                    <Typography variant='h6' color='textPrimary' className="payment-title">
-                                        Paga in contanti
-                                </Typography>
-                                    <Typography color='textPrimary'>
-                                        Paga in contanti all'arrivo del fattorino.
-                                </Typography>
-                                    <Typography color='textPrimary'>
-                                        Nessuna spesa aggiunta, ma ti chiediamo di preparare i contanti.
-                                </Typography>
-                                </div>
-                            </CardActionArea>
-                        </Card>
-                    </Grid>
+                <Grid item xs={12} sm={6}>
+                    <Card className={cashPayment ? 'card-selected' : ''}
+                        variant='outlined'>
+                        <CardActionArea className='payment-card'
+                            onClick={handleCashPaymentSelect}>
+                            <div
+                                className='payment-card-content'>
+                                <Typography variant='h6' color='textPrimary' className="payment-title">
+                                    Paga in contanti
+                        </Typography>
+                                <Typography color='textPrimary'>
+                                    Paga in contanti all'arrivo del fattorino.
+                        </Typography>
+                                <Typography color='textPrimary'>
+                                    Nessuna spesa aggiunta, ma ti chiediamo di preparare i contanti.
+                        </Typography>
+                            </div>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
 
-                    <Grid item xs={12} sm={6}>
-                        <Card className={cashPayment ? '' : 'card-selected'}
-                            variant='outlined'>
-                            <CardActionArea className='payment-card'
-                                onClick={handlePayNowSelect}>
-                                <div
-                                    className='payment-card-content'>
-                                    <Typography variant='h6' color='textPrimary' className="payment-title">
-                                        Paga ora
-                                </Typography>
-                                    <Typography color='textPrimary'>
-                                        La comodità di pagare subito con la tua carta.
-                                </Typography>
-                                </div>
-                            </CardActionArea>
-                        </Card>
-                    </Grid>
-                </div>
+                <Grid item xs={12} sm={6}>
+                    <Card className={cashPayment ? '' : 'card-selected'}
+                        variant='outlined'>
+                        <CardActionArea className='payment-card'
+                            onClick={handlePayNowSelect}>
+                            <div
+                                className='payment-card-content'>
+                                <Typography variant='h6' color='textPrimary' className="payment-title">
+                                    Paga ora
+                        </Typography>
+                                <Typography color='textPrimary'>
+                                    La comodità di pagare subito con la tua carta.
+                        </Typography>
+                            </div>
+                        </CardActionArea>
+                    </Card>
+                </Grid>
+
 
             </Grid>
             <div className="summary-button-container">
