@@ -3,9 +3,11 @@ import { fetchCart } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import CartProductItem from "./cartproductitem.component";
 import { Grid, Container, Divider, Button, Typography } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
+
 import "./cartpage.style.scss"
 
-const CartPage = ({ fetchCart, cart }) => {
+const CartPage = ({ fetchCart, cart, history }) => {
     useEffect(() => {
         fetchCart()
     }, [fetchCart])
@@ -28,7 +30,8 @@ const CartPage = ({ fetchCart, cart }) => {
                 <Button
                     variant="contained"
                     color="primary"
-                    className="proceed-to-order">
+                    className="proceed-to-order"
+                    onClick={() => history.push('/summary')}>
                     Proceed to order
                 </Button>
                 <div className="total-info-container">
@@ -52,4 +55,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartPage)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CartPage))
