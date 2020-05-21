@@ -6,10 +6,13 @@ import { Container } from '@material-ui/core'
 import ProductForm from "./product/product-form.component";
 import CategoryForm from "./category/category-form.component";
 import ProductPage from "./product/product-page.component";
+import Progress from "../common/progress.component";
+import { connect } from "react-redux";
 
-const CatalogPage = ({ match }) => {
+const CatalogPage = ({ match, loading }) => {
 
     return (
+        // gestire qua dentro il loading ed error generali
         <Container maxWidth='md'>
             <Switch>
                 <Route
@@ -26,7 +29,7 @@ const CatalogPage = ({ match }) => {
                 />
                 <Route
                     path={`${match.path}:categoryId/:productId/edit`}
-                    render={(routeProps) => <ProductForm editMode {...routeProps}/>} />
+                    render={(routeProps) => <ProductForm editMode {...routeProps}/>}/>
 
                 <Route path={`${match.path}:categoryId/:productId`} component={ProductPage}/>
                 <Route
@@ -34,9 +37,17 @@ const CatalogPage = ({ match }) => {
                     component={ProductList}
                 />
             </Switch>
+            <Progress loading={loading}/>
+
         </Container>
     )
 
 }
 
-export default CatalogPage
+const mapStateToProps = state => {
+    return {
+        loading: state.catalog.loading
+    }
+}
+
+export default connect(mapStateToProps)(CatalogPage)

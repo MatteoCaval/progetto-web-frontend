@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Grid, makeStyles, TextField } from "@material-ui/core";
 import axios from "axios";
 import Config from "../../../config";
+import { connect } from "react-redux";
+import { fetchProductDetail, updateProduct } from "../../../redux/catalog/catalog.actions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const ProductForm = ({ match, editMode }) => {
+const ProductForm = ({ match, startingProduct, editMode, fetchProductDetail, updateProduct }) => {
 
-    const { productId, categoryId } = match.params
+    const { categoryId, productId } = match.params
 
     const classes = useStyles();
 
-    const [productData, setProuctData] = useState({
+    const [productData, setProductData] = useState({
         name: '',
         image: '',
         description: '',
@@ -34,18 +36,47 @@ const ProductForm = ({ match, editMode }) => {
         ingredients: ['qualcosa', 'qualcosa2']
     })
 
+    useEffect(() => {
+        if (editMode && productId) {
+            fetchProductDetail(productId)
+        }
+    }, [fetchProductDetail])
+
+    useEffect(() => {
+        if (startingProduct && editMode) {
+            setProductData({
+                ...productData,
+                name: startingProduct.name,
+                image: startingProduct.image,
+                description: startingProduct.description,
+                price: startingProduct.price,
+                ingredients: startingProduct.ingredients
+            })
+        }
+    }, [startingProduct])
+
+
     const handleChange = event => {
         const { value, name } = event.target
-        setProuctData({ ...productData, [name]: value })
+        setProductData({ ...productData, [name]: value })
     }
 
     const handleSubmit = event => {
         event.preventDefault()
-        axios.post(`${Config.API_BASE_URL}/catalog/products`, {
-            ...productData,
-            category_id: categoryId
-        }).then(result => console.log('success'))
-            .catch(error => console.log('error'))
+        console.log('handleSubmit')
+        if (editMode) {
+            updateProduct({
+                ...productData,
+                productId
+            })
+        } else {
+            axios.post(`${Config.API_BASE_URL}/catalog/products`, {
+                ...productData,
+                category_id: categoryId
+            }).then(result => console.log('success'))
+                .catch(error => console.log('error'))
+        }
+
     }
 
     return (
@@ -126,4 +157,13 @@ const ProductForm = ({ match, editMode }) => {
     )
 }
 
-export default ProductForm
+const mapStateToProps = (state, ownProps) => {
+    const { productId } = ownProps.match
+
+    return {
+        startingProduct: state.catalog.productDetails
+    }
+}
+
+
+export default connect(mapStateToProps, { fetchProductDetail, updateProduct })(ProductForm)

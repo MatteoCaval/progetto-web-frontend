@@ -34,7 +34,7 @@ export const fetchCategoriesPending = () => {
 
 export const fetchProductsForCategory = (categoryId) => {
     return (dispatch, getState) => {
-        if(getState().catalog.products.filter(product => product.categoryId === categoryId).length) return
+        if (getState().catalog.products.filter(product => product.categoryId === categoryId).length) return
         dispatch(fetchProductForCategoryPending())
         axios.get(`${Config.API_BASE_URL}/catalog/products?categoryId=${categoryId}`)
             .then(result => dispatch(fetchProductForCategorySuccess(result.data)))
@@ -88,6 +88,34 @@ export const fetchProductFailed = error => {
 
 export const fetchProductPending = () => {
     return {
-        type: CatalogActionType.FETCH_CATEGORIES_PENDING
+        type: CatalogActionType.FETCH_PRODUCT_PENDING
+    }
+}
+
+export const updateProduct = (updatedProduct) => {
+    return dispatch => {
+        dispatch(updateProductPending())
+        axios.put(`${Config.API_BASE_URL}/catalog/products/${updatedProduct.productId}`, updatedProduct)
+            .then(result => dispatch(updateProductSuccess()))
+            .catch(error => dispatch(updateProductFailed(error)))
+    }
+}
+
+export const updateProductSuccess = () => {
+    return {
+        type: CatalogActionType.UPDATE_PRODUCT_SUCCESS
+    }
+}
+
+export const updateProductFailed = error => {
+    return {
+        type: CatalogActionType.UPDATE_PRODUCT_FAILED,
+        payload: error
+    }
+}
+
+export const updateProductPending = () => {
+    return {
+        type: CatalogActionType.UPDATE_PRODUCT_PENDING
     }
 }
