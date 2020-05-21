@@ -8,8 +8,9 @@ import CategoryForm from "./category/category-form.component";
 import ProductPage from "./product/product-page.component";
 import Progress from "../common/progress.component";
 import { connect } from "react-redux";
+import ErrorSnackbar from "../common/error-snackbar.component";
 
-const CatalogPage = ({ match, loading }) => {
+const CatalogPage = ({ match, loading, error }) => {
 
     return (
         // gestire qua dentro il loading ed error generali
@@ -38,7 +39,7 @@ const CatalogPage = ({ match, loading }) => {
                 />
             </Switch>
             <Progress loading={loading}/>
-
+            <ErrorSnackbar errorMessage={error}/>
         </Container>
     )
 
@@ -46,7 +47,8 @@ const CatalogPage = ({ match, loading }) => {
 
 const mapStateToProps = state => {
     return {
-        loading: state.catalog.loading
+        loading: state.catalog.loading,
+        error: state.catalog.error
     }
 }
 

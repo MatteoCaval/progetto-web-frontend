@@ -8,7 +8,7 @@ export const fetchCategories = () => {
         dispatch(fetchCategoriesPending())
         axios.get(`${Config.API_BASE_URL}/catalog/categories`)
             .then(result => dispatch(fetchCategoriesSuccess(result.data)))
-            .catch(error => dispatch(fetchCategoriesFailed(error)))
+            .catch(error => dispatch(fetchCategoriesFailed(error.message)))
     }
 }
 
@@ -38,7 +38,7 @@ export const fetchProductsForCategory = (categoryId) => {
         dispatch(fetchProductForCategoryPending())
         axios.get(`${Config.API_BASE_URL}/catalog/products?categoryId=${categoryId}`)
             .then(result => dispatch(fetchProductForCategorySuccess(result.data)))
-            .catch(error => dispatch(fetchProductForCategoryFailed(error)))
+            .catch(error => dispatch(fetchProductForCategoryFailed(error.message)))
     }
 }
 
@@ -68,7 +68,7 @@ export const fetchProductDetail = (productId) => {
         dispatch(fetchProductPending())
         axios.get(`${Config.API_BASE_URL}/catalog/products/${productId}`)
             .then(result => dispatch(fetchProductSuccess(result.data)))
-            .catch(error => dispatch(fetchProductFailed(error)))
+            .catch(error => dispatch(fetchProductFailed(error.message)))
     }
 }
 
@@ -97,7 +97,7 @@ export const updateProduct = (updatedProduct) => {
         dispatch(updateProductPending())
         axios.put(`${Config.API_BASE_URL}/catalog/products/${updatedProduct.productId}`, updatedProduct)
             .then(result => dispatch(updateProductSuccess()))
-            .catch(error => dispatch(updateProductFailed(error)))
+            .catch(error => dispatch(updateProductFailed(error.message)))
     }
 }
 
