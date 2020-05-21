@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./product-page.style.scss";
 
@@ -32,8 +32,10 @@ import { Link as RouterLink } from 'react-router-dom'
 const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
 
     const productId = match.params.productId
+    const[quantity, setQuantity] = useState(1)
 
     const onQuantityChanged = (quantity) => {
+        setQuantity(quantity)
         console.log(quantity)
     }
     useEffect(() => {
@@ -77,7 +79,7 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
                         className="prod-details-add-to-cart"
                         variant="contained"
                         color="primary"
-                        onClick={() => addToCart(productId)}
+                        onClick={() => addToCart(productId, quantity)}
                         startIcon={<AddToCartIcon/>}
                     >Add to cart</Button>
                 </div>
@@ -102,7 +104,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchProduct: productId => dispatch(fetchProductDetail(productId)),
-        addToCart: (productId) => dispatch(addToCart(productId, 2))
+        addToCart: (productId, quantity) => dispatch(addToCart(productId, quantity))
     }
 }
 
