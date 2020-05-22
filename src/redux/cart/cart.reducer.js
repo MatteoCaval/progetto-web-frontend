@@ -2,7 +2,7 @@ import CartActionTypes from "./cart.actionTypes";
 
 const INITIAL_STATE = {
     products: [],
-    isPending: false,
+    loading: false,
     total: 0,
     error: ''
 }
@@ -14,20 +14,25 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
                 ...state,
                 products: action.payload.data.cartProducts,
                 total: action.payload.data.total,
-                isPending: false,
+                loading: false,
                 error: ''
             }
         case CartActionTypes.FETCH_CART_START:
+        case CartActionTypes.REMOVE_ITEM_PENDING:
+        case CartActionTypes.UPDATE_ITEM_QUANTITY_PENDING:
             return {
                 ...state,
-                isPending: true
+                loading: true,
+                error: ''
             }
         case CartActionTypes.FETCH_CART_FAILED:
+        case CartActionTypes.REMOVE_ITEM_FAILED:
+        case CartActionTypes.UPDATE_ITEM_QUANTITY_FAILED:
             return {
                 ...state,
-                isPending: false,
+                loading: false,
                 error: action.payload
-                }
+            }
         default:
             return state
     }

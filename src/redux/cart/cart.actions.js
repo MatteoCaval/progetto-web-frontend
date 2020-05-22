@@ -11,7 +11,7 @@ export const fetchCart =  () => {
             .then(result => {
                 dispatch(fetchCartSuccess(result))
             })
-            .catch(error => dispatch(fetchCartFailed(error)))
+            .catch(error => dispatch(fetchCartFailed(error.message)))
 
     }
 }
@@ -25,7 +25,7 @@ export const fetchCartSuccess = (cart) => {
 
 export const fetchCartFailed = (error) => {
     return {
-        type: CartActionTypes.FETCH_CART_SUCCESS,
+        type: CartActionTypes.FETCH_CART_FAILED,
         payload: error
     }
 }
@@ -45,7 +45,7 @@ export const addToCart = (productId, quantity) => {
             .then(result => {
                 dispatch(addToCartSuccess())
             })
-            .catch(error => dispatch(addToCartFailed(error)))
+            .catch(error => dispatch(addToCartFailed(error.message)))
 
     }
 }
@@ -79,7 +79,7 @@ export const removeProductFromCart = (productId) => {
                 dispatch(removeFromCartSuccess())
                 dispatch(fetchCart())
             })
-            .catch(error => dispatch(removeFromCartFailed(error)))
+            .catch(error => dispatch(removeFromCartFailed(error.message)))
 
     }
 }
@@ -113,7 +113,7 @@ export const updateCartProductQuantity = (productId ,quantity) => {
                 dispatch(updateCartProductQuantitySuccess())
                 dispatch(fetchCart())
             })
-            .catch(error => dispatch(updateCartProductQuantityFailed(error)))
+            .catch(error => dispatch(updateCartProductQuantityFailed(error.message)))
 
     }
 }
