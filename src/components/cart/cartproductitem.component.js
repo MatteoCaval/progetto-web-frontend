@@ -10,10 +10,6 @@ import { connect } from "react-redux";
 
 const CartProductItem = ({ product, removeFromCart, updateProductQuantity }) => {
 
-    const onQuantityChanged = (quantity) => {
-        updateProductQuantity(product.id, quantity)
-    }
-
     return (
         <Card className='cart-root'>
             <div className="cart-image-container">
