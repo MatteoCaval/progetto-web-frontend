@@ -2,7 +2,7 @@ import CartActionTypes from "./cart.actionTypes";
 import axios from 'axios'
 import Config from "../../config";
 
-export const fetchCart = () => {
+export const fetchCart =  () => {
     return (dispatch, getState) => {
         dispatch(fetchCartPending())
         const token = getState().user.currentUser.token

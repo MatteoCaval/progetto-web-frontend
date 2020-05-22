@@ -36,7 +36,7 @@ const CartPage = ({ fetchCart, cart, history }) => {
                 </Button>
                 <div className="total-info-container">
                     <Typography variant='h6' color='textPrimary'>Total:</Typography>
-                    <Typography variant='h5' color='textPrimary'>1000.00€</Typography>
+                    <Typography variant='h5' color='textPrimary'>{cart.total}</Typography>
                 </div>
             </div>
         </Container>

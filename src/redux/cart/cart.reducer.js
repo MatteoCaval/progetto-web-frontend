@@ -3,6 +3,7 @@ import CartActionTypes from "./cart.actionTypes";
 const INITIAL_STATE = {
     products: [],
     isPending: false,
+    total: 0,
     error: ''
 }
 
@@ -11,7 +12,8 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
         case CartActionTypes.FETCH_CART_SUCCESS:
             return {
                 ...state,
-                products: action.payload.data,
+                products: action.payload.data.cartItems,
+                total: action.payload.data.total,
                 isPending: false,
                 error: ''
             }
@@ -28,7 +30,6 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
                 }
         default:
             return state
-
     }
 }
 
