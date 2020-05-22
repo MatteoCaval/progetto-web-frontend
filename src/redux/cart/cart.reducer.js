@@ -12,7 +12,7 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
         case CartActionTypes.FETCH_CART_SUCCESS:
             return {
                 ...state,
-                products: action.payload.data.cartItems,
+                products: action.payload.data.cartProducts,
                 total: action.payload.data.total,
                 isPending: false,
                 error: ''
