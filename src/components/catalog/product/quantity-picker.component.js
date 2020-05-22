@@ -5,15 +5,12 @@ import {
     ButtonGroup
 } from "@material-ui/core";
 
-const QuantityPicker = ({quantity, onValueChanged}) => {
-    const [value, setValue] = useState(1);
-    useEffect(() => {
-        onValueChanged(value)
-    }, [value]);
+const QuantityPicker = ({ quantity, onValueChanged }) => {
+    const [value, setValue] = useState(quantity ? quantity : 1);
 
     useEffect(() => {
-        setValue(quantity ? quantity : 1)
-    },[]);
+        if (value !== quantity) onValueChanged(value)
+    }, [value]);
 
     const handleIncrement = () => {
         setValue(value + 1)
