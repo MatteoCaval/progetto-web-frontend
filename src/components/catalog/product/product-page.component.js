@@ -32,12 +32,8 @@ import { Link as RouterLink } from 'react-router-dom'
 const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
 
     const productId = match.params.productId
-    const[quantity, setQuantity] = useState(1)
+    const [quantity, setQuantity] = useState(1)
 
-    const onQuantityChanged = (quantity) => {
-        setQuantity(quantity)
-        console.log(quantity)
-    }
     useEffect(() => {
         fetchProduct(productId)
     }, [fetchProduct])
@@ -74,7 +70,10 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
                 </div>
 
                 <div className='prod-details-add-to-cart-container'>
-                    <QuantityPicker onValueChanged={onQuantityChanged}/>
+                    <QuantityPicker
+                        quantity={quantity}
+                        onQuantityIncremented={() => setQuantity(quantity + 1)}
+                        onQuantityDecremented={() => setQuantity(quantity - 1)}/>
                     <Button
                         className="prod-details-add-to-cart"
                         variant="contained"

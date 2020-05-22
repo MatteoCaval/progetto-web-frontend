@@ -19,7 +19,7 @@ const CartProductItem = ({ product, removeFromCart, updateProductQuantity }) => 
             <div className="cart-image-container">
                 <CardMedia
                     className="cart-media"
-                    image={product.image} />
+                    image={product.image}/>
             </div>
             <div className="cart-row-container">
                 <div className="cart-info">
@@ -34,10 +34,13 @@ const CartProductItem = ({ product, removeFromCart, updateProductQuantity }) => 
                     <IconButton
                         color="primary"
                         onClick={() => removeFromCart(product.id)}>
-                        <DeleteIcon />
+                        <DeleteIcon/>
                     </IconButton>
                     <div className="cart-picker">
-                        <QuantityPicker quantity={product.quantity} onValueChanged={onQuantityChanged} />
+                        <QuantityPicker
+                            quantity={product.quantity}
+                            onQuantityIncremented={() => updateProductQuantity(product.id, product.quantity + 1)}
+                            onQuantityDecremented={() => updateProductQuantity(product.id, product.quantity - 1)}/>
                     </div>
                 </div>
             </div>
