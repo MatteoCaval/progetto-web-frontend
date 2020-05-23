@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
-import { Menu, MenuItem ,IconButton, Typography, Toolbar, AppBar} from '@material-ui/core';
+import { Menu, MenuItem, IconButton, Typography, Toolbar, AppBar, Drawer } from '@material-ui/core';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { logout } from "../../redux/user/user.actions";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,12 +28,17 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         cursor: "pointer"
     },
+    list: {
+        width: 250,
+    },
 }));
 
 const MenuAppBar = ({ currentUser, history, logout }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
+
+    const [drawerOpen, setDrawerOpen] = useState(false)
 
     const handleProfileMenu = (event) => {
         setAnchorEl(event.currentTarget)
@@ -48,12 +61,34 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
 
     return (
         <div className={classes.root}>
+            <Drawer anchor='left' open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+                <List className={classes.list}>
+                    <ListItem button>
+                        <ListItemIcon>{<ListAltIcon/>}</ListItemIcon>
+                        <ListItemText primary='Orders'/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>{<ScheduleIcon/>}</ListItemIcon>
+                        <ListItemText primary='Timetable'/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>{<DirectionsBikeIcon/>}</ListItemIcon>
+                        <ListItemText primary='Riders'/>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>{<ShoppingBasketIcon/>}</ListItemIcon>
+                        <ListItemText primary='Catalog'/>
+                    </ListItem>
+                </List>
+            </Drawer>
             <AppBar position="fixed">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
+                                onClick={() => setDrawerOpen(true)}>
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" className={classes.title} onClick={handleLogoClick}>FoodDelivery</Typography>
+                    <Typography variant="h6" className={classes.title}
+                                onClick={handleLogoClick}>FoodDelivery</Typography>
                     <div>
                         {currentUser && (
                             <IconButton
