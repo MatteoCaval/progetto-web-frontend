@@ -1,14 +1,12 @@
 import CartActionTypes from "./cart.actionTypes";
-import axios from 'axios'
-import Config from "../../config";
 import { alertActions } from "../alerts/alert.actions";
+import { userService } from "../../services/user.service";
 
 export const fetchCart = () => {
     return (dispatch, getState) => {
         dispatch(fetchCartPending())
         const token = getState().user.currentUser.token
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-        axios.get(`${Config.API_BASE_URL}/user/cart`)
+        userService.fetchCart(token)
             .then(result => {
                 dispatch(fetchCartSuccess(result))
             })
@@ -41,8 +39,7 @@ export const addToCart = (productId, quantity) => {
     return (dispatch, getState) => {
         dispatch(addToCartPending())
         const token = getState().user.currentUser.token
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-        axios.post(`${Config.API_BASE_URL}/user/cart`, { productId, quantity })
+        userService.addToCart(productId, quantity, token)
             .then(result => {
                 dispatch(addToCartSuccess())
                 dispatch(alertActions.success('Product added to cart'))
@@ -75,8 +72,7 @@ export const removeProductFromCart = (productId) => {
     return (dispatch, getState) => {
         dispatch(removeFromCartPending())
         const token = getState().user.currentUser.token
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-        axios.delete(`${Config.API_BASE_URL}/user/cart/${productId}`)
+        userService.removeProductFromCart(productId, token)
             .then(result => {
                 dispatch(removeFromCartSuccess())
                 dispatch(fetchCart())
@@ -104,13 +100,11 @@ export const removeFromCartPending = () => {
     }
 }
 
-
 export const updateCartProductQuantity = (productId, quantity) => {
     return (dispatch, getState) => {
         dispatch(updateCartProductQuantityPending())
         const token = getState().user.currentUser.token
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-        axios.put(`${Config.API_BASE_URL}/user/cart/${productId}`, { quantity: quantity })
+        userService.updateProductQuantity(productId, quantity, token)
             .then(result => {
                 dispatch(updateCartProductQuantitySuccess())
                 dispatch(fetchCart())
