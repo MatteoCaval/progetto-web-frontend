@@ -13,7 +13,6 @@ const alertReducer = (state = {}, action = {}) => {
                 message: action.payload
             }
         case AlertTypes.CLEAR:
-            console.log('clear')
             return {}
         default:
             return state
