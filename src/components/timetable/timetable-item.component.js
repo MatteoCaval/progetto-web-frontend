@@ -1,7 +1,7 @@
 import React from "react"
 import { Container, Grid, Typography, TextField, Switch } from "@material-ui/core"
 import "./timetable-item.style.scss"
-import {initialLaunchState, initialDinnerState} from "./timetable.component"
+import { initialLaunchState, initialDinnerState } from "./timetable.component"
 const TimeTableItem = ({ day, onDayChanged }) => {
     const handleLaunchChange = (e) => {
         const { value, name } = e.target
@@ -11,32 +11,31 @@ const TimeTableItem = ({ day, onDayChanged }) => {
         onDayChanged(newDay)
     }
 
-    const handleDinnerChange = (e) => {
+    const handleDinnerChange = e => {
         const { value, name } = e.target
 
         let splitted = value.split(":");
-        const newDay = { ...day, [name]: { hours: splitted[0], minutes: splitted[1] } }
+        const newDay = { ...day, dinner: { ...day.launch, [name]: { hours: splitted[0], minutes: splitted[1] } } }
         onDayChanged(newDay)
     }
 
     const handleLaunchSwitch = e => {
         const { checked, name } = e.target
 
-        const newDay = { 
-            ...day, 
+        const newDay = {
+            ...day,
             [name]: checked,
             launch: checked ? initialLaunchState : null
         }
 
         onDayChanged(newDay)
-    }    
-    
+    }
+
     const handleDinnerSwitch = e => {
         const { checked, name } = e.target
 
-
-        const newDay = { 
-            ...day, 
+        const newDay = {
+            ...day,
             [name]: checked,
             dinner: checked ? initialDinnerState : null
         }
