@@ -1,12 +1,11 @@
 import CatalogActionType from "./catalog.types";
-import axios from 'axios'
-import Config from "../../config";
+import { catalogService } from "../../services/catalog.service";
 
 export const fetchCategories = () => {
     return (dispatch, getState) => {
         if (getState().catalog.categories.length) return
         dispatch(fetchCategoriesPending())
-        axios.get(`${Config.API_BASE_URL}/catalog/categories`)
+        catalogService.fetchCategories()
             .then(result => dispatch(fetchCategoriesSuccess(result.data)))
             .catch(error => dispatch(fetchCategoriesFailed(error.message)))
     }
@@ -36,7 +35,7 @@ export const fetchProductsForCategory = (categoryId, cached = true) => {
     return (dispatch, getState) => {
         if (cached && getState().catalog.products.filter(product => product.categoryId === categoryId).length) return
         dispatch(fetchProductForCategoryPending())
-        axios.get(`${Config.API_BASE_URL}/catalog/products?categoryId=${categoryId}`)
+        catalogService.fetchProductsForCategory(categoryId)
             .then(result => dispatch(fetchProductForCategorySuccess(result.data)))
             .catch(error => dispatch(fetchProductForCategoryFailed(error.message)))
     }
@@ -66,7 +65,7 @@ export const fetchProductForCategoryPending = () => {
 export const fetchProductDetail = (productId) => {
     return dispatch => {
         dispatch(fetchProductPending())
-        axios.get(`${Config.API_BASE_URL}/catalog/products/${productId}`)
+        catalogService.fetchProductDetail(productId)
             .then(result => dispatch(fetchProductSuccess(result.data)))
             .catch(error => dispatch(fetchProductFailed(error.message)))
     }
