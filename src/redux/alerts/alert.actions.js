@@ -1,8 +1,4 @@
-export const alertActions = {
-    success,
-    error,
-    clear
-}
+import AlertTypes from "./alert.types";
 
 const success = (message) => {
     return {
@@ -22,4 +18,10 @@ const clear = () => {
     return {
         type: AlertTypes.CLEAR
     }
+}
+
+export const alertActions = {
+    success,
+    error,
+    clear
 }

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.scss';
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom'
 import SignIn from "./components/signin/signin.component";
 import MenuAppBar from "./components/appbar/menuappbar.component";
 import Categories from "./components/catalog/catalogpage.component";
@@ -12,12 +12,20 @@ import OrdersPage from "./components/orders/orders-list.component";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import OrderSummaryPage from "./components/ordersummary/order-summary.component";
 import CategoryForm from "./components/catalog/category/category-form.component";
+import Alert from "./components/common/alert.component";
+import { alertActions } from "./redux/alerts/alert.actions";
 
+function App({ user, history, clearAlerts }) {
 
-function App({ user }) {
+    useEffect(() => {
+        history.listen((location, action) => {
+            clearAlerts()
+        })
+    }, [])
+
     return (
         <React.Fragment>
-            <CssBaseline />
+            <CssBaseline/>
             <MenuAppBar/>
             <Switch>
                 <Route exact path="/signin" render={() => user ? <Redirect to='/'/> : <SignIn/>}/>
@@ -33,6 +41,8 @@ function App({ user }) {
 
                 <Route path='/' component={Categories}/>
             </Switch>
+            <Alert/>
+
         </React.Fragment>
     );
 }
@@ -43,4 +53,11 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+    return {
+        clearAlerts: () => dispatch(alertActions.clear())
+    }
+}
+
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
