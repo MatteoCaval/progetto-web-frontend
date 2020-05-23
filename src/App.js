@@ -14,6 +14,7 @@ import OrderSummaryPage from "./components/ordersummary/order-summary.component"
 import CategoryForm from "./components/catalog/category/category-form.component";
 import Alert from "./components/common/alert.component";
 import { alertActions } from "./redux/alerts/alert.actions";
+import RidersPage from "./components/rider/riders.component";
 
 function App({ user, history, clearAlerts }) {
 
@@ -33,6 +34,7 @@ function App({ user, history, clearAlerts }) {
 
                 <Route exact path="/createcategory" component={CategoryForm}/>
 
+                <Route exact path='/riders' component={RidersPage} />
 
                 <Route exact path="/orders" render={() => user ? <OrdersPage/> : <Redirect to='/'/>}/>
                 <Route exact path="/summary" render={() => user ? <OrderSummaryPage/> : <Redirect to='/'/>}/>
