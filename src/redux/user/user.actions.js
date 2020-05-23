@@ -52,6 +52,7 @@ export const registerUser = (user) => {
         authService.registerUser(user)
             .then(result => {
                 dispatch(registrationSuccess(result.data))
+                dispatch(alertActions.success('Registration Sucessful'))
             })
             .catch(error => dispatch(registrationFailed(error)))
     }

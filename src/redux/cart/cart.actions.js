@@ -1,8 +1,9 @@
 import CartActionTypes from "./cart.actionTypes";
 import axios from 'axios'
 import Config from "../../config";
+import { alertActions } from "../alerts/alert.actions";
 
-export const fetchCart =  () => {
+export const fetchCart = () => {
     return (dispatch, getState) => {
         dispatch(fetchCartPending())
         const token = getState().user.currentUser.token
@@ -44,6 +45,7 @@ export const addToCart = (productId, quantity) => {
         axios.post(`${Config.API_BASE_URL}/user/cart`, { productId, quantity })
             .then(result => {
                 dispatch(addToCartSuccess())
+                dispatch(alertActions.success('Product added to cart'))
             })
             .catch(error => dispatch(addToCartFailed(error.message)))
 
@@ -103,12 +105,12 @@ export const removeFromCartPending = () => {
 }
 
 
-export const updateCartProductQuantity = (productId ,quantity) => {
+export const updateCartProductQuantity = (productId, quantity) => {
     return (dispatch, getState) => {
         dispatch(updateCartProductQuantityPending())
         const token = getState().user.currentUser.token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-        axios.put(`${Config.API_BASE_URL}/user/cart/${productId}`, {quantity: quantity})
+        axios.put(`${Config.API_BASE_URL}/user/cart/${productId}`, { quantity: quantity })
             .then(result => {
                 dispatch(updateCartProductQuantitySuccess())
                 dispatch(fetchCart())
