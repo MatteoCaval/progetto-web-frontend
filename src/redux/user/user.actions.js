@@ -2,6 +2,7 @@ import axios from 'axios'
 import AuthActionType from "../auth/auth.actionType";
 import Config from '../../config'
 import UserActionTypes from "./user.actionTypes";
+import { alertActions } from "../alerts/alert.actions";
 
 export const loginSuccess = user => {
     return {
@@ -39,7 +40,11 @@ export const loginUser = (email, password) => {
             .then(result => {
                 dispatch(loginSuccess(result.data))
             })
-            .catch(error => dispatch(loginFailed(error)))
+            .catch(error => {
+                    dispatch(loginFailed(error.message))
+                    dispatch(alertActions.error(error.message))
+                }
+            )
 
     }
 }
