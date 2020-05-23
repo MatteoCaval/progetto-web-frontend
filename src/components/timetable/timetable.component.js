@@ -1,155 +1,102 @@
-import React from "react"
+import React, { useState } from "react"
 import TimeTableItem from "./timetable-item.component"
-import { Container, Grid } from "@material-ui/core"
+import { Container } from "@material-ui/core"
 
-
-const timetable = [
-    {
-        day: 'Monday',
-        launchTimeStart: {
-            hours: 11,
-            minutes: '30'
-        },
-        launchTimeEnd: {
-            hours: 14,
-            minutes: '00'
-        },
-        dinnerTimeStart: {
-            hours: 18,
-            minutes: '30'
-        },
-        dinnerTimeEnd: {
-            hours: 23,
-            minutes: '00'
-        }
+export const initialLaunchState = {
+    timeStart: {
+        hour: '12',
+        minute: '00'
     },
-    {
-        day: 'Tuesday',
-        launchTimeStart: {
-            hours: 11,
-            minutes: '30'
-        },
-        launchTimeEnd: {
-            hours: 14,
-            minutes: '00'
-        },
-        dinnerTimeStart: {
-            hours: 18,
-            minutes: '30'
-        },
-        dinnerTimeEnd: {
-            hours: 23,
-            minutes: '00'
-        }
-    },
-    {
-        day: 'Wednesday',
-        launchTimeStart: {
-            hours: 11,
-            minutes: '30'
-        },
-        launchTimeEnd: {
-            hours: 14,
-            minutes: '00'
-        },
-        dinnerTimeStart: {
-            hours: 18,
-            minutes: '30'
-        },
-        dinnerTimeEnd: {
-            hours: 23,
-            minutes: '00'
-        }
-    },
-    {
-        day: 'Thursday',
-        launchTimeStart: {
-            hours: 11,
-            minutes: '30'
-        },
-        launchTimeEnd: {
-            hours: 14,
-            minutes: '00'
-        },
-        dinnerTimeStart: {
-            hours: 18,
-            minutes: '30'
-        },
-        dinnerTimeEnd: {
-            hours: 23,
-            minutes: '00'
-        }
-    },
-    {
-        day: 'Friday',
-        launchTimeStart: {
-            hours: 11,
-            minutes: '30'
-        },
-        launchTimeEnd: {
-            hours: 14,
-            minutes: '00'
-        },
-        dinnerTimeStart: {
-            hours: 18,
-            minutes: '30'
-        },
-        dinnerTimeEnd: {
-            hours: 23,
-            minutes: '00'
-        }
-    },
-    {
-        day: 'Saturday',
-        launchTimeStart: {
-            hours: 11,
-            minutes: '30'
-        },
-        launchTimeEnd: {
-            hours: 14,
-            minutes: '00'
-        },
-        dinnerTimeStart: {
-            hours: 18,
-            minutes: '30'
-        },
-        dinnerTimeEnd: {
-            hours: 23,
-            minutes: '00'
-        }
-    },
-    {
-        day: 'Sunday',
-        launchTimeStart: {
-            hours: 11,
-            minutes: '30'
-        },
-        launchTimeEnd: {
-            hours: 14,
-            minutes: '00'
-        },
-        dinnerTimeStart: {
-            hours: 18,
-            minutes: '30'
-        },
-        dinnerTimeEnd: {
-            hours: 23,
-            minutes: '00'
-        }
+    timeEnd: {
+        hour: '14',
+        minute: '00'
     }
-]
+}
+
+export const initialDinnerState = {
+    timeStart: {
+        hour: '18',
+        minute: '00'
+    },
+    timeEnd: {
+        hour: '22',
+        minute: '00'
+    }
+}
 
 const TimeTablePage = () => {
-    return (
 
+    const [timetable, setTimetable] = useState(
+        [
+            {
+                name: 'Monday',
+                launchOpen: true,
+                dinnerOpen: true,
+                launch: initialLaunchState,
+                dinner: initialDinnerState
+            },
+            {
+                name: 'Tuesday',
+                launchOpen: true,
+                dinnerOpen: true,
+                launch: initialLaunchState,
+                dinner: initialDinnerState
+            },
+            {
+                name: 'Wednesday',
+                launchOpen: true,
+                dinnerOpen: true,
+                launch: initialLaunchState,
+                dinner: initialDinnerState
+            },
+            {
+                name: 'Thursday',
+                launchOpen: false,
+                dinnerOpen: true,
+                launch: null,
+                dinner: initialDinnerState
+            },
+            {
+                name: 'Friday',
+                launchOpen: true,
+                dinnerOpen: true,
+                launch: initialLaunchState,
+                dinner: initialDinnerState
+            },
+            {
+                name: 'Saturday',
+                launchOpen: true,
+                dinnerOpen: true,
+                launch: initialLaunchState,
+                dinner: initialDinnerState
+            },
+            {
+                name: 'Sunday',
+                launchOpen: true,
+                dinnerOpen: true,
+                launch: initialLaunchState,
+                dinner: initialDinnerState
+            }
+        ]
+    )
+
+    const updateDay = day => {
+        console.log(day)
+
+        setTimetable(timetable.map(d => {
+            return d.name === day.name ? day : d
+        }))
+    }
+
+    return (
         <Container maxWidth='md'>
-        {
-            timetable.map(day => {
-                return (
-                    <TimeTableItem day={day}/>
-                )
-            })
-        }
+            {
+                timetable.map(day => {
+                    return (
+                        <TimeTableItem key={day.name} day={day} onDayChanged={updateDay} />
+                    )
+                })
+            }
         </Container>
     )
 }

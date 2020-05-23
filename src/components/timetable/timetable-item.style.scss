@@ -16,3 +16,9 @@
 .day-component{
     padding-top: 0 !important;
 }
+
+.day-header-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
