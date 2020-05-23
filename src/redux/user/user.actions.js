@@ -1,8 +1,8 @@
-import axios from 'axios'
 import AuthActionType from "../auth/auth.actionType";
-import Config from '../../config'
 import UserActionTypes from "./user.actionTypes";
 import { alertActions } from "../alerts/alert.actions";
+import { authService } from "../../services/auth.service";
+import { userService } from "../../services/user.service";
 
 export const loginSuccess = user => {
     return {
@@ -32,11 +32,9 @@ export const registrationFailed = errorMessage => {
     }
 }
 
-
-// TODO create auth package and move inside it
 export const loginUser = (email, password) => {
     return dispatch => {
-        axios.post(`${Config.API_BASE_URL}/auth/signin`, { email, password })
+        authService.loginUser(email, password)
             .then(result => {
                 dispatch(loginSuccess(result.data))
             })
@@ -51,7 +49,7 @@ export const loginUser = (email, password) => {
 
 export const registerUser = (user) => {
     return dispatch => {
-        axios.post(`${Config.API_BASE_URL}/auth/signup`, user)
+        authService.registerUser(user)
             .then(result => {
                 dispatch(registrationSuccess(result.data))
             })
@@ -62,8 +60,7 @@ export const registerUser = (user) => {
 export const logout = () => {
     return (dispatch, getState) => {
         const token = getState().user.currentUser.token
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-        axios.post(`${Config.API_BASE_URL}/auth/logout`)
+        authService.logout(token)
             .then(result => {
                 dispatch(logoutSuccess())
             })
@@ -86,10 +83,9 @@ export const logoutFailed = (error) => {
 
 export const fetchOrders = () => {
     return (dispatch, getState) => {
-        // dispatch(fetchOrdersPending())
+        dispatch(fetchOrdersPending())
         const token = getState().user.currentUser.token
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-        axios.get(`${Config.API_BASE_URL}/user/orders`)
+        userService.fetchOrders(token)
             .then(result => {
                 dispatch(fetchOrdersSuccess(result.data))
             })
