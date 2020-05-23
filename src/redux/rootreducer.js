@@ -4,13 +4,15 @@ import catalogReducer from "./catalog/catalog.reducer";
 import cartReducer from "./cart/cart.reducer";
 import productOperationsReducer from "./catalog/product/product-operations.reducer";
 import alertReducer from "./alerts/alert.reducer";
+import adminReducer from "./riders/admin.reducer";
 
 const rootReducer = combineReducers({
     user: userReducer,
     catalog: catalogReducer,
     cart: cartReducer,
     productOperations: productOperationsReducer,
-    alert: alertReducer
+    alert: alertReducer,
+    adminData: adminReducer
 })
 
 export default rootReducer;
