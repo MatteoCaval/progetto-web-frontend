@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchRiders } from "../../redux/riders/admin.actions";
 import RiderItem from "./rider-item.component";
+import { Container, Grid } from "@material-ui/core";
 
 const RidersPage = ({ riders, fetchRiders }) => {
 
@@ -10,7 +11,12 @@ const RidersPage = ({ riders, fetchRiders }) => {
     }, [fetchRiders])
 
     return (
-        riders ? riders.map(rider => <RiderItem/>) : <p>No riders found</p>
+        <Container maxWidth='md'>
+            <Grid container spacing={3}>
+                {riders ? riders.map(rider => <Grid item xs={12}><RiderItem rider={rider}/></Grid>) :
+                    <p>No riders found</p>}
+            </Grid>
+        </Container>
     )
 }
 
