@@ -25,8 +25,15 @@ const deleteRider = (riderId, token) => {
     }))
 }
 
+const createRider = (rider, token) => {
+    return new Promise(((resolve, reject) => {
+        resolve()
+    }))
+}
+
 
 export const adminService = {
     fetchRiders,
-    deleteRider
+    deleteRider,
+    createRider
 }

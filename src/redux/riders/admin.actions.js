@@ -72,3 +72,37 @@ export const deleteRiderSuccess = (id) => {
         payload: id
     }
 }
+
+export const createRider = (rider) => {
+    return (dispatch, getState) => {
+        dispatch(createRiderPending())
+        const token = getState().user.currentUser.token
+        adminService.createRider(rider, token)
+            .then(result => {
+                dispatch(createRiderSuccess())
+                dispatch(alertActions.success('Rider created'))
+            })
+            .catch(error => {
+                dispatch(createRiderFailed(error.message))
+                dispatch(alertActions.error(error.message))
+            })
+    }
+}
+
+export const createRiderSuccess = () => {
+    return {
+        type: AdminActionType.CREATE_RIDER_SUCCESS
+    }
+}
+
+export const createRiderPending = () => {
+    return {
+        type: AdminActionType.CREATE_RIDER_PENDING
+    }
+}
+export const createRiderFailed = (errorMessage) => {
+    return {
+        type: AdminActionType.CREATE_RIDER_FAILED,
+        payload: errorMessage
+    }
+}

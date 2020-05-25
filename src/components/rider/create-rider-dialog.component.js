@@ -3,8 +3,10 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import { Button, Grid, TextField } from "@material-ui/core";
+import { createRider } from "../../redux/riders/admin.actions";
+import { connect } from "react-redux";
 
-const CreateRiderDialog = () => {
+const CreateRiderDialog = ({ createRider }) => {
 
     const [riderData, setRiderData] = useState({
         name: '',
@@ -20,14 +22,14 @@ const CreateRiderDialog = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(riderData)
+        createRider({ ...riderData })
     }
 
     return (
-        <Dialog open={true}>
+        <Dialog open={false}>
             <DialogTitle>Create rider</DialogTitle>
             <DialogContent>
-                <form onSubmit={handleChange}>
+                <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
@@ -94,4 +96,4 @@ const CreateRiderDialog = () => {
     )
 }
 
-export default CreateRiderDialog
+export default connect(null, { createRider })(CreateRiderDialog)
