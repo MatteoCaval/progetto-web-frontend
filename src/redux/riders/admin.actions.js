@@ -35,3 +35,40 @@ export const fetchRidersPending = () => {
         type: AdminActionType.FETCH_RIDERS_FAILED
     }
 }
+
+export const deleteRider = (riderId) => {
+    return (dispatch, getState) => {
+        dispatch(deleteRiderPending())
+        const token = getState().user.currentUser.token
+        adminService.deleteRider(riderId, token)
+            .then(result => {
+                dispatch(deleteRiderSuccess(riderId))
+                dispatch(alertActions.success('Rider removed'))
+            })
+            .catch(error => {
+                dispatch(deleteRiderFailed(error.message))
+                dispatch(alertActions.error(error.message))
+            })
+
+    }
+}
+
+export const deleteRiderPending = () => {
+    return {
+        type: AdminActionType.DELETE_RIDER_PENDING
+    }
+}
+
+export const deleteRiderFailed = (errorMessage) => {
+    return {
+        type: AdminActionType.DELETE_RIDER_FAILED,
+        payload: errorMessage
+    }
+}
+
+export const deleteRiderSuccess = (id) => {
+    return {
+        type: AdminActionType.DELETE_RIDER_SUCCESS,
+        payload: id
+    }
+}

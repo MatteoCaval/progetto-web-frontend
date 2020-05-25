@@ -3,11 +3,13 @@ const fetchRiders = () => {
         resolve({
             data: [
                 {
+                    id: 1,
                     name: 'Paolo',
                     surname: 'Bitta',
                     email: 'paolo.bitta@gmail.com'
                 },
                 {
+                    id: 2,
                     name: 'Vittorio',
                     surname: 'Ghini',
                     email: 'v.ghini@gmail.com'
@@ -17,6 +19,14 @@ const fetchRiders = () => {
     }))
 }
 
+const deleteRider = (riderId, token) => {
+    return new Promise(((resolve, reject) => {
+        resolve()
+    }))
+}
+
+
 export const adminService = {
-    fetchRiders
+    fetchRiders,
+    deleteRider
 }

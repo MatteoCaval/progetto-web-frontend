@@ -3,14 +3,15 @@ import { Card } from "@material-ui/core";
 import CardHeader from "@material-ui/core/CardHeader";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete"
+import { deleteRider } from "../../redux/riders/admin.actions";
+import { connect } from "react-redux";
 
-const RiderItem = ({ rider }) => {
+const RiderItem = ({ rider, deleteRider }) => {
     return (
         <Card>
             <CardHeader
-
                 action={
-                    <IconButton aria-label="settings">
+                    <IconButton aria-label="settings" onClick={() => deleteRider(rider.id)}>
                         <DeleteIcon/>
                     </IconButton>
                 }
@@ -21,4 +22,5 @@ const RiderItem = ({ rider }) => {
     )
 }
 
-export default RiderItem
+
+export default connect(null, { deleteRider })(RiderItem)
