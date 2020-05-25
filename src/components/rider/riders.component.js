@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchRiders } from "../../redux/riders/admin.actions";
 import RiderItem from "./rider-item.component";
@@ -6,6 +6,8 @@ import { Button, Container, Grid } from "@material-ui/core";
 import CreateRiderDialog from "./create-rider-dialog.component";
 
 const RidersPage = ({ riders, fetchRiders }) => {
+
+    const [creationDialogOpen, setCreationDialogOpen] = useState(false)
 
     useEffect(() => {
         fetchRiders()
@@ -19,12 +21,13 @@ const RidersPage = ({ riders, fetchRiders }) => {
                         <p>No riders found</p>}
                 </Grid>
                 <Button
+                    onClick={() => setCreationDialogOpen(true)}
                     variant="contained"
                     color="primary">
                     Create new rider
                 </Button>
             </Container>
-            <CreateRiderDialog />
+            <CreateRiderDialog open={creationDialogOpen} onCreationCancelled={() => setCreationDialogOpen(false)}/>
         </React.Fragment>
     )
 }

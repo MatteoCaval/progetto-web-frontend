@@ -6,7 +6,7 @@ import { Button, Grid, TextField } from "@material-ui/core";
 import { createRider } from "../../redux/riders/admin.actions";
 import { connect } from "react-redux";
 
-const CreateRiderDialog = ({ createRider }) => {
+const CreateRiderDialog = ({ createRider, open, onCreationCancelled }) => {
 
     const [riderData, setRiderData] = useState({
         name: '',
@@ -26,7 +26,7 @@ const CreateRiderDialog = ({ createRider }) => {
     }
 
     return (
-        <Dialog open={false}>
+        <Dialog open={open} onClose={onCreationCancelled}>
             <DialogTitle>Create rider</DialogTitle>
             <DialogContent>
                 <form onSubmit={handleSubmit}>
