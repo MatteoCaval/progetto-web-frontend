@@ -7,9 +7,8 @@ const fetchRiders = (token) => {
 }
 
 const deleteRider = (riderId, token) => {
-    return new Promise(((resolve, reject) => {
-        resolve()
-    }))
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+    return axios.delete(`${Config.API_BASE_URL}/riders/${riderId}`)
 }
 
 const createRider = (rider, token) => {
