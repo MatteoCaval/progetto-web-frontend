@@ -5,8 +5,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import { Button, Grid, TextField } from "@material-ui/core";
 import { createRider } from "../../redux/admin/admin.actions";
 import { connect } from "react-redux";
+import Progress from "../common/progress.component";
 
-const CreateRiderDialog = ({ createRider, open, onCreationCancelled }) => {
+const CreateRiderDialog = ({ createRider, open, onCreationCancelled, riderCreation }) => {
 
     const [riderData, setRiderData] = useState({
         name: '',
@@ -91,9 +92,16 @@ const CreateRiderDialog = ({ createRider, open, onCreationCancelled }) => {
                         </Grid>
                     </Grid>
                 </form>
+                <Progress loading={riderCreation && riderCreation.pending}/>
             </DialogContent>
         </Dialog>
     )
 }
 
-export default connect(null, { createRider })(CreateRiderDialog)
+const mapStateToProps = state => {
+    return {
+        riderCreation: state.adminData.riderCreation
+    }
+}
+
+export default connect(mapStateToProps, { createRider })(CreateRiderDialog)

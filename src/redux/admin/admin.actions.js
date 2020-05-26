@@ -32,7 +32,7 @@ export const fetchRidersFailed = (errorMessage) => {
 
 export const fetchRidersPending = () => {
     return {
-        type: AdminActionType.FETCH_RIDERS_FAILED
+        type: AdminActionType.FETCH_RIDERS_PENDING
     }
 }
 
@@ -81,6 +81,7 @@ export const createRider = (rider) => {
             .then(result => {
                 dispatch(createRiderSuccess())
                 dispatch(alertActions.success('Rider created'))
+                dispatch(fetchRiders())
             })
             .catch(error => {
                 dispatch(createRiderFailed(error.message))
