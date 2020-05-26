@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { fetchRiders } from "../../redux/riders/admin.actions";
+import { fetchRiders } from "../../redux/admin/admin.actions";
 import RiderItem from "./rider-item.component";
 import { Button, Container, Grid } from "@material-ui/core";
 import CreateRiderDialog from "./create-rider-dialog.component";

@@ -3,7 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import { Button, Grid, TextField } from "@material-ui/core";
-import { createRider } from "../../redux/riders/admin.actions";
+import { createRider } from "../../redux/admin/admin.actions";
 import { connect } from "react-redux";
 
 const CreateRiderDialog = ({ createRider, open, onCreationCancelled }) => {

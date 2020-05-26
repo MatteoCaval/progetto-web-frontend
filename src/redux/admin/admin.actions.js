@@ -11,7 +11,7 @@ export const fetchRiders = () => {
             })
             .catch(error => {
                 dispatch(fetchRidersFailed(error.message))
-                dispatch(alertActions.error('Error retrieving riders'))
+                dispatch(alertActions.error('Error retrieving admin'))
             })
     }
 }
