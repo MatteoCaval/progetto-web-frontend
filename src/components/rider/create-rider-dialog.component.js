@@ -7,14 +7,16 @@ import { createRider } from "../../redux/admin/admin.actions";
 import { connect } from "react-redux";
 import Progress from "../common/progress.component";
 
+const INITIAL_VALUES = {
+    name: '',
+    surname: '',
+    email: '',
+    password: ''
+}
+
 const CreateRiderDialog = ({ createRider, open, onCreationCancelled, riderCreation }) => {
 
-    const [riderData, setRiderData] = useState({
-        name: '',
-        surname: '',
-        email: '',
-        password: ''
-    })
+    const [riderData, setRiderData] = useState(INITIAL_VALUES)
 
     const handleChange = (event) => {
         const { value, name } = event.target
@@ -24,6 +26,8 @@ const CreateRiderDialog = ({ createRider, open, onCreationCancelled, riderCreati
     const handleSubmit = (event) => {
         event.preventDefault()
         createRider({ ...riderData })
+        setRiderData(INITIAL_VALUES)
+
     }
 
     return (

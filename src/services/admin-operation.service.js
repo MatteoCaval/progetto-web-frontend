@@ -1,22 +1,9 @@
-const fetchRiders = () => {
-    return new Promise(((resolve, reject) => {
-        resolve({
-            data: [
-                {
-                    id: 1,
-                    name: 'Paolo',
-                    surname: 'Bitta',
-                    email: 'paolo.bitta@gmail.com'
-                },
-                {
-                    id: 2,
-                    name: 'Vittorio',
-                    surname: 'Ghini',
-                    email: 'v.ghini@gmail.com'
-                }
-            ]
-        })
-    }))
+import axios from "axios";
+import Config from "../config";
+
+const fetchRiders = (token) => {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+    return axios.get(`${Config.API_BASE_URL}/riders`)
 }
 
 const deleteRider = (riderId, token) => {
@@ -26,9 +13,8 @@ const deleteRider = (riderId, token) => {
 }
 
 const createRider = (rider, token) => {
-    return new Promise(((resolve, reject) => {
-        resolve()
-    }))
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+    return axios.post(`${Config.API_BASE_URL}/riders`, rider)
 }
 
 

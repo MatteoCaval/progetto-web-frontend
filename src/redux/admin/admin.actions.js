@@ -3,9 +3,10 @@ import { adminService } from "../../services/admin-operation.service";
 import { alertActions } from "../alerts/alert.actions";
 
 export const fetchRiders = () => {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(fetchRidersPending())
-        adminService.fetchRiders()
+        const token = getState().user.currentUser.token
+        adminService.fetchRiders(token)
             .then(response => {
                 dispatch(fetchRidersSuccess(response.data))
             })
