@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card, CardActionArea, CardContent, CardMedia, IconButton, Typography } from "@material-ui/core";
 import { addToCart } from "../../../redux/cart/cart.actions";
 import { connect } from "react-redux";
@@ -35,7 +35,7 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
                         className="product-details"
                         color='primary'
                         onClick={() => addProductToCart(product.id)}>
-                        <AddToCartIcon />
+                        <AddToCartIcon/>
                     </IconButton>
                 </div>
 

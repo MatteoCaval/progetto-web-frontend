@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Container, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanel, Grid } from '@material-ui/core'
+import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Grid, Typography } from '@material-ui/core'
 
 import "./order-item.style.scss"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
@@ -14,7 +14,7 @@ const OrderItem = ({ order }) => {
     return (
         <ExpansionPanel>
             <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
+                expandIcon={<ExpandMoreIcon/>}
                 aria-controls="panel1a-content"
                 id="panel1a-header">
                 <div className='order-root'>
@@ -45,14 +45,14 @@ const OrderItem = ({ order }) => {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
                 <div className="order-products-container">
-                {   
-                    order.products.map(product => {
-                    return (
-                        <Grid key={product._id} item xs={12} sm={12}>
-                            <OrderProductItem key={product._id} product={product} />
-                        </Grid>
-                    )
-                })}
+                    {
+                        order.products.map(product => {
+                            return (
+                                <Grid key={product._id} item xs={12} sm={12}>
+                                    <OrderProductItem key={product._id} product={product}/>
+                                </Grid>
+                            )
+                        })}
                 </div>
             </ExpansionPanelDetails>
         </ExpansionPanel>

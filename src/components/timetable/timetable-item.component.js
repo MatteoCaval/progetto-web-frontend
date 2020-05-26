@@ -1,7 +1,8 @@
 import React from "react"
-import { Container, Grid, Typography, TextField, Switch } from "@material-ui/core"
+import { Grid, Switch, TextField, Typography } from "@material-ui/core"
 import "./timetable-item.style.scss"
-import { initialLaunchState, initialDinnerState } from "./timetable.component"
+import { initialDinnerState, initialLaunchState } from "./timetable.component"
+
 const TimeTableItem = ({ day, onDayChanged }) => {
     const handleLaunchChange = (e) => {
         const { value, name } = e.target
@@ -79,7 +80,7 @@ const TimeTableItem = ({ day, onDayChanged }) => {
                                 }}
                                 inputProps={{
                                     step: 1800, // 30 min
-                                }} />
+                                }}/>
                             <span className="timetable-space">-</span>
                             <TextField
                                 id="launchTimeEnd"
@@ -93,7 +94,7 @@ const TimeTableItem = ({ day, onDayChanged }) => {
                                 }}
                                 inputProps={{
                                     step: 1800, // 30 min
-                                }} />
+                                }}/>
                         </div>
                     ) : null
                 }
@@ -102,7 +103,7 @@ const TimeTableItem = ({ day, onDayChanged }) => {
                 <div className="day-header-container">
                     <Typography color='textPrimary'>
                         Dinner
-                </Typography>
+                    </Typography>
                     <Switch
                         checked={day.dinnerOpen}
                         onChange={handleDinnerSwitch}
@@ -127,7 +128,7 @@ const TimeTableItem = ({ day, onDayChanged }) => {
                                     }}
                                     inputProps={{
                                         step: 1800, // 30 min
-                                    }} />
+                                    }}/>
                                 <span className="timetable-space">-</span>
                                 <TextField
                                     id="dinnerTimeEnd"
@@ -141,7 +142,7 @@ const TimeTableItem = ({ day, onDayChanged }) => {
                                     }}
                                     inputProps={{
                                         step: 1800, // 30 min
-                                    }} />
+                                    }}/>
                             </div>
                         ) : null
                 }

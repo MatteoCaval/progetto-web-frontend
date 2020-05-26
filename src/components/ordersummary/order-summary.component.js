@@ -1,10 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Button, Divider, Container, CardActionArea, Typography, Card, Grid, FormControl, TextField, InputLabel, Select, MenuItem } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import {
+    Button,
+    Card,
+    CardActionArea,
+    Container,
+    Divider,
+    Grid,
+    MenuItem,
+    TextField,
+    Typography
+} from "@material-ui/core";
 import { completeOrder } from "../../redux/orders/orders.actions";
 import { connect } from "react-redux";
 import PaymentType from "./payment-type"
 
 import "./order-summary.style.scss"
+
 const cities = [
     'San Mauro Pascoli',
     'Gatteo',
@@ -39,18 +50,18 @@ const time_slots = [
 const OrderSummaryPage = ({ completeOrder }) => {
     const [cashPayment, setCashPayment] = useState(1);
 
-    const[orderData, setOrderData] = useState({
-            name:'',
-            surname:'',
-            address:'',
-            city:'',
-            timeSlot:'',
-            telephoneNumber:'',
-            paymentType:''
+    const [orderData, setOrderData] = useState({
+        name: '',
+        surname: '',
+        address: '',
+        city: '',
+        timeSlot: '',
+        telephoneNumber: '',
+        paymentType: ''
     })
 
     useEffect(() => {
-        setOrderData({...orderData, ['paymentType']: cashPayment ? PaymentType.ON_DELIVERY : PaymentType.ONLINE})
+        setOrderData({ ...orderData, ['paymentType']: cashPayment ? PaymentType.ON_DELIVERY : PaymentType.ONLINE })
     }, [cashPayment])
 
     const handleCashPaymentSelect = () => {
@@ -74,7 +85,7 @@ const OrderSummaryPage = ({ completeOrder }) => {
                 <Typography variant='h5' color='textPrimary'>1000.00€</Typography>
             </div>
 
-            <Divider className='summary-divider' />
+            <Divider className='summary-divider'/>
 
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -86,7 +97,7 @@ const OrderSummaryPage = ({ completeOrder }) => {
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Name' />
+                        label='Name'/>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -98,7 +109,7 @@ const OrderSummaryPage = ({ completeOrder }) => {
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Surname' />
+                        label='Surname'/>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -110,7 +121,7 @@ const OrderSummaryPage = ({ completeOrder }) => {
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Address' />
+                        label='Address'/>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -142,7 +153,7 @@ const OrderSummaryPage = ({ completeOrder }) => {
                         fullWidth
                         type='tel'
                         onChange={handleChange}
-                        label='Telephone Number' />
+                        label='Telephone Number'/>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -158,28 +169,28 @@ const OrderSummaryPage = ({ completeOrder }) => {
                         variant="outlined">
                         {
                             time_slots.map((slot, index) =>
-                                    <MenuItem key={index} value={slot}>{slot}</MenuItem>
-                                )
+                                <MenuItem key={index} value={slot}>{slot}</MenuItem>
+                            )
                         }
                     </TextField>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
                     <Card className={cashPayment ? 'card-selected' : ''}
-                        variant='outlined'>
+                          variant='outlined'>
                         <CardActionArea className='payment-card'
-                            onClick={handleCashPaymentSelect}>
+                                        onClick={handleCashPaymentSelect}>
                             <div
                                 className='payment-card-content'>
                                 <Typography variant='h6' color='textPrimary' className="payment-title">
                                     Paga in contanti
-                        </Typography>
+                                </Typography>
                                 <Typography color='textPrimary'>
                                     Paga in contanti all'arrivo del fattorino.
-                        </Typography>
+                                </Typography>
                                 <Typography color='textPrimary'>
                                     Nessuna spesa aggiunta, ma ti chiediamo di preparare i contanti.
-                        </Typography>
+                                </Typography>
                             </div>
                         </CardActionArea>
                     </Card>
@@ -187,17 +198,17 @@ const OrderSummaryPage = ({ completeOrder }) => {
 
                 <Grid item xs={12} sm={6}>
                     <Card className={cashPayment ? '' : 'card-selected'}
-                        variant='outlined'>
+                          variant='outlined'>
                         <CardActionArea className='payment-card'
-                            onClick={handlePayNowSelect}>
+                                        onClick={handlePayNowSelect}>
                             <div
                                 className='payment-card-content'>
                                 <Typography variant='h6' color='textPrimary' className="payment-title">
                                     Paga ora
-                        </Typography>
+                                </Typography>
                                 <Typography color='textPrimary'>
                                     La comodità di pagare subito con la tua carta.
-                        </Typography>
+                                </Typography>
                             </div>
                         </CardActionArea>
                     </Card>
@@ -207,10 +218,10 @@ const OrderSummaryPage = ({ completeOrder }) => {
             </Grid>
             <div className="summary-button-container">
                 <Button className="place-order" variant='contained'
-                    onClick={() => completeOrder(orderData)}
-                    color='primary'>
+                        onClick={() => completeOrder(orderData)}
+                        color='primary'>
                     Concludi l'ordine
-            </Button>
+                </Button>
             </div>
         </Container>
     )

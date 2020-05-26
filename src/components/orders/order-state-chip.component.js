@@ -1,8 +1,7 @@
 import React from 'react'
-import { Chip, Typography } from '@material-ui/core'
+import { Chip } from '@material-ui/core'
 import OrderState from './order-state'
 import "./order-state-chip.style.scss"
-import { indigo, yellow, green } from '@material-ui/core/colors'
 
 const OrderStateChip = ({ state }) => {
     let className
