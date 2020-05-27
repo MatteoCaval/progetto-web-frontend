@@ -1,6 +1,9 @@
 import React, { useState } from "react"
 import TimeTableItem from "./timetable-item.component"
-import { Container } from "@material-ui/core"
+import { Container, Button } from "@material-ui/core"
+import { updateTimetable } from "../../redux/timetable/timetable.actions";
+import {connect} from "react-redux";
+import "./timetable.style.scss"
 
 export const initialLaunchState = {
     timeStart: {
@@ -24,7 +27,7 @@ export const initialDinnerState = {
     }
 }
 
-const TimeTablePage = () => {
+const TimeTablePage = ({updateTimetable}) => {
 
     const [timetable, setTimetable] = useState(
         [
@@ -88,17 +91,40 @@ const TimeTablePage = () => {
         }))
     }
 
+    
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        updateTimetable(timetable)
+    }
+
+
     return (
         <Container maxWidth='md'>
-            {
-                timetable.map(day => {
-                    return (
-                        <TimeTableItem key={day.name} day={day} onDayChanged={updateDay} />
-                    )
-                })
-            }
+            <form onSubmit={handleSubmit}>
+                {
+                    timetable.map(day => {
+                        return (
+                            <TimeTableItem key={day.name} day={day} onDayChanged={updateDay} />
+                        )
+                    })
+                }
+                <div className="save-button-container">
+                    <Button
+                        type='submit'
+                        variant='contained'
+                        color='primary'>
+                        Save
+                    </Button>
+                </div>
+            </form>
         </Container>
     )
 }
 
-export default TimeTablePage
+const mapDispatchToProps = dispatch => {
+    return {
+        updateTimetable: (timetable) => dispatch(updateTimetable(timetable))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(TimeTablePage)
