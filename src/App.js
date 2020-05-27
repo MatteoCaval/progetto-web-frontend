@@ -39,7 +39,8 @@ function App({ user, history, clearAlerts }) {
 
                 <Route exact path="/orders" render={() => user ? <OrdersPage/> : <Redirect to='/'/>}/>
                 <Route exact path="/summary" render={() => user ? <OrderSummaryPage/> : <Redirect to='/'/>}/>
-                <Route exact path='/cart' render={() => user ? <CartPage/> : <Redirect to='/signin'/>}/>
+                <Route exact path='/cart'
+                       render={() => (user && user.role === 'consumer') ? <CartPage/> : <Redirect to='/signin'/>}/>
                 <Route exact path='/timetable'
                        render={() => (user && user.role === 'admin') ? <TimeTablePage/> : <Redirect to='/signin'/>}/>
 

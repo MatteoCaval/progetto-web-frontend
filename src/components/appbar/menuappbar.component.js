@@ -100,7 +100,7 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
                     <Typography variant="h6" className={classes.title}
                                 onClick={handleLogoClick}>FoodDelivery</Typography>
                     <div>
-                        {currentUser && (
+                        {currentUser && currentUser.role === 'consumer' && (
                             <IconButton
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
@@ -133,7 +133,10 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
                                 }}
                                 open={open}
                                 onClose={handleClose}>
-                                <MenuItem onClick={() => history.push('/orders')}>My Orders</MenuItem>
+                                {
+                                    currentUser.role === 'consumer' &&
+                                    <MenuItem onClick={() => history.push('/orders')}>My Orders</MenuItem>
+                                }
                                 <MenuItem onClick={() => logout()}>Logout</MenuItem>
                             </Menu>
                         )}
