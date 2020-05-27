@@ -16,6 +16,7 @@ import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
 import EditIcon from "@material-ui/icons/Edit"
 import { addToCart } from "../../../redux/cart/cart.actions";
 import { Link as RouterLink } from 'react-router-dom'
+import AdminConstrained from "../../common/admin-constrained-container.component";
 
 
 // const product =
@@ -83,13 +84,14 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
                     >Add to cart</Button>
                 </div>
             </div>
-            <Fab color="primary"
-                 aria-label="add"
-                 component={RouterLink}
-                 to={`${productId}/edit`}>
-                <EditIcon/>
-            </Fab>
-
+            <AdminConstrained>
+                <Fab color="primary"
+                     aria-label="add"
+                     component={RouterLink}
+                     to={`${productId}/edit`}>
+                    <EditIcon/>
+                </Fab>
+            </AdminConstrained>
         </Container>) : null
     )
 }

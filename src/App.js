@@ -34,12 +34,14 @@ function App({ user, history, clearAlerts }) {
 
                 <Route exact path="/createcategory" component={CategoryForm}/>
 
-                <Route exact path='/riders' component={RidersPage} />
+                <Route exact path='/riders'
+                       render={() => (user && user.role === 'admin') ? <RidersPage/> : <Redirect to='/signin'/>}/>
 
                 <Route exact path="/orders" render={() => user ? <OrdersPage/> : <Redirect to='/'/>}/>
                 <Route exact path="/summary" render={() => user ? <OrderSummaryPage/> : <Redirect to='/'/>}/>
                 <Route exact path='/cart' render={() => user ? <CartPage/> : <Redirect to='/signin'/>}/>
-                <Route exact path='/timetable' render={() => user ? <TimeTablePage/> : <Redirect to='/signin'/>}/>
+                <Route exact path='/timetable'
+                       render={() => (user && user.role === 'admin') ? <TimeTablePage/> : <Redirect to='/signin'/>}/>
 
                 <Route path='/' component={Categories}/>
             </Switch>

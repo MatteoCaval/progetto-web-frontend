@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Fab, Grid, makeStyles } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
+import AdminConstrained from "../../common/admin-constrained-container.component";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,13 +41,15 @@ const ProductList = ({ fetchCategoryProducs, match, products }) => {
                         })
                     }
                 </Grid>
-                <Fab className={classes.fabAdd}
-                     color="primary"
-                     aria-label="add"
-                     component={RouterLink}
-                     to={`${categoryId}/createproduct`}>
-                    <AddIcon/>
-                </Fab>
+                <AdminConstrained>
+                    <Fab className={classes.fabAdd}
+                         color="primary"
+                         aria-label="add"
+                         component={RouterLink}
+                         to={`${categoryId}/createproduct`}>
+                        <AddIcon/>
+                    </Fab>
+                </AdminConstrained>
             </React.Fragment>
         </div>
     )

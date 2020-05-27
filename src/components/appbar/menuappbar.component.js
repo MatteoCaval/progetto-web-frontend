@@ -15,6 +15,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import { Link as RouterLink } from 'react-router-dom'
+import AdminConstrained from "../common/admin-constrained-container.component";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -63,34 +64,39 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
 
     return (
         <div className={classes.root}>
-            <Drawer anchor='left' open={drawerOpen} onClose={hideDrawer}>
-                <List className={classes.list}>
-                    <ListItem button>
-                        <ListItemIcon>{<ListAltIcon/>}</ListItemIcon>
-                        <ListItemText primary='Orders'/>
-                    </ListItem>
-                    <ListItem button
-                              component={RouterLink}
-                              to="/timetable"
-                              onClick={hideDrawer}>
-                        <ListItemIcon>{<ScheduleIcon/>}</ListItemIcon>
-                        <ListItemText primary='Timetable'/>
-                    </ListItem>
-                    <ListItem button
-                              component={RouterLink}
-                              to='/riders'
-                              onClick={hideDrawer}>
-                        <ListItemIcon>{<DirectionsBikeIcon/>}</ListItemIcon>
-                        <ListItemText primary='Riders'/>
-                    </ListItem>
-                </List>
-            </Drawer>
+            <AdminConstrained>
+                <Drawer anchor='left' open={drawerOpen} onClose={hideDrawer}>
+                    <List className={classes.list}>
+                        <ListItem button>
+                            <ListItemIcon>{<ListAltIcon/>}</ListItemIcon>
+                            <ListItemText primary='Orders'/>
+                        </ListItem>
+
+                        <ListItem button
+                                  component={RouterLink}
+                                  to="/timetable"
+                                  onClick={hideDrawer}>
+                            <ListItemIcon>{<ScheduleIcon/>}</ListItemIcon>
+                            <ListItemText primary='Timetable'/>
+                        </ListItem>
+                        <ListItem button
+                                  component={RouterLink}
+                                  to='/riders'
+                                  onClick={hideDrawer}>
+                            <ListItemIcon>{<DirectionsBikeIcon/>}</ListItemIcon>
+                            <ListItemText primary='Riders'/>
+                        </ListItem>
+                    </List>
+                </Drawer>
+            </AdminConstrained>
             <AppBar position="fixed">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
-                                onClick={() => setDrawerOpen(true)}>
-                        <MenuIcon/>
-                    </IconButton>
+                    <AdminConstrained>
+                        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
+                                    onClick={() => setDrawerOpen(true)}>
+                            <MenuIcon/>
+                        </IconButton>
+                    </AdminConstrained>
                     <Typography variant="h6" className={classes.title}
                                 onClick={handleLogoClick}>FoodDelivery</Typography>
                     <div>
