@@ -47,7 +47,7 @@ const time_slots = [
     '22.00'
 ]
 
-const OrderSummaryPage = ({ completeOrder }) => {
+const OrderSummaryPage = ({ completeOrder, total }) => {
     const [cashPayment, setCashPayment] = useState(1);
 
     const [orderData, setOrderData] = useState({
@@ -82,7 +82,7 @@ const OrderSummaryPage = ({ completeOrder }) => {
 
             <div className="summary-total-container">
                 <Typography variant='h6' color='textPrimary'>Total:</Typography>
-                <Typography variant='h5' color='textPrimary'>1000.00€</Typography>
+                <Typography variant='h5' color='textPrimary'>{total}€</Typography>
             </div>
 
             <Divider className='summary-divider'/>
@@ -233,4 +233,10 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(OrderSummaryPage)
+const mapStateToProps = state => {
+    return {
+        total: state.cart.total
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderSummaryPage)
