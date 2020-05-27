@@ -16,37 +16,62 @@ const CartPage = ({ fetchCart, cart, history }) => {
 
     const { products, error, loading, total } = cart
 
-    return (
-        <Container maxWidth='md'>
-            <Grid className="products-list" container spacing={2}>
-                {
-                    products && products.map(product => {
-                        return (
-                            <Grid key={product.id} item xs={12} sm={12}>
-                                <CartProductItem key={product.id} product={product}/>
-                            </Grid>
-                        )
-                    })
-                }
-            </Grid>
-            <Divider className='cart-total-divider'/>
-            <div className="total-container">
-                <Button
-                    variant="contained"
-                    color="primary"
-                    className="proceed-to-order"
-                    onClick={() => history.push('/summary')}>
-                    Proceed to order
-                </Button>
-                <div className="total-info-container">
-                    <Typography variant='h6' color='textPrimary'>Total:</Typography>
-                    <Typography variant='h5' color='textPrimary'>{total}</Typography>
+    if (products.length > 0) {
+        return (
+            <Container maxWidth='md'>
+                <Grid className="products-list" container spacing={2}>
+                    {
+                        products && products.map(product => {
+                            return (
+                                <Grid key={product.id} item xs={12} sm={12}>
+                                    <CartProductItem key={product.id} product={product} />
+                                </Grid>
+                            )
+                        })
+                    }
+                </Grid>
+                <Divider className='cart-total-divider' />
+                <div className="total-container">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className="proceed-to-order"
+                        onClick={() => history.push('/summary')}>
+                        Proceed to order
+                    </Button>
+                    <div className="total-info-container">
+                        <Typography variant='h6' color='textPrimary'>Total:</Typography>
+                        <Typography variant='h5' color='textPrimary'>{total}€</Typography>
+                    </div>
                 </div>
-            </div>
-            <Progress loading={loading}/>
-            {error && (<ErrorSnackbar errorMessage={error}/>)}
-        </Container>
-    )
+                <Progress loading={loading} />
+                {error && (<ErrorSnackbar errorMessage={error} />)}
+            </Container>
+
+        )
+    } else {
+        return (
+            <Container maxWidth='md'>
+                <div className="empty-shop-button-container">
+
+                    <Typography variant='h5' color='textPrimary'>
+                        Il carrello è vuoto
+                    </Typography>
+                    <Typography color='textPrimary'>
+                        Al momento all'interno del tuo carrello non sono presenti prodotti.
+                    </Typography>
+
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className="back-to-shop-button"
+                        onClick={() => history.push('/')}>
+                        Back to shop
+                    </Button>
+                </div>
+            </Container>
+        )
+    }
 }
 
 const mapStateToProps = state => {
