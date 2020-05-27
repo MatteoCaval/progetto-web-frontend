@@ -16,15 +16,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const ProductList = ({ fetchCategoryProducs, match, products }) => {
+const ProductList = ({ fetchCategoryProducts, match, products }) => {
 
     const categoryId = match.params.categoryId
 
-    console.log(products)
-
     useEffect(() => {
-        fetchCategoryProducs(categoryId)
-    }, [fetchCategoryProducs])
+        fetchCategoryProducts(categoryId)
+    }, [fetchCategoryProducts])
 
     const classes = useStyles()
     return (
@@ -65,7 +63,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchCategoryProducs: (categoryId) => dispatch(fetchProductsForCategory(categoryId))
+        fetchCategoryProducts: (categoryId) => dispatch(fetchProductsForCategory(categoryId))
     }
 }
 
