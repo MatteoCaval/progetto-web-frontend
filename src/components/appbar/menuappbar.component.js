@@ -15,7 +15,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import { Link as RouterLink } from 'react-router-dom'
-import AdminConstrained from "../common/admin-constrained-container.component";
+import { AdminConstrained } from "../common/constrained-containers.component";
 
 const useStyles = makeStyles((theme) => ({
     root: {

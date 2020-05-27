@@ -5,7 +5,7 @@ import Category from "./category-item.component";
 import { Grid, Fab, makeStyles } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import { Link as RouterLink } from 'react-router-dom';
-import AdminConstrained from "../../common/admin-constrained-container.component";
+import { AdminConstrained } from "../../common/constrained-containers.component";
 
 const useStyles = makeStyles((theme) => ({
     fabAdd: {

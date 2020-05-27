@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
 import { withRouter } from "react-router-dom";
 import "./product-item.style.scss";
+import { ConsumerConstrained } from "../../common/constrained-containers.component";
 
 
 const ProductItem = ({ product, addProductToCart, history, match }) => {
@@ -31,12 +32,15 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
                         {product.price}€
                     </Typography>
 
-                    <IconButton
-                        className="product-details"
-                        color='primary'
-                        onClick={() => addProductToCart(product.id)}>
-                        <AddToCartIcon/>
-                    </IconButton>
+                    <ConsumerConstrained>
+                        <IconButton
+                            className="product-details"
+                            color='primary'
+                            onClick={() => addProductToCart(product.id)}>
+                            <AddToCartIcon/>
+                        </IconButton>
+                    </ConsumerConstrained>
+
                 </div>
 
             </CardContent>

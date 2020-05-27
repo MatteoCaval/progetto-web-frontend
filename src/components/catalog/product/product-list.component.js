@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Fab, Grid, makeStyles } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
-import AdminConstrained from "../../common/admin-constrained-container.component";
+import { AdminConstrained } from "../../common/constrained-containers.component";
 
 
 const useStyles = makeStyles((theme) => ({

@@ -2,13 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import "./product-page.style.scss";
 
-import {
-    CardMedia,
-    Typography,
-    Container,
-    Button,
-    Fab
-} from "@material-ui/core";
+import { Button, CardMedia, Container, Fab, Typography } from "@material-ui/core";
 import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
 import QuantityPicker from "./quantity-picker.component"
@@ -16,7 +10,7 @@ import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
 import EditIcon from "@material-ui/icons/Edit"
 import { addToCart } from "../../../redux/cart/cart.actions";
 import { Link as RouterLink } from 'react-router-dom'
-import AdminConstrained from "../../common/admin-constrained-container.component";
+import { AdminConstrained, ConsumerConstrained } from "../../common/constrained-containers.component";
 
 
 // const product =
@@ -69,20 +63,21 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
                         }
                     </ul>
                 </div>
-
-                <div className='prod-details-add-to-cart-container'>
-                    <QuantityPicker
-                        quantity={quantity}
-                        onQuantityIncremented={() => setQuantity(quantity + 1)}
-                        onQuantityDecremented={() => setQuantity(quantity - 1)}/>
-                    <Button
-                        className="prod-details-add-to-cart"
-                        variant="contained"
-                        color="primary"
-                        onClick={() => addToCart(productId, quantity)}
-                        startIcon={<AddToCartIcon/>}
-                    >Add to cart</Button>
-                </div>
+                <ConsumerConstrained>
+                    <div className='prod-details-add-to-cart-container'>
+                        <QuantityPicker
+                            quantity={quantity}
+                            onQuantityIncremented={() => setQuantity(quantity + 1)}
+                            onQuantityDecremented={() => setQuantity(quantity - 1)}/>
+                        <Button
+                            className="prod-details-add-to-cart"
+                            variant="contained"
+                            color="primary"
+                            onClick={() => addToCart(productId, quantity)}
+                            startIcon={<AddToCartIcon/>}
+                        >Add to cart</Button>
+                    </div>
+                </ConsumerConstrained>
             </div>
             <AdminConstrained>
                 <Fab color="primary"
