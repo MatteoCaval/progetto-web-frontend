@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { fetchOrders } from "../../redux/user/user.actions";
+import React, { useState } from "react";
 import { Container, Tab, Tabs } from "@material-ui/core";
-import { connect } from "react-redux";
-import OrderList from "./orders-list.component";
 import AppBar from "@material-ui/core/AppBar";
+import PaginatedOrderList from "./paginated-order-list.component";
+import LiveUpdatedOrderList from "./live-updated-order-list.component";
 
-const OrdersPage = ({ orders, fetchOrders }) => {
-
+const OrdersPage = () => {
     const [tabValue, setTabValue] = useState(0)
-
-    useEffect(() => {
-        fetchOrders()
-    }, [fetchOrders])
 
     return (
         <React.Fragment>
@@ -31,28 +25,16 @@ const OrdersPage = ({ orders, fetchOrders }) => {
             <Container maxWidth='md'>
                 {/*first tab*/}
                 <div hidden={tabValue !== 0}>
-                   <p>Primo tab</p>
+                    <LiveUpdatedOrderList/>
                 </div>
                 {/*second tab*/}
                 <div hidden={tabValue !== 1}>
-                    <OrderList orders={orders}/>
+                    <PaginatedOrderList/>
                 </div>
             </Container>
         </React.Fragment>
     )
-
 }
 
-const mapStateToProps = state => {
-    return {
-        orders: state.user.orders
-    }
-}
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchOrders: () => dispatch(fetchOrders())
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrdersPage)
+export default OrdersPage
