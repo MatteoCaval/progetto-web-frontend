@@ -18,20 +18,20 @@ export const completeOrder = (orderData) => {
     }
 }
 
-export const completeOrderSuccess = () => {
+const completeOrderSuccess = () => {
     return {
         type: OrderActionTypes.COMPLETE_ORDER_SUCCESS
     }
 }
 
-export const completeOrderFailed = (error) => {
+const completeOrderFailed = (error) => {
     return {
         type: OrderActionTypes.COMPLETE_ORDER_FAILED,
         payload: error.message
     }
 }
 
-export const completeOrderPending = () => {
+const completeOrderPending = () => {
     return {
         type: OrderActionTypes.COMPLETE_ORDER_PENDING
     }
@@ -51,21 +51,21 @@ export const fetchOrderHistory = (page = 1) => {
     }
 }
 
-export const fetchOrderHistorySuccess = (resultData) => {
+const fetchOrderHistorySuccess = (resultData) => {
     return {
         type: OrderActionTypes.FETCH_ORDER_HISTORY_SUCCESS,
         payload: resultData
     }
 }
 
-export const fetchOrderHistoryFailed = (errorMessage) => {
+const fetchOrderHistoryFailed = (errorMessage) => {
     return {
         type: OrderActionTypes.FETCH_ORDER_HISTORY_FAILED,
         payload: errorMessage
     }
 }
 
-export const fetchOrderHistoryPending = () => {
+const fetchOrderHistoryPending = () => {
     return {
         type: OrderActionTypes.FETCH_ORDER_HISTORY_PENDING
     }

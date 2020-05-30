@@ -3,33 +3,37 @@ import OrderList from "./orders-list.component";
 import { fetchUserOrders } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
 import { Pagination } from "@material-ui/lab";
+import { fetchOrderHistory } from "../../redux/orders/orders.actions";
 
-const PaginatedOrderList = ({ orders, fetchOrders }) => {
+const PaginatedOrderList = ({ orders, fetchUserOrders, fetchOrderHistory, pageCount, currentPage, pending }) => {
 
     useEffect(() => {
-        fetchOrders()
-    }, [fetchOrders])
+        fetchOrderHistory()
+    }, [fetchOrderHistory])
+
+    const onPageChanged = (event, page) => {
+        event.preventDefault()
+        fetchOrderHistory(page)
+    }
 
     return (
         <React.Fragment>
-            <p>Paginated order list</p>
             <OrderList orders={orders}/>
-            <Pagination count={10} color='primary'/>
+            <Pagination page={currentPage} count={pageCount} color='primary' onChange={onPageChanged}/>
         </React.Fragment>
     )
 
 }
 
 const mapStateToProps = state => {
+    const { orders, pending, currentPage, pageCount } = state.orders.orderHistory
     return {
-        orders: state.user.orders
+        orders,
+        pending,
+        currentPage,
+        pageCount
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchOrders: () => dispatch(fetchUserOrders())
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaginatedOrderList)
+export default connect(mapStateToProps, { fetchUserOrders, fetchOrderHistory })(PaginatedOrderList)
