@@ -2,8 +2,11 @@ import React, { useState } from "react"
 import TimeTableItem from "./timetable-item.component"
 import { Container, Button } from "@material-ui/core"
 import { updateTimetable } from "../../redux/timetable/timetable.actions";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import "./timetable.style.scss"
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+
 
 export const initialLaunchState = {
     timeStart: {
@@ -27,7 +30,7 @@ export const initialDinnerState = {
     }
 }
 
-const TimeTablePage = ({updateTimetable}) => {
+const TimeTablePage = ({ updateTimetable }) => {
 
     const [timetable, setTimetable] = useState(
         [
@@ -91,7 +94,7 @@ const TimeTablePage = ({updateTimetable}) => {
         }))
     }
 
-    
+
     const handleSubmit = (e) => {
         e.preventDefault()
         updateTimetable(timetable)
@@ -99,25 +102,29 @@ const TimeTablePage = ({updateTimetable}) => {
 
 
     return (
-        <Container maxWidth='md'>
-            <form onSubmit={handleSubmit}>
-                {
-                    timetable.map(day => {
-                        return (
-                            <TimeTableItem key={day.name} day={day} onDayChanged={updateDay} />
-                        )
-                    })
-                }
-                <div className="save-button-container">
-                    <Button
-                        type='submit'
-                        variant='contained'
-                        color='primary'>
-                        Save
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+
+            <Container maxWidth='md'>
+                <form onSubmit={handleSubmit}>
+                    {
+                        timetable.map(day => {
+                            return (
+                                <TimeTableItem key={day.name} day={day} onDayChanged={updateDay} />
+                            )
+                        })
+                    }
+                    <div className="save-button-container">
+                        <Button
+                            type='submit'
+                            variant='contained'
+                            color='primary'>
+                            Save
                     </Button>
-                </div>
-            </form>
-        </Container>
+                    </div>
+                </form>
+            </Container>
+        </MuiPickersUtilsProvider>
+
     )
 }
 
