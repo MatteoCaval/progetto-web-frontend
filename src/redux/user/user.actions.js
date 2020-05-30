@@ -82,7 +82,7 @@ export const logoutFailed = (error) => {
     }
 }
 
-export const fetchOrders = () => {
+export const fetchUserOrders = () => {
     return (dispatch, getState) => {
         dispatch(fetchOrdersPending())
         const token = getState().user.currentUser.token

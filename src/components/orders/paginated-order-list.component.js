@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import OrderList from "./orders-list.component";
-import { fetchOrders } from "../../redux/user/user.actions";
+import { fetchUserOrders } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
 import { Pagination } from "@material-ui/lab";
 
@@ -28,7 +28,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchOrders: () => dispatch(fetchOrders())
+        fetchOrders: () => dispatch(fetchUserOrders())
     }
 }
 
