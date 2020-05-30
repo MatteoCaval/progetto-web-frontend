@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import OrderList from "./orders-list.component";
 import { fetchOrders } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
+import { Pagination } from "@material-ui/lab";
 
 const PaginatedOrderList = ({ orders, fetchOrders }) => {
 
@@ -13,6 +14,7 @@ const PaginatedOrderList = ({ orders, fetchOrders }) => {
         <React.Fragment>
             <p>Paginated order list</p>
             <OrderList orders={orders}/>
+            <Pagination count={10} color='primary'/>
         </React.Fragment>
     )
 
