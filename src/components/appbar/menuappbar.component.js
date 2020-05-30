@@ -67,7 +67,10 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
             <AdminConstrained>
                 <Drawer anchor='left' open={drawerOpen} onClose={hideDrawer}>
                     <List className={classes.list}>
-                        <ListItem button>
+                        <ListItem button
+                                  component={RouterLink}
+                                  to="/orders"
+                                  onClick={hideDrawer}>
                             <ListItemIcon>{<ListAltIcon/>}</ListItemIcon>
                             <ListItemText primary='Orders'/>
                         </ListItem>
