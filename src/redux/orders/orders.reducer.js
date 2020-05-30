@@ -30,7 +30,19 @@ const ordersReducer = (state = INITIAL_STATE, action = {}) => {
                 }
             }
         }
+        case OrderActionTypes.FETCH_ORDER_HISTORY_FAILED: {
+            return {
+                ...state,
+                orderHistory: {
+                    ...state.orderHistory,
+                    pending: false,
+                    error: action.payload
+                }
+            }
+        }
         default:
             return state
     }
 }
+
+export default ordersReducer
