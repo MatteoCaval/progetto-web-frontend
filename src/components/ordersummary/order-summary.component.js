@@ -28,26 +28,7 @@ const cities = [
     'Borghi'
 ]
 
-const time_slots = [
-    '11.00',
-    '11.30',
-    '12.00',
-    '12.30',
-    '13.00',
-    '13.30',
-    '14.00',
-    '18.00',
-    '18.30',
-    '19.00',
-    '19.30',
-    '20.00',
-    '20.30',
-    '21.00',
-    '21.30',
-    '22.00'
-]
-
-const OrderSummaryPage = ({ completeOrder, total }) => {
+const OrderSummaryPage = ({ completeOrder, total, timetable }) => {
     const [cashPayment, setCashPayment] = useState(1);
 
     const [orderData, setOrderData] = useState({
@@ -59,6 +40,37 @@ const OrderSummaryPage = ({ completeOrder, total }) => {
         telephoneNumber: '',
         paymentType: ''
     })
+
+    function generateSlots(hourStart, minutesStart, hourEnd, minutesEnd) {
+        const slots = [];
+        var slices = ["00", "30"];
+
+        if (minutesStart == 30) {
+            slots.push(hourStart + ":" + minutesStart);
+            hourStart++;
+        }
+
+        for (var i = hourStart; i < hourEnd; i++) {
+            for (var j = 0; j < 2; j++) {
+                var time = i + ":" + slices[j];
+                slots.push(time);
+            }
+        }
+
+        slots.push(hourEnd + ":" + "00");
+
+        if (minutesEnd == 30) {
+            slots.push(hourEnd + ":" + "30");
+        }
+
+        return slots;
+    }
+
+
+    const timeSlotsLaunch = timetable.launchOpen ? generateSlots(timetable.launch.timeStart.hour, timetable.launch.timeStart.minute, timetable.launch.timeEnd.hour, timetable.launch.timeEnd.minute) : [];
+    const timeSlotsDinner = timetable.dinnerOpen ? generateSlots(timetable.dinner.timeStart.hour, timetable.dinner.timeStart.minute, timetable.dinner.timeEnd.hour, timetable.dinner.timeEnd.minute) : [];
+
+    const time_slots = timeSlotsLaunch.concat(timeSlotsDinner)
 
     useEffect(() => {
         setOrderData({ ...orderData, ['paymentType']: cashPayment ? PaymentType.ON_DELIVERY : PaymentType.ONLINE })
@@ -85,7 +97,7 @@ const OrderSummaryPage = ({ completeOrder, total }) => {
                 <Typography variant='h5' color='textPrimary'>{total}€</Typography>
             </div>
 
-            <Divider className='summary-divider'/>
+            <Divider className='summary-divider' />
 
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -97,7 +109,7 @@ const OrderSummaryPage = ({ completeOrder, total }) => {
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Name'/>
+                        label='Name' />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -109,7 +121,7 @@ const OrderSummaryPage = ({ completeOrder, total }) => {
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Surname'/>
+                        label='Surname' />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -121,7 +133,7 @@ const OrderSummaryPage = ({ completeOrder, total }) => {
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Address'/>
+                        label='Address' />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -153,7 +165,7 @@ const OrderSummaryPage = ({ completeOrder, total }) => {
                         fullWidth
                         type='tel'
                         onChange={handleChange}
-                        label='Telephone Number'/>
+                        label='Telephone Number' />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -177,9 +189,9 @@ const OrderSummaryPage = ({ completeOrder, total }) => {
 
                 <Grid item xs={12} sm={6}>
                     <Card className={cashPayment ? 'card-selected' : ''}
-                          variant='outlined'>
+                        variant='outlined'>
                         <CardActionArea className='payment-card'
-                                        onClick={handleCashPaymentSelect}>
+                            onClick={handleCashPaymentSelect}>
                             <div
                                 className='payment-card-content'>
                                 <Typography variant='h6' color='textPrimary' className="payment-title">
@@ -198,9 +210,9 @@ const OrderSummaryPage = ({ completeOrder, total }) => {
 
                 <Grid item xs={12} sm={6}>
                     <Card className={cashPayment ? '' : 'card-selected'}
-                          variant='outlined'>
+                        variant='outlined'>
                         <CardActionArea className='payment-card'
-                                        onClick={handlePayNowSelect}>
+                            onClick={handlePayNowSelect}>
                             <div
                                 className='payment-card-content'>
                                 <Typography variant='h6' color='textPrimary' className="payment-title">
@@ -218,8 +230,8 @@ const OrderSummaryPage = ({ completeOrder, total }) => {
             </Grid>
             <div className="summary-button-container">
                 <Button className="place-order" variant='contained'
-                        onClick={() => completeOrder(orderData)}
-                        color='primary'>
+                    onClick={() => completeOrder(orderData)}
+                    color='primary'>
                     Concludi l'ordine
                 </Button>
             </div>
@@ -235,7 +247,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
-        total: state.cart.total
+        total: state.cart.total,
+        timetable: state.cart.timetable
     }
 }
 
