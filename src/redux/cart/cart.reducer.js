@@ -1,5 +1,4 @@
 import CartActionTypes from "./cart.actionTypes";
-import TimetableActionTypes from "./../timetable/timetable.actionTypes";
 
 const INITIAL_STATE = {
     products: [],
@@ -19,7 +18,7 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
                 loading: false,
                 error: ''
             }
-        case TimetableActionTypes.FETCH_TODAY_TIMETABLE_SUCCESS:
+        case CartActionTypes.FETCH_TODAY_TIMETABLE_SUCCESS:
             return {
                 ...state,
                 timetable: action.payload.data,
@@ -29,7 +28,7 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
         case CartActionTypes.FETCH_CART_START:
         case CartActionTypes.REMOVE_ITEM_PENDING:
         case CartActionTypes.UPDATE_ITEM_QUANTITY_PENDING:
-        case TimetableActionTypes.FETCH_TODAY_TIMETABLE_PENDING:
+        case CartActionTypes.FETCH_TODAY_TIMETABLE_PENDING:
             return {
                 ...state,
                 loading: true,
@@ -38,7 +37,7 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
         case CartActionTypes.FETCH_CART_FAILED:
         case CartActionTypes.REMOVE_ITEM_FAILED:
         case CartActionTypes.UPDATE_ITEM_QUANTITY_FAILED:
-        case TimetableActionTypes.FETCH_TODAY_TIMETABLE_FAILED:
+        case CartActionTypes.FETCH_TODAY_TIMETABLE_FAILED:
             return {
                 ...state,
                 loading: false,

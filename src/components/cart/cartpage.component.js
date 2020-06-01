@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { fetchCart } from "../../redux/cart/cart.actions";
-import { fetchTodayTimetable } from "../../redux/timetable/timetable.actions";
+import { fetchCart, fetchTodayTimetable } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import CartProductItem from "./cartproductitem.component";
 import { Button, Container, Divider, Grid, Typography } from "@material-ui/core";

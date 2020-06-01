@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import TimeTableItem from "./timetable-item.component"
 import { Container, Button } from "@material-ui/core"
-import { updateTimetable } from "../../redux/timetable/timetable.actions";
+import { updateTimetable, fetchTimetable } from "../../redux/admin/admin.actions";
 import { connect } from "react-redux";
 import "./timetable.style.scss"
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -30,61 +30,19 @@ export const initialDinnerState = {
     }
 }
 
-const TimeTablePage = ({ updateTimetable }) => {
+const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) => {
 
     const [timetable, setTimetable] = useState(
-        [
-            {
-                name: 'Monday',
-                launchOpen: true,
-                dinnerOpen: true,
-                launch: initialLaunchState,
-                dinner: initialDinnerState
-            },
-            {
-                name: 'Tuesday',
-                launchOpen: true,
-                dinnerOpen: true,
-                launch: initialLaunchState,
-                dinner: initialDinnerState
-            },
-            {
-                name: 'Wednesday',
-                launchOpen: true,
-                dinnerOpen: true,
-                launch: initialLaunchState,
-                dinner: initialDinnerState
-            },
-            {
-                name: 'Thursday',
-                launchOpen: false,
-                dinnerOpen: true,
-                launch: null,
-                dinner: initialDinnerState
-            },
-            {
-                name: 'Friday',
-                launchOpen: true,
-                dinnerOpen: true,
-                launch: initialLaunchState,
-                dinner: initialDinnerState
-            },
-            {
-                name: 'Saturday',
-                launchOpen: true,
-                dinnerOpen: true,
-                launch: initialLaunchState,
-                dinner: initialDinnerState
-            },
-            {
-                name: 'Sunday',
-                launchOpen: true,
-                dinnerOpen: true,
-                launch: initialLaunchState,
-                dinner: initialDinnerState
-            }
-        ]
+        []
     )
+
+    useEffect(() => {
+        fetchTimetable()
+    }, [fetchTimetable])
+
+    useEffect(() => {
+        setTimetable(currentTimetable)
+    }, [currentTimetable])
 
     const updateDay = day => {
         console.log(day)
@@ -94,12 +52,10 @@ const TimeTablePage = ({ updateTimetable }) => {
         }))
     }
 
-
     const handleSubmit = (e) => {
         e.preventDefault()
         updateTimetable(timetable)
     }
-
 
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -107,7 +63,7 @@ const TimeTablePage = ({ updateTimetable }) => {
             <Container maxWidth='md'>
                 <form onSubmit={handleSubmit}>
                     {
-                        timetable.map(day => {
+                        timetable && timetable.map(day => {
                             return (
                                 <TimeTableItem key={day.name} day={day} onDayChanged={updateDay} />
                             )
@@ -124,14 +80,22 @@ const TimeTablePage = ({ updateTimetable }) => {
                 </form>
             </Container>
         </MuiPickersUtilsProvider>
-
     )
+}
+
+const mapStateToProps = state => {
+    console.log(state.adminData.timetable)
+
+    return {
+        currentTimetable: state.adminData.timetable
+    }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateTimetable: (timetable) => dispatch(updateTimetable(timetable))
+        updateTimetable: (timetable) => dispatch(updateTimetable(timetable)),
+        fetchTimetable: () => dispatch(fetchTimetable())
     }
 }
 
-export default connect(null, mapDispatchToProps)(TimeTablePage)
+export default connect(mapStateToProps, mapDispatchToProps)(TimeTablePage)

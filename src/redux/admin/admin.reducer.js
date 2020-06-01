@@ -48,6 +48,29 @@ const adminReducer = (state = INITIAL_STATE, action = {}) => {
             }
         }
 
+        case AdminActionType.FETCH_TIMETABLE_PENDING: {
+            return {
+                ...state,
+                riderCreation: {
+                    pending: true
+                }
+            }
+        }
+        case AdminActionType.FETCH_TIMETABLE_FAILED: {
+            return {
+                ...state,
+                riderCreation: {
+                    error: action.payload
+                }
+            }
+        }
+        case AdminActionType.FETCH_TIMETABLE_SUCCESS: {
+            return {
+                ...state,
+                timetable: action.payload.data
+            }
+        }
+
         default:
             return state
 
