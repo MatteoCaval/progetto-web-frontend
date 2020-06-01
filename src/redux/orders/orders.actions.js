@@ -72,12 +72,13 @@ const fetchOrderHistoryPending = () => {
     }
 }
 
-// realm time actions
+// real time actions
 
 let socket = undefined
 export const startLiveOrderUpdated = () => {
     return (dispatch, getState) => {
-        socket = io.connect(Config.API_BASE_URL)
+        const token = getState().user.currentUser.token
+        socket = io.connect(Config.API_BASE_URL, { query: { token } })
         socket.on('orders', orders => {
             dispatch(realTimeOrders(orders))
         })
@@ -92,7 +93,7 @@ export const startLiveOrderUpdated = () => {
 
 export const stopLiveOrderUpdated = () => {
     return () => {
-       socket.disconnect()
+        socket.disconnect()
     }
 }
 
