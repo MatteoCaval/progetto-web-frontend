@@ -132,7 +132,7 @@ export const updateCartProductQuantityPending = () => {
     }
 }
 
-export const fetchTodayTimetable = (timetable) => {
+export const fetchTodayTimetable = () => {
     return (dispatch, getState) => {
         dispatch(fetchTodayTimetablePending())
         const token = getState().user.currentUser.token

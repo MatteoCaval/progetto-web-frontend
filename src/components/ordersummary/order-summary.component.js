@@ -11,6 +11,7 @@ import {
     Typography
 } from "@material-ui/core";
 import { completeOrder } from "../../redux/orders/orders.actions";
+import { fetchTodayTimetable } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import PaymentType from "./payment-type"
 
@@ -28,7 +29,7 @@ const cities = [
     'Borghi'
 ]
 
-const OrderSummaryPage = ({ completeOrder, total, timetable }) => {
+const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable }) => {
     const [cashPayment, setCashPayment] = useState(1);
 
     const [orderData, setOrderData] = useState({
@@ -41,36 +42,9 @@ const OrderSummaryPage = ({ completeOrder, total, timetable }) => {
         paymentType: ''
     })
 
-    function generateSlots(hourStart, minutesStart, hourEnd, minutesEnd) {
-        const slots = [];
-        var slices = ["00", "30"];
-
-        if (minutesStart == 30) {
-            slots.push(hourStart + ":" + minutesStart);
-            hourStart++;
-        }
-
-        for (var i = hourStart; i < hourEnd; i++) {
-            for (var j = 0; j < 2; j++) {
-                var time = i + ":" + slices[j];
-                slots.push(time);
-            }
-        }
-
-        slots.push(hourEnd + ":" + "00");
-
-        if (minutesEnd == 30) {
-            slots.push(hourEnd + ":" + "30");
-        }
-
-        return slots;
-    }
-
-
-    const timeSlotsLaunch = timetable.launchOpen ? generateSlots(timetable.launch.timeStart.hour, timetable.launch.timeStart.minute, timetable.launch.timeEnd.hour, timetable.launch.timeEnd.minute) : [];
-    const timeSlotsDinner = timetable.dinnerOpen ? generateSlots(timetable.dinner.timeStart.hour, timetable.dinner.timeStart.minute, timetable.dinner.timeEnd.hour, timetable.dinner.timeEnd.minute) : [];
-
-    const time_slots = timeSlotsLaunch.concat(timeSlotsDinner)
+    useEffect(() => {
+        fetchTodayTimetable()
+    }, [fetchTodayTimetable])
 
     useEffect(() => {
         setOrderData({ ...orderData, ['paymentType']: cashPayment ? PaymentType.ON_DELIVERY : PaymentType.ONLINE })
@@ -172,6 +146,7 @@ const OrderSummaryPage = ({ completeOrder, total, timetable }) => {
                     <TextField
                         id="timeSlot"
                         name="timeSlot"
+                        disabled={timeSlots.length < 1}
                         value={orderData.timeSlot}
                         select
                         required
@@ -180,7 +155,7 @@ const OrderSummaryPage = ({ completeOrder, total, timetable }) => {
                         onChange={handleChange}
                         variant="outlined">
                         {
-                            time_slots.map((slot, index) =>
+                            timeSlots && timeSlots.map((slot, index) =>
                                 <MenuItem key={index} value={slot}>{slot}</MenuItem>
                             )
                         }
@@ -230,10 +205,14 @@ const OrderSummaryPage = ({ completeOrder, total, timetable }) => {
             </Grid>
             <div className="summary-button-container">
                 <Button className="place-order" variant='contained'
+                    disabled={timeSlots.length < 1}
                     onClick={() => completeOrder(orderData)}
                     color='primary'>
                     Concludi l'ordine
                 </Button>
+                {
+                    timeSlots.length < 1 ? <Typography variant="h6" className="no-slots-label">Al momento il negozio è chiuso. Non è possibile effetuare nessun ordine.</Typography> : null     
+                }
             </div>
         </Container>
     )
@@ -241,14 +220,15 @@ const OrderSummaryPage = ({ completeOrder, total, timetable }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        completeOrder: (orderData) => dispatch(completeOrder(orderData))
+        completeOrder: (orderData) => dispatch(completeOrder(orderData)),
+        fetchTodayTimetable: () => dispatch(fetchTodayTimetable())
     }
 }
 
 const mapStateToProps = state => {
     return {
         total: state.cart.total,
-        timetable: state.cart.timetable
+        timeSlots: state.cart.timetable
     }
 }
 

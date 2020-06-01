@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { fetchCart, fetchTodayTimetable } from "../../redux/cart/cart.actions";
+import { fetchCart } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import CartProductItem from "./cartproductitem.component";
 import { Button, Container, Divider, Grid, Typography } from "@material-ui/core";
@@ -9,47 +9,12 @@ import "./cartpage.style.scss"
 import Progress from "../common/progress.component";
 import ErrorSnackbar from "../common/error-snackbar.component";
 
-const CartPage = ({ fetchCart, fetchTodayTimetable, cart, history }) => {
+const CartPage = ({ fetchCart, cart, history }) => {
     useEffect(() => {
         fetchCart()
     }, [fetchCart])
 
-    useEffect(() => {
-        fetchTodayTimetable()
-    }, [fetchTodayTimetable])
-
-    const { products, error, loading, total, timetable } = cart
-
-    const isOpenToday = timetable.launchOpen || timetable.dinnerOpen
-
-    function isNowBefore(hour, minutes) {
-        const today = new Date();
-        const nowHour = today.getHours();
-        const nowMinutes = today.getMinutes();
-
-        if (nowHour > hour) {
-            return false;
-        }
-
-        if (nowHour == hour) {
-            return nowMinutes < minutes
-        }
-
-        return true;
-    }
-
-    function canOrder() {  
-        const isBeforeDinnerEnd = timetable.dinnerOpen ? isNowBefore(timetable.dinner.timeEnd.hour, timetable.dinner.timeEnd.minute) : false;
-        if (isOpenToday) {
-            if (timetable.launchOpen) {
-                return isNowBefore(timetable.launch.timeEnd.hour, timetable.launch.timeEnd.minute) ? true : isBeforeDinnerEnd;
-            } else {
-                return isBeforeDinnerEnd;
-            }
-        } 
-
-        return false;
-    }
+    const { products, error, loading, total } = cart    
 
     if (products.length > 0) {
         return (
@@ -68,7 +33,6 @@ const CartPage = ({ fetchCart, fetchTodayTimetable, cart, history }) => {
                 <Divider className='cart-total-divider' />
                 <div className="total-container">
                     <Button
-                        disabled={!canOrder()}
                         variant="contained"
                         color="primary"
                         className="proceed-to-order"
@@ -76,10 +40,6 @@ const CartPage = ({ fetchCart, fetchTodayTimetable, cart, history }) => {
                         Proceed to order
                     </Button>
                     
-                    {
-                        canOrder() ? null : (<span className="shop-closed-label">{isOpenToday ? "The shop has just been closed today" : "The shop is closed today"}</span>)
-                    }
-
                     <div className="total-info-container">
                         <Typography variant='h6' color='textPrimary'>Total:</Typography>
                         <Typography variant='h5' color='textPrimary'>{total}€</Typography>
@@ -125,7 +85,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchCart: () => dispatch(fetchCart()),
-        fetchTodayTimetable: () => dispatch(fetchTodayTimetable())
     }
 }
 
