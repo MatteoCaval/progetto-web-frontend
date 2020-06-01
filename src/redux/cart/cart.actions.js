@@ -132,4 +132,37 @@ export const updateCartProductQuantityPending = () => {
     }
 }
 
+export const fetchTodayTimetable = (timetable) => {
+    return (dispatch, getState) => {
+        dispatch(fetchTodayTimetablePending())
+        const token = getState().user.currentUser.token
+        userService.fetchTodayTimetable(token)
+            .then(result  => {
+                dispatch(fetchTodayTimetableSuccess(result))
+            })
+            .catch(error => dispatch(fetchTodayTimetableFailed(error.message)))
+    }
+}
+
+
+export const fetchTodayTimetableSuccess = (timetable) => {
+    return {
+        type: CartActionTypes.FETCH_TODAY_TIMETABLE_SUCCESS,
+        payload: timetable
+    }
+}
+
+export const fetchTodayTimetableFailed = (error) => {
+    return {
+        type: CartActionTypes.FETCH_TODAY_TIMETABLE_FAILED,
+        payload: error
+    }
+}
+
+export const fetchTodayTimetablePending = () => {
+    return {
+        type: CartActionTypes.FETCH_TODAY_TIMETABLE_PENDING
+    }
+}
+
 

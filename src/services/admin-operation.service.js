@@ -16,9 +16,20 @@ const createRider = (rider, token) => {
     return axios.post(`${Config.API_BASE_URL}/riders`, rider)
 }
 
+const fetchTimetable = (userToken) => {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + userToken
+    return axios.get(`${Config.API_BASE_URL}/timetable/`)
+}
+const updateTimetable = (timetable, userToken) => {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + userToken
+    return axios.put(`${Config.API_BASE_URL}/timetable`, { timetable })
+}
+
 
 export const adminService = {
     fetchRiders,
     deleteRider,
-    createRider
+    createRider,
+    fetchTimetable,
+    updateTimetable
 }

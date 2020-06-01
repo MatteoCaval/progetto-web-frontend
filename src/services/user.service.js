@@ -26,11 +26,19 @@ const updateProductQuantity = (productId, quantity, userToken) => {
     return axios.put(`${Config.API_BASE_URL}/user/cart/${productId}`, { quantity: quantity })
 }
 
+const fetchTodayTimetable = (userToken) => {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + userToken
+    return axios.get(`${Config.API_BASE_URL}/timetable/today`)
+}
+
+
+
 export const userService = {
     fetchOrders,
     fetchCart,
     addToCart,
     removeProductFromCart,
-    updateProductQuantity
+    updateProductQuantity,
+    fetchTodayTimetable
 }
 

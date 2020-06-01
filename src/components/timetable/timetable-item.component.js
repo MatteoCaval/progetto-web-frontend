@@ -43,7 +43,7 @@ const TimeTableItem = ({ day, onDayChanged }) => {
         const newDay = {
             ...day,
             [name]: checked,
-            dinner: checked ? initialDinnerState : null
+            dinner : checked ? initialDinnerState : null
         }
 
         onDayChanged(newDay)
