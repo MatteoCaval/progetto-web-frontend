@@ -3,6 +3,7 @@ import axios from 'axios'
 import Config from "../../config";
 import { orderService } from "../../services/orders.service";
 import { alertActions } from "../alerts/alert.actions";
+import io from "socket.io-client";
 
 export const completeOrder = (orderData) => {
     return (dispatch, getState) => {
@@ -72,6 +73,28 @@ const fetchOrderHistoryPending = () => {
 }
 
 // realm time actions
+
+let socket = undefined
+export const startLiveOrderUpdated = () => {
+    return (dispatch, getState) => {
+        socket = io.connect(Config.API_BASE_URL)
+        socket.on('orders', orders => {
+            dispatch(realTimeOrders(orders))
+        })
+        socket.on('newOrder', order => {
+            dispatch(newOrderReceived(order))
+        })
+        socket.on('orderUpdated', order => {
+            dispatch(orderUpdated(order))
+        })
+    }
+}
+
+export const stopLiveOrderUpdated = () => {
+    return () => {
+       socket.disconnect()
+    }
+}
 
 export const realTimeOrders = (orders) => {
     return {

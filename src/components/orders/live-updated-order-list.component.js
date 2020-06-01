@@ -1,26 +1,14 @@
 import React, { useEffect } from "react";
 import OrderList from "./orders-list.component";
 import { connect } from "react-redux";
-import Config from "../../config";
-import io from "socket.io-client";
-import { newOrderReceived, orderUpdated, realTimeOrders } from "../../redux/orders/orders.actions";
+import { startLiveOrderUpdated, stopLiveOrderUpdated } from "../../redux/orders/orders.actions";
 
-const LiveUpdatedOrderList = ({ orders, realTimeOrders, newOrderReceived, orderUpdated }) => {
+const LiveUpdatedOrderList = ({ startLiveOrderUpdated, orders, stopLiveOrderUpdated }) => {
 
     useEffect(() => {
-        //valutare se è buona pratica spostare nelle action come per le chiamata api
-        const client = io.connect(Config.API_BASE_URL)
-        client.on('orders', orders => {
-            realTimeOrders(orders)
-        })
-        client.on('newOrder', order => {
-            newOrderReceived(order)
-        })
-        client.on('orderUpdated', order => {
-            orderUpdated(order)
-        })
+        startLiveOrderUpdated()
         return () => {
-            console.log('pulire qui, chiudere socket o lanciare azione per chiudere socket')
+            stopLiveOrderUpdated()
         }
     }, [])
 
@@ -41,4 +29,7 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { realTimeOrders, newOrderReceived, orderUpdated })(LiveUpdatedOrderList)
+export default connect(mapStateToProps, {
+    startLiveOrderUpdated,
+    stopLiveOrderUpdated
+})(LiveUpdatedOrderList)

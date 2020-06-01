@@ -11,7 +11,7 @@ const OrderActionTypes = {
     // real time orders actions
     REAL_TIME_ORDERS: 'REAL_TIME_ORDERS',
     NEW_ORDER_RECEIVED: 'NEW_ORDER_RECEIVED',
-    ORDER_UPDATED: 'ORDER_UPDATED'
+    ORDER_UPDATED: 'ORDER_UPDATED',
 }
 
 export default OrderActionTypes
