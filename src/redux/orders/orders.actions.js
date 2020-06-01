@@ -71,6 +71,31 @@ const fetchOrderHistoryPending = () => {
     }
 }
 
+// realm time actions
+
+export const realTimeOrders = (orders) => {
+    return {
+        type: OrderActionTypes.REAL_TIME_ORDERS,
+        payload: orders
+    }
+}
+
+export const newOrderReceived = (order) => {
+    return {
+        type: OrderActionTypes.NEW_ORDER_RECEIVED,
+        payload: order
+    }
+}
+
+export const orderUpdated = (order) => {
+    return {
+        type: OrderActionTypes.ORDER_UPDATED,
+        payload: order
+    }
+}
+
+
+
 
 
 
