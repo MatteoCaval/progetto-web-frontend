@@ -44,7 +44,7 @@ function App({ user, history, clearAlerts }) {
                 <Route exact path='/timetable'
                        render={() => (user && user.role === 'admin') ? <TimeTablePage/> : <Redirect to='/signin'/>}/>
 
-                <Route path='/' component={Categories}/>
+                <Route path='/' render={() => (!user || user.role !== 'rider') ? <Categories/> : <OrdersPage/>}/>
             </Switch>
             <Alert/>
 

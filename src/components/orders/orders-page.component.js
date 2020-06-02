@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, Tab, Tabs } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import PaginatedOrderList from "./paginated-order-list.component";
@@ -21,7 +21,6 @@ const getInitialTabValue = (userRole) => {
 
 const OrdersPage = ({ userRole }) => {
     const [tabValue, setTabValue] = useState(getInitialTabValue(userRole))
-
 
     return (
         <React.Fragment>
@@ -46,9 +45,9 @@ const OrdersPage = ({ userRole }) => {
                     <LiveUpdatedOrderList/>
                 </div>
                 {/*second tab*/}
-                <div hidden={tabValue !== 1}>
+                {userRole !== UserRoles.RIDER && <div hidden={tabValue !== 1}>
                     <PaginatedOrderList/>
-                </div>
+                </div>}
             </Container>
         </React.Fragment>
     )

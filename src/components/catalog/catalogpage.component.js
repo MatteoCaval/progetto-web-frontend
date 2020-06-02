@@ -1,6 +1,6 @@
 import React from "react";
 import CategoryList from "./category/category-list.component";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import ProductList from "./product/product-list.component";
 import { Container } from '@material-ui/core'
 import ProductForm from "./product/product-form.component";
@@ -11,7 +11,6 @@ import { connect } from "react-redux";
 import ErrorSnackbar from "../common/error-snackbar.component";
 
 const CatalogPage = ({ match, loading, error }) => {
-
     return (
         // gestire qua dentro il loading ed error generali
         <Container maxWidth='md'>
@@ -52,4 +51,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(CatalogPage)
+export default withRouter(connect(mapStateToProps)(CatalogPage))
