@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import OrderList from "./orders-list.component";
 import { connect } from "react-redux";
 import { startLiveOrderUpdated, stopLiveOrderUpdated } from "../../redux/orders/orders.actions";
+import UserRoles from "../../common/UserRoles";
 
 const LiveUpdatedOrderList = ({ startLiveOrderUpdated, orders, stopLiveOrderUpdated }) => {
 
@@ -15,16 +16,21 @@ const LiveUpdatedOrderList = ({ startLiveOrderUpdated, orders, stopLiveOrderUpda
 
     return (
         <React.Fragment>
-            <p>Live updated order list</p>
             <OrderList orders={orders}/>
         </React.Fragment>
     )
 
 }
 
+const adminFilters = ['PENDING', 'IN_DELIVERY']
+const riderFilter = ['IN_DELIVERY']
+
 const mapStateToProps = state => {
+    const userRole = state.user.currentUser ? state.user.currentUser.role : null
     return {
-        orders: state.orders.realTimeOrders
+        orders: state.orders.realTimeOrders.filter(order => {
+            return userRole === UserRoles.RIDER ? riderFilter.includes(order.state) : adminFilters.includes(order.state)
+        })
     }
 }
 
