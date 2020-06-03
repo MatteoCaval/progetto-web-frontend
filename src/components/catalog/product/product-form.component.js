@@ -8,7 +8,6 @@ import {
     updateProduct
 } from "../../../redux/catalog/product/product-operations.actions";
 import Progress from "../../common/progress.component";
-import ErrorSnackbar from "../../common/error-snackbar.component";
 import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -165,7 +164,6 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                 </Grid>
             </form>
             <Progress loading={loading}/>
-            <ErrorSnackbar errorMessage={error}/>
         </Container>
     )
 }

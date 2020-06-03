@@ -8,7 +8,6 @@ import CategoryForm from "./category/category-form.component";
 import ProductPage from "./product/product-page.component";
 import Progress from "../common/progress.component";
 import { connect } from "react-redux";
-import ErrorSnackbar from "../common/error-snackbar.component";
 
 const CatalogPage = ({ match, loading, error }) => {
     return (
@@ -38,7 +37,6 @@ const CatalogPage = ({ match, loading, error }) => {
                 />
             </Switch>
             <Progress loading={loading}/>
-            <ErrorSnackbar errorMessage={error}/>
         </Container>
     )
 

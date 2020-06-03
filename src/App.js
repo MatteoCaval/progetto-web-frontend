@@ -40,7 +40,7 @@ function App({ user, history, clearAlerts }) {
 
 
                 <Route exact path="/orders" render={() => user ? <PaginatedOrderList/> : <Redirect to='/'/>}/>
-                
+
                 <Route exact path="/live-orders"
                        render={() => (user && user.role !== 'consumer') ? <LiveUpdatedOrderList/> :
                            <Redirect to='/'/>}/>

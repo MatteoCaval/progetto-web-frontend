@@ -7,14 +7,13 @@ import { withRouter } from "react-router-dom";
 
 import "./cartpage.style.scss"
 import Progress from "../common/progress.component";
-import ErrorSnackbar from "../common/error-snackbar.component";
 
 const CartPage = ({ fetchCart, cart, history }) => {
     useEffect(() => {
         fetchCart()
     }, [fetchCart])
 
-    const { products, error, loading, total } = cart    
+    const { products, error, loading, total } = cart
 
     if (products.length > 0) {
         return (
@@ -24,13 +23,13 @@ const CartPage = ({ fetchCart, cart, history }) => {
                         products && products.map(product => {
                             return (
                                 <Grid key={product.id} item xs={12} sm={12}>
-                                    <CartProductItem key={product.id} product={product} />
+                                    <CartProductItem key={product.id} product={product}/>
                                 </Grid>
                             )
                         })
                     }
                 </Grid>
-                <Divider className='cart-total-divider' />
+                <Divider className='cart-total-divider'/>
                 <div className="total-container">
                     <Button
                         variant="contained"
@@ -39,15 +38,14 @@ const CartPage = ({ fetchCart, cart, history }) => {
                         onClick={() => history.push('/summary')}>
                         Proceed to order
                     </Button>
-                    
+
                     <div className="total-info-container">
                         <Typography variant='h6' color='textPrimary'>Total:</Typography>
                         <Typography variant='h5' color='textPrimary'>{total}€</Typography>
                     </div>
 
                 </div>
-                <Progress loading={loading} />
-                {error && (<ErrorSnackbar errorMessage={error} />)}
+                <Progress loading={loading}/>
             </Container>
 
         )
