@@ -1,9 +1,12 @@
 import axios from 'axios'
 import Config from "../config";
+import UserRoles from "../common/UserRoles";
+import OrderState from "../components/orders/order-state";
 
-const fetchOrderHistory = (token, page = 1) => {
+const fetchOrderHistory = (token, userRole, page = 1, ) => {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-    return axios.get(`${Config.API_BASE_URL}/orders?page=${page}`)
+    const stateFilterQuery = userRole === UserRoles.ADMIN ? `&state=${OrderState.DELIVERED}` : ''
+    return axios.get(`${Config.API_BASE_URL}/orders?page=${page}${stateFilterQuery}`)
 }
 
 export const orderService = {

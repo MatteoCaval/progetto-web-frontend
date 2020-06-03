@@ -42,7 +42,7 @@ export const fetchOrderHistory = (page = 1) => {
     return (dispatch, getState) => {
         dispatch(fetchOrderHistoryPending())
         const token = getState().user.currentUser.token
-        orderService.fetchOrderHistory(token, page)
+        orderService.fetchOrderHistory(token, getState().user.currentUser.role, page)
             .then(result => dispatch(fetchOrderHistorySuccess(result.data)))
             .catch(error => {
                 dispatch(fetchOrderHistoryFailed(error.message))
