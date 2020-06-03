@@ -58,13 +58,14 @@ const ordersReducer = (state = INITIAL_STATE, action = {}) => {
         }
         case OrderActionTypes.ORDER_UPDATED: {
             const updatedOrder = action.payload
+            const orderPresent = state.realTimeOrders.find(order => order._id === updatedOrder._id)
             return {
                 ...state,
-                realTimeOrders: state.realTimeOrders.map(
-                    order => {
+                realTimeOrders: orderPresent ? state.realTimeOrders.map(
+                    order => { // se l'ordine aggiornato era presente in lista lo aggiorno
                         return order._id === updatedOrder._id ? updatedOrder : order
-                    }
-                )
+                    })
+                    : [updatedOrder, ...state.realTimeOrders] // se l'ordine aggiornato non era presente in lista lo aggiungo
             }
         }
 
