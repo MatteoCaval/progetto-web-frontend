@@ -3,7 +3,7 @@ import { Chip } from '@material-ui/core'
 import OrderState from './order-state'
 import "./order-state-chip.style.scss"
 
-const OrderStateChip = ({ state }) => {
+const OrderStateChip = ({ state, handleOnClick }) => {
     let className
     let label
     switch (state) {
@@ -21,7 +21,7 @@ const OrderStateChip = ({ state }) => {
             break;
     }
     return (
-        <Chip size="small" label={label} className={className} />
+        <Chip size="small" label={label} className={className} onClick={handleOnClick} />
     )
 }
 
