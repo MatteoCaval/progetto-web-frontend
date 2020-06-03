@@ -5,7 +5,7 @@ import { startLiveOrderUpdated, stopLiveOrderUpdated } from "../../redux/orders/
 import UserRoles from "../../common/UserRoles";
 import { Container } from "@material-ui/core";
 
-const LiveUpdatedOrderList = ({ startLiveOrderUpdated, orders, stopLiveOrderUpdated }) => {
+const LiveOrdersPage = ({ startLiveOrderUpdated, orders, stopLiveOrderUpdated }) => {
 
     useEffect(() => {
         startLiveOrderUpdated()
@@ -39,4 +39,4 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
     startLiveOrderUpdated,
     stopLiveOrderUpdated
-})(LiveUpdatedOrderList)
+})(LiveOrdersPage)

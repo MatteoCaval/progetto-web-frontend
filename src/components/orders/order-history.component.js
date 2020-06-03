@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import OrderList from "./orders-list.component";
-import { fetchUserOrders } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
 import { Pagination } from "@material-ui/lab";
 import { fetchOrderHistory } from "../../redux/orders/orders.actions";
 import { Container } from "@material-ui/core";
 
-const PaginatedOrderList = ({ orders, fetchUserOrders, fetchOrderHistory, pageCount, currentPage, pending }) => {
+const OrderHistoryPage = ({ orders, fetchOrderHistory, pageCount, currentPage, pending }) => {
 
     useEffect(() => {
         fetchOrderHistory()
@@ -37,4 +36,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { fetchUserOrders, fetchOrderHistory })(PaginatedOrderList)
+export default connect(mapStateToProps, { fetchOrderHistory })(OrderHistoryPage)

@@ -1,8 +1,6 @@
 import AuthActionType from "../auth/auth.actionType";
-import UserActionTypes from "./user.actionTypes";
 import { alertActions } from "../alerts/alert.actions";
 import { authService } from "../../services/auth.service";
-import { userService } from "../../services/user.service";
 
 export const loginSuccess = user => {
     return {
@@ -82,37 +80,8 @@ export const logoutFailed = (error) => {
     }
 }
 
-export const fetchUserOrders = () => {
-    return (dispatch, getState) => {
-        dispatch(fetchOrdersPending())
-        const token = getState().user.currentUser.token
-        userService.fetchOrders(token)
-            .then(result => {
-                dispatch(fetchOrdersSuccess(result.data))
-            })
-            .catch(error => dispatch(fetchOrdersFailed(error)))
-    }
-}
 
-export const fetchOrdersSuccess = (orders) => {
-    return {
-        type: UserActionTypes.FETCH_ORDERS_SUCCESS,
-        payload: orders
-    }
-}
 
-export const fetchOrdersFailed = (error) => {
-    return {
-        type: UserActionTypes.FETCH_ORDERS_FAILED,
-        payload: error.message
-    }
-}
-
-export const fetchOrdersPending = () => {
-    return {
-        type: UserActionTypes.FETCH_ORDERS_PENDING
-    }
-}
 
 
 

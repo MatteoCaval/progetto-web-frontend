@@ -14,8 +14,8 @@ import CategoryForm from "./components/catalog/category/category-form.component"
 import Alert from "./components/common/alert.component";
 import { alertActions } from "./redux/alerts/alert.actions";
 import RidersPage from "./components/rider/riders.component";
-import PaginatedOrderList from "./components/orders/paginated-order-list.component";
-import LiveUpdatedOrderList from "./components/orders/live-updated-order-list.component";
+import PaginatedOrderList from "./components/orders/order-history.component";
+import LiveUpdatedOrderList from "./components/orders/live-orders.component";
 
 function App({ user, history, clearAlerts }) {
 
