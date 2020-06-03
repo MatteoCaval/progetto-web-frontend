@@ -8,13 +8,14 @@ import CartPage from "./components/cart/cartpage.component";
 import TimeTablePage from "./components/timetable/timetable.component";
 import SignUp from "./components/signup/signup.component";
 import { connect } from "react-redux";
-import OrdersPage from "./components/orders/orders-page.component";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import OrderSummaryPage from "./components/ordersummary/order-summary.component";
 import CategoryForm from "./components/catalog/category/category-form.component";
 import Alert from "./components/common/alert.component";
 import { alertActions } from "./redux/alerts/alert.actions";
 import RidersPage from "./components/rider/riders.component";
+import PaginatedOrderList from "./components/orders/paginated-order-list.component";
+import LiveUpdatedOrderList from "./components/orders/live-updated-order-list.component";
 
 function App({ user, history, clearAlerts }) {
 
@@ -37,14 +38,18 @@ function App({ user, history, clearAlerts }) {
                 <Route exact path='/riders'
                        render={() => (user && user.role === 'admin') ? <RidersPage/> : <Redirect to='/signin'/>}/>
 
-                <Route exact path="/orders" render={() => user ? <OrdersPage/> : <Redirect to='/'/>}/>
+
+                <Route exact path="/orders" render={() => user ? <PaginatedOrderList/> : <Redirect to='/'/>}/>
+                <Route exact path="/live-orders" render={() => user ? <LiveUpdatedOrderList/> : <Redirect to='/'/>}/>
+
                 <Route exact path="/summary" render={() => user ? <OrderSummaryPage/> : <Redirect to='/'/>}/>
                 <Route exact path='/cart'
                        render={() => (user && user.role === 'consumer') ? <CartPage/> : <Redirect to='/signin'/>}/>
                 <Route exact path='/timetable'
                        render={() => (user && user.role === 'admin') ? <TimeTablePage/> : <Redirect to='/signin'/>}/>
 
-                <Route path='/' render={() => (!user || user.role !== 'rider') ? <Categories/> : <OrdersPage/>}/>
+                <Route path='/'
+                       render={() => (!user || user.role !== 'rider') ? <Categories/> : <LiveUpdatedOrderList/>}/>
             </Switch>
             <Alert/>
 

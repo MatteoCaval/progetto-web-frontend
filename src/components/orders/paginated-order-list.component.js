@@ -4,6 +4,7 @@ import { fetchUserOrders } from "../../redux/user/user.actions";
 import { connect } from "react-redux";
 import { Pagination } from "@material-ui/lab";
 import { fetchOrderHistory } from "../../redux/orders/orders.actions";
+import { Container } from "@material-ui/core";
 
 const PaginatedOrderList = ({ orders, fetchUserOrders, fetchOrderHistory, pageCount, currentPage, pending }) => {
 
@@ -17,10 +18,10 @@ const PaginatedOrderList = ({ orders, fetchUserOrders, fetchOrderHistory, pageCo
     }
 
     return (
-        <React.Fragment>
+        <Container maxWidth='md'>
             <OrderList orders={orders}/>
             <Pagination page={currentPage} count={pageCount} color='primary' onChange={onPageChanged}/>
-        </React.Fragment>
+        </Container>
     )
 
 }

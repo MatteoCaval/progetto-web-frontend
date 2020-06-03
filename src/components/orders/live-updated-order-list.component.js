@@ -3,6 +3,7 @@ import OrderList from "./orders-list.component";
 import { connect } from "react-redux";
 import { startLiveOrderUpdated, stopLiveOrderUpdated } from "../../redux/orders/orders.actions";
 import UserRoles from "../../common/UserRoles";
+import { Container } from "@material-ui/core";
 
 const LiveUpdatedOrderList = ({ startLiveOrderUpdated, orders, stopLiveOrderUpdated }) => {
 
@@ -15,9 +16,9 @@ const LiveUpdatedOrderList = ({ startLiveOrderUpdated, orders, stopLiveOrderUpda
 
 
     return (
-        <React.Fragment>
+        <Container maxWidth='md'>
             <OrderList orders={orders}/>
-        </React.Fragment>
+        </Container>
     )
 
 }
