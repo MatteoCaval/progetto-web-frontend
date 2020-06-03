@@ -69,12 +69,18 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
                     <List className={classes.list}>
                         <ListItem button
                                   component={RouterLink}
+                                  to="/live-orders"
+                                  onClick={hideDrawer}>
+                            <ListItemIcon>{<ListAltIcon/>}</ListItemIcon>
+                            <ListItemText primary='Live Orders'/>
+                        </ListItem>
+                        <ListItem button
+                                  component={RouterLink}
                                   to="/orders"
                                   onClick={hideDrawer}>
                             <ListItemIcon>{<ListAltIcon/>}</ListItemIcon>
-                            <ListItemText primary='Orders'/>
+                            <ListItemText primary='Order History'/>
                         </ListItem>
-
                         <ListItem button
                                   component={RouterLink}
                                   to="/timetable"
