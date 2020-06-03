@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
 import { alertActions } from "../../redux/alerts/alert.actions";
+import Alert from "@material-ui/lab/Alert";
+import AlertTypes from "../../redux/alerts/alert.types";
 
-const Alert = ({ alert, clearAlerts }) => {
+const AlertManager = ({ alert, clearAlerts }) => {
 
     const onCloseAlert = () => {
         clearAlerts()
@@ -15,13 +15,13 @@ const Alert = ({ alert, clearAlerts }) => {
         alert && (alert.message ? (
             <Snackbar
                 open={alert}
-                autoHideDuration={2000}
-                message={alert.message}
-                action={
-                    <IconButton size="small" aria-label="close" color="inherit" onClick={onCloseAlert}>
-                        <CloseIcon fontSize="small"/>
-                    </IconButton>
-                }/>
+                autoHideDuration={2000}>
+                <Alert
+                    onClose={onCloseAlert}
+                    severity={alert.type === AlertTypes.ERROR ? 'error' : 'info'}>
+                    {alert.message}
+                </Alert>
+            </Snackbar>
         ) : null)
     )
 
@@ -41,4 +41,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Alert)
+export default connect(mapStateToProps, mapDispatchToProps)(AlertManager)
