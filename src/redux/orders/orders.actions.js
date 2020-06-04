@@ -40,7 +40,7 @@ const completeOrderPending = () => {
 
 export const updateOrder = (orderId, state, riderId) => {
     return (dispatch, getState) => {
-        const token = getState().user.currentUser.token
+        const token = getState().user.token
 
         dispatch(updateOrderPending())
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
