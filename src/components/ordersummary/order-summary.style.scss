@@ -18,10 +18,7 @@
 }
 
 .summary-divider {
-    margin: 1em !important;
     margin-bottom: 2em !important;
-    height: 1px !important;
-    background-color: #424242 !important;
 }
 
 .place-order {
@@ -51,4 +48,8 @@
 
 .no-slots-label{
     color: red;
+}
+
+.order-summary-header{
+    margin-bottom: 2em;
 }

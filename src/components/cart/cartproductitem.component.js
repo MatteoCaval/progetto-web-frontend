@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardMedia, Typography, IconButton } from '@material-ui/core'
 
 import "./cartproductitem.style.scss"
-import QuantityPicker from "./../catalog/product/quantity-picker.component"
+import QuantityPicker from "./../custom/quantity-picker.component"
 import DeleteIcon from "@material-ui/icons/Delete"
 import { removeProductFromCart, updateCartProductQuantity } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";

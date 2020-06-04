@@ -5,7 +5,7 @@ import "./product-page.style.scss";
 import { Button, CardMedia, Container, Fab, Typography } from "@material-ui/core";
 import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
-import QuantityPicker from "./quantity-picker.component"
+import QuantityPicker from "./../../custom/quantity-picker.component"
 import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
 import EditIcon from "@material-ui/icons/Edit"
 import { addToCart } from "../../../redux/cart/cart.actions";

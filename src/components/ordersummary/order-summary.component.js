@@ -4,7 +4,6 @@ import {
     Card,
     CardActionArea,
     Container,
-    Divider,
     Grid,
     MenuItem,
     TextField,
@@ -17,6 +16,7 @@ import PaymentType from "./payment-type"
 
 import "./order-summary.style.scss"
 import { withRouter } from "react-router-dom";
+import HorizontalDivider from "../custom/horizontal-divider.component";
 
 const cities = [
     'San Mauro Pascoli',
@@ -73,13 +73,13 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
 
     return (
         <Container maxWidth='md'>
-
-            <div className="summary-total-container">
-                <Typography variant='h6' color='textPrimary'>Total:</Typography>
-                <Typography variant='h5' color='textPrimary'>{total}€</Typography>
+            <div className="order-summary-header">
+                <div className="summary-total-container">
+                    <Typography variant='h6' color='textPrimary'>Total:</Typography>
+                    <Typography variant='h5' color='textPrimary'>{total}€</Typography>
+                </div>
+                <HorizontalDivider/>
             </div>
-
-            <Divider className='summary-divider'/>
 
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -91,7 +91,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Name'/>
+                        label='Name' />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -103,7 +103,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Surname'/>
+                        label='Surname' />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -115,7 +115,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Address'/>
+                        label='Address' />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -147,7 +147,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                         fullWidth
                         type='tel'
                         onChange={handleChange}
-                        label='Telephone Number'/>
+                        label='Telephone Number' />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -172,9 +172,9 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
 
                 <Grid item xs={12} sm={6}>
                     <Card className={cashPayment ? 'card-selected' : ''}
-                          variant='outlined'>
+                        variant='outlined'>
                         <CardActionArea className='payment-card'
-                                        onClick={handleCashPaymentSelect}>
+                            onClick={handleCashPaymentSelect}>
                             <div
                                 className='payment-card-content'>
                                 <Typography variant='h6' color='textPrimary' className="payment-title">
@@ -193,9 +193,9 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
 
                 <Grid item xs={12} sm={6}>
                     <Card className={cashPayment ? '' : 'card-selected'}
-                          variant='outlined'>
+                        variant='outlined'>
                         <CardActionArea className='payment-card'
-                                        onClick={handlePayNowSelect}>
+                            onClick={handlePayNowSelect}>
                             <div
                                 className='payment-card-content'>
                                 <Typography variant='h6' color='textPrimary' className="payment-title">
@@ -213,9 +213,9 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
             </Grid>
             <div className="summary-button-container">
                 <Button className="place-order" variant='contained'
-                        disabled={timeSlots.length < 1}
-                        onClick={() => completeOrder(orderData)}
-                        color='primary'>
+                    disabled={timeSlots.length < 1}
+                    onClick={() => completeOrder(orderData)}
+                    color='primary'>
                     Concludi l'ordine
                 </Button>
                 {

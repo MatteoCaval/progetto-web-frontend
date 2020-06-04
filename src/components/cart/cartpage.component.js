@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { fetchCart } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import CartProductItem from "./cartproductitem.component";
-import { Button, Container, Divider, Grid, Typography } from "@material-ui/core";
+import { Button, Container, Grid, Typography } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 
 import "./cartpage.style.scss"
 import Progress from "../common/progress.component";
+import HorizontalDivider from "../custom/horizontal-divider.component";
 
 const CartPage = ({ fetchCart, cart, history }) => {
     useEffect(() => {
@@ -24,29 +25,31 @@ const CartPage = ({ fetchCart, cart, history }) => {
                         products.map(product => {
                             return (
                                 <Grid key={product.id} item xs={12} sm={12}>
-                                    <CartProductItem key={product.id} product={product}/>
+                                    <CartProductItem key={product.id} product={product} />
                                 </Grid>
                             )
                         })
                     }
                 </Grid>
-                <Divider className='cart-total-divider'/>
-                <div className="total-container">
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        className="proceed-to-order"
-                        onClick={() => history.push('/summary')}>
-                        Proceed to order
+
+                <div className="cart-page-end-list">
+                    <HorizontalDivider/>
+                    <div className="total-container">
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            className="proceed-to-order"
+                            onClick={() => history.push('/summary')}>
+                            Proceed to order
                     </Button>
 
-                    <div className="total-info-container">
-                        <Typography variant='h6' color='textPrimary'>Total:</Typography>
-                        <Typography variant='h5' color='textPrimary'>{total}€</Typography>
+                        <div className="total-info-container">
+                            <Typography variant='h6' color='textPrimary'>Total:</Typography>
+                            <Typography variant='h5' color='textPrimary'>{total}€</Typography>
+                        </div>
                     </div>
-
                 </div>
-                <Progress loading={loading}/>
+                <Progress loading={loading} />
             </Container>
 
         )

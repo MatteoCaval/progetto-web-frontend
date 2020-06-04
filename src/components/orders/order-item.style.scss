@@ -1,7 +1,7 @@
 .order-root {
     display: flex;
     flex-direction: row;
-    padding: 1em;
+    padding: 0em 1em;
     width: 100%;
 }
 
@@ -20,4 +20,21 @@
 
 .rider-chip{
     margin-top: 0.5em;
+}
+
+.collapsed-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.delivery-info-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.telephone-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: auto;
 }

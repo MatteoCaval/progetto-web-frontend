@@ -1,6 +1,6 @@
 import React from 'react'
 import { Chip } from '@material-ui/core'
-import OrderState from './order-state'
+import OrderState from '../../common/OrderState'
 import "./order-state-chip.style.scss"
 
 const OrderStateChip = ({ state, handleOnClick }) => {

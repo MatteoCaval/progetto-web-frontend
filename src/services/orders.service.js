@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Config from "../config";
 import UserRoles from "../common/UserRoles";
-import OrderState from "../components/orders/order-state";
+import OrderState from "../common/OrderState";
 
 const fetchOrderHistory = (token, userRole, page = 1, ) => {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token

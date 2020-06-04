@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
     ExpansionPanel,
     ExpansionPanelDetails,
@@ -13,20 +13,21 @@ import {
     DialogTitle,
     Avatar,
     List,
-    ListItem, 
-    ListItemAvatar, 
-    ListItemText, 
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
 } from '@material-ui/core'
 
 import "./order-item.style.scss"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import OrderProductItem from "./order-product-item.component"
-import OrderStateChip from "./order-state-chip.component"
+import OrderStateChip from "../custom/order-state-chip.component"
 import { connect } from "react-redux";
 import UserRoles from "./../../common/UserRoles"
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike'
-import OrderState from './order-state'
+import OrderState from '../../common/OrderState'
 import { updateOrder } from './../../redux/orders/orders.actions'
+import HorizontalDivider from '../custom/horizontal-divider.component'
 
 const OrderItem = ({ order, user, riders, updateOrder }) => {
 
@@ -83,7 +84,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                     <div className="right-container">
                         <OrderStateChip state={order.state} handleOnClick={user.role === UserRoles.ADMIN && order.state === OrderState.PENDING ? handleClickOpen : null} />
                         {
-                            order.state === OrderState.PENDING ? null : <Chip className="rider-chip" size="small" label={`${order.rider.name} ${order.rider.surname}`} onDelete={handleRiderRemove} />
+                            order.state === OrderState.PENDING ? null : <Chip className="rider-chip" size="small" label={`${order.rider.name} ${order.rider.surname}`} onDelete={user.role === UserRoles.ADMIN ? handleRiderRemove : null} />
                         }
                         <Typography color='textPrimary'>
                             Total Price:
@@ -94,7 +95,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                     </div>
                 </div>
             </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
+            <ExpansionPanelDetails className="collapsed-container">
                 <div className="order-products-container">
                     {
                         order.products.map(product => {
@@ -104,6 +105,28 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                                 </Grid>
                             )
                         })}
+                </div>
+                <HorizontalDivider />
+                <div className="delivery-info-container">
+                    <div>
+                        <Typography color='textPrimary'>
+                            Address
+                        </Typography>
+                        <Typography variant='h6' color='textPrimary'>
+                            {order.address}
+                        </Typography>
+                        <Typography variant='h6' color='textPrimary'>
+                            {order.city}
+                        </Typography>
+                    </div>
+                    <div className="telephone-container">
+                        <Typography color='textPrimary'>
+                            Telephone number
+                        </Typography>
+                        <Typography variant='h6' color='textPrimary'>
+                            {order.telephoneNumber}
+                        </Typography>
+                    </div>
                 </div>
             </ExpansionPanelDetails>
             <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleClose}>
