@@ -5,6 +5,8 @@ import "./order-item.style.scss"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import OrderProductItem from "./order-product-item.component"
 import OrderStateChip from "./order-state-chip.component"
+import { connect } from "react-redux";
+import UserRoles from  "./../common/userRoles"
 
 const riders = [
     {
@@ -24,7 +26,7 @@ const riders = [
     }
 ]
 
-const OrderItem = ({ order }) => {
+const OrderItem = ({ order, user }) => {
 
     const order_date = new Date(order.creationDate)
     const delivery_date = new Date(order.date)
@@ -68,7 +70,7 @@ const OrderItem = ({ order }) => {
                         </Typography>
                     </div>
                     <div className="right-container">
-                        <OrderStateChip state={order.state} handleOnClick={handleClickOpen} />
+                        <OrderStateChip state={order.state} handleOnClick={user.role === UserRoles.ADMIN ? handleClickOpen : null} />
                         <Typography color='textPrimary'>
                             Total Price:
                         </Typography>
@@ -118,5 +120,9 @@ const OrderItem = ({ order }) => {
         </ExpansionPanel>
     )
 }
-
-export default OrderItem
+const mapStateToProps = state => {
+    return {
+        user: state.user.currentUser,
+    }
+}
+export default connect(mapStateToProps, null)(OrderItem)
