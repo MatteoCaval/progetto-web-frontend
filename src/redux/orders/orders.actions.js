@@ -14,7 +14,10 @@ export const completeOrder = (orderData) => {
             .then(result => {
                 dispatch(completeOrderSuccess())
             })
-            .catch(error => dispatch(completeOrderFailed(error)))
+            .catch(error => {
+                dispatch(alertActions.error(error.message))
+                dispatch(completeOrderFailed(error.message))
+            })
 
     }
 }

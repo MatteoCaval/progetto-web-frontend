@@ -13,14 +13,15 @@ const CartPage = ({ fetchCart, cart, history }) => {
         fetchCart()
     }, [fetchCart])
 
+
     const { products, error, loading, total } = cart
 
-    if (products.length > 0) {
+    if (products && products.length) {
         return (
             <Container maxWidth='md'>
                 <Grid className="products-list" container spacing={2}>
                     {
-                        products && products.map(product => {
+                        products.map(product => {
                             return (
                                 <Grid key={product.id} item xs={12} sm={12}>
                                     <CartProductItem key={product.id} product={product}/>
@@ -80,10 +81,5 @@ const mapStateToProps = state => {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchCart: () => dispatch(fetchCart()),
-    }
-}
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CartPage))
+export default withRouter(connect(mapStateToProps, { fetchCart })(CartPage))

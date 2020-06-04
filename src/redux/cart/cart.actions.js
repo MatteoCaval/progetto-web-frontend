@@ -137,7 +137,7 @@ export const fetchTodayTimetable = () => {
         dispatch(fetchTodayTimetablePending())
         const token = getState().user.token
         userService.fetchTodayTimetable(token)
-            .then(result  => {
+            .then(result => {
                 dispatch(fetchTodayTimetableSuccess(result))
             })
             .catch(error => dispatch(fetchTodayTimetableFailed(error.message)))
@@ -162,6 +162,12 @@ export const fetchTodayTimetableFailed = (error) => {
 export const fetchTodayTimetablePending = () => {
     return {
         type: CartActionTypes.FETCH_TODAY_TIMETABLE_PENDING
+    }
+}
+
+export const clearOrderData = () => {
+    return {
+        type: CartActionTypes.CLEAR_ORDER_DATA
     }
 }
 

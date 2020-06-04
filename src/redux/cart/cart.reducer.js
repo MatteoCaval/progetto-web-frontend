@@ -1,11 +1,13 @@
 import CartActionTypes from "./cart.actionTypes";
+import OrderActionTypes from "../orders/orders.types";
 
 const INITIAL_STATE = {
-    products: [],
+    products: null,
     loading: false,
     total: 0,
     error: '',
-    timetable: ''
+    timetable: '',
+    orderCompleted: false
 }
 
 const cartReducer = (state = INITIAL_STATE, action = {}) => {
@@ -43,6 +45,16 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
                 loading: false,
                 error: action.payload
             }
+        case OrderActionTypes.COMPLETE_ORDER_SUCCESS: {
+            return {
+                ...state,
+                orderCompleted: true
+            }
+        }
+        case CartActionTypes.CLEAR_ORDER_DATA: {
+            return INITIAL_STATE
+        }
+
         default:
             return state
     }

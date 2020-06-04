@@ -11,11 +11,12 @@ import {
     Typography
 } from "@material-ui/core";
 import { completeOrder } from "../../redux/orders/orders.actions";
-import { fetchTodayTimetable } from "../../redux/cart/cart.actions";
+import { clearOrderData, fetchTodayTimetable } from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import PaymentType from "./payment-type"
 
 import "./order-summary.style.scss"
+import { withRouter } from "react-router-dom";
 
 const cities = [
     'San Mauro Pascoli',
@@ -29,7 +30,7 @@ const cities = [
     'Borghi'
 ]
 
-const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable }) => {
+const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable, orderCompleted, clearOrderData, history }) => {
     const [cashPayment, setCashPayment] = useState(1);
 
     const [orderData, setOrderData] = useState({
@@ -45,6 +46,13 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
     useEffect(() => {
         fetchTodayTimetable()
     }, [fetchTodayTimetable])
+
+    useEffect(() => {
+        if (orderCompleted) {
+            history.push('/')
+            clearOrderData()
+        }
+    }, [orderCompleted])
 
     useEffect(() => {
         setOrderData({ ...orderData, ['paymentType']: cashPayment ? PaymentType.ON_DELIVERY : PaymentType.ONLINE })
@@ -71,7 +79,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                 <Typography variant='h5' color='textPrimary'>{total}€</Typography>
             </div>
 
-            <Divider className='summary-divider' />
+            <Divider className='summary-divider'/>
 
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -83,7 +91,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Name' />
+                        label='Name'/>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -95,7 +103,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Surname' />
+                        label='Surname'/>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -107,7 +115,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                         required
                         fullWidth
                         onChange={handleChange}
-                        label='Address' />
+                        label='Address'/>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -139,7 +147,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                         fullWidth
                         type='tel'
                         onChange={handleChange}
-                        label='Telephone Number' />
+                        label='Telephone Number'/>
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
@@ -164,9 +172,9 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
 
                 <Grid item xs={12} sm={6}>
                     <Card className={cashPayment ? 'card-selected' : ''}
-                        variant='outlined'>
+                          variant='outlined'>
                         <CardActionArea className='payment-card'
-                            onClick={handleCashPaymentSelect}>
+                                        onClick={handleCashPaymentSelect}>
                             <div
                                 className='payment-card-content'>
                                 <Typography variant='h6' color='textPrimary' className="payment-title">
@@ -185,9 +193,9 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
 
                 <Grid item xs={12} sm={6}>
                     <Card className={cashPayment ? '' : 'card-selected'}
-                        variant='outlined'>
+                          variant='outlined'>
                         <CardActionArea className='payment-card'
-                            onClick={handlePayNowSelect}>
+                                        onClick={handlePayNowSelect}>
                             <div
                                 className='payment-card-content'>
                                 <Typography variant='h6' color='textPrimary' className="payment-title">
@@ -205,13 +213,15 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
             </Grid>
             <div className="summary-button-container">
                 <Button className="place-order" variant='contained'
-                    disabled={timeSlots.length < 1}
-                    onClick={() => completeOrder(orderData)}
-                    color='primary'>
+                        disabled={timeSlots.length < 1}
+                        onClick={() => completeOrder(orderData)}
+                        color='primary'>
                     Concludi l'ordine
                 </Button>
                 {
-                    timeSlots.length < 1 ? <Typography variant="h6" className="no-slots-label">Al momento il negozio è chiuso. Non è possibile effetuare nessun ordine.</Typography> : null     
+                    timeSlots.length < 1 ?
+                        <Typography variant="h6" className="no-slots-label">Al momento il negozio è chiuso. Non è
+                            possibile effetuare nessun ordine.</Typography> : null
                 }
             </div>
         </Container>
@@ -221,15 +231,17 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
 const mapDispatchToProps = dispatch => {
     return {
         completeOrder: (orderData) => dispatch(completeOrder(orderData)),
-        fetchTodayTimetable: () => dispatch(fetchTodayTimetable())
+        fetchTodayTimetable: () => dispatch(fetchTodayTimetable()),
+        clearOrderData: () => dispatch(clearOrderData())
     }
 }
 
 const mapStateToProps = state => {
     return {
         total: state.cart.total,
-        timeSlots: state.cart.timetable
+        timeSlots: state.cart.timetable,
+        orderCompleted: state.cart.orderCompleted
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderSummaryPage)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderSummaryPage))
