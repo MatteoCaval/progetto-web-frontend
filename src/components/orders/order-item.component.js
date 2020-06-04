@@ -1,42 +1,44 @@
-import React, { useState } from 'react'
-import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Grid, Typography, TextField, Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem } from '@material-ui/core'
+import React, { useState, useEffect } from 'react'
+import {
+    ExpansionPanel,
+    ExpansionPanelDetails,
+    ExpansionPanelSummary,
+    Grid,
+    Typography,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    Chip,
+    DialogTitle,
+    Avatar,
+    List,
+    ListItem, 
+    ListItemAvatar, 
+    ListItemText, 
+} from '@material-ui/core'
 
 import "./order-item.style.scss"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import OrderProductItem from "./order-product-item.component"
 import OrderStateChip from "./order-state-chip.component"
 import { connect } from "react-redux";
-import UserRoles from  "./../common/userRoles"
+import UserRoles from "./../../common/UserRoles"
+import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike'
+import OrderState from './order-state'
+import { updateOrder } from './../../redux/orders/orders.actions'
 
-const riders = [
-    {
-        id: 1,
-        name: "Rider 1",
-        email: "rider1@fooddelivery.it"
-    },
-    {
-        id: 2,
-        name: "Rider 2",
-        email: "rider2@fooddelivery.it"
-    },
-    {
-        id: 3,
-        name: "Rider 3",
-        email: "rider3@fooddelivery.it"
-    }
-]
-
-const OrderItem = ({ order, user }) => {
+const OrderItem = ({ order, user, riders, updateOrder }) => {
 
     const order_date = new Date(order.creationDate)
     const delivery_date = new Date(order.date)
     const delivery_time = new Date(order.time)
 
     const [open, setOpen] = useState(false);
-    const [selectedRider, setSelectedRider] = useState('');
 
-    const handleChange = (event) => {
-        setSelectedRider(event.target.value);
+    const handleListItemClick = (rider) => {
+        update(rider)
+        setOpen(false);
     };
 
     const handleClickOpen = (e) => {
@@ -47,6 +49,19 @@ const OrderItem = ({ order, user }) => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleRiderRemove = () => {
+        update(null)
+    };
+
+    const update = (rider) => {
+        const orderState = rider != null ? OrderState.IN_DELIVERY : OrderState.PENDING
+        const riderId = rider != null ? rider.id : null
+
+        console.log("RiderID" + riderId)
+
+        updateOrder(order._id, orderState, riderId)
+    }
 
     return (
         <ExpansionPanel>
@@ -70,7 +85,10 @@ const OrderItem = ({ order, user }) => {
                         </Typography>
                     </div>
                     <div className="right-container">
-                        <OrderStateChip state={order.state} handleOnClick={user.role === UserRoles.ADMIN ? handleClickOpen : null} />
+                        <OrderStateChip state={order.state} handleOnClick={user.role === UserRoles.ADMIN && order.state === OrderState.PENDING ? handleClickOpen : null} />
+                        {
+                            order.state === OrderState.PENDING ? null : <Chip className="rider-chip" size="small" label={`${order.rider.name} ${order.rider.surname}`} onDelete={handleRiderRemove} />
+                        }
                         <Typography color='textPrimary'>
                             Total Price:
                         </Typography>
@@ -95,18 +113,18 @@ const OrderItem = ({ order, user }) => {
             <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleClose}>
                 <DialogTitle>Assign this order</DialogTitle>
                 <DialogContent>
-                    <TextField
-                        value={selectedRider}
-                        select
-                        label="Rider"
-                        fullWidth
-                        onChange={handleChange}>
-                        {
-                            riders.map((rider, index) =>
-                                <MenuItem key={index} value={rider.id}>{rider.name}</MenuItem>
-                            )
-                        }
-                    </TextField>
+                    <List>
+                        {riders && riders.map((rider) => (
+                            <ListItem button onClick={() => handleListItemClick(rider)} key={rider.id}>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        <DirectionsBikeIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText primary={`${rider.name} ${rider.surname}`} />
+                            </ListItem>
+                        ))}
+                    </List>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
@@ -121,8 +139,10 @@ const OrderItem = ({ order, user }) => {
     )
 }
 const mapStateToProps = state => {
+    const currentUser = state.user.currentUser
     return {
-        user: state.user.currentUser,
+        user: currentUser,
+        riders: currentUser.role === UserRoles.ADMIN ? state.adminData.riders : null
     }
 }
-export default connect(mapStateToProps, null)(OrderItem)
+export default connect(mapStateToProps, { updateOrder })(OrderItem)

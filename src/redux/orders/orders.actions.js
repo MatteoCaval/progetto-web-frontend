@@ -38,6 +38,40 @@ const completeOrderPending = () => {
     }
 }
 
+export const updateOrder = (orderId, state, riderId) => {
+    return (dispatch, getState) => {
+        const token = getState().user.currentUser.token
+
+        dispatch(updateOrderPending())
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+        return axios.put(`${Config.API_BASE_URL}/orders/${orderId}`, { state, riderId })
+            .then(() => {
+                dispatch(updateOrderSuccess())
+            })
+            .catch(error => 
+                dispatch(updateOrderFailed(error)))
+    }
+}
+
+const updateOrderSuccess = () => {
+    return {
+        type: OrderActionTypes.UPDATE_ORDER_SUCCESS,
+    }
+}
+
+const updateOrderFailed = (errorMessage) => {
+    return {
+        type: OrderActionTypes.UPDATE_ORDER_FAILED,
+        payload: errorMessage
+    }
+}
+
+const updateOrderPending = () => {
+    return {
+        type: OrderActionTypes.UPDATE_ORDER_PENDING
+    }
+}
+
 export const fetchOrderHistory = (page = 1) => {
     return (dispatch, getState) => {
         dispatch(fetchOrderHistoryPending())

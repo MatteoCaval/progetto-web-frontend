@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 import { startLiveOrderUpdated, stopLiveOrderUpdated } from "../../redux/orders/orders.actions";
 import UserRoles from "../../common/UserRoles";
 import { Container } from "@material-ui/core";
+import { fetchRiders } from "../../redux/admin/admin.actions";
 
-const LiveOrdersPage = ({ startLiveOrderUpdated, orders, stopLiveOrderUpdated }) => {
+const LiveOrdersPage = ({ startLiveOrderUpdated, orders, stopLiveOrderUpdated, fetchRiders, userRole}) => {
 
     useEffect(() => {
         startLiveOrderUpdated()
@@ -14,6 +15,11 @@ const LiveOrdersPage = ({ startLiveOrderUpdated, orders, stopLiveOrderUpdated })
         }
     }, [])
 
+    useEffect(() => {
+        if (userRole === UserRoles.ADMIN){
+            fetchRiders()
+        }
+    }, [])
 
     return (
         <Container maxWidth='md'>
@@ -31,12 +37,14 @@ const mapStateToProps = state => {
     return {
         orders: state.orders.realTimeOrders.filter(order => {
             return userRole === UserRoles.RIDER ? riderFilter.includes(order.state) : adminFilters.includes(order.state)
-        })
+        }),
+        userRole: userRole
     }
 }
 
 
 export default connect(mapStateToProps, {
     startLiveOrderUpdated,
-    stopLiveOrderUpdated
+    stopLiveOrderUpdated,
+    fetchRiders
 })(LiveOrdersPage)

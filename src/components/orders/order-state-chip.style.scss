@@ -6,11 +6,11 @@
 }
 
 .state-in-delivery {
-    background-color: yellow;
+    background-color: yellow !important;
 }
 
 .state-state-delivered {
-    background-color: green;
+    background-color: green !important;
     .MuiChip-label {
         color: white !important;
     }
