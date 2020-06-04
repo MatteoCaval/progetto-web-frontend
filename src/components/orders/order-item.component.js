@@ -32,7 +32,6 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
 
     const order_date = new Date(order.creationDate)
     const delivery_date = new Date(order.date)
-    const delivery_time = new Date(order.time)
 
     const [open, setOpen] = useState(false);
 
@@ -57,9 +56,6 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
     const update = (rider) => {
         const orderState = rider != null ? OrderState.IN_DELIVERY : OrderState.PENDING
         const riderId = rider != null ? rider.id : null
-
-        console.log("RiderID" + riderId)
-
         updateOrder(order._id, orderState, riderId)
     }
 
@@ -81,7 +77,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                             Delivery date
                         </Typography>
                         <Typography variant='h6' color='textPrimary'>
-                            {delivery_date.toLocaleDateString()} - {delivery_time.toLocaleTimeString()}
+                            {delivery_date.toLocaleDateString()} - {order.time}
                         </Typography>
                     </div>
                     <div className="right-container">
