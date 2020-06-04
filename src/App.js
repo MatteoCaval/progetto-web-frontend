@@ -24,7 +24,9 @@ function App({ user, history, clearAlerts,fetchCurrentUser }) {
         history.listen((location, action) => {
             clearAlerts()
         })
-        fetchCurrentUser()
+        if (user) {
+            fetchCurrentUser()
+        }
     }, [])
 
     return (
