@@ -5,7 +5,7 @@ import { userService } from "../../services/user.service";
 export const fetchCart = () => {
     return (dispatch, getState) => {
         dispatch(fetchCartPending())
-        const token = getState().user.currentUser.token
+        const token = getState().user.token
         userService.fetchCart(token)
             .then(result => {
                 dispatch(fetchCartSuccess(result))
@@ -38,7 +38,7 @@ export const fetchCartPending = () => {
 export const addToCart = (productId, quantity) => {
     return (dispatch, getState) => {
         dispatch(addToCartPending())
-        const token = getState().user.currentUser.token
+        const token = getState().user.token
         userService.addToCart(productId, quantity, token)
             .then(result => {
                 dispatch(addToCartSuccess())
@@ -71,7 +71,7 @@ export const addToCartPending = () => {
 export const removeProductFromCart = (productId) => {
     return (dispatch, getState) => {
         dispatch(removeFromCartPending())
-        const token = getState().user.currentUser.token
+        const token = getState().user.token
         userService.removeProductFromCart(productId, token)
             .then(result => {
                 dispatch(removeFromCartSuccess())
@@ -103,7 +103,7 @@ export const removeFromCartPending = () => {
 export const updateCartProductQuantity = (productId, quantity) => {
     return (dispatch, getState) => {
         dispatch(updateCartProductQuantityPending())
-        const token = getState().user.currentUser.token
+        const token = getState().user.token
         userService.updateProductQuantity(productId, quantity, token)
             .then(result => {
                 dispatch(updateCartProductQuantitySuccess())
@@ -135,7 +135,7 @@ export const updateCartProductQuantityPending = () => {
 export const fetchTodayTimetable = () => {
     return (dispatch, getState) => {
         dispatch(fetchTodayTimetablePending())
-        const token = getState().user.currentUser.token
+        const token = getState().user.token
         userService.fetchTodayTimetable(token)
             .then(result  => {
                 dispatch(fetchTodayTimetableSuccess(result))

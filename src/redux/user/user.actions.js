@@ -58,7 +58,7 @@ export const registerUser = (user) => {
 
 export const logout = () => {
     return (dispatch, getState) => {
-        const token = getState().user.currentUser.token
+        const token = getState().user.token
         authService.logout(token)
             .then(result => {
                 dispatch(logoutSuccess())

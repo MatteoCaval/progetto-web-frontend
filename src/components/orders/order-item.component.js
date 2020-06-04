@@ -122,7 +122,7 @@ const OrderItem = ({ order, user }) => {
 }
 const mapStateToProps = state => {
     return {
-        user: state.user.currentUser,
+        user: state.user,
     }
 }
 export default connect(mapStateToProps, null)(OrderItem)
