@@ -16,13 +16,15 @@ import { alertActions } from "./redux/alerts/alert.actions";
 import RidersPage from "./components/rider/riders.component";
 import PaginatedOrderList from "./components/orders/order-history.component";
 import LiveUpdatedOrderList from "./components/orders/live-orders.component";
+import { fetchCurrentUser } from "./redux/user/user.actions";
 
-function App({ user, history, clearAlerts }) {
+function App({ user, history, clearAlerts,fetchCurrentUser }) {
 
     useEffect(() => {
         history.listen((location, action) => {
             clearAlerts()
         })
+        fetchCurrentUser()
     }, [])
 
     return (
@@ -68,7 +70,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        clearAlerts: () => dispatch(alertActions.clear())
+        clearAlerts: () => dispatch(alertActions.clear()),
+        fetchCurrentUser : () => dispatch(fetchCurrentUser())
     }
 }
 

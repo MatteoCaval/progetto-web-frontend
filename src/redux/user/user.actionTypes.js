@@ -1,4 +1,5 @@
 const UserActionTypes = {
-
+    FETCH_CURRENT_USER_SUCCESS: 'FETCH_CURRENT_USER_SUCCESS',
+    FETCH_CURRENT_USER_FAILED: 'FETCH_CURRENT_USER_FAILED'
 }
 export default UserActionTypes

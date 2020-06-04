@@ -1,6 +1,8 @@
 import AuthActionType from "../auth/auth.actionType";
 import { alertActions } from "../alerts/alert.actions";
 import { authService } from "../../services/auth.service";
+import { userService } from "../../services/user.service";
+import UserActionTypes from "./user.actionTypes";
 
 export const loginSuccess = user => {
     return {
@@ -79,6 +81,33 @@ export const logoutFailed = (error) => {
         payload: error
     }
 }
+
+export const fetchCurrentUser = () => {
+    return (dispatch, getState) => {
+        const token = getState().user.token
+        userService.fetchCurrentUser(token)
+            .then(result => {
+                dispatch(fetchCurrentUserSuccess(result.data))
+            })
+            .catch(error => dispatch(fetchCurrentUserFailed(error.message)))
+
+    }
+}
+
+const fetchCurrentUserSuccess = (user) => {
+    return {
+        type: UserActionTypes.FETCH_CURRENT_USER_SUCCESS,
+        payload: user
+    }
+}
+
+const fetchCurrentUserFailed = errorMessage => {
+    return {
+        type: UserActionTypes.FETCH_CURRENT_USER_FAILED,
+        payload: errorMessage
+    }
+}
+
 
 
 
