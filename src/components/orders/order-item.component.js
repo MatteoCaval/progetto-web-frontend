@@ -5,17 +5,7 @@ import {
     ExpansionPanelSummary,
     Grid,
     Typography,
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    Chip,
-    DialogTitle,
-    Avatar,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
+    Chip
 } from '@material-ui/core'
 
 import "./order-item.style.scss"
@@ -24,30 +14,42 @@ import OrderProductItem from "./order-product-item.component"
 import OrderStateChip from "../custom/order-state-chip.component"
 import { connect } from "react-redux";
 import UserRoles from "./../../common/UserRoles"
-import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike'
 import OrderState from '../../common/OrderState'
 import { updateOrder } from './../../redux/orders/orders.actions'
 import HorizontalDivider from '../custom/horizontal-divider.component'
+import SelectRiderDialog from './select-rider-dialog.component'
 
 const OrderItem = ({ order, user, riders, updateOrder }) => {
 
     const order_date = new Date(order.creationDate)
     const delivery_date = new Date(order.date)
 
-    const [open, setOpen] = useState(false);
+    const [adminDialogOpen, setAdminDialogOpen] = useState(false);
 
     const handleListItemClick = (rider) => {
         update(rider)
-        setOpen(false);
+        setAdminDialogOpen(false);
     };
 
     const handleClickOpen = (e) => {
         e.stopPropagation();
-        setOpen(true);
+
+        switch (user.role) {
+            case UserRoles.ADMIN:
+                if (order.state === OrderState.PENDING) {
+                    setAdminDialogOpen(true)
+                }
+                break;
+            case UserRoles.RIDER:
+                update(order.rider)
+                break;
+            default:
+                break;
+        }
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setAdminDialogOpen(false);
     };
 
     const handleRiderRemove = () => {
@@ -55,9 +57,18 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
     };
 
     const update = (rider) => {
-        const orderState = rider != null ? OrderState.IN_DELIVERY : OrderState.PENDING
         const riderId = rider != null ? rider.id : null
-        updateOrder(order._id, orderState, riderId)
+        switch (user.role) {
+            case UserRoles.ADMIN:
+                const orderState = rider != null ? OrderState.IN_DELIVERY : OrderState.PENDING
+                updateOrder(order._id, orderState, riderId)
+                break;
+            case UserRoles.RIDER:
+                updateOrder(order._id, OrderState.DELIVERED, riderId)
+                break;
+            default:
+                break;
+        }
     }
 
     return (
@@ -82,9 +93,9 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                         </Typography>
                     </div>
                     <div className="right-container">
-                        <OrderStateChip state={order.state} handleOnClick={user.role === UserRoles.ADMIN && order.state === OrderState.PENDING ? handleClickOpen : null} />
+                        <OrderStateChip state={order.state} handleOnClick={handleClickOpen} />
                         {
-                            order.state === OrderState.PENDING ? null : <Chip className="rider-chip" size="small" label={`${order.rider.name} ${order.rider.surname}`} onDelete={user.role === UserRoles.ADMIN ? handleRiderRemove : null} />
+                            order.state === OrderState.PENDING ? null : <Chip className="rider-chip" size="small" label={`${order.rider.name} ${order.rider.surname}`} onDelete={user.role === UserRoles.ADMIN && order.state === OrderState.IN_DELIVERY ? handleRiderRemove : null} />
                         }
                         <Typography color='textPrimary'>
                             Total Price:
@@ -129,31 +140,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                     </div>
                 </div>
             </ExpansionPanelDetails>
-            <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleClose}>
-                <DialogTitle>Assign this order</DialogTitle>
-                <DialogContent>
-                    <List>
-                        {riders && riders.map((rider) => (
-                            <ListItem button onClick={() => handleListItemClick(rider)} key={rider.id}>
-                                <ListItemAvatar>
-                                    <Avatar>
-                                        <DirectionsBikeIcon />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText primary={`${rider.name} ${rider.surname}`} />
-                            </ListItem>
-                        ))}
-                    </List>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Cancel
-                    </Button>
-                    <Button onClick={handleClose} color="primary">
-                        Ok
-                    </Button>
-                </DialogActions>
-            </Dialog>
+            <SelectRiderDialog riders={riders} open={adminDialogOpen} handleClose={handleClose} handleListItemClick={handleListItemClick}/> 
         </ExpansionPanel>
     )
 }
