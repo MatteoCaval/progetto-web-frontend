@@ -8,7 +8,7 @@ import io from "socket.io-client";
 export const completeOrder = (orderData) => {
     return (dispatch, getState) => {
         dispatch(completeOrderPending())
-        const token = getState().user.currentUser.token
+        const token = getState().user.token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
         axios.post(`${Config.API_BASE_URL}/orders`, orderData)
             .then(result => {
@@ -75,8 +75,8 @@ const updateOrderPending = () => {
 export const fetchOrderHistory = (page = 1) => {
     return (dispatch, getState) => {
         dispatch(fetchOrderHistoryPending())
-        const token = getState().user.currentUser.token
-        orderService.fetchOrderHistory(token, getState().user.currentUser.role, page)
+        const token = getState().user.token
+        orderService.fetchOrderHistory(token, getState().user.role, page)
             .then(result => dispatch(fetchOrderHistorySuccess(result.data)))
             .catch(error => {
                 dispatch(fetchOrderHistoryFailed(error.message))
@@ -111,7 +111,7 @@ const fetchOrderHistoryPending = () => {
 let socket = undefined
 export const startLiveOrderUpdated = () => {
     return (dispatch, getState) => {
-        const token = getState().user.currentUser.token
+        const token = getState().user.token
         socket = io.connect(Config.API_BASE_URL, { query: { token } })
         socket.on('orders', orders => {
             dispatch(realTimeOrders(orders))

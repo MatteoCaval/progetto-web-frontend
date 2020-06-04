@@ -31,6 +31,10 @@ const fetchTodayTimetable = (userToken) => {
     return axios.get(`${Config.API_BASE_URL}/timetable/today`)
 }
 
+const fetchCurrentUser = (userToken) => {
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + userToken
+    return axios.get(`${Config.API_BASE_URL}/user/current`)
+}
 
 
 export const userService = {
@@ -39,6 +43,7 @@ export const userService = {
     addToCart,
     removeProductFromCart,
     updateProductQuantity,
-    fetchTodayTimetable
+    fetchTodayTimetable,
+    fetchCurrentUser
 }
 
