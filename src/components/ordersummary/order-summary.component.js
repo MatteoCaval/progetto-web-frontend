@@ -32,7 +32,6 @@ const cities = [
 
 const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTimetable, orderCompleted, clearOrderData, history }) => {
     const [cashPayment, setCashPayment] = useState(1);
-
     const [orderData, setOrderData] = useState({
         name: user.name,
         surname: user.surname,
@@ -154,23 +153,27 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                    <TextField
-                        select
-                        id="timeSlot"
-                        name="timeSlot"
-                        disabled={timeSlots.length < 1}
-                        value={orderData.timeSlot}
-                        required
-                        label="Orario di consegna"
-                        fullWidth
-                        onChange={handleChange}
-                        variant="outlined">
-                        {
-                            timeSlots && timeSlots.map((slot, index) =>
-                                <MenuItem key={index} value={slot}>{slot}</MenuItem>
-                            )
-                        }
-                    </TextField>
+                    {
+                        timeSlots ? <TextField
+                            select
+                            id="timeSlot"
+                            name="timeSlot"
+                            disabled={timeSlots.length < 1}
+                            value={orderData.timeSlot}
+                            required
+                            label="Orario di consegna"
+                            fullWidth
+                            onChange={handleChange}
+                            children={[]}
+                            variant="outlined">
+                            {
+                                timeSlots && timeSlots.map((slot, index) =>
+                                    <MenuItem key={index} value={slot}>{slot}</MenuItem>
+                                )
+                            }
+                        </TextField> : null>
+                    }
+
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
