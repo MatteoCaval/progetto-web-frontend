@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Grid, makeStyles, TextField } from "@material-ui/core";
+import { Button, Container, Grid, makeStyles, TextField, Typography, Card } from "@material-ui/core";
 import { connect } from "react-redux";
 import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
 import {
@@ -9,23 +9,8 @@ import {
 } from "../../../redux/catalog/product/product-operations.actions";
 import Progress from "../../common/progress.component";
 import { withRouter } from "react-router-dom";
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column'
-    },
-    form: {
-        marginTop: theme.spacing(3),
-    },
-    button: {
-        marginTop: theme.spacing(2)
-    },
-    image: {
-        width: '100%'
-    }
-}))
+import StringListPicker from "../../custom/string-list-builder.component";
+import './product-form.style.scss'
 
 const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDetail, updateProduct, createProduct, loading, error, completed, resetProductOperationsState }) => {
 
@@ -36,14 +21,12 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
         resetProductOperationsState()
     }
 
-    const classes = useStyles();
-
     const [productData, setProductData] = useState({
         name: '',
         image: '',
         description: '',
         price: '',
-        ingredients: ['qualcosa', 'qualcosa2']
+        ingredients: []
     })
 
     useEffect(() => {
@@ -72,6 +55,11 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
         setProductData({ ...productData, [name]: value })
     }
 
+    const handleIngredientsChanged = (ingredients) => {
+        console.log(ingredients)
+        setProductData({ ...productData, ['ingredients']: ingredients })
+    }
+
     const handleSubmit = event => {
         event.preventDefault()
         if (editMode) {
@@ -89,9 +77,32 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
 
     }
 
+    const addIngredient = (newIngredient) => {
+        const ingredients = productData.ingredients
+        const index = ingredients.indexOf(newIngredient)
+        if (index < 0) {
+            ingredients.push(newIngredient)
+        }
+        setProductData({ ...productData, ['ingredients']: ingredients })
+    }
+
+    const updateIngredient = (oldValue, newValue) => {
+        const ingredients = productData.ingredients
+        const index = ingredients.indexOf(oldValue)
+        ingredients[index] = newValue
+        setProductData({ ...productData, ['ingredients']: ingredients })
+    }
+
+    const deleteIngredient = (ingredient) => {
+        const filtered = productData.ingredients.filter(function (item) {
+            return item !== ingredient
+        })
+        setProductData({ ...productData, ['ingredients']: filtered })
+    }
+
     return (
-        <Container className={classes.root} maxWidth='xs'>
-            <form className={classes.form} onSubmit={handleSubmit}>
+        <Container className="product-form-root" maxWidth='xs'>
+            <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <TextField
@@ -104,13 +115,13 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             fullWidth
                             value={productData.name}
                             onChange={handleChange}
-                            label='Name'/>
+                            label='Name' />
                     </Grid>
                     <Grid item xs={12}>
                         <img
-                            className={classes.image}
+                            className="form-product-image"
                             src={productData.image}
-                            alt='image-preview'/>
+                            alt='image-preview' />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
@@ -123,7 +134,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             fullWidth
                             value={productData.image}
                             onChange={handleChange}
-                            label='Image url'/>
+                            label='Image url' />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
@@ -137,7 +148,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             rows='3'
                             value={productData.description}
                             onChange={handleChange}
-                            label='Description'/>
+                            label='Description' />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
@@ -150,20 +161,26 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             fullWidth
                             value={productData.price}
                             onChange={handleChange}
-                            label='Price'/>
+                            label='Price' />
                     </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                    >Done
-                    </Button>
-
+                    <Grid item xs={12}>
+                        <Card className="form-ingredients-card" variant='outlined'>
+                            <Typography>Ingredients</Typography>
+                            <StringListPicker strings={productData.ingredients} addItem={addIngredient} updateItem={updateIngredient} removeItem={deleteIngredient} />
+                        </Card>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary">
+                            Done
+                        </Button>
+                    </Grid>
                 </Grid>
             </form>
-            <Progress loading={loading}/>
+            <Progress loading={loading} />
         </Container>
     )
 }
