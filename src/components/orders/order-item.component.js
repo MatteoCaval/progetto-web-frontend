@@ -17,7 +17,8 @@ import UserRoles from "./../../common/UserRoles"
 import OrderState from '../../common/OrderState'
 import { updateOrder } from './../../redux/orders/orders.actions'
 import HorizontalDivider from '../custom/horizontal-divider.component'
-import SelectRiderDialog from './select-rider-dialog.component'
+import DeliverOrderDialog  from './dialogs/deliver-order-dialog.component'
+import SelectRiderDialog  from './dialogs/select-rider-dialog.component'
 
 const OrderItem = ({ order, user, riders, updateOrder }) => {
 
@@ -25,13 +26,14 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
     const delivery_date = new Date(order.date)
 
     const [adminDialogOpen, setAdminDialogOpen] = useState(false);
+    const [deliveryDialogOpen, setDeliveryDialogOpen] = useState(false);
 
     const handleListItemClick = (rider) => {
         update(rider)
         setAdminDialogOpen(false);
     };
 
-    const handleClickOpen = (e) => {
+    const handleChipOpen = (e) => {
         e.stopPropagation();
 
         switch (user.role) {
@@ -41,19 +43,31 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                 }
                 break;
             case UserRoles.RIDER:
-                update(order.rider)
+                if (order.state === OrderState.IN_DELIVERY) {
+                    setDeliveryDialogOpen(true)
+                }
                 break;
             default:
                 break;
         }
     };
 
-    const handleClose = () => {
+
+    const handleAdminDialogClose = () => {
         setAdminDialogOpen(false);
     };
 
     const handleRiderRemove = () => {
         update(null)
+    };
+
+    const handleDeliveryDialogClose = () => {
+        setDeliveryDialogOpen(false);
+    };
+
+    const handleDeliveryDialogConfirm = () => {
+        update(order.rider)
+        setDeliveryDialogOpen(false)
     };
 
     const update = (rider) => {
@@ -93,7 +107,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                         </Typography>
                     </div>
                     <div className="right-container">
-                        <OrderStateChip state={order.state} handleOnClick={handleClickOpen} />
+                        <OrderStateChip state={order.state} handleOnClick={handleChipOpen} />
                         {
                             order.state === OrderState.PENDING ? null : <Chip className="rider-chip" size="small" label={`${order.rider.name} ${order.rider.surname}`} onDelete={user.role === UserRoles.ADMIN && order.state === OrderState.IN_DELIVERY ? handleRiderRemove : null} />
                         }
@@ -140,7 +154,9 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                     </div>
                 </div>
             </ExpansionPanelDetails>
-            <SelectRiderDialog riders={riders} open={adminDialogOpen} handleClose={handleClose} handleListItemClick={handleListItemClick}/> 
+            <SelectRiderDialog/>
+            <SelectRiderDialog riders={riders} open={adminDialogOpen} handleClose={handleAdminDialogClose} handleListItemClick={handleListItemClick} />
+            <DeliverOrderDialog open={deliveryDialogOpen} handleDiscard={handleDeliveryDialogClose} handleConfirm={handleDeliveryDialogConfirm} />
         </ExpansionPanel>
     )
 }
