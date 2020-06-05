@@ -30,17 +30,18 @@ const cities = [
     'Borghi'
 ]
 
-const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable, orderCompleted, clearOrderData, history }) => {
+const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTimetable, orderCompleted, clearOrderData, history }) => {
     const [cashPayment, setCashPayment] = useState(1);
 
     const [orderData, setOrderData] = useState({
-        name: '',
-        surname: '',
+        name: user.name,
+        surname: user.surname,
         address: '',
         city: '',
         timeSlot: '',
         telephoneNumber: '',
-        paymentType: ''
+        paymentType: '',
+        total
     })
 
     useEffect(() => {
@@ -78,7 +79,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                     <Typography variant='h6' color='textPrimary'>Total:</Typography>
                     <Typography variant='h5' color='textPrimary'>{total}€</Typography>
                 </div>
-                <HorizontalDivider/>
+                <HorizontalDivider />
             </div>
 
             <Grid container spacing={2}>
@@ -86,6 +87,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                     <TextField
                         id='name'
                         name='name'
+                        value={orderData.name}
                         variant='outlined'
                         autoComplete='off'
                         required
@@ -98,6 +100,7 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
                     <TextField
                         id='surname'
                         name='surname'
+                        value={orderData.surname}
                         variant='outlined'
                         autoComplete='off'
                         required
@@ -120,10 +123,10 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
 
                 <Grid item xs={12} sm={6}>
                     <TextField
+                        select
                         id="city"
                         name="city"
                         value={orderData.city}
-                        select
                         required
                         label="Città"
                         fullWidth
@@ -152,11 +155,11 @@ const OrderSummaryPage = ({ completeOrder, total, timeSlots, fetchTodayTimetable
 
                 <Grid item xs={12} sm={6}>
                     <TextField
+                        select
                         id="timeSlot"
                         name="timeSlot"
                         disabled={timeSlots.length < 1}
                         value={orderData.timeSlot}
-                        select
                         required
                         label="Orario di consegna"
                         fullWidth
@@ -240,7 +243,8 @@ const mapStateToProps = state => {
     return {
         total: state.cart.total,
         timeSlots: state.cart.timetable,
-        orderCompleted: state.cart.orderCompleted
+        orderCompleted: state.cart.orderCompleted,
+        user: state.user
     }
 }
 
