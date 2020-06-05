@@ -154,7 +154,6 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                     </div>
                 </div>
             </ExpansionPanelDetails>
-            <SelectRiderDialog/>
             <SelectRiderDialog riders={riders} open={adminDialogOpen} handleClose={handleAdminDialogClose} handleListItemClick={handleListItemClick} />
             <DeliverOrderDialog open={deliveryDialogOpen} handleDiscard={handleDeliveryDialogClose} handleConfirm={handleDeliveryDialogConfirm} />
         </ExpansionPanel>
