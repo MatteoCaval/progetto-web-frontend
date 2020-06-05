@@ -171,7 +171,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                                     <MenuItem key={index} value={slot}>{slot}</MenuItem>
                                 )
                             }
-                        </TextField> : null>
+                        </TextField> : null
                     }
 
                 </Grid>
