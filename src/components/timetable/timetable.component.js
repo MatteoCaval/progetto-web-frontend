@@ -30,10 +30,48 @@ export const initialDinnerState = {
     }
 }
 
+export const initialTimeTable = [
+    {
+        name: 'Monday',
+        launchOpen: false,
+        dinnerOpen: false
+    },
+    {
+        name: 'Tuesday',
+        launchOpen: false,
+        dinnerOpen: false
+    },
+    {
+        name: 'Wednesday',
+        launchOpen: false,
+        dinnerOpen: false
+    },
+    {
+        name: 'Thursday',
+        launchOpen: false,
+        dinnerOpen: false
+    },
+    {
+        name: 'Friday',
+        launchOpen: false,
+        dinnerOpen: false
+    },
+    {
+        name: 'Saturday',
+        launchOpen: false,
+        dinnerOpen: false
+    },
+    {
+        name: 'Sunday',
+        launchOpen: false,
+        dinnerOpen: false
+    }
+]
+
 const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) => {
 
     const [timetable, setTimetable] = useState(
-        []
+        initialTimeTable
     )
 
     useEffect(() => {
@@ -41,7 +79,9 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) =>
     }, [fetchTimetable])
 
     useEffect(() => {
-        setTimetable(currentTimetable)
+        if (currentTimetable != null && currentTimetable.length > 0){
+            setTimetable(currentTimetable)
+        }
     }, [currentTimetable])
 
     const updateDay = day => {
@@ -84,8 +124,6 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) =>
 }
 
 const mapStateToProps = state => {
-    console.log(state.adminData.timetable)
-
     return {
         currentTimetable: state.adminData.timetable
     }
