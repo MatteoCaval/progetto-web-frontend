@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Grid, TextField, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Container, Button } from "@material-ui/core";
+import { TextField, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Container, Button } from "@material-ui/core";
 import './string-list-builder.style.scss'
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import SaveIcon from '@material-ui/icons/Save';
-import { keys } from "@material-ui/core/styles/createBreakpoints";
 
 const StringListPicker = ({ strings, addItem, updateItem, removeItem }) => {
     const [inputVisible, setInputVisible] = useState(false)
@@ -34,10 +33,12 @@ const StringListPicker = ({ strings, addItem, updateItem, removeItem }) => {
     }
 
     const handleSaveInputPressed = () => {
-        if (oldValue) {
-            updateItem(oldValue, selectedValue)
-        } else {
-            addItem(selectedValue)
+        if (selectedValue != "") {
+            if (oldValue) {
+                updateItem(oldValue, selectedValue)
+            } else {
+                addItem(selectedValue)
+            }
         }
         setInputVisible(false)
     }

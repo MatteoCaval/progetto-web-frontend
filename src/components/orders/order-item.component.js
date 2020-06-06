@@ -108,7 +108,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                         <OrderStateChip state={order.state} handleOnClick={handleChipOpen}/>
                         <AdminConstrained>
                             {
-                                order.state === OrderState.PENDING ? null : <Chip className="rider-chip" size="small"
+                                order.state === OrderState.PENDING || user.role != UserRoles.ADMIN ? null : <Chip className="rider-chip" size="small"
                                                                                   label={`${order.rider.name} ${order.rider.surname}`}
                                                                                   onDelete={user.role === UserRoles.ADMIN && order.state === OrderState.IN_DELIVERY ? handleRiderRemove : null}/>
                             }

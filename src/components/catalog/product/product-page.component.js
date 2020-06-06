@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import "./product-page.style.scss";
 
-import { Button, CardMedia, Container, Fab, Typography } from "@material-ui/core";
+import { Button, CardMedia, Grid, Typography } from "@material-ui/core";
 import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
 import QuantityPicker from "./../../custom/quantity-picker.component"
@@ -22,55 +22,61 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
     }, [fetchProduct])
 
     return (
-        product ? (<Container>
-            <div className='prod-details-center-container'>
-                <CardMedia
-                    className='prod-details-media'
-                    image={product.image}
-                />
-            </div>
-            <div className='prod-details-side-container'>
-                <Typography className='prod-details-title' variant='h3' color='textPrimary'>
-                    {product.name}
-                </Typography>
-                <Typography variant='h3' color='textPrimary'>
-                    {product.price}€
-                </Typography>
-            </div>
-            <div className="prod-details-info-container">
-                <p>{product.description}</p>
-                <div className="prod-details-ingredients-container">
-                    <Typography className='prod-details-ingredients' variant='h3' color='textPrimary'>
-                        Ingredienti:
-                    </Typography>
-                    <ul>
-                        {
-                            product.ingredients.map((ingredient, index) =>
-                                <li key={index}>{ingredient}</li>
-                            )
-                        }
-                    </ul>
-                </div>
-                <ConsumerConstrained>
-                    <div className='prod-details-add-to-cart-container'>
-                        <QuantityPicker
-                            quantity={quantity}
-                            onQuantityIncremented={() => setQuantity(quantity + 1)}
-                            onQuantityDecremented={() => setQuantity(quantity - 1)} />
-                        <Button
-                            className="prod-details-add-to-cart"
-                            variant="contained"
-                            color="primary"
-                            onClick={() => addToCart(productId, quantity)}
-                            startIcon={<AddToCartIcon />}
-                        >Add to cart</Button>
+        product ? (
+            <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                    <div className='prod-details-center-container'>
+                        <CardMedia
+                            className='prod-details-media'
+                            image={product.image}
+                        />
                     </div>
-                </ConsumerConstrained>
-            </div>
-            <AdminConstrained>
-                <FabFixed icon={<EditIcon />} to={`${productId}/edit`} />
-            </AdminConstrained>
-        </Container>) : null
+                </Grid>
+                <Grid item xs={12} sm={6}>
+
+                    <div className='prod-details-side-container'>
+                        <Typography className='prod-details-title' variant='h3' color='textPrimary'>
+                            {product.name}
+                        </Typography>
+                        <Typography variant='h3' color='textPrimary'>
+                            {product.price}€
+                </Typography>
+                    </div>
+                    <div className="prod-details-info-container">
+                        <p>{product.description}</p>
+                        <div className="prod-details-ingredients-container">
+                            <Typography className='prod-details-ingredients' variant='h3' color='textPrimary'>
+                                Ingredienti:
+                    </Typography>
+                            <ul>
+                                {
+                                    product.ingredients.map((ingredient, index) =>
+                                        <li key={index}>{ingredient}</li>
+                                    )
+                                }
+                            </ul>
+                        </div>
+                        <ConsumerConstrained>
+                            <div className='prod-details-add-to-cart-container'>
+                                <QuantityPicker
+                                    quantity={quantity}
+                                    onQuantityIncremented={() => setQuantity(quantity + 1)}
+                                    onQuantityDecremented={() => setQuantity(quantity - 1)} />
+                                <Button
+                                    className="prod-details-add-to-cart"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => addToCart(productId, quantity)}
+                                    startIcon={<AddToCartIcon />}
+                                >Add to cart</Button>
+                            </div>
+                        </ConsumerConstrained>
+                    </div>
+                </Grid>
+                <AdminConstrained>
+                    <FabFixed icon={<EditIcon />} to={`${productId}/edit`} />
+                </AdminConstrained>
+            </Grid>) : null
     )
 }
 
