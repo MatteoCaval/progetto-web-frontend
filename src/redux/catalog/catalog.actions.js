@@ -11,21 +11,21 @@ export const fetchCategories = () => {
     }
 }
 
-export const fetchCategoriesSuccess = (categories) => {
+const fetchCategoriesSuccess = (categories) => {
     return {
         type: CatalogActionType.FETCH_CATEGORIES_SUCCESS,
         payload: categories
     }
 }
 
-export const fetchCategoriesFailed = (error) => {
+const fetchCategoriesFailed = (error) => {
     return {
         type: CatalogActionType.FETCH_CATEGORIES_FAILED,
         payload: error
     }
 }
 
-export const fetchCategoriesPending = () => {
+const fetchCategoriesPending = () => {
     return {
         type: CatalogActionType.FETCH_CATEGORIES_PENDING
     }

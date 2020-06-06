@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.10.2",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0"
   }
