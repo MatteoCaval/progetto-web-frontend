@@ -2,19 +2,10 @@ import React, { useEffect } from "react";
 import { fetchProductsForCategory } from "../../../redux/catalog/catalog.actions";
 import ProductItem from "./product-item.component";
 import { connect } from "react-redux";
-import { Fab, Grid, makeStyles } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
+import { Grid } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { AdminConstrained } from "../../common/constrained-containers.component";
-
-
-const useStyles = makeStyles((theme) => ({
-    fabAdd: {
-        position: 'absolute',
-        bottom: theme.spacing(2),
-        right: theme.spacing(2),
-    }
-}))
+import FabFixed from "../../custom/fab-fixed.component"
 
 const ProductList = ({ fetchCategoryProducts, match, products }) => {
 
@@ -24,7 +15,6 @@ const ProductList = ({ fetchCategoryProducts, match, products }) => {
         fetchCategoryProducts(categoryId)
     }, [fetchCategoryProducts])
 
-    const classes = useStyles()
     return (
         <div>
             <React.Fragment>
@@ -33,20 +23,14 @@ const ProductList = ({ fetchCategoryProducts, match, products }) => {
                         products.map(product => {
                             return (
                                 <Grid key={product.id} item xs={6} sm={4}>
-                                    <ProductItem key={product.id} product={product}/>
+                                    <ProductItem key={product.id} product={product} />
                                 </Grid>
                             )
                         })
                     }
                 </Grid>
                 <AdminConstrained>
-                    <Fab className={classes.fabAdd}
-                         color="primary"
-                         aria-label="add"
-                         component={RouterLink}
-                         to={`${categoryId}/createproduct`}>
-                        <AddIcon/>
-                    </Fab>
+                    <FabFixed icon={<AddIcon />} to={`${categoryId}/createproduct`} />
                 </AdminConstrained>
             </React.Fragment>
         </div>

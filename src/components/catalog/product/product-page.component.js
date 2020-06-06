@@ -9,20 +9,8 @@ import QuantityPicker from "./../../custom/quantity-picker.component"
 import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
 import EditIcon from "@material-ui/icons/Edit"
 import { addToCart } from "../../../redux/cart/cart.actions";
-import { Link as RouterLink } from 'react-router-dom'
 import { AdminConstrained, ConsumerConstrained } from "../../common/constrained-containers.component";
-
-
-// const product =
-// {
-//     category_id: "5ebdbea72f597d1f281fc1c0",
-//     name: "Spaghetti alla Amatriciana",
-//     description: "Piatto tipico italiano, dove il guanciale è il protagonista indiscusso",
-//     price: "20",
-//     image: "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2019/12/spaghetti-al-pomodoro/jcr:content/header-par/image-single.img10.jpg/1576681061599.jpg",
-//     ingredients: ["Pasta", "Pomodoro", "Guanciale", "Cipolla"]
-// }
-
+import FabFixed from "../../custom/fab-fixed.component"
 
 const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
 
@@ -68,24 +56,19 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
                         <QuantityPicker
                             quantity={quantity}
                             onQuantityIncremented={() => setQuantity(quantity + 1)}
-                            onQuantityDecremented={() => setQuantity(quantity - 1)}/>
+                            onQuantityDecremented={() => setQuantity(quantity - 1)} />
                         <Button
                             className="prod-details-add-to-cart"
                             variant="contained"
                             color="primary"
                             onClick={() => addToCart(productId, quantity)}
-                            startIcon={<AddToCartIcon/>}
+                            startIcon={<AddToCartIcon />}
                         >Add to cart</Button>
                     </div>
                 </ConsumerConstrained>
             </div>
             <AdminConstrained>
-                <Fab color="primary"
-                     aria-label="add"
-                     component={RouterLink}
-                     to={`${productId}/edit`}>
-                    <EditIcon/>
-                </Fab>
+                <FabFixed icon={<EditIcon />} to={`${productId}/edit`} />
             </AdminConstrained>
         </Container>) : null
     )

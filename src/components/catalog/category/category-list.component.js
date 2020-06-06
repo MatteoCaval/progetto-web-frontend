@@ -2,22 +2,12 @@ import React, { useEffect } from "react";
 import { fetchCategories } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
 import Category from "./category-item.component";
-import { Grid, Fab, makeStyles } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
-import { Link as RouterLink } from 'react-router-dom';
 import { AdminConstrained } from "../../common/constrained-containers.component";
-
-const useStyles = makeStyles((theme) => ({
-    fabAdd: {
-        position: 'absolute',
-        bottom: theme.spacing(2),
-        right: theme.spacing(2),
-    }
-}))
+import FabFixed from "../../custom/fab-fixed.component"
 
 const CategoryList = ({ categories, fetchCategories }) => {
-
-    const classes = useStyles()
 
     useEffect(() => {
         fetchCategories()
@@ -30,22 +20,15 @@ const CategoryList = ({ categories, fetchCategories }) => {
                     categories.map(category => {
                         return (
                             <Grid key={category.id} item xs={6} sm={4}>
-                                <Category key={category.id} category={category}/>
+                                <Category key={category.id} category={category} />
                             </Grid>
                         )
                     })
                 }
             </Grid>
             <AdminConstrained>
-                <Fab className={classes.fabAdd}
-                     color="primary"
-                     aria-label="add"
-                     component={RouterLink}
-                     to="/createcategory">
-                    <AddIcon/>
-                </Fab>
+                <FabFixed icon={<AddIcon />} to={"/createcategory"} />
             </AdminConstrained>
-
         </React.Fragment>
     )
 }
