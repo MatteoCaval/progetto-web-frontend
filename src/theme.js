@@ -12,11 +12,49 @@ let theme = createMuiTheme({
         danger: 'orange',
     },
     typography: {
-        /*
-        fontFamily: [
-            'Comic Sans MS'
-        ].join(','),
-        */
+        h1:{
+            fontSize: '3px'
+        },
+        h2:{
+            fontSize: '1.6rem',
+            fontWeight: 500
+        },
+        h3:{
+            fontSize: '1.4rem',
+            fontWeight: 500
+        },
+        h4:{
+            fontSize: '1.2rem',
+            fontWeight: 400
+        },
+        h5:{
+            fontSize: '1rem',
+            fontWeight: 500
+        },
+        h6:{
+            fontSize: '3px'
+        },
+        subtitle1:{
+            
+        },
+        subtitle2:{
+            
+        },
+        body1:{
+            
+        },
+        body2:{
+            
+        },
+        button:{
+            
+        },
+        caption:{
+            
+        },
+        overline:{
+            
+        },
     }
 });
 

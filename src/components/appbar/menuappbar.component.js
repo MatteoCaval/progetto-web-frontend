@@ -106,7 +106,7 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
                             <MenuIcon/>
                         </IconButton>
                     </AdminConstrained>
-                    <Typography variant="h6" className={classes.title}
+                    <Typography variant="h2" className={classes.title}
                                 onClick={handleLogoClick}>FoodDelivery</Typography>
                     <div>
                         {currentUser && currentUser.role === 'consumer' && (

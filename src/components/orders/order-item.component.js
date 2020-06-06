@@ -93,16 +93,16 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                 id="panel1a-header">
                 <div className='order-root'>
                     <div className="left-container">
-                        <Typography variant='h5' color='textPrimary'>
+                        <Typography variant='h3' color='textPrimary'>
                             Order {order._id}
                         </Typography>
-                        <Typography variant='h6' color='textPrimary'>
+                        <Typography variant='h4' color='textPrimary'>
                             of {order_date.toLocaleDateString()}
                         </Typography>
-                        <Typography color='textPrimary'>
+                        <Typography variant='h5'color='textPrimary'>
                             Delivery date
                         </Typography>
-                        <Typography variant='h6' color='textPrimary'>
+                        <Typography variant='h4' color='textPrimary'>
                             {delivery_date.toLocaleDateString()} - {order.time}
                         </Typography>
                     </div>
@@ -111,10 +111,10 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                         {
                             order.state === OrderState.PENDING ? null : <Chip className="rider-chip" size="small" label={`${order.rider.name} ${order.rider.surname}`} onDelete={user.role === UserRoles.ADMIN && order.state === OrderState.IN_DELIVERY ? handleRiderRemove : null} />
                         }
-                        <Typography color='textPrimary'>
+                        <Typography variant='h5' color='textPrimary'>
                             Total Price:
                         </Typography>
-                        <Typography variant='h6' color='textPrimary'>
+                        <Typography variant='h4' color='textPrimary'>
                             {order.totalPrice}€
                         </Typography>
                     </div>
@@ -134,21 +134,21 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                 <HorizontalDivider />
                 <div className="delivery-info-container">
                     <div>
-                        <Typography color='textPrimary'>
+                        <Typography variant='h5' color='textPrimary'>
                             Address
                         </Typography>
-                        <Typography variant='h6' color='textPrimary'>
+                        <Typography color='textPrimary'>
                             {order.address}
                         </Typography>
-                        <Typography variant='h6' color='textPrimary'>
+                        <Typography color='textPrimary'>
                             {order.city}
                         </Typography>
                     </div>
                     <div className="telephone-container">
-                        <Typography color='textPrimary'>
+                        <Typography variant='h5' color='textPrimary'>
                             Telephone number
                         </Typography>
-                        <Typography variant='h6' color='textPrimary'>
+                        <Typography color='textPrimary'>
                             {order.telephoneNumber}
                         </Typography>
                     </div>

@@ -50,7 +50,6 @@ const TimeTableItem = ({ day, onDayChanged }) => {
     }
 
     const getDate = (hour, minute) => {
-        console.log('Enter in getDate -> ' + hour + ' - ' + minute)
         let date = new Date();
         date.setHours(hour);
         date.setMinutes(minute);
@@ -58,9 +57,9 @@ const TimeTableItem = ({ day, onDayChanged }) => {
     }
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={4}>
             <Grid className="day-name" item xs={12} sm={12}>
-                <Typography variant='h6' color='textPrimary'>
+                <Typography variant='h3' color='textPrimary'>
                     {day.name}
                 </Typography>
             </Grid>

@@ -29,3 +29,9 @@
 .cart-page-end-list {
     margin-top: 4em;
 }
+
+.total-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

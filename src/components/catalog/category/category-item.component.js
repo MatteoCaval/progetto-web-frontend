@@ -24,7 +24,7 @@ const Category = ({ category, history, match }) => {
                 </div>
                 <CardContent
                     className='content'>
-                    <Typography className='category-title' variant='h6' color='textPrimary'>
+                    <Typography className='category-title' variant='h3' color='textPrimary'>
                         {category.name}
                     </Typography>
                 </CardContent>

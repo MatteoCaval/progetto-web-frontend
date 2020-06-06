@@ -75,8 +75,8 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
         <Container maxWidth='md'>
             <div className="order-summary-header">
                 <div className="summary-total-container">
-                    <Typography variant='h6' color='textPrimary'>Total:</Typography>
-                    <Typography variant='h5' color='textPrimary'>{total}€</Typography>
+                    <Typography variant='h2' color='textPrimary'>Total:</Typography>
+                    <Typography variant='h3' color='textPrimary'>{total}€</Typography>
                 </div>
                 <HorizontalDivider />
             </div>
@@ -183,7 +183,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                             onClick={handleCashPaymentSelect}>
                             <div
                                 className='payment-card-content'>
-                                <Typography variant='h6' color='textPrimary' className="payment-title">
+                                <Typography variant='h3' color='textPrimary' className="payment-title">
                                     Paga in contanti
                                 </Typography>
                                 <Typography color='textPrimary'>
@@ -204,7 +204,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                             onClick={handlePayNowSelect}>
                             <div
                                 className='payment-card-content'>
-                                <Typography variant='h6' color='textPrimary' className="payment-title">
+                                <Typography variant='h3' color='textPrimary' className="payment-title">
                                     Paga ora
                                 </Typography>
                                 <Typography color='textPrimary'>
@@ -226,7 +226,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                 </Button>
                 {
                     timeSlots.length < 1 ?
-                        <Typography variant="h6" className="no-slots-label">Al momento il negozio è chiuso. Non è
+                        <Typography variant="h3" className="no-slots-label">Al momento il negozio è chiuso. Non è
                             possibile effetuare nessun ordine.</Typography> : null
                 }
             </div>

@@ -44,8 +44,8 @@ const CartPage = ({ fetchCart, cart, history }) => {
                     </Button>
 
                         <div className="total-info-container">
-                            <Typography variant='h6' color='textPrimary'>Total:</Typography>
-                            <Typography variant='h5' color='textPrimary'>{total}€</Typography>
+                            <Typography variant='h2' color='textPrimary'>Total:</Typography>
+                            <Typography variant='h3' color='textPrimary'>{total}€</Typography>
                         </div>
                     </div>
                 </div>
@@ -58,13 +58,12 @@ const CartPage = ({ fetchCart, cart, history }) => {
             <Container maxWidth='md'>
                 <div className="empty-shop-button-container">
 
-                    <Typography variant='h5' color='textPrimary'>
+                    <Typography variant='h2' color='textPrimary'>
                         Il carrello è vuoto
                     </Typography>
                     <Typography color='textPrimary'>
                         Al momento all'interno del tuo carrello non sono presenti prodotti.
                     </Typography>
-
                     <Button
                         variant="contained"
                         color="primary"

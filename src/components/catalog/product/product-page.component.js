@@ -42,17 +42,17 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
                 />
             </div>
             <div className='prod-details-side-container'>
-                <Typography className='prod-details-title' variant='h5' color='textPrimary'>
+                <Typography className='prod-details-title' variant='h3' color='textPrimary'>
                     {product.name}
                 </Typography>
-                <Typography variant='h6' color='textPrimary'>
+                <Typography variant='h3' color='textPrimary'>
                     {product.price}€
                 </Typography>
             </div>
             <div className="prod-details-info-container">
                 <p>{product.description}</p>
                 <div className="prod-details-ingredients-container">
-                    <Typography className='prod-details-ingredients' variant='h6' color='textPrimary'>
+                    <Typography className='prod-details-ingredients' variant='h3' color='textPrimary'>
                         Ingredienti:
                     </Typography>
                     <ul>
