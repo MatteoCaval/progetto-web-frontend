@@ -17,8 +17,9 @@ import UserRoles from "./../../common/UserRoles"
 import OrderState from '../../common/OrderState'
 import { updateOrder } from './../../redux/orders/orders.actions'
 import HorizontalDivider from '../custom/horizontal-divider.component'
-import DeliverOrderDialog  from './dialogs/deliver-order-dialog.component'
-import SelectRiderDialog  from './dialogs/select-rider-dialog.component'
+import DeliverOrderDialog from './dialogs/deliver-order-dialog.component'
+import SelectRiderDialog from './dialogs/select-rider-dialog.component'
+import { AdminConstrained } from "../common/constrained-containers.component";
 
 const OrderItem = ({ order, user, riders, updateOrder }) => {
 
@@ -88,18 +89,15 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
     return (
         <ExpansionPanel>
             <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
+                expandIcon={<ExpandMoreIcon/>}
                 aria-controls="panel1a-content"
                 id="panel1a-header">
                 <div className='order-root'>
                     <div className="left-container">
                         <Typography variant='h3' color='textPrimary'>
-                            Order {order._id}
+                            {order.userFullName}
                         </Typography>
-                        <Typography variant='h4' color='textPrimary'>
-                            of {order_date.toLocaleDateString()}
-                        </Typography>
-                        <Typography variant='h5'color='textPrimary'>
+                        <Typography variant='h5' color='textPrimary'>
                             Delivery date
                         </Typography>
                         <Typography variant='h4' color='textPrimary'>
@@ -107,10 +105,14 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                         </Typography>
                     </div>
                     <div className="right-container">
-                        <OrderStateChip state={order.state} handleOnClick={handleChipOpen} />
-                        {
-                            order.state === OrderState.PENDING ? null : <Chip className="rider-chip" size="small" label={`${order.rider.name} ${order.rider.surname}`} onDelete={user.role === UserRoles.ADMIN && order.state === OrderState.IN_DELIVERY ? handleRiderRemove : null} />
-                        }
+                        <OrderStateChip state={order.state} handleOnClick={handleChipOpen}/>
+                        <AdminConstrained>
+                            {
+                                order.state === OrderState.PENDING ? null : <Chip className="rider-chip" size="small"
+                                                                                  label={`${order.rider.name} ${order.rider.surname}`}
+                                                                                  onDelete={user.role === UserRoles.ADMIN && order.state === OrderState.IN_DELIVERY ? handleRiderRemove : null}/>
+                            }
+                        </AdminConstrained>
                         <Typography variant='h5' color='textPrimary'>
                             Total Price:
                         </Typography>
@@ -126,12 +128,12 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                         order.products.map(product => {
                             return (
                                 <Grid key={product._id} item xs={12} sm={12}>
-                                    <OrderProductItem key={product._id} product={product} />
+                                    <OrderProductItem key={product._id} product={product}/>
                                 </Grid>
                             )
                         })}
                 </div>
-                <HorizontalDivider />
+                <HorizontalDivider/>
                 <div className="delivery-info-container">
                     <div>
                         <Typography variant='h5' color='textPrimary'>
@@ -154,8 +156,10 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                     </div>
                 </div>
             </ExpansionPanelDetails>
-            <SelectRiderDialog riders={riders} open={adminDialogOpen} handleClose={handleAdminDialogClose} handleListItemClick={handleListItemClick} />
-            <DeliverOrderDialog open={deliveryDialogOpen} handleDiscard={handleDeliveryDialogClose} handleConfirm={handleDeliveryDialogConfirm} />
+            <SelectRiderDialog riders={riders} open={adminDialogOpen} handleClose={handleAdminDialogClose}
+                               handleListItemClick={handleListItemClick}/>
+            <DeliverOrderDialog open={deliveryDialogOpen} handleDiscard={handleDeliveryDialogClose}
+                                handleConfirm={handleDeliveryDialogConfirm}/>
         </ExpansionPanel>
     )
 }
