@@ -1,6 +1,6 @@
 import CatalogActionType from "./catalog.types";
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
     categories: [],
     products: [],
     productDetails: null,
