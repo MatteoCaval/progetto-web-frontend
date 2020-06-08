@@ -1,6 +1,5 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import expect from 'expect'
 import axios from 'axios'
 import OrderActionTypes from "./orders.types";
 import { completeOrder, fetchOrderHistory, updateOrder } from "./orders.actions";
