@@ -5,7 +5,7 @@ export const fetchCategories = () => {
     return (dispatch, getState) => {
         if (getState().catalog.categories.length) return
         dispatch(fetchCategoriesPending())
-        catalogService.fetchCategories()
+        return catalogService.fetchCategories()
             .then(result => dispatch(fetchCategoriesSuccess(result.data)))
             .catch(error => dispatch(fetchCategoriesFailed(error.message)))
     }
@@ -35,28 +35,28 @@ export const fetchProductsForCategory = (categoryId, cached = true) => {
     return (dispatch, getState) => {
         if (cached && getState().catalog.products.filter(product => product.categoryId === categoryId).length) return
         dispatch(fetchProductForCategoryPending())
-        catalogService.fetchProductsForCategory(categoryId)
+        return catalogService.fetchProductsForCategory(categoryId)
             .then(result => dispatch(fetchProductForCategorySuccess(result.data)))
             .catch(error => dispatch(fetchProductForCategoryFailed(error.message)))
     }
 }
 
 
-export const fetchProductForCategorySuccess = (products) => {
+const fetchProductForCategorySuccess = (products) => {
     return {
         type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_SUCCESS,
         payload: products
     }
 }
 
-export const fetchProductForCategoryFailed = (error) => {
+const fetchProductForCategoryFailed = (error) => {
     return {
         type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_FAILED,
         payload: error
     }
 }
 
-export const fetchProductForCategoryPending = () => {
+const fetchProductForCategoryPending = () => {
     return {
         type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_PENDING
     }
@@ -65,27 +65,27 @@ export const fetchProductForCategoryPending = () => {
 export const fetchProductDetail = (productId) => {
     return dispatch => {
         dispatch(fetchProductPending())
-        catalogService.fetchProductDetail(productId)
+        return catalogService.fetchProductDetail(productId)
             .then(result => dispatch(fetchProductSuccess(result.data)))
             .catch(error => dispatch(fetchProductFailed(error.message)))
     }
 }
 
-export const fetchProductSuccess = (product) => {
+const fetchProductSuccess = (product) => {
     return {
         type: CatalogActionType.FETCH_PRODUCT_SUCCESS,
         payload: product
     }
 }
 
-export const fetchProductFailed = error => {
+const fetchProductFailed = error => {
     return {
         type: CatalogActionType.FETCH_PRODUCT_FAILED,
         payload: error
     }
 }
 
-export const fetchProductPending = () => {
+const fetchProductPending = () => {
     return {
         type: CatalogActionType.FETCH_PRODUCT_PENDING
     }
