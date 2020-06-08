@@ -10,7 +10,7 @@ export const completeOrder = (orderData) => {
         dispatch(completeOrderPending())
         const token = getState().user.token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-        axios.post(`${Config.API_BASE_URL}/orders`, orderData)
+        return axios.post(`${Config.API_BASE_URL}/orders`, orderData)
             .then(result => {
                 dispatch(completeOrderSuccess())
             })
@@ -44,14 +44,13 @@ const completeOrderPending = () => {
 export const updateOrder = (orderId, state, riderId) => {
     return (dispatch, getState) => {
         const token = getState().user.token
-
         dispatch(updateOrderPending())
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
         return axios.put(`${Config.API_BASE_URL}/orders/${orderId}`, { state, riderId })
             .then(() => {
                 dispatch(updateOrderSuccess())
             })
-            .catch(error => 
+            .catch(error =>
                 dispatch(updateOrderFailed(error)))
     }
 }
@@ -79,7 +78,7 @@ export const fetchOrderHistory = (page = 1) => {
     return (dispatch, getState) => {
         dispatch(fetchOrderHistoryPending())
         const token = getState().user.token
-        orderService.fetchOrderHistory(token, getState().user.role, page)
+        return orderService.fetchOrderHistory(token, getState().user.role, page)
             .then(result => dispatch(fetchOrderHistorySuccess(result.data)))
             .catch(error => {
                 dispatch(fetchOrderHistoryFailed(error.message))

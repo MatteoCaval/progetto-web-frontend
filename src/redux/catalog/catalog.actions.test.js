@@ -9,7 +9,7 @@ const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
 jest.mock('axios');
 
-describe('async actions', () => {
+describe('async catalog actions', () => {
 
     it('fetchingCategories on success creates PENDING and SUCCESS actions', () => {
         const expectedActions = [
