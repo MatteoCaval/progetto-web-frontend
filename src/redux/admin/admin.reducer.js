@@ -67,7 +67,7 @@ const adminReducer = (state = INITIAL_STATE, action = {}) => {
         case AdminActionType.FETCH_TIMETABLE_SUCCESS: {
             return {
                 ...state,
-                timetable: action.payload.data
+                timetable: action.payload
             }
         }
 

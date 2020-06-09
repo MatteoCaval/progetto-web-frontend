@@ -147,7 +147,7 @@ export const fetchTimetable = () => {
         const token = getState().user.token
         return adminService.fetchTimetable(token)
             .then((result) => {
-                dispatch(fetchTimetableSuccess(result))
+                dispatch(fetchTimetableSuccess(result.data))
             })
             .catch(error => dispatch(fetchTimetableFailed(error.message)))
 
