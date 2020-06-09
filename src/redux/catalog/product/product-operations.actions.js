@@ -6,7 +6,7 @@ import { fetchProductsForCategory } from "../catalog.actions";
 export const createProduct = (product) => {
     return dispatch => {
         dispatch(createProductPending())
-        axios.post(`${Config.API_BASE_URL}/catalog/products`, product)
+        return axios.post(`${Config.API_BASE_URL}/catalog/products`, product)
             .then(result => {
                 dispatch(createProductSuccess())
                 dispatch(fetchProductsForCategory(product.category_id, false))
@@ -15,20 +15,20 @@ export const createProduct = (product) => {
     }
 }
 
-export const createProductSuccess = () => {
+const createProductSuccess = () => {
     return {
         type: ProductOperationType.CREATE_PRODUCT_SUCCESS
     }
 }
 
-export const createProductFailed = error => {
+const createProductFailed = error => {
     return {
         type: ProductOperationType.CREATE_PRODUCT_FAILED,
         payload: error
     }
 }
 
-export const createProductPending = () => {
+const createProductPending = () => {
     return {
         type: ProductOperationType.CREATE_PRODUCT_PENDING
     }
@@ -37,7 +37,7 @@ export const createProductPending = () => {
 export const updateProduct = (updatedProduct) => {
     return dispatch => {
         dispatch(updateProductPending())
-        axios.put(`${Config.API_BASE_URL}/catalog/products/${updatedProduct.productId}`, updatedProduct)
+        return axios.put(`${Config.API_BASE_URL}/catalog/products/${updatedProduct.productId}`, updatedProduct)
             .then(result => {
                 dispatch(updateProductSuccess())
                 dispatch(fetchProductsForCategory(updatedProduct.category_id, false))
@@ -46,20 +46,20 @@ export const updateProduct = (updatedProduct) => {
     }
 }
 
-export const updateProductSuccess = () => {
+const updateProductSuccess = () => {
     return {
         type: ProductOperationType.UPDATE_PRODUCT_SUCCESS
     }
 }
 
-export const updateProductFailed = error => {
+const updateProductFailed = error => {
     return {
         type: ProductOperationType.UPDATE_PRODUCT_FAILED,
         payload: error
     }
 }
 
-export const updateProductPending = () => {
+const updateProductPending = () => {
     return {
         type: ProductOperationType.UPDATE_PRODUCT_PENDING
     }
