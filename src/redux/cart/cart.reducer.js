@@ -1,7 +1,7 @@
 import CartActionTypes from "./cart.actionTypes";
 import OrderActionTypes from "../orders/orders.types";
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
     products: null,
     loading: false,
     total: 0,
