@@ -15,7 +15,7 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
         case CartActionTypes.FETCH_CART_SUCCESS:
             return {
                 ...state,
-                products: action.payload.data.cartProducts,
+                products: action.payload.cartProducts,
                 total: action.payload.data.total,
                 loading: false,
                 error: ''
@@ -23,7 +23,7 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
         case CartActionTypes.FETCH_TODAY_TIMETABLE_SUCCESS:
             return {
                 ...state,
-                timetable: action.payload.data,
+                timetable: action.payload,
                 loading: false,
                 error: ''
             }

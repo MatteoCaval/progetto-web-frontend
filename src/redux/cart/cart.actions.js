@@ -6,30 +6,30 @@ export const fetchCart = () => {
     return (dispatch, getState) => {
         dispatch(fetchCartPending())
         const token = getState().user.token
-        userService.fetchCart(token)
+        return userService.fetchCart(token)
             .then(result => {
-                dispatch(fetchCartSuccess(result))
+                dispatch(fetchCartSuccess(result.data))
             })
             .catch(error => dispatch(fetchCartFailed(error.message)))
 
     }
 }
 
-export const fetchCartSuccess = (cart) => {
+const fetchCartSuccess = (cart) => {
     return {
         type: CartActionTypes.FETCH_CART_SUCCESS,
         payload: cart
     }
 }
 
-export const fetchCartFailed = (error) => {
+const fetchCartFailed = (error) => {
     return {
         type: CartActionTypes.FETCH_CART_FAILED,
         payload: error
     }
 }
 
-export const fetchCartPending = () => {
+const fetchCartPending = () => {
     return {
         type: CartActionTypes.FETCH_CART_START
     }
@@ -39,7 +39,7 @@ export const addToCart = (productId, quantity) => {
     return (dispatch, getState) => {
         dispatch(addToCartPending())
         const token = getState().user.token
-        userService.addToCart(productId, quantity, token)
+        return userService.addToCart(productId, quantity, token)
             .then(result => {
                 dispatch(addToCartSuccess())
                 dispatch(alertActions.success('Product added to cart'))
@@ -49,19 +49,19 @@ export const addToCart = (productId, quantity) => {
     }
 }
 
-export const addToCartSuccess = () => {
+const addToCartSuccess = () => {
     return {
         type: CartActionTypes.ADD_ITEM_SUCCESS
     }
 }
-export const addToCartFailed = (error) => {
+const addToCartFailed = (error) => {
     return {
         type: CartActionTypes.ADD_ITEM_FAILED,
         payload: error
     }
 }
 
-export const addToCartPending = () => {
+const addToCartPending = () => {
     return {
         type: CartActionTypes.ADD_ITEM_PENDING
     }
@@ -72,7 +72,7 @@ export const removeProductFromCart = (productId) => {
     return (dispatch, getState) => {
         dispatch(removeFromCartPending())
         const token = getState().user.token
-        userService.removeProductFromCart(productId, token)
+        return userService.removeProductFromCart(productId, token)
             .then(result => {
                 dispatch(removeFromCartSuccess())
                 dispatch(fetchCart())
@@ -82,19 +82,19 @@ export const removeProductFromCart = (productId) => {
     }
 }
 
-export const removeFromCartSuccess = () => {
+const removeFromCartSuccess = () => {
     return {
         type: CartActionTypes.REMOVE_ITEM_SUCCESS
     }
 }
-export const removeFromCartFailed = (error) => {
+const removeFromCartFailed = (error) => {
     return {
         type: CartActionTypes.REMOVE_ITEM_FAILED,
         payload: error
     }
 }
 
-export const removeFromCartPending = () => {
+const removeFromCartPending = () => {
     return {
         type: CartActionTypes.REMOVE_ITEM_PENDING
     }
@@ -104,7 +104,7 @@ export const updateCartProductQuantity = (productId, quantity) => {
     return (dispatch, getState) => {
         dispatch(updateCartProductQuantityPending())
         const token = getState().user.token
-        userService.updateProductQuantity(productId, quantity, token)
+        return userService.updateProductQuantity(productId, quantity, token)
             .then(result => {
                 dispatch(updateCartProductQuantitySuccess())
                 dispatch(fetchCart())
@@ -114,19 +114,19 @@ export const updateCartProductQuantity = (productId, quantity) => {
     }
 }
 
-export const updateCartProductQuantitySuccess = () => {
+const updateCartProductQuantitySuccess = () => {
     return {
         type: CartActionTypes.UPDATE_ITEM_QUANTITY_SUCCESS
     }
 }
-export const updateCartProductQuantityFailed = (error) => {
+const updateCartProductQuantityFailed = (error) => {
     return {
         type: CartActionTypes.UPDATE_ITEM_QUANTITY_FAILED,
         payload: error
     }
 }
 
-export const updateCartProductQuantityPending = () => {
+const updateCartProductQuantityPending = () => {
     return {
         type: CartActionTypes.UPDATE_ITEM_QUANTITY_PENDING
     }
@@ -136,30 +136,31 @@ export const fetchTodayTimetable = () => {
     return (dispatch, getState) => {
         dispatch(fetchTodayTimetablePending())
         const token = getState().user.token
-        userService.fetchTodayTimetable(token)
+        // TODO potrebbe anche non essere autenticata
+        return userService.fetchTodayTimetable(token)
             .then(result => {
-                dispatch(fetchTodayTimetableSuccess(result))
+                dispatch(fetchTodayTimetableSuccess(result.data))
             })
             .catch(error => dispatch(fetchTodayTimetableFailed(error.message)))
     }
 }
 
 
-export const fetchTodayTimetableSuccess = (timetable) => {
+const fetchTodayTimetableSuccess = (timetable) => {
     return {
         type: CartActionTypes.FETCH_TODAY_TIMETABLE_SUCCESS,
         payload: timetable
     }
 }
 
-export const fetchTodayTimetableFailed = (error) => {
+const fetchTodayTimetableFailed = (error) => {
     return {
         type: CartActionTypes.FETCH_TODAY_TIMETABLE_FAILED,
         payload: error
     }
 }
 
-export const fetchTodayTimetablePending = () => {
+const fetchTodayTimetablePending = () => {
     return {
         type: CartActionTypes.FETCH_TODAY_TIMETABLE_PENDING
     }
