@@ -6,7 +6,7 @@ export const fetchRiders = () => {
     return (dispatch, getState) => {
         dispatch(fetchRidersPending())
         const token = getState().user.token
-        adminService.fetchRiders(token)
+        return adminService.fetchRiders(token)
             .then(response => {
                 dispatch(fetchRidersSuccess(response.data))
             })
@@ -17,21 +17,21 @@ export const fetchRiders = () => {
     }
 }
 
-export const fetchRidersSuccess = (riders) => {
+const fetchRidersSuccess = (riders) => {
     return {
         type: AdminActionType.FETCH_RIDERS_SUCCESS,
         payload: riders
     }
 }
 
-export const fetchRidersFailed = (errorMessage) => {
+const fetchRidersFailed = (errorMessage) => {
     return {
         type: AdminActionType.FETCH_RIDERS_FAILED,
         payload: errorMessage
     }
 }
 
-export const fetchRidersPending = () => {
+const fetchRidersPending = () => {
     return {
         type: AdminActionType.FETCH_RIDERS_PENDING
     }
@@ -41,7 +41,7 @@ export const deleteRider = (riderId) => {
     return (dispatch, getState) => {
         dispatch(deleteRiderPending())
         const token = getState().user.token
-        adminService.deleteRider(riderId, token)
+        return adminService.deleteRider(riderId, token)
             .then(result => {
                 dispatch(deleteRiderSuccess(riderId))
                 dispatch(alertActions.success('Rider removed'))
@@ -54,20 +54,20 @@ export const deleteRider = (riderId) => {
     }
 }
 
-export const deleteRiderPending = () => {
+const deleteRiderPending = () => {
     return {
         type: AdminActionType.DELETE_RIDER_PENDING
     }
 }
 
-export const deleteRiderFailed = (errorMessage) => {
+const deleteRiderFailed = (errorMessage) => {
     return {
         type: AdminActionType.DELETE_RIDER_FAILED,
         payload: errorMessage
     }
 }
 
-export const deleteRiderSuccess = (id) => {
+const deleteRiderSuccess = (id) => {
     return {
         type: AdminActionType.DELETE_RIDER_SUCCESS,
         payload: id
@@ -78,7 +78,7 @@ export const createRider = (rider) => {
     return (dispatch, getState) => {
         dispatch(createRiderPending())
         const token = getState().user.token
-        adminService.createRider(rider, token)
+        return adminService.createRider(rider, token)
             .then(result => {
                 dispatch(createRiderSuccess())
                 dispatch(alertActions.success('Rider created'))
@@ -91,18 +91,18 @@ export const createRider = (rider) => {
     }
 }
 
-export const createRiderSuccess = () => {
+const createRiderSuccess = () => {
     return {
         type: AdminActionType.CREATE_RIDER_SUCCESS
     }
 }
 
-export const createRiderPending = () => {
+const createRiderPending = () => {
     return {
         type: AdminActionType.CREATE_RIDER_PENDING
     }
 }
-export const createRiderFailed = (errorMessage) => {
+const createRiderFailed = (errorMessage) => {
     return {
         type: AdminActionType.CREATE_RIDER_FAILED,
         payload: errorMessage
@@ -113,7 +113,7 @@ export const updateTimetable = (timetable) => {
     return (dispatch, getState) => {
         dispatch(updateTimetablePending())
         const token = getState().user.token
-        adminService.updateTimetable(timetable, token)
+        return adminService.updateTimetable(timetable, token)
             .then(() => {
                 dispatch(updateTimetableSuccess())
                 dispatch(alertActions.success('Timetable updated'))
@@ -123,19 +123,19 @@ export const updateTimetable = (timetable) => {
     }
 }
 
-export const updateTimetableSuccess = () => {
+const updateTimetableSuccess = () => {
     return {
         type: AdminActionType.UPDATE_TIMETABLE_SUCCESS
     }
 }
-export const updateTimetableFailed = (error) => {
+const updateTimetableFailed = (error) => {
     return {
         type: AdminActionType.UPDATE_TIMETABLE_FAILED,
         payload: error
     }
 }
 
-export const updateTimetablePending = () => {
+const updateTimetablePending = () => {
     return {
         type: AdminActionType.UPDATE_TIMETABLE_PENDING
     }
@@ -145,7 +145,7 @@ export const fetchTimetable = () => {
     return (dispatch, getState) => {
         dispatch(fetchTimetablePending())
         const token = getState().user.token
-        adminService.fetchTimetable(token)
+        return adminService.fetchTimetable(token)
             .then((result) => {
                 dispatch(fetchTimetableSuccess(result))
             })
@@ -154,21 +154,21 @@ export const fetchTimetable = () => {
     }
 }
 
-export const fetchTimetableSuccess = (timetable) => {
+const fetchTimetableSuccess = (timetable) => {
     return {
         type: AdminActionType.FETCH_TIMETABLE_SUCCESS,
         payload: timetable
     }
 }
 
-export const fetchTimetableFailed = (error) => {
+const fetchTimetableFailed = (error) => {
     return {
         type: AdminActionType.FETCH_TIMETABLE_FAILED,
         payload: error
     }
 }
 
-export const fetchTimetablePending = () => {
+const fetchTimetablePending = () => {
     return {
         type: AdminActionType.FETCH_TIMETABLE_PENDING
     }
