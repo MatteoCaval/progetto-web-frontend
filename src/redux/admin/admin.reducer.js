@@ -1,6 +1,6 @@
 import AdminActionType from "./admin.types";
 
-const INITIAL_STATE = {}
+export const INITIAL_STATE = {}
 
 const adminReducer = (state = INITIAL_STATE, action = {}) => {
     switch (action.type) {
@@ -48,22 +48,6 @@ const adminReducer = (state = INITIAL_STATE, action = {}) => {
             }
         }
 
-        case AdminActionType.FETCH_TIMETABLE_PENDING: {
-            return {
-                ...state,
-                riderCreation: {
-                    pending: true
-                }
-            }
-        }
-        case AdminActionType.FETCH_TIMETABLE_FAILED: {
-            return {
-                ...state,
-                riderCreation: {
-                    error: action.payload
-                }
-            }
-        }
         case AdminActionType.FETCH_TIMETABLE_SUCCESS: {
             return {
                 ...state,
