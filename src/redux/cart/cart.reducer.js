@@ -16,7 +16,7 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
             return {
                 ...state,
                 products: action.payload.cartProducts,
-                total: action.payload.data.total,
+                total: action.payload.total,
                 loading: false,
                 error: ''
             }
