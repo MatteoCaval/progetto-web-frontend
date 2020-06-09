@@ -5,7 +5,7 @@ import ProductOperationType from "./product-operations.type";
  *
  */
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
     loading: false,
     error: '',
     completed: false
