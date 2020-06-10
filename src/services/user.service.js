@@ -1,39 +1,33 @@
 import axios from "axios";
 import Config from "../config";
+import getAuthHeader from "./getAuthHeader";
 
 const fetchOrders = (userToken) => {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + userToken
-    return axios.get(`${Config.API_BASE_URL}/user/orders`)
+    return axios.get(`${Config.API_BASE_URL}/user/orders`, getAuthHeader(userToken))
 }
 
 const fetchCart = (userToken) => {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + userToken
-    return axios.get(`${Config.API_BASE_URL}/user/cart`)
+    return axios.get(`${Config.API_BASE_URL}/user/cart`, getAuthHeader(userToken))
 }
 
 const addToCart = (productId, quantity, userToken) => {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + userToken
-    return axios.post(`${Config.API_BASE_URL}/user/cart`, { productId, quantity })
+    return axios.post(`${Config.API_BASE_URL}/user/cart`, { productId, quantity }, getAuthHeader(userToken))
 }
 
 const removeProductFromCart = (productId, userToken) => {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + userToken
-    return axios.delete(`${Config.API_BASE_URL}/user/cart/${productId}`)
+    return axios.delete(`${Config.API_BASE_URL}/user/cart/${productId}`, getAuthHeader(userToken))
 }
 
 const updateProductQuantity = (productId, quantity, userToken) => {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + userToken
-    return axios.put(`${Config.API_BASE_URL}/user/cart/${productId}`, { quantity: quantity })
+    return axios.put(`${Config.API_BASE_URL}/user/cart/${productId}`, { quantity: quantity }, getAuthHeader(userToken))
 }
 
 const fetchTodayTimetable = (userToken) => {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + userToken
-    return axios.get(`${Config.API_BASE_URL}/timetable/today`)
+    return axios.get(`${Config.API_BASE_URL}/timetable/today`, getAuthHeader(userToken))
 }
 
 const fetchCurrentUser = (userToken) => {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + userToken
-    return axios.get(`${Config.API_BASE_URL}/user/current`)
+    return axios.get(`${Config.API_BASE_URL}/user/current`, getAuthHeader(userToken))
 }
 
 

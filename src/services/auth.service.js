@@ -1,5 +1,6 @@
 import axios from "axios";
 import Config from "../config";
+import getAuthHeader from "./getAuthHeader";
 
 
 const registerUser = (user) => {
@@ -11,8 +12,8 @@ const loginUser = (email, password) => {
 }
 
 const logout = (token) => {
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-    return axios.post(`${Config.API_BASE_URL}/auth/logout`)
+    console.log(token)
+    return axios.post(`${Config.API_BASE_URL}/auth/logout`, null, getAuthHeader(token))
 }
 
 

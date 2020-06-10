@@ -4,13 +4,13 @@ import Config from "../../config";
 import { orderService } from "../../services/orders.service";
 import { alertActions } from "../alerts/alert.actions";
 import io from "socket.io-client";
+import getAuthHeader from "../../services/getAuthHeader";
 
 export const completeOrder = (orderData) => {
     return (dispatch, getState) => {
         dispatch(completeOrderPending())
         const token = getState().user.token
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-        return axios.post(`${Config.API_BASE_URL}/orders`, orderData)
+        return axios.post(`${Config.API_BASE_URL}/orders`, orderData, getAuthHeader(token))
             .then(result => {
                 dispatch(completeOrderSuccess())
             })
@@ -45,8 +45,7 @@ export const updateOrder = (orderId, state, riderId) => {
     return (dispatch, getState) => {
         const token = getState().user.token
         dispatch(updateOrderPending())
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-        return axios.put(`${Config.API_BASE_URL}/orders/${orderId}`, { state, riderId })
+        return axios.put(`${Config.API_BASE_URL}/orders/${orderId}`, { state, riderId }, getAuthHeader(token))
             .then(() => {
                 dispatch(updateOrderSuccess())
             })
