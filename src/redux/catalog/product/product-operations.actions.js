@@ -2,11 +2,13 @@ import axios from "axios";
 import Config from "../../../config";
 import ProductOperationType from "./product-operations.type";
 import { fetchProductsForCategory } from "../catalog.actions";
+import getAuthHeader from "../../../services/getAuthHeader";
 
 export const createProduct = (product) => {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(createProductPending())
-        return axios.post(`${Config.API_BASE_URL}/catalog/products`, product)
+        const token = getState().user.token
+        return axios.post(`${Config.API_BASE_URL}/catalog/products`, product, getAuthHeader(token))
             .then(result => {
                 dispatch(createProductSuccess())
                 dispatch(fetchProductsForCategory(product.category_id, false))
@@ -35,9 +37,10 @@ const createProductPending = () => {
 }
 
 export const updateProduct = (updatedProduct) => {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(updateProductPending())
-        return axios.put(`${Config.API_BASE_URL}/catalog/products/${updatedProduct.productId}`, updatedProduct)
+        const token = getState().user.token
+        return axios.put(`${Config.API_BASE_URL}/catalog/products/${updatedProduct.productId}`, updatedProduct, getAuthHeader(token))
             .then(result => {
                 dispatch(updateProductSuccess())
                 dispatch(fetchProductsForCategory(updatedProduct.category_id, false))

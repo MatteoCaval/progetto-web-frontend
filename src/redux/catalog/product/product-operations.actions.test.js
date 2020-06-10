@@ -31,7 +31,7 @@ describe('product operation actions', () => {
         axios.post.mockImplementation(() => Promise.resolve())
         axios.get.mockImplementation(() => Promise.resolve({ data: productsAfterCreation }))
 
-        const store = mockStore({})
+        const store = mockStore({ user: { token: 'token' } })
         return store.dispatch(createProduct(product)).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })
@@ -54,7 +54,7 @@ describe('product operation actions', () => {
         axios.put.mockImplementation(() => Promise.resolve())
         axios.get.mockImplementation(() => Promise.resolve({ data: productAfterUpdate }))
 
-        const store = mockStore({})
+        const store = mockStore({ user: { token: 'token' } })
         return store.dispatch(updateProduct(product)).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })
