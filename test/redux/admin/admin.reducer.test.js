@@ -1,5 +1,5 @@
-import adminReducer, { INITIAL_STATE as adminInitialState } from "./admin.reducer";
-import AdminActionType from "./admin.types";
+import adminReducer, { INITIAL_STATE as adminInitialState } from "../../../src/redux/admin/admin.reducer";
+import AdminActionType from "../../../src/redux/admin/admin.types";
 
 describe('admin reducer', () => {
 

@@ -1,5 +1,5 @@
-import { alertActions } from "./alert.actions";
-import AlertTypes from "./alert.types";
+import { alertActions } from "../../../src/redux/alerts/alert.actions";
+import AlertTypes from "../../../src/redux/alerts/alert.types";
 
 
 describe('alert actions', () => {

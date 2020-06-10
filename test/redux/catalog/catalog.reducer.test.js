@@ -1,5 +1,5 @@
-import catalogReducer, { INITIAL_STATE as catalogInitialState } from "./catalog.reducer";
-import CatalogActionType from "./catalog.types";
+import catalogReducer, { INITIAL_STATE as catalogInitialState } from "../../../src/redux/catalog/catalog.reducer";
+import CatalogActionType from "../../../src/redux/catalog/catalog.types";
 
 describe('catalogReducer', () => {
 

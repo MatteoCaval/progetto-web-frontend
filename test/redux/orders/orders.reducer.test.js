@@ -1,5 +1,5 @@
-import ordersReducer, { INITIAL_STATE as orderInitialState } from "./orders.reducer";
-import OrderActionTypes from "./orders.types";
+import ordersReducer, { INITIAL_STATE as orderInitialState } from "../../../src/redux/orders/orders.reducer";
+import OrderActionTypes from "../../../src/redux/orders/orders.types";
 
 
 describe('order reducer', () => {

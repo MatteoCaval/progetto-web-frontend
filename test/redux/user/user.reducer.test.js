@@ -1,6 +1,6 @@
-import userReducer from "./user.reducer";
-import AuthActionType from "../auth/auth.actionType";
-import UserActionTypes from "./user.actionTypes";
+import userReducer from "../../../src/redux/user/user.reducer";
+import AuthActionType from "../../../src/redux/auth/auth.actionType";
+import UserActionTypes from "../../../src/redux/user/user.actionTypes";
 
 describe('user reducer', () => {
     it('should save user data on LOGIN_SUCCESS', () => {

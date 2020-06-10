@@ -1,9 +1,9 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios'
-import { createRider, deleteRider, fetchRiders, fetchTimetable, updateTimetable } from "./admin.actions";
-import AdminActionType from "./admin.types";
-import AlertTypes from "../alerts/alert.types";
+import { createRider, deleteRider, fetchRiders, fetchTimetable, updateTimetable } from "../../../src/redux/admin/admin.actions";
+import AdminActionType from "../../../src/redux/admin/admin.types";
+import AlertTypes from "../../../src/redux/alerts/alert.types";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)

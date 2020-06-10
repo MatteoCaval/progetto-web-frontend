@@ -1,9 +1,9 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios'
-import AuthActionType from "../auth/auth.actionType";
-import { fetchCurrentUser, loginUser, logout, registerUser } from "./user.actions";
-import UserActionTypes from "./user.actionTypes";
+import AuthActionType from "../../../src/redux/auth/auth.actionType";
+import { fetchCurrentUser, loginUser, logout, registerUser } from "../../../src/redux/user/user.actions";
+import UserActionTypes from "../../../src/redux/user/user.actionTypes";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)

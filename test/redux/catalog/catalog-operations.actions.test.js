@@ -1,9 +1,9 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios'
-import { createProduct, resetProductOperationsState, updateProduct } from "./catalog-operations.actions";
-import ProductOperationType from "./catalog-operations.type";
-import CatalogActionType from "./catalog.types";
+import { createProduct, resetProductOperationsState, updateProduct } from "../../../src/redux/catalog/catalog-operations.actions";
+import ProductOperationType from "../../../src/redux/catalog/catalog-operations.type";
+import CatalogActionType from "../../../src/redux/catalog/catalog.types";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)

@@ -1,15 +1,15 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios'
-import CartActionTypes from "./cart.actionTypes";
+import CartActionTypes from "../../../src/redux/cart/cart.actionTypes";
 import {
     addToCart,
     fetchCart,
     fetchTodayTimetable,
     removeProductFromCart,
     updateCartProductQuantity
-} from "./cart.actions";
-import AlertTypes from "../alerts/alert.types";
+} from "../../../src/redux/cart/cart.actions";
+import AlertTypes from "../../../src/redux/alerts/alert.types";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)

@@ -1,9 +1,9 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import expect from 'expect'
-import CatalogActionType from "./catalog.types";
+import CatalogActionType from "../../../src/redux/catalog/catalog.types";
 import axios from 'axios'
-import { fetchCategories, fetchProductDetail, fetchProductsForCategory } from "./catalog.actions";
+import { fetchCategories, fetchProductDetail, fetchProductsForCategory } from "../../../src/redux/catalog/catalog.actions";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
