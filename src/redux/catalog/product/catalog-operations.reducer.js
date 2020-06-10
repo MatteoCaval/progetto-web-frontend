@@ -1,4 +1,4 @@
-import ProductOperationType from "./product-operations.type";
+import ProductOperationType from "./catalog-operations.type";
 
 /**
  * State for editing actions: ex. product creation or update
@@ -11,7 +11,7 @@ export const INITIAL_STATE = {
     completed: false
 }
 
-const productOperationsReducer = (state = INITIAL_STATE, action = {}) => {
+const catalogOperationsReducer = (state = INITIAL_STATE, action = {}) => {
     switch (action.type) {
         case ProductOperationType.CREATE_PRODUCT_SUCCESS:
         case ProductOperationType.UPDATE_PRODUCT_SUCCESS:
@@ -45,4 +45,4 @@ const productOperationsReducer = (state = INITIAL_STATE, action = {}) => {
     }
 }
 
-export default productOperationsReducer
+export default catalogOperationsReducer

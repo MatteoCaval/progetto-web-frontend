@@ -1,10 +1,10 @@
-import productOperationsReducer, { INITIAL_STATE as operationInitialState } from "./product-operations.reducer";
-import ProductOperationType from "./product-operations.type";
+import catalogOperationsReducer, { INITIAL_STATE as operationInitialState } from "./catalog-operations.reducer";
+import ProductOperationType from "./catalog-operations.type";
 
 describe('product operations reducer', () => {
 
     it('should set completed on CREATE_PRODUCT_SUCCESS', () => {
-        expect(productOperationsReducer(operationInitialState, {
+        expect(catalogOperationsReducer(operationInitialState, {
             type: ProductOperationType.CREATE_PRODUCT_SUCCESS
         })).toMatchObject({
             loading: false,
@@ -14,7 +14,7 @@ describe('product operations reducer', () => {
     })
 
     it('should set completed on UPDATE_PRODUCT_SUCCESS', () => {
-        expect(productOperationsReducer(operationInitialState, {
+        expect(catalogOperationsReducer(operationInitialState, {
             type: ProductOperationType.UPDATE_PRODUCT_SUCCESS
         })).toMatchObject({
             loading: false,
@@ -25,7 +25,7 @@ describe('product operations reducer', () => {
 
     it('should set error on CREATE_PRODUCT_FAILED', () => {
         const errorMessage = 'error'
-        expect(productOperationsReducer(operationInitialState, {
+        expect(catalogOperationsReducer(operationInitialState, {
             type: ProductOperationType.CREATE_PRODUCT_FAILED,
             payload: errorMessage
         })).toMatchObject({
@@ -37,7 +37,7 @@ describe('product operations reducer', () => {
 
     it('should set error on UPDATE_PRODUCT_FAILED', () => {
         const errorMessage = 'error'
-        expect(productOperationsReducer(operationInitialState, {
+        expect(catalogOperationsReducer(operationInitialState, {
             type: ProductOperationType.UPDATE_PRODUCT_FAILED,
             payload: errorMessage
         })).toMatchObject({
@@ -48,7 +48,7 @@ describe('product operations reducer', () => {
     })
 
     it('should set loading on CREATE_PRODUCT_PENDING', () => {
-        expect(productOperationsReducer(operationInitialState, {
+        expect(catalogOperationsReducer(operationInitialState, {
             type: ProductOperationType.CREATE_PRODUCT_PENDING
         })).toMatchObject({
             loading: true,
@@ -58,7 +58,7 @@ describe('product operations reducer', () => {
     })
 
     it('should set loading on UPDATE_PRODUCT_PENDING', () => {
-        expect(productOperationsReducer(operationInitialState, {
+        expect(catalogOperationsReducer(operationInitialState, {
             type: ProductOperationType.UPDATE_PRODUCT_PENDING
         })).toMatchObject({
             loading: true,
@@ -73,7 +73,7 @@ describe('product operations reducer', () => {
             loading: true,
             completed: true
         }
-        expect(productOperationsReducer(prevState, {
+        expect(catalogOperationsReducer(prevState, {
             type: ProductOperationType.RESET_STATE
         })).toMatchObject({
             ...operationInitialState

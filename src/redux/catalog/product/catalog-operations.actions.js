@@ -1,6 +1,6 @@
 import axios from "axios";
 import Config from "../../../config";
-import ProductOperationType from "./product-operations.type";
+import ProductOperationType from "./catalog-operations.type";
 import { fetchProductsForCategory } from "../catalog.actions";
 import getAuthHeader from "../../../services/getAuthHeader";
 

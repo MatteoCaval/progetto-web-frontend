@@ -6,7 +6,7 @@ import {
     createProduct,
     resetProductOperationsState,
     updateProduct
-} from "../../../redux/catalog/product/product-operations.actions";
+} from "../../../redux/catalog/product/catalog-operations.actions";
 import Progress from "../../common/progress.component";
 import { withRouter } from "react-router-dom";
 import StringListPicker from "../../custom/string-list-builder.component";
@@ -115,13 +115,13 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             fullWidth
                             value={productData.name}
                             onChange={handleChange}
-                            label='Name' />
+                            label='Name'/>
                     </Grid>
                     <Grid item xs={12}>
                         <img
                             className="form-product-image"
                             src={productData.image}
-                            alt='image-preview' />
+                            alt='image-preview'/>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
@@ -134,7 +134,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             fullWidth
                             value={productData.image}
                             onChange={handleChange}
-                            label='Image url' />
+                            label='Image url'/>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
@@ -148,7 +148,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             rows='3'
                             value={productData.description}
                             onChange={handleChange}
-                            label='Description' />
+                            label='Description'/>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
@@ -161,12 +161,13 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             fullWidth
                             value={productData.price}
                             onChange={handleChange}
-                            label='Price' />
+                            label='Price'/>
                     </Grid>
                     <Grid item xs={12}>
                         <Card className="form-ingredients-card" variant='outlined'>
                             <Typography>Ingredients</Typography>
-                            <StringListPicker strings={productData.ingredients} addItem={addIngredient} updateItem={updateIngredient} removeItem={deleteIngredient} />
+                            <StringListPicker strings={productData.ingredients} addItem={addIngredient}
+                                              updateItem={updateIngredient} removeItem={deleteIngredient}/>
                         </Card>
                     </Grid>
                     <Grid item xs={12}>
@@ -180,14 +181,14 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                     </Grid>
                 </Grid>
             </form>
-            <Progress loading={loading} />
+            <Progress loading={loading}/>
         </Container>
     )
 }
 
 const mapStateToProps = (state, ownProps) => {
     const { productId } = ownProps.match
-    const { loading, error, completed } = state.productOperations
+    const { loading, error, completed } = state.catalogOperations
     return {
         startingProduct: state.catalog.productDetails,
         loading,
