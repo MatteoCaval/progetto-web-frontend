@@ -6,7 +6,7 @@ import {
     createProduct,
     resetProductOperationsState,
     updateProduct
-} from "../../../redux/catalog/product/catalog-operations.actions";
+} from "../../../redux/catalog/catalog-operations.actions";
 import Progress from "../../common/progress.component";
 import { withRouter } from "react-router-dom";
 import StringListPicker from "../../custom/string-list-builder.component";

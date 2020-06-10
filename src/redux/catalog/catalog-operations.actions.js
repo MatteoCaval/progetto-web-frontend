@@ -1,8 +1,8 @@
 import axios from "axios";
-import Config from "../../../config";
+import Config from "../../config";
 import ProductOperationType from "./catalog-operations.type";
-import { fetchProductsForCategory } from "../catalog.actions";
-import getAuthHeader from "../../../services/getAuthHeader";
+import { fetchProductsForCategory } from "./catalog.actions";
+import getAuthHeader from "../../services/getAuthHeader";
 
 export const createProduct = (product) => {
     return (dispatch, getState) => {
