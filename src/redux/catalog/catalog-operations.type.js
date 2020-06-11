@@ -1,4 +1,4 @@
-const ProductOperationType = {
+const CatalogOperationType = {
     CREATE_PRODUCT_SUCCESS: 'CREATE_PRODUCT_SUCCESS',
     CREATE_PRODUCT_FAILED: 'CREATE_PRODUCT_FAILED',
     CREATE_PRODUCT_PENDING: 'CREATE_PRODUCT_PENDING',
@@ -9,4 +9,4 @@ const ProductOperationType = {
 
 }
 
-export default ProductOperationType
+export default CatalogOperationType

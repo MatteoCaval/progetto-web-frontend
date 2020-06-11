@@ -2,7 +2,7 @@ import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios'
 import { createProduct, resetProductOperationsState, updateProduct } from "../../../src/redux/catalog/catalog-operations.actions";
-import ProductOperationType from "../../../src/redux/catalog/catalog-operations.type";
+import CatalogOperationType from "../../../src/redux/catalog/catalog-operations.type";
 import CatalogActionType from "../../../src/redux/catalog/catalog.types";
 
 const middlewares = [thunk]
@@ -23,8 +23,8 @@ describe('product operation actions', () => {
         ]
 
         const expectedActions = [
-            { type: ProductOperationType.CREATE_PRODUCT_PENDING },
-            { type: ProductOperationType.CREATE_PRODUCT_SUCCESS },
+            { type: CatalogOperationType.CREATE_PRODUCT_PENDING },
+            { type: CatalogOperationType.CREATE_PRODUCT_SUCCESS },
             { type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_PENDING },
             { type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_SUCCESS, payload: productsAfterCreation },
         ]
@@ -46,8 +46,8 @@ describe('product operation actions', () => {
             product
         ]
         const expectedActions = [
-            { type: ProductOperationType.UPDATE_PRODUCT_PENDING },
-            { type: ProductOperationType.UPDATE_PRODUCT_SUCCESS },
+            { type: CatalogOperationType.UPDATE_PRODUCT_PENDING },
+            { type: CatalogOperationType.UPDATE_PRODUCT_SUCCESS },
             { type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_PENDING },
             { type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_SUCCESS, payload: productAfterUpdate },
         ]
@@ -62,7 +62,7 @@ describe('product operation actions', () => {
 
     it('should return reset action on resetProductOperationsState success', () => {
         expect(resetProductOperationsState()).toEqual({
-            type: ProductOperationType.RESET_STATE
+            type: CatalogOperationType.RESET_STATE
         })
     })
 

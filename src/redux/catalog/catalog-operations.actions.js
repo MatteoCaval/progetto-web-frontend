@@ -1,6 +1,6 @@
 import axios from "axios";
 import Config from "../../config";
-import ProductOperationType from "./catalog-operations.type";
+import CatalogOperationType from "./catalog-operations.type";
 import { fetchProductsForCategory } from "./catalog.actions";
 import getAuthHeader from "../../services/getAuthHeader";
 
@@ -19,20 +19,20 @@ export const createProduct = (product) => {
 
 const createProductSuccess = () => {
     return {
-        type: ProductOperationType.CREATE_PRODUCT_SUCCESS
+        type: CatalogOperationType.CREATE_PRODUCT_SUCCESS
     }
 }
 
 const createProductFailed = error => {
     return {
-        type: ProductOperationType.CREATE_PRODUCT_FAILED,
+        type: CatalogOperationType.CREATE_PRODUCT_FAILED,
         payload: error
     }
 }
 
 const createProductPending = () => {
     return {
-        type: ProductOperationType.CREATE_PRODUCT_PENDING
+        type: CatalogOperationType.CREATE_PRODUCT_PENDING
     }
 }
 
@@ -51,25 +51,25 @@ export const updateProduct = (updatedProduct) => {
 
 const updateProductSuccess = () => {
     return {
-        type: ProductOperationType.UPDATE_PRODUCT_SUCCESS
+        type: CatalogOperationType.UPDATE_PRODUCT_SUCCESS
     }
 }
 
 const updateProductFailed = error => {
     return {
-        type: ProductOperationType.UPDATE_PRODUCT_FAILED,
+        type: CatalogOperationType.UPDATE_PRODUCT_FAILED,
         payload: error
     }
 }
 
 const updateProductPending = () => {
     return {
-        type: ProductOperationType.UPDATE_PRODUCT_PENDING
+        type: CatalogOperationType.UPDATE_PRODUCT_PENDING
     }
 }
 
 export const resetProductOperationsState = () => {
     return {
-        type: ProductOperationType.RESET_STATE
+        type: CatalogOperationType.RESET_STATE
     }
 }
