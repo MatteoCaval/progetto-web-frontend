@@ -9,16 +9,22 @@ import QuantityPicker from "./../../custom/quantity-picker.component"
 import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
 import { addToCart } from "../../../redux/cart/cart.actions";
 import { AdminConstrained, ConsumerConstrained } from "../../common/constrained-containers.component";
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, withRouter } from 'react-router-dom'
+import { deleteProduct, resetCatalogOperationsState } from "../../../redux/catalog/catalog-operations.actions";
 
-const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
+const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, deleteProduct, resetCatalogOperationsState, productDeletionCompleted }) => {
+
+    if (productDeletionCompleted) {
+        history.push(`/${product.categoryId}`)
+        resetCatalogOperationsState()
+    }
 
     const productId = match.params.productId
     const [quantity, setQuantity] = useState(1)
 
     useEffect(() => {
-        fetchProduct(productId)
-    }, [fetchProduct])
+        fetchProductDetail(productId)
+    }, [fetchProductDetail])
 
     return (
         product ? (
@@ -75,6 +81,7 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
                             <Button
                                 variant="contained"
                                 color="primary"
+                                onClick={() => deleteProduct(product.id)}
                             >Remove</Button>
                             <Button
                                 variant="contained"
@@ -91,15 +98,16 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
 
 const mapStateToProps = state => {
     return {
-        product: state.catalog.productDetails
+        product: state.catalog.productDetails,
+        productDeletionCompleted: state.catalogOperations.completed
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchProduct: productId => dispatch(fetchProductDetail(productId)),
-        addToCart: (productId, quantity) => dispatch(addToCart(productId, quantity))
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductPage)
+export default withRouter(connect(mapStateToProps, {
+    fetchProductDetail,
+    addToCart,
+    deleteProduct,
+    resetCatalogOperationsState
+
+})(ProductPage))
