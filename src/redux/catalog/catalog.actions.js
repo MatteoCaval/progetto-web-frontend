@@ -3,7 +3,7 @@ import { catalogService } from "../../services/catalog.service";
 
 export const fetchCategories = () => {
     return (dispatch, getState) => {
-        if (getState().catalog.categories.length) return
+        // if (getState().catalog.categories.length) return
         dispatch(fetchCategoriesPending())
         return catalogService.fetchCategories()
             .then(result => dispatch(fetchCategoriesSuccess(result.data)))

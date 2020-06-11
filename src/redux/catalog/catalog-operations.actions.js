@@ -1,5 +1,5 @@
 import CatalogOperationType from "./catalog-operations.type";
-import { fetchProductsForCategory } from "./catalog.actions";
+import { fetchCategories, fetchProductsForCategory } from "./catalog.actions";
 import { catalogService } from "../../services/catalog.service";
 
 export const createProduct = (product) => {
@@ -66,9 +66,42 @@ const updateProductPending = () => {
     }
 }
 
+export const createCategory = (category) => {
+    return (dispatch, getState) => {
+        dispatch(createCategoryPending())
+        const token = getState().user.token
+        return catalogService.createCategory(category, token)
+            .then(result => {
+                dispatch(createCategorySuccess())
+                dispatch(fetchCategories())
+            })
+            .catch(error => dispatch(createCategoryFailed(error.message)))
+    }
+}
 
-export const resetProductOperationsState = () => {
+const createCategorySuccess = () => {
+    return {
+        type: CatalogOperationType.CREATE_CATEGORY_SUCCESS
+    }
+}
+
+const createCategoryFailed = error => {
+    return {
+        type: CatalogOperationType.CREATE_CATEGORY_FAILED,
+        payload: error
+    }
+}
+
+const createCategoryPending = () => {
+    return {
+        type: CatalogOperationType.CREATE_CATEGORY_PENDING
+    }
+}
+
+
+export const resetCatalogOperationsState = () => {
     return {
         type: CatalogOperationType.RESET_STATE
     }
 }
+

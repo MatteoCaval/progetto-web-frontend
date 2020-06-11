@@ -1,7 +1,12 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios'
-import { createProduct, resetProductOperationsState, updateProduct } from "../../../src/redux/catalog/catalog-operations.actions";
+import {
+    createCategory,
+    createProduct,
+    resetCatalogOperationsState,
+    updateProduct
+} from "../../../src/redux/catalog/catalog-operations.actions";
 import CatalogOperationType from "../../../src/redux/catalog/catalog-operations.type";
 import CatalogActionType from "../../../src/redux/catalog/catalog.types";
 
@@ -61,8 +66,34 @@ describe('product operation actions', () => {
     })
 
     it('should return reset action on resetProductOperationsState success', () => {
-        expect(resetProductOperationsState()).toEqual({
+        expect(resetCatalogOperationsState()).toEqual({
             type: CatalogOperationType.RESET_STATE
+        })
+    })
+
+
+    it('should create pending and success actions and fetching categories on createCategory success', () => {
+
+        const category = {
+            name: 'nome',
+        }
+
+        const categoriesAfterCreation = [
+            category
+        ]
+
+        const expectedActions = [
+            { type: CatalogOperationType.CREATE_CATEGORY_PENDING },
+            { type: CatalogOperationType.CREATE_CATEGORY_SUCCESS },
+            { type: CatalogActionType.FETCH_CATEGORIES_PENDING },
+            { type: CatalogActionType.FETCH_CATEGORIES_SUCCESS, payload: categoriesAfterCreation },
+        ]
+        axios.post.mockImplementation(() => Promise.resolve())
+        axios.get.mockImplementation(() => Promise.resolve({ data: categoriesAfterCreation }))
+
+        const store = mockStore({ user: { token: 'token' } })
+        return store.dispatch(createCategory(category)).then(() => {
+            expect(store.getActions()).toEqual(expectedActions)
         })
     })
 

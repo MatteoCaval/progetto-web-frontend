@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Grid, makeStyles, TextField, Typography, Card } from "@material-ui/core";
+import { Button, Card, Container, Grid, TextField, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
 import {
     createProduct,
-    resetProductOperationsState,
+    resetCatalogOperationsState,
     updateProduct
 } from "../../../redux/catalog/catalog-operations.actions";
 import Progress from "../../common/progress.component";
@@ -12,13 +12,13 @@ import { withRouter } from "react-router-dom";
 import StringListPicker from "../../custom/string-list-builder.component";
 import './product-form.style.scss'
 
-const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDetail, updateProduct, createProduct, loading, error, completed, resetProductOperationsState }) => {
+const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDetail, updateProduct, createProduct, loading, error, completed, resetCatalogOperationsState }) => {
 
     const { categoryId, productId } = match.params
 
     if (completed) {
         history.push(`/${categoryId}`)
-        resetProductOperationsState()
+        resetCatalogOperationsState()
     }
 
     const [productData, setProductData] = useState({
@@ -202,5 +202,5 @@ export default withRouter(connect(mapStateToProps, {
     fetchProductDetail,
     updateProduct,
     createProduct,
-    resetProductOperationsState
+    resetCatalogOperationsState
 })(ProductForm))

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Container, Grid, TextField, makeStyles, Button } from "@material-ui/core";
-import axios from 'axios'
-import Config from "../../../config";
+import { Button, Container, Grid, makeStyles, TextField } from "@material-ui/core";
+import { connect } from "react-redux";
+import { createCategory, resetCatalogOperationsState } from "../../../redux/catalog/catalog-operations.actions";
+import { withRouter } from "react-router-dom";
+import Progress from "../../common/progress.component";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,9 +22,14 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const CategoryForm = ({ match }) => {
+const CategoryForm = ({ history, loading, error, completed, createCategory }) => {
 
     const classes = useStyles();
+
+    if (completed) {
+        history.push(`/`)
+        resetCatalogOperationsState()
+    }
 
     const [categoryData, setCategoryData] = useState({
         name: '',
@@ -36,11 +43,10 @@ const CategoryForm = ({ match }) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        axios.post(`${Config.API_BASE_URL}/catalog/categories`, {
+        createCategory({
             name: categoryData.name,
             image: categoryData.imageUrl
-        }).then(result => console.log('success'))
-            .catch(error => console.log('error'))
+        })
     }
 
     return (
@@ -88,9 +94,22 @@ const CategoryForm = ({ match }) => {
 
                 </Grid>
             </form>
+            <Progress loading={loading}/>
         </Container>
     )
 
 }
 
-export default CategoryForm
+const mapStateToProps = state => {
+    const { loading, error, completed } = state.catalogOperations
+    return {
+        loading,
+        error,
+        completed
+    }
+}
+
+export default withRouter(connect(
+    mapStateToProps,
+    { createCategory, resetCatalogOperationsState }
+)(CategoryForm))
