@@ -1,5 +1,6 @@
 import catalogReducer, { INITIAL_STATE as catalogInitialState } from "../../../src/redux/catalog/catalog.reducer";
 import CatalogActionType from "../../../src/redux/catalog/catalog.types";
+import CatalogOperationType from "../../../src/redux/catalog/catalog-operations.type";
 
 describe('catalogReducer', () => {
 
@@ -122,6 +123,38 @@ describe('catalogReducer', () => {
             products: [],
             error: errorMessage,
             loading: false
+        })
+    })
+
+    it('should delete category from state after REMOVE_CATEGORY_SUCCESS', () => {
+        const categoryToRemove = {
+            id: '1'
+        }
+        const prevState = {
+            ...catalogInitialState,
+            categories: [categoryToRemove]
+        }
+        expect(catalogReducer(prevState, {
+            type: CatalogOperationType.REMOVE_CATEGORY_SUCCESS,
+            payload: categoryToRemove.id
+        })).toMatchObject({
+            categories: []
+        })
+    })
+
+    it('should delete product from state after REMOVE_PRODUCT_SUCCESS', () => {
+        const productToRemove = {
+            id: '1'
+        }
+        const prevState = {
+            ...catalogInitialState,
+            products: [productToRemove]
+        }
+        expect(catalogReducer(prevState, {
+            type: CatalogOperationType.REMOVE_PRODUCT_SUCCESS,
+            payload: productToRemove.id
+        })).toMatchObject({
+            products: []
         })
     })
 

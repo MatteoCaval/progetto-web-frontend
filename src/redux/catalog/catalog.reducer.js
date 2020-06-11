@@ -1,4 +1,5 @@
 import CatalogActionType from "./catalog.types";
+import CatalogOperationType from "./catalog-operations.type";
 
 export const INITIAL_STATE = {
     categories: [],
@@ -69,6 +70,20 @@ const catalogReducer = (state = INITIAL_STATE, action = {}) => {
                 loading: false,
                 error: action.payload
             }
+        case CatalogOperationType.REMOVE_CATEGORY_SUCCESS: {
+            const categoryId = action.payload
+            return {
+                ...state,
+                categories: state.categories.filter(category => category.id !== categoryId)
+            }
+        }
+        case CatalogOperationType.REMOVE_PRODUCT_SUCCESS: {
+            const productId = action.payload
+            return {
+                ...state,
+                products: state.products.filter(product => product.id !== productId)
+            }
+        }
         default:
             return state
     }

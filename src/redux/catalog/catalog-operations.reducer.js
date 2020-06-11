@@ -16,6 +16,8 @@ const catalogOperationsReducer = (state = INITIAL_STATE, action = {}) => {
         case CatalogOperationType.CREATE_PRODUCT_SUCCESS:
         case CatalogOperationType.UPDATE_PRODUCT_SUCCESS:
         case CatalogOperationType.CREATE_CATEGORY_SUCCESS:
+        case CatalogOperationType.REMOVE_PRODUCT_SUCCESS:
+        case CatalogOperationType.REMOVE_CATEGORY_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -25,6 +27,8 @@ const catalogOperationsReducer = (state = INITIAL_STATE, action = {}) => {
         case CatalogOperationType.CREATE_PRODUCT_FAILED:
         case CatalogOperationType.UPDATE_PRODUCT_FAILED:
         case CatalogOperationType.CREATE_CATEGORY_FAILED:
+        case CatalogOperationType.REMOVE_PRODUCT_FAILED:
+        case CatalogOperationType.REMOVE_CATEGORY_FAILED:
             return {
                 ...state,
                 loading: false,
@@ -34,6 +38,8 @@ const catalogOperationsReducer = (state = INITIAL_STATE, action = {}) => {
         case CatalogOperationType.CREATE_PRODUCT_PENDING:
         case CatalogOperationType.UPDATE_PRODUCT_PENDING:
         case CatalogOperationType.CREATE_CATEGORY_PENDING:
+        case CatalogOperationType.REMOVE_PRODUCT_PENDING:
+        case CatalogOperationType.REMOVE_CATEGORY_PENDING:
             return {
                 ...state,
                 loading: true,

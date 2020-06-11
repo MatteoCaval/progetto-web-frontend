@@ -73,7 +73,6 @@ describe('product operation actions', () => {
 
 
     it('should create pending and success actions and fetching categories on createCategory success', () => {
-
         const category = {
             name: 'nome',
         }

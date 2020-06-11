@@ -98,6 +98,70 @@ const createCategoryPending = () => {
     }
 }
 
+export const deleteCategory = (categoryId) => {
+    return (dispatch, getState) => {
+        dispatch(deleteCategoryPending())
+        const token = getState().user.token
+        return catalogService.deleteCategory(categoryId, token)
+            .then(result => {
+                dispatch(deleteCategorySuccess(categoryId))
+            })
+            .catch(error => dispatch(deleteCategoryFailed(error.message)))
+    }
+}
+
+const deleteCategorySuccess = (categoryId) => {
+    return {
+        type: CatalogOperationType.REMOVE_CATEGORY_SUCCESS,
+        payload: categoryId
+    }
+}
+
+const deleteCategoryPending = () => {
+    return {
+        type: CatalogOperationType.REMOVE_CATEGORY_PENDING
+    }
+}
+
+const deleteCategoryFailed = (errorMessage) => {
+    return {
+        type: CatalogOperationType.REMOVE_CATEGORY_FAILED,
+        payload: errorMessage
+    }
+}
+
+
+export const deleteProduct = (productId) => {
+    return (dispatch, getState) => {
+        dispatch(deleteProductPending())
+        const token = getState().user.token
+        return catalogService.deleteProduct(productId, token)
+            .then(result => {
+                dispatch(deleteProductSuccess(productId))
+            })
+            .catch(error => dispatch(deleteProductFailed(error.message)))
+    }
+}
+
+const deleteProductSuccess = (productId) => {
+    return {
+        type: CatalogOperationType.REMOVE_PRODUCT_SUCCESS,
+        payload: productId
+    }
+}
+
+const deleteProductPending = () => {
+    return {
+        type: CatalogOperationType.REMOVE_PRODUCT_PENDING
+    }
+}
+
+const deleteProductFailed = (errorMessage) => {
+    return {
+        type: CatalogOperationType.REMOVE_PRODUCT_FAILED,
+        payload: errorMessage
+    }
+}
 
 export const resetCatalogOperationsState = () => {
     return {

@@ -39,6 +39,12 @@ const deleteProduct = (productId, token) => {
         getAuthHeader(token))
 }
 
+const deleteCategory = (categoryId, token) => {
+    return axios.delete(
+        `${Config.API_BASE_URL}/catalog/categories/${categoryId}`,
+        getAuthHeader(token))
+}
+
 export const catalogService = {
     fetchCategories,
     fetchProductsForCategory,
@@ -46,5 +52,6 @@ export const catalogService = {
     createProduct,
     updateProduct,
     createCategory,
-    deleteProduct
+    deleteProduct,
+    deleteCategory
 }
