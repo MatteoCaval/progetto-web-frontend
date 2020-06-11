@@ -15,6 +15,7 @@ const catalogOperationsReducer = (state = INITIAL_STATE, action = {}) => {
     switch (action.type) {
         case CatalogOperationType.CREATE_PRODUCT_SUCCESS:
         case CatalogOperationType.UPDATE_PRODUCT_SUCCESS:
+        case CatalogOperationType.CREATE_CATEGORY_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -23,6 +24,7 @@ const catalogOperationsReducer = (state = INITIAL_STATE, action = {}) => {
             }
         case CatalogOperationType.CREATE_PRODUCT_FAILED:
         case CatalogOperationType.UPDATE_PRODUCT_FAILED:
+        case CatalogOperationType.CREATE_CATEGORY_FAILED:
             return {
                 ...state,
                 loading: false,
@@ -31,6 +33,7 @@ const catalogOperationsReducer = (state = INITIAL_STATE, action = {}) => {
             }
         case CatalogOperationType.CREATE_PRODUCT_PENDING:
         case CatalogOperationType.UPDATE_PRODUCT_PENDING:
+        case CatalogOperationType.CREATE_CATEGORY_PENDING:
             return {
                 ...state,
                 loading: true,
