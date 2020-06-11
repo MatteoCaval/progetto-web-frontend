@@ -7,10 +7,9 @@ import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
 import QuantityPicker from "./../../custom/quantity-picker.component"
 import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
-import EditIcon from "@material-ui/icons/Edit"
 import { addToCart } from "../../../redux/cart/cart.actions";
 import { AdminConstrained, ConsumerConstrained } from "../../common/constrained-containers.component";
-import FabFixed from "../../custom/fab-fixed.component"
+import { Link as RouterLink } from 'react-router-dom'
 
 const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
 
@@ -71,10 +70,21 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
                             </div>
                         </ConsumerConstrained>
                     </div>
+                    <AdminConstrained>
+                        <div className='admin-commands'>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                            >Remove</Button>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                component={RouterLink}
+                                to={`${productId}/edit`}
+                            >Edit</Button>
+                        </div>
+                    </AdminConstrained>
                 </Grid>
-                <AdminConstrained>
-                    <FabFixed icon={<EditIcon/>} to={`${productId}/edit`}/>
-                </AdminConstrained>
             </Grid>) : null
     )
 }

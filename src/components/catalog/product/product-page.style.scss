@@ -45,5 +45,14 @@
     flex-direction: column;
   }
 
+  .admin-commands {
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin-right: 1em;
+    }
+
+  }
 
 }
