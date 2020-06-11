@@ -1,14 +1,12 @@
-import axios from "axios";
-import Config from "../../config";
 import CatalogOperationType from "./catalog-operations.type";
 import { fetchProductsForCategory } from "./catalog.actions";
-import getAuthHeader from "../../services/getAuthHeader";
+import { catalogService } from "../../services/catalog.service";
 
 export const createProduct = (product) => {
     return (dispatch, getState) => {
         dispatch(createProductPending())
         const token = getState().user.token
-        return axios.post(`${Config.API_BASE_URL}/catalog/products`, product, getAuthHeader(token))
+        return catalogService.createProduct(product, token)
             .then(result => {
                 dispatch(createProductSuccess())
                 dispatch(fetchProductsForCategory(product.category_id, false))
@@ -40,7 +38,7 @@ export const updateProduct = (updatedProduct) => {
     return (dispatch, getState) => {
         dispatch(updateProductPending())
         const token = getState().user.token
-        return axios.put(`${Config.API_BASE_URL}/catalog/products/${updatedProduct.productId}`, updatedProduct, getAuthHeader(token))
+        return catalogService.updateProduct(updatedProduct, token)
             .then(result => {
                 dispatch(updateProductSuccess())
                 dispatch(fetchProductsForCategory(updatedProduct.category_id, false))
@@ -67,6 +65,7 @@ const updateProductPending = () => {
         type: CatalogOperationType.UPDATE_PRODUCT_PENDING
     }
 }
+
 
 export const resetProductOperationsState = () => {
     return {
