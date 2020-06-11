@@ -23,31 +23,31 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
 
     return (
         product ? (
-            <Grid container spacing={2}>
+            <Grid container className='prod-details' spacing={2}>
                 <Grid item xs={12} sm={6}>
-                    <div className='prod-details-center-container'>
+                    <div className='center-container'>
                         <CardMedia
-                            className='prod-details-media'
+                            className='media'
                             image={product.image}
                         />
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6}>
 
-                    <div className='prod-details-side-container'>
-                        <Typography className='prod-details-title' variant='h3' color='textPrimary'>
+                    <div className='side-container'>
+                        <Typography className='title' variant='h3' color='textPrimary'>
                             {product.name}
                         </Typography>
                         <Typography variant='h3' color='textPrimary'>
                             {product.price}€
-                </Typography>
+                        </Typography>
                     </div>
-                    <div className="prod-details-info-container">
+                    <div className="info-container">
                         <p>{product.description}</p>
-                        <div className="prod-details-ingredients-container">
-                            <Typography className='prod-details-ingredients' variant='h3' color='textPrimary'>
+                        <div className="ingredients-container">
+                            <Typography className='ingredients' variant='h3' color='textPrimary'>
                                 Ingredienti:
-                    </Typography>
+                            </Typography>
                             <ul>
                                 {
                                     product.ingredients.map((ingredient, index) =>
@@ -57,24 +57,23 @@ const ProductPage = ({ match, fetchProduct, addToCart, product }) => {
                             </ul>
                         </div>
                         <ConsumerConstrained>
-                            <div className='prod-details-add-to-cart-container'>
+                            <div className='add-to-cart-container'>
                                 <QuantityPicker
                                     quantity={quantity}
                                     onQuantityIncremented={() => setQuantity(quantity + 1)}
-                                    onQuantityDecremented={() => setQuantity(quantity - 1)} />
+                                    onQuantityDecremented={() => setQuantity(quantity - 1)}/>
                                 <Button
-                                    className="prod-details-add-to-cart"
                                     variant="contained"
                                     color="primary"
                                     onClick={() => addToCart(productId, quantity)}
-                                    startIcon={<AddToCartIcon />}
+                                    startIcon={<AddToCartIcon/>}
                                 >Add to cart</Button>
                             </div>
                         </ConsumerConstrained>
                     </div>
                 </Grid>
                 <AdminConstrained>
-                    <FabFixed icon={<EditIcon />} to={`${productId}/edit`} />
+                    <FabFixed icon={<EditIcon/>} to={`${productId}/edit`}/>
                 </AdminConstrained>
             </Grid>) : null
     )

@@ -1,42 +1,49 @@
-.prod-details-center-container {
-  display: flex;
-  justify-content: center;
-}
 
-.prod-details-side-container {
-  display: flex;
-}
+.prod-details {
 
-.prod-details-title {
-  flex: 1;
-  display: flex;
-}
+  .center-container {
+    display: flex;
+    justify-content: center;
+  }
 
-.prod-details-media {
-  width: 100%;
-  padding-top: 100%;
-  margin-bottom: 2em;
-}
+  .side-container {
+    display: flex;
+  }
 
-.prod-details-ingredients {
-  margin-top: 0;
-}
+  .title {
+    flex: 1;
+    display: flex;
+  }
 
-.prod-details-ingredients-container {
-  flex-grow: 1;
-}
+  .media {
+    width: 100%;
+    padding-top: 100%;
+    margin-bottom: 2em;
+  }
 
-.prod-details-add-to-cart {
-  margin-left: 2em !important;
-}
+  .ingredients {
+    margin-top: 0;
+  }
 
-.prod-details-add-to-cart-container {
-  display: flex;
-  justify-content: center;
-  margin-top: auto;
-}
+  .ingredients-container {
+    flex-grow: 1;
+  }
 
-.prod-details-info-container {
-  display: flex;
-  flex-direction: column;
+  .add-to-cart-container {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+
+    button {
+      margin-left: 2em !important;
+    }
+
+  }
+
+  .info-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+
 }
