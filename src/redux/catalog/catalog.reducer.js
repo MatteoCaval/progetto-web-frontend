@@ -84,6 +84,32 @@ const catalogReducer = (state = INITIAL_STATE, action = {}) => {
                 products: state.products.filter(product => product.id !== productId)
             }
         }
+        case CatalogOperationType.CREATE_CATEGORY_SUCCESS: {
+            return {
+                ...state,
+                categories: [
+                    ...state.categories,
+                    action.payload
+                ]
+            }
+        }
+        case CatalogOperationType.UPDATE_PRODUCT_SUCCESS: {
+            const updatedProduct = action.payload
+            console.log(updatedProduct)
+            return {
+                ...state,
+                products: state.products.map(product => product.id === updatedProduct.id ? updatedProduct : product)
+            }
+        }
+        case CatalogOperationType.CREATE_PRODUCT_SUCCESS: {
+            return {
+                ...state,
+                products: [
+                    ...state.products,
+                    action.payload
+                ]
+            }
+        }
         default:
             return state
     }

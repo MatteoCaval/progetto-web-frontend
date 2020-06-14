@@ -3,7 +3,7 @@ import { catalogService } from "../../services/catalog.service";
 
 export const fetchCategories = () => {
     return (dispatch, getState) => {
-        // if (getState().catalog.categories.length) return
+        if (getState().catalog.categories.length) return
         dispatch(fetchCategoriesPending())
         return catalogService.fetchCategories()
             .then(result => dispatch(fetchCategoriesSuccess(result.data)))
@@ -33,6 +33,10 @@ const fetchCategoriesPending = () => {
 
 export const fetchProductsForCategory = (categoryId, cached = true) => {
     return (dispatch, getState) => {
+        console.log(cached)
+        console.log(categoryId)
+        console.log(getState().catalog.products)
+        console.log(getState().catalog.products.filter(product => product.categoryId === categoryId).length)
         if (cached && getState().catalog.products.filter(product => product.categoryId === categoryId).length) return
         dispatch(fetchProductForCategoryPending())
         return catalogService.fetchProductsForCategory(categoryId)

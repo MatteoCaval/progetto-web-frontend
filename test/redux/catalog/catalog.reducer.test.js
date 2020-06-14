@@ -158,5 +158,68 @@ describe('catalogReducer', () => {
         })
     })
 
+    it('should contain created product inside state after CREATE_PRODUCT_SUCCESS', () => {
+        const product = {
+            id: 'id',
+            name: 'prodotto da aggiungere'
+        }
+
+        const prevState = {
+            ...catalogInitialState,
+            products: []
+        }
+
+        expect(catalogReducer(prevState, {
+            type: CatalogOperationType.CREATE_PRODUCT_SUCCESS,
+            payload: product
+        })).toMatchObject({
+            products: [product]
+        })
+
+    })
+
+    it('should contain updated product inside state after UPDATE_PRODUCT_SUCCESS', () => {
+        const updatedProduct = {
+            id: 'id1',
+            name: 'nome aggiornato'
+        }
+
+        const prevState = {
+            ...catalogInitialState,
+            products: [
+                {
+                    id: 'id1',
+                    name: 'nome precedente'
+                }
+            ]
+        }
+
+        expect(catalogReducer(prevState, {
+            type: CatalogOperationType.UPDATE_PRODUCT_SUCCESS,
+            payload: updatedProduct
+        })).toMatchObject({
+            products: [updatedProduct]
+        })
+    })
+
+
+    it('should contain created category inside state after CREATE_CATEGORY_SUCCESS', () => {
+        const category = {
+            id: 'id1',
+            name: 'nome categoria'
+        }
+
+        const prevState = {
+            ...catalogInitialState,
+        }
+
+        expect(catalogReducer(prevState, {
+            type: CatalogOperationType.CREATE_CATEGORY_SUCCESS,
+            payload: category
+        })).toMatchObject({
+            categories: [category]
+        })
+    })
+
 
 })

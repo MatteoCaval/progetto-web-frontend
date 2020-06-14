@@ -8,7 +8,6 @@ import {
     updateProduct
 } from "../../../src/redux/catalog/catalog-operations.actions";
 import CatalogOperationType from "../../../src/redux/catalog/catalog-operations.type";
-import CatalogActionType from "../../../src/redux/catalog/catalog.types";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
@@ -29,12 +28,9 @@ describe('product operation actions', () => {
 
         const expectedActions = [
             { type: CatalogOperationType.CREATE_PRODUCT_PENDING },
-            { type: CatalogOperationType.CREATE_PRODUCT_SUCCESS },
-            { type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_PENDING },
-            { type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_SUCCESS, payload: productsAfterCreation },
+            { type: CatalogOperationType.CREATE_PRODUCT_SUCCESS, payload: product }
         ]
-        axios.post.mockImplementation(() => Promise.resolve())
-        axios.get.mockImplementation(() => Promise.resolve({ data: productsAfterCreation }))
+        axios.post.mockImplementation(() => Promise.resolve({ data: product }))
 
         const store = mockStore({ user: { token: 'token' } })
         return store.dispatch(createProduct(product)).then(() => {
@@ -52,12 +48,9 @@ describe('product operation actions', () => {
         ]
         const expectedActions = [
             { type: CatalogOperationType.UPDATE_PRODUCT_PENDING },
-            { type: CatalogOperationType.UPDATE_PRODUCT_SUCCESS },
-            { type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_PENDING },
-            { type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_SUCCESS, payload: productAfterUpdate },
+            { type: CatalogOperationType.UPDATE_PRODUCT_SUCCESS, payload: productAfterUpdate }
         ]
-        axios.put.mockImplementation(() => Promise.resolve())
-        axios.get.mockImplementation(() => Promise.resolve({ data: productAfterUpdate }))
+        axios.put.mockImplementation(() => Promise.resolve({ data: productAfterUpdate }))
 
         const store = mockStore({ user: { token: 'token' } })
         return store.dispatch(updateProduct(product)).then(() => {
@@ -83,12 +76,9 @@ describe('product operation actions', () => {
 
         const expectedActions = [
             { type: CatalogOperationType.CREATE_CATEGORY_PENDING },
-            { type: CatalogOperationType.CREATE_CATEGORY_SUCCESS },
-            { type: CatalogActionType.FETCH_CATEGORIES_PENDING },
-            { type: CatalogActionType.FETCH_CATEGORIES_SUCCESS, payload: categoriesAfterCreation },
+            { type: CatalogOperationType.CREATE_CATEGORY_SUCCESS, payload: category }
         ]
-        axios.post.mockImplementation(() => Promise.resolve())
-        axios.get.mockImplementation(() => Promise.resolve({ data: categoriesAfterCreation }))
+        axios.post.mockImplementation(() => Promise.resolve({ data: category }))
 
         const store = mockStore({ user: { token: 'token' } })
         return store.dispatch(createCategory(category)).then(() => {

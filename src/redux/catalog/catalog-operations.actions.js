@@ -8,16 +8,16 @@ export const createProduct = (product) => {
         const token = getState().user.token
         return catalogService.createProduct(product, token)
             .then(result => {
-                dispatch(createProductSuccess())
-                dispatch(fetchProductsForCategory(product.category_id, false))
+                dispatch(createProductSuccess(result.data))
             })
             .catch(error => dispatch(createProductFailed(error.message)))
     }
 }
 
-const createProductSuccess = () => {
+const createProductSuccess = (product) => {
     return {
-        type: CatalogOperationType.CREATE_PRODUCT_SUCCESS
+        type: CatalogOperationType.CREATE_PRODUCT_SUCCESS,
+        payload: product
     }
 }
 
@@ -40,16 +40,16 @@ export const updateProduct = (updatedProduct) => {
         const token = getState().user.token
         return catalogService.updateProduct(updatedProduct, token)
             .then(result => {
-                dispatch(updateProductSuccess())
-                dispatch(fetchProductsForCategory(updatedProduct.category_id, false))
+                dispatch(updateProductSuccess(result.data))
             })
             .catch(error => dispatch(updateProductFailed(error.message)))
     }
 }
 
-const updateProductSuccess = () => {
+const updateProductSuccess = (product) => {
     return {
-        type: CatalogOperationType.UPDATE_PRODUCT_SUCCESS
+        type: CatalogOperationType.UPDATE_PRODUCT_SUCCESS,
+        payload: product
     }
 }
 
@@ -72,16 +72,16 @@ export const createCategory = (category) => {
         const token = getState().user.token
         return catalogService.createCategory(category, token)
             .then(result => {
-                dispatch(createCategorySuccess())
-                dispatch(fetchCategories())
+                dispatch(createCategorySuccess(result.data))
             })
             .catch(error => dispatch(createCategoryFailed(error.message)))
     }
 }
 
-const createCategorySuccess = () => {
+const createCategorySuccess = (category) => {
     return {
-        type: CatalogOperationType.CREATE_CATEGORY_SUCCESS
+        type: CatalogOperationType.CREATE_CATEGORY_SUCCESS,
+        payload: category
     }
 }
 
