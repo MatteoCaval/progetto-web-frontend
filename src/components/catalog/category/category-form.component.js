@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const CategoryForm = ({ history, loading, error, completed, createCategory }) => {
+const CategoryForm = ({ history, loading, error, completed, createCategory, resetCatalogOperationsState }) => {
 
     const classes = useStyles();
 
