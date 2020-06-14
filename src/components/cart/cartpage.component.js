@@ -25,7 +25,7 @@ const CartPage = ({ fetchCart, cart, history }) => {
                         products.map(product => {
                             return (
                                 <Grid key={product.id} item xs={12} sm={12}>
-                                    <CartProductItem key={product.id} product={product} />
+                                    <CartProductItem key={product.id} product={product}/>
                                 </Grid>
                             )
                         })
@@ -41,7 +41,7 @@ const CartPage = ({ fetchCart, cart, history }) => {
                             className="proceed-to-order"
                             onClick={() => history.push('/summary')}>
                             Proceed to order
-                    </Button>
+                        </Button>
 
                         <div className="total-info-container">
                             <Typography variant='h2' color='textPrimary'>Total:</Typography>
@@ -49,29 +49,31 @@ const CartPage = ({ fetchCart, cart, history }) => {
                         </div>
                     </div>
                 </div>
-                <Progress loading={loading} />
+                <Progress loading={loading}/>
             </Container>
 
         )
     } else {
         return (
             <Container maxWidth='md'>
-                <div className="empty-shop-button-container">
-
-                    <Typography variant='h2' color='textPrimary'>
-                        Il carrello è vuoto
-                    </Typography>
-                    <Typography color='textPrimary'>
-                        Al momento all'interno del tuo carrello non sono presenti prodotti.
-                    </Typography>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        className="back-to-shop-button"
-                        onClick={() => history.push('/')}>
-                        Back to shop
-                    </Button>
-                </div>
+                {(products && !loading && !error) ? (
+                    <div className="empty-shop-button-container">
+                        <Typography variant='h2' color='textPrimary'>
+                            Il carrello è vuoto
+                        </Typography>
+                        <Typography color='textPrimary'>
+                            Al momento all'interno del tuo carrello non sono presenti prodotti.
+                        </Typography>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            className="back-to-shop-button"
+                            onClick={() => history.push('/')}>
+                            Back to shop
+                        </Button>
+                    </div>
+                ) : null
+                }
             </Container>
         )
     }
