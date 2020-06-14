@@ -2,38 +2,56 @@ import React, { useEffect } from "react";
 import { fetchProductsForCategory } from "../../../redux/catalog/catalog.actions";
 import ProductItem from "./product-item.component";
 import { connect } from "react-redux";
-import { Grid } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { AdminConstrained } from "../../common/constrained-containers.component";
 import FabFixed from "../../custom/fab-fixed.component"
+import { deleteCategory, resetCatalogOperationsState } from "../../../redux/catalog/catalog-operations.actions";
+import { withRouter } from "react-router-dom";
 
-const ProductList = ({ fetchCategoryProducts, match, products }) => {
+const ProductList = ({ history, fetchCategoryProducts, match, products, isEmptyCategory, deleteCategory, deletionCompleted, resetCatalogOperationsState }) => {
 
     const categoryId = match.params.categoryId
+
+    if(deletionCompleted) {
+        history.push('/')
+        resetCatalogOperationsState()
+
+    }
 
     useEffect(() => {
         fetchCategoryProducts(categoryId)
     }, [fetchCategoryProducts])
 
     return (
-        <div>
-            <React.Fragment>
-                <Grid container spacing={2}>
-                    {
-                        products.map(product => {
-                            return (
-                                <Grid key={product.id} item xs={6} sm={4}>
-                                    <ProductItem key={product.id} product={product} />
-                                </Grid>
-                            )
-                        })
-                    }
-                </Grid>
-                <AdminConstrained>
-                    <FabFixed icon={<AddIcon />} to={`${categoryId}/createproduct`} />
-                </AdminConstrained>
-            </React.Fragment>
-        </div>
+        <React.Fragment>
+            {isEmptyCategory && (
+                <div>
+                    No Product in this category
+                    <AdminConstrained>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => deleteCategory(categoryId)}
+                        >Remove</Button>
+                    </AdminConstrained>
+                </div>
+            )}
+            <Grid container spacing={2}>
+                {
+                    products.map(product => {
+                        return (
+                            <Grid key={product.id} item xs={6} sm={4}>
+                                <ProductItem key={product.id} product={product}/>
+                            </Grid>
+                        )
+                    })
+                }
+            </Grid>
+            <AdminConstrained>
+                <FabFixed icon={<AddIcon/>} to={`${categoryId}/createproduct`}/>
+            </AdminConstrained>
+        </React.Fragment>
     )
 }
 
@@ -41,14 +59,15 @@ const ProductList = ({ fetchCategoryProducts, match, products }) => {
 const mapStateToProps = (state, ownProps) => {
     const categoryId = ownProps.match.params.categoryId
     return {
-        products: state.catalog.products.filter(product => product.categoryId === categoryId)
+        isEmptyCategory: !state.catalog.products.length && !state.catalog.loading && !state.catalog.error,
+        products: state.catalog.products.filter(product => product.categoryId === categoryId),
+        deletionCompleted: state.catalogOperations.loading
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchCategoryProducts: (categoryId) => dispatch(fetchProductsForCategory(categoryId))
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
+export default withRouter(connect(mapStateToProps, {
+    fetchCategoryProducts: fetchProductsForCategory,
+    deleteCategory,
+    resetCatalogOperationsState
+})(ProductList))
