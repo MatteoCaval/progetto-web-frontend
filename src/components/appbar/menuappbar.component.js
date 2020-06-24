@@ -26,8 +26,10 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
     },
     title: {
-        flexGrow: 1,
         cursor: "pointer"
+    },
+    headerButtons: {
+        marginLeft: "auto"
     },
     list: {
         width: 250,
@@ -108,7 +110,7 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
                     </AdminConstrained>
                     <Typography variant="h2" className={classes.title}
                                 onClick={handleLogoClick}>FoodDelivery</Typography>
-                    <div>
+                    <div className={classes.headerButtons}>
                         {currentUser && currentUser.role === 'consumer' && (
                             <IconButton
                                 aria-label="account of current user"
