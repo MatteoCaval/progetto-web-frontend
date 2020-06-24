@@ -6,6 +6,7 @@ import { Button, Grid, TextField } from "@material-ui/core";
 import { createRider } from "../../redux/admin/admin.actions";
 import { connect } from "react-redux";
 import Progress from "../common/progress.component";
+import "./create-rider-dialog.style.scss"
 
 const INITIAL_VALUES = {
     name: '',
@@ -33,7 +34,7 @@ const CreateRiderDialog = ({ createRider, open, onCreationCancelled, riderCreati
     return (
         <Dialog open={open} onClose={onCreationCancelled}>
             <DialogTitle>Create rider</DialogTitle>
-            <DialogContent>
+            <DialogContent className="dialog-content-container">
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>

@@ -32,7 +32,8 @@ let theme = createMuiTheme({
             fontWeight: 500
         },
         h6:{
-            fontSize: '3px'
+            fontSize: '1rem',
+            fontWeight: 500
         },
         subtitle1:{
             

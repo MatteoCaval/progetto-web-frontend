@@ -5,6 +5,7 @@ import RiderItem from "./rider-item.component";
 import { Button, Container, Grid } from "@material-ui/core";
 import CreateRiderDialog from "./create-rider-dialog.component";
 import Progress from "../common/progress.component";
+import "./riders.style.scss"
 
 const RidersPage = ({ riders, fetchRiders, loading }) => {
 
@@ -25,12 +26,14 @@ const RidersPage = ({ riders, fetchRiders, loading }) => {
                     {riders ? riders.map(rider => <Grid key={rider.id} item xs={12}><RiderItem rider={rider}/></Grid>) :
                         <p>No riders found</p>}
                 </Grid>
+                <div className="rider-button-container">
                 <Button
                     onClick={() => setCreationDialogOpen(true)}
                     variant="contained"
                     color="primary">
                     Create new rider
                 </Button>
+                </div>
             </Container>
             <CreateRiderDialog open={creationDialogOpen} onCreationCancelled={() => setCreationDialogOpen(false)}/>
             <Progress loading={loading}/>
