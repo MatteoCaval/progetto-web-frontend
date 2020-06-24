@@ -24,7 +24,7 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
                 </div>
             </CardActionArea>
             <CardContent>
-                <Typography className="product-title" variant='h3' color='textPrimary'>
+                <Typography className="product-title" variant='h5' color='textPrimary'>
                     {product.name}
                 </Typography>
                 <div className='product-root'>
