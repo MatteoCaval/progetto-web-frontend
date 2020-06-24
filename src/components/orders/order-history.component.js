@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Pagination } from "@material-ui/lab";
 import { fetchOrderHistory } from "../../redux/orders/orders.actions";
 import { Container } from "@material-ui/core";
+import "./order-history.style.scss";
 
 const OrderHistoryPage = ({ orders, fetchOrderHistory, pageCount, currentPage, pending }) => {
 
@@ -19,7 +20,9 @@ const OrderHistoryPage = ({ orders, fetchOrderHistory, pageCount, currentPage, p
     return (
         <Container maxWidth='md'>
             <OrderList orders={orders}/>
+            <div className="order-pagination-conatiner">
             <Pagination page={currentPage} count={pageCount} color='primary' onChange={onPageChanged}/>
+            </div>
         </Container>
     )
 
