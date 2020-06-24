@@ -115,14 +115,18 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             fullWidth
                             value={productData.name}
                             onChange={handleChange}
-                            label='Name'/>
+                            label='Name' />
                     </Grid>
-                    <Grid item xs={12}>
-                        <img
-                            className="form-product-image"
-                            src={productData.image}
-                            alt='image-preview'/>
-                    </Grid>
+                    {
+                        productData.image.length > 0 ?
+                            <Grid item xs={12}>
+                                <img
+                                    className="form-product-image"
+                                    src={productData.image}
+                                    alt='image-preview' />
+                            </Grid> : null
+                    }
+
                     <Grid item xs={12}>
                         <TextField
                             id='image'
@@ -134,7 +138,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             fullWidth
                             value={productData.image}
                             onChange={handleChange}
-                            label='Image url'/>
+                            label='Image url' />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
@@ -148,7 +152,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             rows='3'
                             value={productData.description}
                             onChange={handleChange}
-                            label='Description'/>
+                            label='Description' />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
@@ -161,13 +165,13 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             fullWidth
                             value={productData.price}
                             onChange={handleChange}
-                            label='Price'/>
+                            label='Price' />
                     </Grid>
                     <Grid item xs={12}>
                         <Card className="form-ingredients-card" variant='outlined'>
                             <Typography>Ingredients</Typography>
                             <StringListPicker strings={productData.ingredients} addItem={addIngredient}
-                                              updateItem={updateIngredient} removeItem={deleteIngredient}/>
+                                updateItem={updateIngredient} removeItem={deleteIngredient} />
                         </Card>
                     </Grid>
                     <Grid item xs={12}>
@@ -181,7 +185,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                     </Grid>
                 </Grid>
             </form>
-            <Progress loading={loading}/>
+            <Progress loading={loading} />
         </Container>
     )
 }

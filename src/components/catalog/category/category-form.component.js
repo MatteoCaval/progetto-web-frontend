@@ -65,12 +65,15 @@ const CategoryForm = ({ history, loading, error, completed, createCategory, rese
                             onChange={handleChange}
                             label='Category Name'/>
                     </Grid>
-                    <Grid item xs={12}>
+                    {
+                        categoryData.imageUrl.length > 0 ? 
+                        <Grid item xs={12}>
                         <img
                             className={classes.image}
                             src={categoryData.imageUrl}
                             alt='image-preview'/>
-                    </Grid>
+                        </Grid> : null
+                    }
                     <Grid item xs={12}>
                         <TextField
                             id='image'
