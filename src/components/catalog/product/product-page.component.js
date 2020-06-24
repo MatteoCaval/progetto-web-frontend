@@ -68,6 +68,7 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
                                     onQuantityIncremented={() => setQuantity(quantity + 1)}
                                     onQuantityDecremented={() => setQuantity(quantity - 1)}/>
                                 <Button
+                                    className="add-button"
                                     variant="contained"
                                     color="primary"
                                     onClick={() => addToCart(productId, quantity)}
