@@ -64,6 +64,7 @@ const SignIn = ({login}) => {
                             id="email"
                             label="Email Address"
                             name="email"
+                            type="email"
                             autoComplete="email"
                             value={email}
                             onChange={handleChange}
