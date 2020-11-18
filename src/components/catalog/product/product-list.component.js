@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import { fetchProductsForCategory } from "../../../redux/catalog/catalog.actions";
+import React, {useEffect} from "react";
+import {fetchProductsForCategory} from "../../../redux/catalog/catalog.actions";
 import ProductItem from "./product-item.component";
-import { connect } from "react-redux";
-import { Button, Grid, Typography } from "@material-ui/core";
+import {connect} from "react-redux";
+import {Button, CardContent, Grid, Typography} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import { AdminConstrained } from "../../common/constrained-containers.component";
+import {AdminConstrained} from "../../common/constrained-containers.component";
 import FabFixed from "../../custom/fab-fixed.component"
-import { deleteCategory, resetCatalogOperationsState } from "../../../redux/catalog/catalog-operations.actions";
-import { withRouter } from "react-router-dom";
+import {deleteCategory, resetCatalogOperationsState} from "../../../redux/catalog/catalog-operations.actions";
+import {withRouter} from "react-router-dom";
 import "./product-list.style.scss"
 
 const ProductList = ({ history, fetchCategoryProducts, match, products, isEmptyCategory, deleteCategory, deletionCompleted, resetCatalogOperationsState }) => {
@@ -17,7 +17,6 @@ const ProductList = ({ history, fetchCategoryProducts, match, products, isEmptyC
     if (deletionCompleted) {
         history.push('/')
         resetCatalogOperationsState()
-
     }
 
     useEffect(() => {
@@ -44,6 +43,12 @@ const ProductList = ({ history, fetchCategoryProducts, match, products, isEmptyC
                     </AdminConstrained>
                 </div>
             )}
+            {
+                (products && !products.isEmpty) ?
+                    <Typography className="category-name-header" variant='h2' color='textPrimary' align='center'>
+                        <b>{products.map(p => p.categoryName)[0]}</b>
+                    </Typography> : null
+            }
             <Grid container spacing={2}>
                 {
                     products.map(product => {
