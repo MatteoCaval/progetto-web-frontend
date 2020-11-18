@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 
 import "./product-page.style.scss";
 
-import { Button, CardMedia, Grid, Typography } from "@material-ui/core";
-import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
-import { connect } from "react-redux";
+import {Button, CardMedia, Grid, Typography} from "@material-ui/core";
+import {fetchProductDetail} from "../../../redux/catalog/catalog.actions";
+import {connect} from "react-redux";
 import QuantityPicker from "./../../custom/quantity-picker.component"
 import AddToCartIcon from "@material-ui/icons/AddShoppingCart"
-import { addToCart } from "../../../redux/cart/cart.actions";
-import { AdminConstrained, ConsumerConstrained } from "../../common/constrained-containers.component";
-import { Link as RouterLink, withRouter } from 'react-router-dom'
-import { deleteProduct, resetCatalogOperationsState } from "../../../redux/catalog/catalog-operations.actions";
+import {addToCart} from "../../../redux/cart/cart.actions";
+import {AdminConstrained, ConsumerConstrained} from "../../common/constrained-containers.component";
+import {Link as RouterLink, withRouter} from 'react-router-dom'
+import {deleteProduct, resetCatalogOperationsState} from "../../../redux/catalog/catalog-operations.actions";
 
 const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, deleteProduct, resetCatalogOperationsState, productDeletionCompleted }) => {
 
@@ -93,7 +93,7 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
                         </div>
                     </AdminConstrained>
                 </Grid>
-            </Grid>) : null
+            </Grid>) : <p>Product not found</p>
     )
 }
 

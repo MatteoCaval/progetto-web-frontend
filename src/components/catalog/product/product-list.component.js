@@ -54,14 +54,14 @@ const ProductList = ({ history, fetchCategoryProducts, match, products, isEmptyC
                     products.map(product => {
                         return (
                             <Grid key={product.id} item xs={6} sm={4}>
-                                <ProductItem key={product.id} product={product} />
+                                <ProductItem key={product.id} product={product}/>
                             </Grid>
                         )
                     })
                 }
             </Grid>
             <AdminConstrained>
-                <FabFixed icon={<AddIcon />} to={`${categoryId}/createproduct`} />
+                <FabFixed icon={<AddIcon/>} to={`${categoryId}/createproduct`}/>
             </AdminConstrained>
         </React.Fragment>
     )
@@ -73,7 +73,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
         isEmptyCategory: !state.catalog.products.length && !state.catalog.loading && !state.catalog.error,
         products: state.catalog.products.filter(product => product.categoryId === categoryId),
-        deletionCompleted: state.catalogOperations.loading
+        deletionCompleted: state.catalogOperations.loading,
+
     }
 }
 
