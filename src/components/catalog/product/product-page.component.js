@@ -11,6 +11,7 @@ import {addToCart} from "../../../redux/cart/cart.actions";
 import {AdminConstrained, ConsumerConstrained} from "../../common/constrained-containers.component";
 import {Link as RouterLink, withRouter} from 'react-router-dom'
 import {deleteProduct, resetCatalogOperationsState} from "../../../redux/catalog/catalog-operations.actions";
+import Link from "@material-ui/core/Link";
 
 const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, deleteProduct, resetCatalogOperationsState, productDeletionCompleted }) => {
 
@@ -93,7 +94,15 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
                         </div>
                     </AdminConstrained>
                 </Grid>
-            </Grid>) : <p>Product not found</p>
+                <Grid item xs={12}>
+                    <Typography align='center'>
+                        <Link component={RouterLink} to={`/${product.categoryId}`}>
+                            Back to {product.categoryName}
+                        </Link>
+                    </Typography>
+                </Grid>
+            </Grid>
+        ) : <p>Product not found</p>
     )
 }
 
