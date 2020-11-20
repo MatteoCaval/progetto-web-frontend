@@ -1,16 +1,9 @@
-@import "./../../common/base.scss";
-
 .gridTileStyle {
     cursor: pointer;
 }
 
-h1 {
-    color: $site-color;
-    font-weight: 500 !important;
-}
-
 .home-image {
-    width: 100% !important; 
+    width: 100%; 
     height: auto;
 }
 
@@ -23,8 +16,4 @@ h1 {
 
 .categories-container{
     margin-top: 2em;
-}
-
-main {
-    margin-top: $page-margin-top;
 }

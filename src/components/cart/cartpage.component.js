@@ -19,39 +19,41 @@ const CartPage = ({ fetchCart, cart, history }) => {
 
     if (products && products.length) {
         return (
-            <Container maxWidth='md'>
-                <Grid className="products-list" container spacing={2}>
-                    {
-                        products.map(product => {
-                            return (
-                                <Grid key={product.id} item xs={12} sm={12}>
-                                    <CartProductItem key={product.id} product={product}/>
-                                </Grid>
-                            )
-                        })
-                    }
-                </Grid>
+            <main>
+                <Typography variant="h1" className="page-title">Cart</Typography>      
+                <Container maxWidth='md'>
+                    <Grid className="products-list" container spacing={2}>
+                        {
+                            products.map(product => {
+                                return (
+                                    <Grid key={product.id} item xs={12} sm={12}>
+                                        <CartProductItem key={product.id} product={product} />
+                                    </Grid>
+                                )
+                            })
+                        }
+                    </Grid>
 
-                <div className="cart-page-end-list">
-                    <HorizontalDivider/>
-                    <div className="total-container">
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            className="proceed-to-order"
-                            onClick={() => history.push('/summary')}>
-                            Proceed to order
+                    <div className="cart-page-end-list">
+                        <HorizontalDivider />
+                        <div className="total-container">
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                className="proceed-to-order"
+                                onClick={() => history.push('/summary')}>
+                                Proceed to order
                         </Button>
 
-                        <div className="total-info-container">
-                            <Typography variant='h2' color='textPrimary'>Total:</Typography>
-                            <Typography variant='h3' color='textPrimary'>{total}€</Typography>
+                            <div className="total-info-container">
+                                <Typography variant='h2' color='textPrimary'>Total:</Typography>
+                                <Typography variant='h3' color='textPrimary'>{total}€</Typography>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <Progress loading={loading}/>
-            </Container>
-
+                    <Progress loading={loading} />
+                </Container>
+            </main>
         )
     } else {
         return (

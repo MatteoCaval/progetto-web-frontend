@@ -5,22 +5,23 @@ import indigo from '@material-ui/core/colors/indigo'
 let theme = createMuiTheme({
     palette: {
         primary: indigo,
-        secondary: green,
-        // type: 'dark',
+        secondary: {
+            main: '#921C2A'
+        }
     },
     status: {
         danger: 'orange',
     },
     typography: {
-        fontFamily: 'Roboto' ,
+        fontFamily: 'Maven Pro' ,
 
         h1:{
             fontSize: '2rem',
-            fontWeight: "bold"
+            fontWeight: 800
         },
         h2:{
             fontSize: '1.6rem',
-            fontWeight: 500
+            fontWeight: 600
         },
         h3:{
             fontSize: '1.4rem',
@@ -59,6 +60,9 @@ let theme = createMuiTheme({
         overline:{
             
         },
+        button:{
+            color: 'secondary',
+        }
     }
 });
 
