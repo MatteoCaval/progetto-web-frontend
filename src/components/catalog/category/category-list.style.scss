@@ -1,3 +1,30 @@
-.gridTileStyle{
-    height: 12em;
+@import "./../../common/base.scss";
+
+.gridTileStyle {
+    cursor: pointer;
+}
+
+h1 {
+    color: $site-color;
+    font-weight: 500 !important;
+}
+
+.home-image {
+    width: 100% !important; 
+    height: auto;
+}
+
+.image-container {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;  /* Centering y-axis */
+    align-items :center; /* Centering x-axis */
+}
+
+.categories-container{
+    margin-top: 2em;
+}
+
+main {
+    margin-top: $page-margin-top;
 }

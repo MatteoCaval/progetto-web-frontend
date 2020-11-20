@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { fetchCategories } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
-import { GridList, GridListTile } from "@material-ui/core";
+import { Grid, GridList, GridListTile, Typography, CardMedia } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import { AdminConstrained } from "../../common/constrained-containers.component";
 import FabFixed from "../../custom/fab-fixed.component"
@@ -46,7 +46,26 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
 
     return (
         <React.Fragment>
-            <div className="">
+            <main>
+                <Grid container>
+                    <Grid item xs={12} sm={6}> 
+                        <Typography variant="h2" className="title">Il chioschetto ti da il ben venuto!</Typography>
+                        <Typography>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lorem mi, suscipit et scelerisque vitae, aliquet et augue. 
+                        Praesent maximus suscipit mauris, nec mollis arcu egestas ac. Aenean et ornare libero. Suspendisse potenti. Proin non tincidunt ipsum. 
+                        Vivamus sit amet purus vel lectus sagittis cursus at eget tellus. In eget justo sed elit venenatis mollis. 
+                        Curabitur ac erat vel ipsum interdum lobortis. Morbi dapibus, nulla vitae efficitur consectetur, turpis quam rutrum enim, vitae pretium arcu magna et nisi. 
+                        Proin elementum et ex sit amet varius. Sed in sollicitudin dolor. Proin ullamcorper volutpat orci nec malesuada. 
+                        Vestibulum magna nisi, mattis vitae efficitur id, pulvinar quis tortor. Sed ultrices lacus quis nisl cursus pellentesque eu id risus.
+                        </Typography>                    
+                    </Grid>
+                    <Grid item  xs={12} sm={6} className="image-container">
+                        <img class='home-image' src="https://www.ilchioschettobarpizzeria.it/wp-content/uploads/2019/10/logo-bianco.jpg"/>
+                    </Grid>
+                </Grid>
+
+                <div class="categories-container">                        
+                <Typography variant="h2" className="title">Dai una occhiata alle nostre pietanze!</Typography>
                 <GridList spacing={2} cols={getScreenWidth()}>
                     {
                         categories.map((category) => (
@@ -59,7 +78,9 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
                             </GridListTile>))
                     }
                 </GridList>
-            </div>
+                </div>
+      
+            </main>
             <AdminConstrained>
                 <FabFixed icon={<AddIcon />} to={"/createcategory"} />
             </AdminConstrained>

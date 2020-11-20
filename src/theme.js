@@ -12,8 +12,11 @@ let theme = createMuiTheme({
         danger: 'orange',
     },
     typography: {
+        fontFamily: 'Roboto' ,
+
         h1:{
-            fontSize: '3px'
+            fontSize: '2rem',
+            fontWeight: "bold"
         },
         h2:{
             fontSize: '1.6rem',
