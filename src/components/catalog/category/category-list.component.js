@@ -60,11 +60,11 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
                         </Typography>                    
                     </Grid>
                     <Grid item  xs={12} sm={6} className="image-container">
-                        <img class='home-image' src="https://www.ilchioschettobarpizzeria.it/wp-content/uploads/2019/10/logo-bianco.jpg"/>
+                        <img className='home-image' src="https://www.ilchioschettobarpizzeria.it/wp-content/uploads/2019/10/logo-bianco.jpg" alt="Logo"/>
                     </Grid>
                 </Grid>
 
-                <div class="categories-container">                        
+                <div className="categories-container">
                 <Typography variant="h2" className="page-title">Dai una occhiata alle nostre pietanze!</Typography>
                 <GridList spacing={2} cols={getScreenWidth()}>
                     {
