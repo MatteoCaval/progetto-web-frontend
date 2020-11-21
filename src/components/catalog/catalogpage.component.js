@@ -1,15 +1,25 @@
 import React from "react";
 import CategoryList from "./category/category-list.component";
-import { Route, Switch, withRouter } from "react-router-dom";
+import {Route, Switch, withRouter} from "react-router-dom";
 import ProductList from "./product/product-list.component";
-import { Container } from '@material-ui/core'
+import {Container} from '@material-ui/core'
 import ProductForm from "./product/product-form.component";
 import CategoryForm from "./category/category-form.component";
 import ProductPage from "./product/product-page.component";
 import Progress from "../common/progress.component";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 
 const CatalogPage = ({ match, loading, error }) => {
+
+    let errorView;
+    if (error) {
+        if (error.code === 404) {
+            errorView = (<p>Item not found</p>)
+        } else if (!error.code ) {
+            errorView = (<p>Something went wrong</p>)
+        }
+    }
+
     return (
         // gestire qua dentro il loading ed error generali
         <Container maxWidth='md'>
@@ -36,8 +46,8 @@ const CatalogPage = ({ match, loading, error }) => {
                     component={ProductList}
                 />
             </Switch>
+            {errorView}
             <Progress loading={loading}/>
-            {error ? <p>{error}</p> : null}
         </Container>
     )
 
