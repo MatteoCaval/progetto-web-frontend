@@ -47,7 +47,7 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
     return (
         <React.Fragment>
             <main>
-                <Grid container>
+                <Grid container className="welcome">
                     <Grid item sm={12} md={6}> 
                         <Typography variant="h2" className="page-title">Il chioschetto ti da il ben venuto!</Typography>
                         <Typography>

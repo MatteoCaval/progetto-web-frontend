@@ -1,7 +1,15 @@
-.home-image {
-    width: 100%; 
-    height: auto;
+.welcome{
+    .home-image {
+        width: 100%; 
+        height: auto;
+    }
+    
+    .image-container {
+        display: flex;
+        align-items: center;
+    }
 }
+
 
 .categories-container{
     margin-top: 2em;
