@@ -46,7 +46,7 @@ const CatalogPage = ({ match, loading, error }) => {
 const mapStateToProps = state => {
     return {
         loading: state.catalog.loading,
-        error: state.catalog.error
+        error: state.catalog.error ? state.catalog.description : null
     }
 }
 

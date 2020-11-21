@@ -110,7 +110,7 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
                     </Grid>
                 </Grid>
             </main>
-        ) : <p>Product not found</p>
+        ) : null
     )
 }
 

@@ -6,7 +6,7 @@ export const INITIAL_STATE = {
     products: [],
     productDetails: null,
     loading: false,
-    error: ''
+    error: null
 }
 
 const catalogReducer = (state = INITIAL_STATE, action = {}) => {
@@ -16,13 +16,13 @@ const catalogReducer = (state = INITIAL_STATE, action = {}) => {
                 ...state,
                 categories: action.payload,
                 loading: false,
-                error: ''
+                error: null
             }
         case CatalogActionType.FETCH_CATEGORIES_PENDING:
             return {
                 ...state,
                 loading: true,
-                error: ''
+                error: null
             }
         case CatalogActionType.FETCH_CATEGORIES_FAILED:
             return {
@@ -35,40 +35,40 @@ const catalogReducer = (state = INITIAL_STATE, action = {}) => {
                 ...state,
                 productDetails: action.payload,
                 loading: false,
-                error: ''
+                error: null
             }
         case CatalogActionType.FETCH_PRODUCT_PENDING:
             return {
                 ...state,
                 productDetails: null,
                 loading: true,
-                error: ''
+                error: null
             }
         case CatalogActionType.FETCH_PRODUCT_FAILED:
             return {
                 ...state,
                 productDetails: null,
                 loading: false,
-                error: action.payload.description
+                error: action.payload
             }
         case CatalogActionType.FETCH_CATEGORY_PRODUCTS_SUCCESS:
             return {
                 ...state,
                 products: action.payload,
                 loading: false,
-                error: ''
+                error: null
             }
         case CatalogActionType.FETCH_CATEGORY_PRODUCTS_PENDING:
             return {
                 ...state,
                 loading: true,
-                error: ''
+                error: null
             }
         case CatalogActionType.FETCH_CATEGORY_PRODUCTS_FAILED:
             return {
                 ...state,
                 loading: false,
-                error: action.payload.description
+                error: action.payload
             }
         case CatalogOperationType.REMOVE_CATEGORY_SUCCESS: {
             const categoryId = action.payload

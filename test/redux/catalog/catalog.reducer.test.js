@@ -1,10 +1,9 @@
-import catalogReducer, { INITIAL_STATE as catalogInitialState } from "../../../src/redux/catalog/catalog.reducer";
+import catalogReducer, {INITIAL_STATE as catalogInitialState} from "../../../src/redux/catalog/catalog.reducer";
 import CatalogActionType from "../../../src/redux/catalog/catalog.types";
 import CatalogOperationType from "../../../src/redux/catalog/catalog-operations.type";
+import {sampleErrorResponse, sampleMappedError} from "../networkTestUtils";
 
 describe('catalogReducer', () => {
-
-    const errorMessage = 'error'
 
     it('on FETCH_CATEGORIES_SUCCESS sets categories and clears loading and error', () => {
         const prevState = catalogInitialState
@@ -17,7 +16,7 @@ describe('catalogReducer', () => {
         })).toEqual({
             ...prevState,
             categories: resultCategories,
-            error: '',
+            error: null,
             loading: false
         })
     })
@@ -26,11 +25,11 @@ describe('catalogReducer', () => {
         const prevState = catalogInitialState
         expect(catalogReducer(prevState, {
             type: CatalogActionType.FETCH_CATEGORIES_FAILED,
-            payload: 'error'
+            payload: sampleMappedError
         })).toEqual({
             ...prevState,
             categories: [],
-            error: 'error',
+            error: sampleMappedError,
             loading: false
         })
     })
@@ -42,7 +41,7 @@ describe('catalogReducer', () => {
         })).toEqual({
             ...prevState,
             categories: [],
-            error: '',
+            error: null,
             loading: true
         })
     })
@@ -56,7 +55,7 @@ describe('catalogReducer', () => {
         })).toEqual({
             ...prevState,
             productDetails: resultProduct,
-            error: '',
+            error: null,
             loading: false
         })
     })
@@ -68,7 +67,7 @@ describe('catalogReducer', () => {
         })).toEqual({
             ...prevState,
             productDetails: null,
-            error: '',
+            error: null,
             loading: true
         })
     })
@@ -77,11 +76,11 @@ describe('catalogReducer', () => {
         const prevState = catalogInitialState
         expect(catalogReducer(prevState, {
             type: CatalogActionType.FETCH_PRODUCT_FAILED,
-            payload: errorMessage
+            payload: sampleMappedError
         })).toEqual({
             ...prevState,
             productDetails: null,
-            error: errorMessage,
+            error: sampleMappedError,
             loading: false
         })
     })
@@ -95,7 +94,7 @@ describe('catalogReducer', () => {
         })).toEqual({
             ...prevState,
             products: result,
-            error: '',
+            error: null,
             loading: false
         })
     })
@@ -107,7 +106,7 @@ describe('catalogReducer', () => {
         })).toEqual({
             ...prevState,
             products: [],
-            error: '',
+            error: null,
             loading: true
         })
     })
@@ -117,11 +116,11 @@ describe('catalogReducer', () => {
         const result = ['prod1', 'prod2']
         expect(catalogReducer(prevState, {
             type: CatalogActionType.FETCH_CATEGORY_PRODUCTS_FAILED,
-            payload: errorMessage
+            payload: sampleMappedError
         })).toEqual({
             ...prevState,
             products: [],
-            error: errorMessage,
+            error: sampleMappedError,
             loading: false
         })
     })
