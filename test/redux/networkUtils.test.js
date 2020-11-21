@@ -33,7 +33,7 @@ describe('mapNetworkError', () => {
         const errorCode = 404
         let error = {
             response: {
-                code: errorCode,
+                status: errorCode,
                 data: {
                     description: description
                 }
@@ -50,7 +50,7 @@ describe('mapNetworkError', () => {
         const errorCode = 404
         let error = {
             response: {
-                code: errorCode,
+                status: errorCode,
                 message: ''
             }
         }

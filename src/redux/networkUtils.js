@@ -15,7 +15,7 @@ export const mapNetworkError = error => {
     if (error.response) {
         // client received an error response (5xx, 4xx)
         return {
-            code: error.response.code,
+            code: error.response.status,
             description: getErrorResponseDescription(error)
         }
     } else if (error.request) {

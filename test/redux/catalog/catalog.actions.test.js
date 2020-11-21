@@ -20,7 +20,7 @@ describe('async catalog actions', () => {
 
     const sampleErrorResponse = {
         response: {
-            code: errorCode,
+            status: errorCode,
             data: {
                 description: errorDescription
             }
