@@ -1,6 +1,7 @@
 import CartActionTypes from "./cart.actionTypes";
 import { alertActions } from "../alerts/alert.actions";
 import { userService } from "../../services/user.service";
+import {mapNetworkError} from "../networkUtils";
 
 export const fetchCart = () => {
     return (dispatch, getState) => {
@@ -10,7 +11,7 @@ export const fetchCart = () => {
             .then(result => {
                 dispatch(fetchCartSuccess(result.data))
             })
-            .catch(error => dispatch(fetchCartFailed(error.message)))
+            .catch(error => dispatch(fetchCartFailed(mapNetworkError(error))))
 
     }
 }
@@ -44,7 +45,7 @@ export const addToCart = (productId, quantity) => {
                 dispatch(addToCartSuccess())
                 dispatch(alertActions.success('Product added to cart'))
             })
-            .catch(error => dispatch(addToCartFailed(error.message)))
+            .catch(error => dispatch(addToCartFailed(mapNetworkError(error))))
 
     }
 }
@@ -77,7 +78,7 @@ export const removeProductFromCart = (productId) => {
                 dispatch(removeFromCartSuccess())
                 dispatch(fetchCart())
             })
-            .catch(error => dispatch(removeFromCartFailed(error.message)))
+            .catch(error => dispatch(removeFromCartFailed(mapNetworkError(error))))
 
     }
 }
@@ -109,7 +110,7 @@ export const updateCartProductQuantity = (productId, quantity) => {
                 dispatch(updateCartProductQuantitySuccess())
                 dispatch(fetchCart())
             })
-            .catch(error => dispatch(updateCartProductQuantityFailed(error.message)))
+            .catch(error => dispatch(updateCartProductQuantityFailed(mapNetworkError(error))))
 
     }
 }
@@ -141,7 +142,7 @@ export const fetchTodayTimetable = () => {
             .then(result => {
                 dispatch(fetchTodayTimetableSuccess(result.data))
             })
-            .catch(error => dispatch(fetchTodayTimetableFailed(error.message)))
+            .catch(error => dispatch(fetchTodayTimetableFailed(mapNetworkError(error))))
     }
 }
 

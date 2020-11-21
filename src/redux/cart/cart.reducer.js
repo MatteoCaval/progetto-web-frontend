@@ -5,7 +5,7 @@ export const INITIAL_STATE = {
     products: null,
     loading: false,
     total: 0,
-    error: '',
+    error: null,
     timetable: '',
     orderCompleted: false
 }
@@ -18,14 +18,14 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
                 products: action.payload.cartProducts,
                 total: action.payload.total,
                 loading: false,
-                error: ''
+                error: null
             }
         case CartActionTypes.FETCH_TODAY_TIMETABLE_SUCCESS:
             return {
                 ...state,
                 timetable: action.payload,
                 loading: false,
-                error: ''
+                error: null
             }
         case CartActionTypes.FETCH_CART_START:
         case CartActionTypes.REMOVE_ITEM_PENDING:
@@ -34,7 +34,7 @@ const cartReducer = (state = INITIAL_STATE, action = {}) => {
             return {
                 ...state,
                 loading: true,
-                error: ''
+                error: null
             }
         case CartActionTypes.FETCH_CART_FAILED:
         case CartActionTypes.REMOVE_ITEM_FAILED:

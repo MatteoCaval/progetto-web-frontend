@@ -18,7 +18,7 @@ describe('cart reducer', () => {
             products,
             total,
             loading: false,
-            error: ''
+            error: null
         })
     })
 
@@ -33,7 +33,7 @@ describe('cart reducer', () => {
             ...prevState,
             timetable,
             loading: false,
-            error: ''
+            error: null
         })
 
     })
@@ -50,7 +50,7 @@ describe('cart reducer', () => {
         const prevState = {
             ...cartInitialState,
             orderCompleted: true,
-            error: 'errore',
+            error: null,
             loading: true
         }
 
