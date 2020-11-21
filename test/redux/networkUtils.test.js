@@ -1,6 +1,6 @@
-import {getErrorResponseMessage} from "../../src/redux/networkUtils";
+import {getErrorResponseDescription} from "../../src/redux/networkUtils";
 
-describe("getErrorResponseMessage", () => {
+describe("getErrorResponseDescription", () => {
 
     it('shoul get error description if present', () => {
         const description = "error description"
@@ -11,7 +11,7 @@ describe("getErrorResponseMessage", () => {
                 }
             }
         }
-        expect(getErrorResponseMessage(error)).toBe(description)
+        expect(getErrorResponseDescription(error)).toBe(description)
     })
 
     it('shoul get fallback message on missing description', () => {
@@ -23,7 +23,7 @@ describe("getErrorResponseMessage", () => {
             },
             message: fallBackdescription
         }
-        expect(getErrorResponseMessage(error)).toBe(fallBackdescription)
+        expect(getErrorResponseDescription(error)).toBe(fallBackdescription)
     })
 
 })

@@ -3,7 +3,7 @@ import {alertActions} from "../alerts/alert.actions";
 import {authService} from "../../services/auth.service";
 import {userService} from "../../services/user.service";
 import UserActionTypes from "./user.actionTypes";
-import { getErrorResponseMessage } from "../networkUtils"
+import { getErrorResponseDescription } from "../networkUtils"
 const loginSuccess = user => {
     return {
         type: AuthActionType.LOGIN_SUCCESS,
@@ -39,8 +39,8 @@ export const loginUser = (email, password) => {
                 dispatch(loginSuccess(result.data))
             })
             .catch(error => {
-                    dispatch(loginFailed(getErrorResponseMessage(error)))
-                    dispatch(alertActions.error(getErrorResponseMessage(error)))
+                    dispatch(loginFailed(getErrorResponseDescription(error)))
+                    dispatch(alertActions.error(getErrorResponseDescription(error)))
                 }
             )
 
