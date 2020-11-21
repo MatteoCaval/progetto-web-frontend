@@ -23,11 +23,30 @@ describe('user reducer', () => {
         )
     })
 
-    it('should reset user data on FETCH_CURRENT_USER_FAILED', () => {
-        expect(userReducer({ email: 'prova@test.it', token: 'token' },
-            { type: UserActionTypes.FETCH_CURRENT_USER_FAILED }))
+    it('should reset user data on FETCH_CURRENT_USER_FAILED due to an error response', () => {
+        const user = { email: 'prova@test.it', token: 'token' }
+        expect(userReducer(user,
+            {
+                type: UserActionTypes.FETCH_CURRENT_USER_FAILED,
+                payload: {
+                    code: 404
+                }
+            }))
             .toEqual(null)
     })
+
+    it('should not reset user data on FETCH_CURRENT_USER_FAILED if there is no response from the server', () => {
+        const user = { email: 'prova@test.it', token: 'token' }
+        expect(userReducer(user,
+            {
+                type: UserActionTypes.FETCH_CURRENT_USER_FAILED,
+                payload: {
+                    code: null
+                }
+            }))
+            .toEqual(user)
+    })
+
 
     it('should reset user data on LOGOUT_SUCCESS', () => {
         expect(userReducer({ email: 'prova@test.it', token: 'token' },

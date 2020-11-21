@@ -3,7 +3,7 @@ import {alertActions} from "../alerts/alert.actions";
 import {authService} from "../../services/auth.service";
 import {userService} from "../../services/user.service";
 import UserActionTypes from "./user.actionTypes";
-import { getErrorResponseDescription } from "../networkUtils"
+import {getErrorResponseDescription, mapNetworkError} from "../networkUtils"
 const loginSuccess = user => {
     return {
         type: AuthActionType.LOGIN_SUCCESS,
@@ -89,7 +89,7 @@ export const fetchCurrentUser = () => {
             .then(result => {
                 dispatch(fetchCurrentUserSuccess(result.data))
             })
-            .catch(error => dispatch(fetchCurrentUserFailed(error.message)))
+            .catch(error => dispatch(fetchCurrentUserFailed(mapNetworkError(error))))
 
     }
 }
@@ -101,10 +101,10 @@ const fetchCurrentUserSuccess = (user) => {
     }
 }
 
-const fetchCurrentUserFailed = errorMessage => {
+const fetchCurrentUserFailed = error => {
     return {
         type: UserActionTypes.FETCH_CURRENT_USER_FAILED,
-        payload: errorMessage
+        payload: error
     }
 }
 

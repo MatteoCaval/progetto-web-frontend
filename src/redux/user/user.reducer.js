@@ -16,7 +16,11 @@ const userReducer = (state = INITIAL_STATE, action = {}) => {
             }
         }
         case UserActionTypes.FETCH_CURRENT_USER_FAILED: {
-            return null
+            if (action.payload.code) {
+                return null
+            } else {
+                return state
+            }
         }
         case AuthActionType.LOGOUT_SUCCESS:
             return null
