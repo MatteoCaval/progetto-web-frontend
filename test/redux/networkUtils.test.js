@@ -1,4 +1,4 @@
-import {getErrorResponseDescription} from "../../src/redux/networkUtils";
+import {getErrorResponseDescription, mapNetworkError} from "../../src/redux/networkUtils";
 
 describe("getErrorResponseDescription", () => {
 
@@ -14,16 +14,52 @@ describe("getErrorResponseDescription", () => {
         expect(getErrorResponseDescription(error)).toBe(description)
     })
 
-    it('shoul get fallback message on missing description', () => {
+    it('shoul get fallback empty message on missing description', () => {
         const description = "error description"
-        const fallBackdescription = 'fallback'
         let error = {
             response: {
                 data: null
             },
-            message: fallBackdescription
         }
-        expect(getErrorResponseDescription(error)).toBe(fallBackdescription)
+        expect(getErrorResponseDescription(error)).toBe('')
     })
 
 })
+
+
+describe('mapNetworkError', () => {
+    it('should map server error response with description', () => {
+        const description = 'description'
+        const errorCode = 404
+        let error = {
+            response: {
+                code: errorCode,
+                data: {
+                    description: description
+                }
+            }
+        }
+        expect(mapNetworkError(error)).toMatchObject({
+            code: errorCode,
+            description: description
+        })
+
+    });
+
+    it('should map server error response without description', () => {
+        const errorCode = 404
+        let error = {
+            response: {
+                code: errorCode,
+                data: {
+                }
+            }
+        }
+        expect(mapNetworkError(error)).toMatchObject({
+            code: errorCode,
+            description: ''
+        })
+
+    });
+
+});
