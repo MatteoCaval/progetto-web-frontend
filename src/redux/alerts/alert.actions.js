@@ -1,16 +1,36 @@
 import AlertTypes from "./alert.types";
 
 const success = (message) => {
-    return {
-        type: AlertTypes.SUCCESS,
-        payload: message
+    return dispatch => {
+        dispatch({
+            type: AlertTypes.SUCCESS,
+            payload: message
+        })
+
+        return new Promise(resolve => {
+            setTimeout(resolve, 2000)
+        })
+            .then(() => {
+                dispatch(clear())
+            })
+
+
     }
 }
 
 const error = (message) => {
-    return {
-        type: AlertTypes.ERROR,
-        payload: message
+    return dispatch => {
+        dispatch({
+            type: AlertTypes.ERROR,
+            payload: message
+        })
+
+        return new Promise(resolve => {
+            setTimeout(resolve, 2000)
+        })
+            .then(() => {
+                dispatch(clear())
+            })
     }
 }
 
