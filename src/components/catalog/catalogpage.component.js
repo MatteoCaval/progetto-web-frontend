@@ -37,6 +37,7 @@ const CatalogPage = ({ match, loading, error }) => {
                 />
             </Switch>
             <Progress loading={loading}/>
+            {error ? <p>{error}</p> : null}
         </Container>
     )
 

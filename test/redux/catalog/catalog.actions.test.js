@@ -3,13 +3,29 @@ import thunk from 'redux-thunk'
 import expect from 'expect'
 import CatalogActionType from "../../../src/redux/catalog/catalog.types";
 import axios from 'axios'
-import { fetchCategories, fetchProductDetail, fetchProductsForCategory } from "../../../src/redux/catalog/catalog.actions";
+import {
+    fetchCategories,
+    fetchProductDetail,
+    fetchProductsForCategory
+} from "../../../src/redux/catalog/catalog.actions";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
 jest.mock('axios');
 
 describe('async catalog actions', () => {
+
+    const errorCode = 404
+    const errorDescription = 'description'
+
+    const sampleErrorResponse = {
+        response: {
+            code: errorCode,
+            data: {
+                description: errorDescription
+            }
+        }
+    }
 
     it('fetchingCategories on success creates PENDING and SUCCESS actions', () => {
         const expectedActions = [
@@ -26,13 +42,18 @@ describe('async catalog actions', () => {
     })
 
     it('fetchingCategories on error creates PENDING and ERROR actions', () => {
+        const sampleError = {
+            code: errorCode,
+            description: errorDescription
+        }
+
         const expectedActions = [
             { type: CatalogActionType.FETCH_CATEGORIES_PENDING },
-            { type: CatalogActionType.FETCH_CATEGORIES_FAILED, payload: 'error' }
+            { type: CatalogActionType.FETCH_CATEGORIES_FAILED, payload: sampleError }
         ]
         const store = mockStore({ catalog: { categories: [] } })
 
-        axios.get.mockImplementation(() => Promise.reject({ message: 'error' }))
+        axios.get.mockImplementation(() => Promise.reject(sampleErrorResponse))
 
         return store.dispatch(fetchCategories()).then(() => {
             expect(store.getActions()).toEqual(expectedActions)

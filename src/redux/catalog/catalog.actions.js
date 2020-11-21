@@ -1,5 +1,6 @@
 import CatalogActionType from "./catalog.types";
 import { catalogService } from "../../services/catalog.service";
+import {mapNetworkError} from "../networkUtils";
 
 export const fetchCategories = () => {
     return (dispatch, getState) => {
@@ -7,7 +8,7 @@ export const fetchCategories = () => {
         dispatch(fetchCategoriesPending())
         return catalogService.fetchCategories()
             .then(result => dispatch(fetchCategoriesSuccess(result.data)))
-            .catch(error => dispatch(fetchCategoriesFailed(error.message)))
+            .catch(error => dispatch(fetchCategoriesFailed(mapNetworkError(error))))
     }
 }
 
@@ -41,7 +42,7 @@ export const fetchProductsForCategory = (categoryId, cached = true) => {
         dispatch(fetchProductForCategoryPending())
         return catalogService.fetchProductsForCategory(categoryId)
             .then(result => dispatch(fetchProductForCategorySuccess(result.data)))
-            .catch(error => dispatch(fetchProductForCategoryFailed(error.message)))
+            .catch(error => dispatch(fetchProductForCategoryFailed(mapNetworkError(error))))
     }
 }
 
@@ -71,7 +72,7 @@ export const fetchProductDetail = (productId) => {
         dispatch(fetchProductPending())
         return catalogService.fetchProductDetail(productId)
             .then(result => dispatch(fetchProductSuccess(result.data)))
-            .catch(error => dispatch(fetchProductFailed(error.message)))
+            .catch(error => dispatch(fetchProductFailed(mapNetworkError(error))))
     }
 }
 

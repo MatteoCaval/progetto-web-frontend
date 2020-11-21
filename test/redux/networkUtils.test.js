@@ -51,8 +51,7 @@ describe('mapNetworkError', () => {
         let error = {
             response: {
                 code: errorCode,
-                data: {
-                }
+                message: ''
             }
         }
         expect(mapNetworkError(error)).toMatchObject({

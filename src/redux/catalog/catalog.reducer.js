@@ -49,7 +49,7 @@ const catalogReducer = (state = INITIAL_STATE, action = {}) => {
                 ...state,
                 productDetails: null,
                 loading: false,
-                error: action.payload
+                error: action.payload.description
             }
         case CatalogActionType.FETCH_CATEGORY_PRODUCTS_SUCCESS:
             return {
@@ -68,7 +68,7 @@ const catalogReducer = (state = INITIAL_STATE, action = {}) => {
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                error: action.payload.description
             }
         case CatalogOperationType.REMOVE_CATEGORY_SUCCESS: {
             const categoryId = action.payload
