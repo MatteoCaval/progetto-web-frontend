@@ -48,7 +48,7 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
         <React.Fragment>
             <main>
                 <Grid container>
-                    <Grid item xs={12} sm={6}> 
+                    <Grid item sm={12} md={6}> 
                         <Typography variant="h2" className="page-title">Il chioschetto ti da il ben venuto!</Typography>
                         <Typography>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lorem mi, suscipit et scelerisque vitae, aliquet et augue. 
@@ -59,24 +59,30 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
                         Vestibulum magna nisi, mattis vitae efficitur id, pulvinar quis tortor. Sed ultrices lacus quis nisl cursus pellentesque eu id risus.
                         </Typography>                    
                     </Grid>
-                    <Grid item  xs={12} sm={6} className="image-container">
+                    <Grid item  sm={12} md={6} className="image-container">
                         <img className='home-image' src="https://www.ilchioschettobarpizzeria.it/wp-content/uploads/2019/10/logo-bianco.jpg" alt="Logo"/>
                     </Grid>
                 </Grid>
 
                 <div className="categories-container">
                 <Typography variant="h2" className="page-title">Dai una occhiata alle nostre pietanze!</Typography>
-                <GridList spacing={2} cols={getScreenWidth()}>
-                    {
-                        categories.map((category) => (
-                            <GridListTile key={category.name} className="gridTileStyle"
-                                onClick={() => history.push(`${match.url}${category.id}`)}>
-                                <img className="image-media" src={category.image} alt={category.name} />
-                                <GridListTileBar
-                                    title={category.name}
-                                />
-                            </GridListTile>))
-                    }
+                <GridList spacing={25} cols={getScreenWidth()}>
+                {
+                    categories.map((category) => (
+                        <GridListTile key={category.name} className="tile"
+                            onClick={() => history.push(`${match.url}${category.id}`)}>                      
+                            <div className="image-container">
+                                <CardMedia
+                                    className='image'
+                                    image={category.image}/>
+                                    <span className="overlay"/>
+                                    <div className="text-container">
+                                        <Typography variant="h2" className="text">{category.name}</Typography>
+                                    </div>
+                            </div>
+                
+                        </GridListTile>))
+                }
                 </GridList>
                 </div>
       

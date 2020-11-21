@@ -1,19 +1,54 @@
-.gridTileStyle {
-    cursor: pointer;
-}
-
 .home-image {
     width: 100%; 
     height: auto;
 }
 
-.image-container {
-    display: flex !important;
-    flex-direction: column;
-    justify-content: center;  /* Centering y-axis */
-    align-items :center; /* Centering x-axis */
-}
-
 .categories-container{
     margin-top: 2em;
+
+    .tile {
+        height: auto !important;
+        cursor: pointer;
+
+        .image-container{
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 100%;
+            display: flex;
+        
+            .image {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                vertical-align: middle;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .overlay {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                vertical-align: middle;
+                background-color: black;
+                opacity: 0.40;
+                margin-right: auto;        
+            }
+
+            .text-container {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                vertical-align: middle;
+                margin-right: auto;
+                display: flex; 
+                align-items: center;
+                justify-content: center;
+                color: white;
+            }
+
+        
+        }
+    }
 }
+
