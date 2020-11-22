@@ -17,7 +17,7 @@ const ordersReducer = (state = INITIAL_STATE, action = {}) => {
                     pageCount,
                     orders,
                     pending: false,
-                    error: ''
+                    error: null
                 }
             }
         case OrderActionTypes.FETCH_ORDER_HISTORY_PENDING: {
@@ -26,7 +26,7 @@ const ordersReducer = (state = INITIAL_STATE, action = {}) => {
                 orderHistory: {
                     ...state.orderHistory,
                     pending: true,
-                    error: ''
+                    error: null
                 }
             }
         }

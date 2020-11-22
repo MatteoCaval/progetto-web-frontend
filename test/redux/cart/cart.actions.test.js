@@ -26,7 +26,7 @@ describe('cart actions', () => {
         const store = mockStore({ user: { token: 'token' } })
         axios.get.mockImplementation(() => Promise.resolve({ data: result }))
 
-        store.dispatch(fetchCart()).then(() => {
+        return store.dispatch(fetchCart()).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })
     })

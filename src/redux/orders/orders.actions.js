@@ -5,6 +5,7 @@ import { orderService } from "../../services/orders.service";
 import { alertActions } from "../alerts/alert.actions";
 import io from "socket.io-client";
 import getAuthHeader from "../../services/getAuthHeader";
+import {mapNetworkError} from "../networkUtils";
 
 export const completeOrder = (orderData) => {
     return (dispatch, getState) => {
@@ -80,7 +81,7 @@ export const fetchOrderHistory = (page = 1) => {
         return orderService.fetchOrderHistory(token, getState().user.role, page)
             .then(result => dispatch(fetchOrderHistorySuccess(result.data)))
             .catch(error => {
-                dispatch(fetchOrderHistoryFailed(error.message))
+                dispatch(fetchOrderHistoryFailed(mapNetworkError(error)))
                 dispatch(alertActions.error(error.message))
             })
 
@@ -94,10 +95,10 @@ const fetchOrderHistorySuccess = (resultData) => {
     }
 }
 
-const fetchOrderHistoryFailed = (errorMessage) => {
+const fetchOrderHistoryFailed = (error) => {
     return {
         type: OrderActionTypes.FETCH_ORDER_HISTORY_FAILED,
-        payload: errorMessage
+        payload: error
     }
 }
 

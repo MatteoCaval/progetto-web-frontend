@@ -1,5 +1,6 @@
 import ordersReducer, { INITIAL_STATE as orderInitialState } from "../../../src/redux/orders/orders.reducer";
 import OrderActionTypes from "../../../src/redux/orders/orders.types";
+import {sampleMappedError} from "../networkTestUtils";
 
 
 describe('order reducer', () => {
@@ -21,7 +22,7 @@ describe('order reducer', () => {
                 ...prevState.orderHistory,
                 ...result,
                 pending: false,
-                error: ''
+                error: null
             }
         })
     })
@@ -35,21 +36,22 @@ describe('order reducer', () => {
             orderHistory: {
                 ...prevState.orderHistory,
                 pending: true,
-                error: ''
+                error: null
             }
         })
     })
 
     it('set error on FETCH_ORDER_HISTORY_FAILED', () => {
+        let error = sampleMappedError
         const prevState = orderInitialState
         expect(ordersReducer(prevState, {
             type: OrderActionTypes.FETCH_ORDER_HISTORY_FAILED,
-            payload: errorMessage
+            payload: sampleMappedError
         })).toMatchObject({
             orderHistory: {
                 ...prevState.orderHistory,
                 pending: false,
-                error: errorMessage
+                error: sampleMappedError
             }
         })
     })
