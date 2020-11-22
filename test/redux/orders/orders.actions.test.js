@@ -2,7 +2,7 @@ import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios'
 import OrderActionTypes from "../../../src/redux/orders/orders.types";
-import { completeOrder, fetchOrderHistory, updateOrder } from "../../../src/redux/orders/orders.actions";
+import {completeOrder, fetchOrderHistory, updateOrder} from "../../../src/redux/orders/orders.actions";
 import UserRoles from "../../../src/common/UserRoles";
 
 const middlewares = [thunk]
@@ -11,13 +11,15 @@ jest.mock('axios');
 
 describe('async order actions', () => {
 
+    const stateWToken = { user: { data: { token: 'token' } } }
+
     it('create PENDING and SUCCESS actions on completeOrder', () => {
         const expectedActions = [
             { type: OrderActionTypes.COMPLETE_ORDER_PENDING },
             { type: OrderActionTypes.COMPLETE_ORDER_SUCCESS }
         ]
 
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
 
         axios.post.mockImplementation(() => Promise.resolve())
 
@@ -32,7 +34,7 @@ describe('async order actions', () => {
             { type: OrderActionTypes.UPDATE_ORDER_SUCCESS }
         ]
 
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
         axios.put.mockImplementation(() => Promise.resolve())
 
         return store.dispatch(updateOrder('orderId', {}, 'riderId'))
@@ -47,7 +49,7 @@ describe('async order actions', () => {
             { type: OrderActionTypes.FETCH_ORDER_HISTORY_SUCCESS, }
         ]
 
-        const store = mockStore({ user: { token: 'token', role: UserRoles.ADMIN } })
+        const store = mockStore({ user: { data: { token: 'token', role: UserRoles.ADMIN } } })
         axios.get.mockImplementation(() => Promise.resolve(orders))
 
         return store.dispatch(fetchOrderHistory())

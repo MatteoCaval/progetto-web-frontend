@@ -10,7 +10,7 @@ import {mapNetworkError} from "../networkUtils";
 export const completeOrder = (orderData) => {
     return (dispatch, getState) => {
         dispatch(completeOrderPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return axios.post(`${Config.API_BASE_URL}/orders`, orderData, getAuthHeader(token))
             .then(result => {
                 dispatch(completeOrderSuccess())
@@ -44,7 +44,7 @@ const completeOrderPending = () => {
 
 export const updateOrder = (orderId, state, riderId) => {
     return (dispatch, getState) => {
-        const token = getState().user.token
+        const token = getState().user.data.token
         dispatch(updateOrderPending())
         return axios.put(`${Config.API_BASE_URL}/orders/${orderId}`, { state, riderId }, getAuthHeader(token))
             .then(() => {
@@ -77,7 +77,7 @@ const updateOrderPending = () => {
 export const fetchOrderHistory = (page = 1) => {
     return (dispatch, getState) => {
         dispatch(fetchOrderHistoryPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return orderService.fetchOrderHistory(token, getState().user.role, page)
             .then(result => dispatch(fetchOrderHistorySuccess(result.data)))
             .catch(error => {
@@ -113,7 +113,7 @@ const fetchOrderHistoryPending = () => {
 let socket = undefined
 export const startLiveOrderUpdated = () => {
     return (dispatch, getState) => {
-        const token = getState().user.token
+        const token = getState().user.data.token
         socket = io.connect(Config.API_BASE_URL, { query: { token } })
         socket.on('orders', orders => {
             dispatch(realTimeOrders(orders))

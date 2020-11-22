@@ -6,7 +6,7 @@ const RoleConstrained = ({ children, roleMatch }) => {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        roleMatch: ownProps.role && state.user && state.user.role === ownProps.role
+        roleMatch: ownProps.role && state.user && state.user.data && state.user.data.role === ownProps.role
     }
 }
 

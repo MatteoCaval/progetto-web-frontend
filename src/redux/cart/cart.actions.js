@@ -6,7 +6,7 @@ import {mapNetworkError} from "../networkUtils";
 export const fetchCart = () => {
     return (dispatch, getState) => {
         dispatch(fetchCartPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return userService.fetchCart(token)
             .then(result => {
                 dispatch(fetchCartSuccess(result.data))
@@ -39,7 +39,7 @@ const fetchCartPending = () => {
 export const addToCart = (productId, quantity) => {
     return (dispatch, getState) => {
         dispatch(addToCartPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return userService.addToCart(productId, quantity, token)
             .then(result => {
                 dispatch(addToCartSuccess())
@@ -72,7 +72,7 @@ const addToCartPending = () => {
 export const removeProductFromCart = (productId) => {
     return (dispatch, getState) => {
         dispatch(removeFromCartPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return userService.removeProductFromCart(productId, token)
             .then(result => {
                 dispatch(removeFromCartSuccess())
@@ -104,7 +104,7 @@ const removeFromCartPending = () => {
 export const updateCartProductQuantity = (productId, quantity) => {
     return (dispatch, getState) => {
         dispatch(updateCartProductQuantityPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return userService.updateProductQuantity(productId, quantity, token)
             .then(result => {
                 dispatch(updateCartProductQuantitySuccess())
@@ -136,7 +136,7 @@ const updateCartProductQuantityPending = () => {
 export const fetchTodayTimetable = () => {
     return (dispatch, getState) => {
         dispatch(fetchTodayTimetablePending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         // TODO potrebbe anche non essere autenticata
         return userService.fetchTodayTimetable(token)
             .then(result => {

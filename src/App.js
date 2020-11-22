@@ -66,7 +66,7 @@ function App({ user, history, clearAlerts,fetchCurrentUser }) {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user.data
     }
 }
 

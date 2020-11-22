@@ -32,7 +32,7 @@ describe('product operation actions', () => {
         ]
         axios.post.mockImplementation(() => Promise.resolve({ data: product }))
 
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore({ user: { data: { token: 'token' } } })
         return store.dispatch(createProduct(product)).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })
@@ -52,7 +52,7 @@ describe('product operation actions', () => {
         ]
         axios.put.mockImplementation(() => Promise.resolve({ data: productAfterUpdate }))
 
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore({ user: { data: { token: 'token' } } })
         return store.dispatch(updateProduct(product)).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })
@@ -80,7 +80,7 @@ describe('product operation actions', () => {
         ]
         axios.post.mockImplementation(() => Promise.resolve({ data: category }))
 
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore({ user: { data: { token: 'token' } } })
         return store.dispatch(createCategory(category)).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })

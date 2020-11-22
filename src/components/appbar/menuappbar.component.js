@@ -161,7 +161,7 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.user
+        currentUser: state.user.data
     }
 }
 

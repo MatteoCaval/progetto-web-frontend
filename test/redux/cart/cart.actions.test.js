@@ -17,13 +17,15 @@ jest.mock('axios');
 
 describe('cart actions', () => {
 
+    const stateWToken = { user: { data: { token: 'token' } } }
+
     it('should create PENDIND and SUCCESS actions on fetchCart success', () => {
         const result = { products: [] }
         const expectedActions = [
             { type: CartActionTypes.FETCH_CART_START },
             { type: CartActionTypes.FETCH_CART_SUCCESS, payload: result }
         ]
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
         axios.get.mockImplementation(() => Promise.resolve({ data: result }))
 
         return store.dispatch(fetchCart()).then(() => {
@@ -38,7 +40,7 @@ describe('cart actions', () => {
             { type: CartActionTypes.ADD_ITEM_SUCCESS },
             { type: AlertTypes.SUCCESS, payload: 'Product added to cart' }
         ]
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
         axios.post.mockImplementation(() => Promise.resolve())
         axios.get.mockImplementation(() => Promise.resolve({ data: result }))
 
@@ -56,7 +58,7 @@ describe('cart actions', () => {
             { type: CartActionTypes.FETCH_CART_SUCCESS, payload: result }
 
         ]
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
         axios.delete.mockImplementation(() => Promise.resolve())
         axios.get.mockImplementation(() => Promise.resolve({ data: result }))
 
@@ -74,7 +76,7 @@ describe('cart actions', () => {
             { type: CartActionTypes.FETCH_CART_SUCCESS, payload: result }
 
         ]
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
         axios.put.mockImplementation(() => Promise.resolve())
         axios.get.mockImplementation(() => Promise.resolve({ data: result }))
 
@@ -90,7 +92,7 @@ describe('cart actions', () => {
             { type: CartActionTypes.FETCH_TODAY_TIMETABLE_SUCCESS, payload: result }
 
         ]
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
 
         axios.get.mockImplementation(() => Promise.resolve({ data: result }))
 

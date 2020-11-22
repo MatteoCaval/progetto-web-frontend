@@ -164,7 +164,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
     )
 }
 const mapStateToProps = state => {
-    const currentUser = state.user
+    const currentUser = state.user.data
     return {
         user: currentUser,
         riders: currentUser.role === UserRoles.ADMIN ? state.adminData.riders : null

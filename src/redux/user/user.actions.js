@@ -3,7 +3,8 @@ import {alertActions} from "../alerts/alert.actions";
 import {authService} from "../../services/auth.service";
 import {userService} from "../../services/user.service";
 import UserActionTypes from "./user.actionTypes";
-import {getErrorResponseDescription, mapNetworkError} from "../networkUtils"
+import {mapNetworkError} from "../networkUtils"
+
 const loginSuccess = user => {
     return {
         type: AuthActionType.LOGIN_SUCCESS,
@@ -11,10 +12,10 @@ const loginSuccess = user => {
     }
 }
 
-const loginFailed = errorMessage => {
+const loginFailed = error => {
     return {
         type: AuthActionType.LOGIN_FAILED,
-        payload: errorMessage
+        payload: error
     }
 }
 
@@ -25,10 +26,10 @@ const registrationSuccess = user => {
     }
 }
 
-const registrationFailed = errorMessage => {
+const registrationFailed = error => {
     return {
         type: AuthActionType.REGISTRATION_FAILED,
-        payload: errorMessage
+        payload: error
     }
 }
 
@@ -39,8 +40,8 @@ export const loginUser = (email, password) => {
                 dispatch(loginSuccess(result.data))
             })
             .catch(error => {
-                    dispatch(loginFailed(getErrorResponseDescription(error)))
-                    dispatch(alertActions.error(getErrorResponseDescription(error)))
+                    dispatch(loginFailed(mapNetworkError(error)))
+                    dispatch(alertActions.error(mapNetworkError(error).description))
                 }
             )
 
@@ -52,15 +53,15 @@ export const registerUser = (user) => {
         return authService.registerUser(user)
             .then(result => {
                 dispatch(registrationSuccess(result.data))
-                dispatch(alertActions.success('Registration Sucessful'))
+                dispatch(alertActions.success('Registration Successful'))
             })
-            .catch(error => dispatch(registrationFailed(error)))
+            .catch(error => dispatch(registrationFailed(mapNetworkError(error))))
     }
 }
 
 export const logout = () => {
     return (dispatch, getState) => {
-        const token = getState().user.token
+        const token = getState().user.data.token
         return authService.logout(token)
             .then(result => {
                 dispatch(logoutSuccess())
@@ -84,7 +85,7 @@ const logoutFailed = (error) => {
 
 export const fetchCurrentUser = () => {
     return (dispatch, getState) => {
-        const token = getState().user.token
+        const token = getState().user.data.token
         return userService.fetchCurrentUser(token)
             .then(result => {
                 dispatch(fetchCurrentUserSuccess(result.data))

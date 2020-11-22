@@ -1,38 +1,35 @@
-import userReducer from "../../../src/redux/user/user.reducer";
+import userReducer, {INITIAL_STATE} from "../../../src/redux/user/user.reducer";
 import AuthActionType from "../../../src/redux/auth/auth.actionType";
 import UserActionTypes from "../../../src/redux/user/user.actionTypes";
 
 describe('user reducer', () => {
+
     it('should save user data on LOGIN_SUCCESS', () => {
         const user = { email: 'prova@test.it', token: 'token' }
-        expect(userReducer(null, {
+        expect(userReducer({ data: user, error: null }, {
             type: AuthActionType.LOGIN_SUCCESS,
             payload: user
-        })).toEqual(
-            user
-        )
+        })).toHaveProperty('data', user)
     })
 
     it('should save user data on FETCH_CURRENT_USER_SUCCESS', () => {
         const user = { email: 'prova@test.it', token: 'token' }
-        expect(userReducer(null, {
+        expect(userReducer(INITIAL_STATE, {
             type: UserActionTypes.FETCH_CURRENT_USER_SUCCESS,
             payload: user
-        })).toEqual(
-            user
-        )
+        })).toHaveProperty('data', user)
     })
 
     it('should reset user data on FETCH_CURRENT_USER_FAILED due to an error response', () => {
         const user = { email: 'prova@test.it', token: 'token' }
-        expect(userReducer(user,
+        expect(userReducer({ data: user, error: null },
             {
                 type: UserActionTypes.FETCH_CURRENT_USER_FAILED,
                 payload: {
                     code: 404
                 }
             }))
-            .toEqual(null)
+            .toEqual({ data: null, error: null })
     })
 
     it('should not reset user data on FETCH_CURRENT_USER_FAILED if there is no response from the server', () => {
@@ -49,9 +46,9 @@ describe('user reducer', () => {
 
 
     it('should reset user data on LOGOUT_SUCCESS', () => {
-        expect(userReducer({ email: 'prova@test.it', token: 'token' },
+        expect(userReducer({ data: { email: 'prova@test.it', token: 'token' }, error: null },
             { type: AuthActionType.LOGOUT_SUCCESS }))
-            .toEqual(null)
+            .toEqual({ data: null, error: null })
     })
 
 })

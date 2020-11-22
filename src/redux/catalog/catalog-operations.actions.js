@@ -5,7 +5,7 @@ import { catalogService } from "../../services/catalog.service";
 export const createProduct = (product) => {
     return (dispatch, getState) => {
         dispatch(createProductPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return catalogService.createProduct(product, token)
             .then(result => {
                 dispatch(createProductSuccess(result.data))
@@ -37,7 +37,7 @@ const createProductPending = () => {
 export const updateProduct = (updatedProduct) => {
     return (dispatch, getState) => {
         dispatch(updateProductPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return catalogService.updateProduct(updatedProduct, token)
             .then(result => {
                 dispatch(updateProductSuccess(result.data))
@@ -69,7 +69,7 @@ const updateProductPending = () => {
 export const createCategory = (category) => {
     return (dispatch, getState) => {
         dispatch(createCategoryPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return catalogService.createCategory(category, token)
             .then(result => {
                 dispatch(createCategorySuccess(result.data))
@@ -101,7 +101,7 @@ const createCategoryPending = () => {
 export const deleteCategory = (categoryId) => {
     return (dispatch, getState) => {
         dispatch(deleteCategoryPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return catalogService.deleteCategory(categoryId, token)
             .then(result => {
                 dispatch(deleteCategorySuccess(categoryId))
@@ -134,7 +134,7 @@ const deleteCategoryFailed = (errorMessage) => {
 export const deleteProduct = (productId) => {
     return (dispatch, getState) => {
         dispatch(deleteProductPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return catalogService.deleteProduct(productId, token)
             .then(result => {
                 dispatch(deleteProductSuccess(productId))

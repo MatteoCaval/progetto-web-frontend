@@ -1,7 +1,13 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios'
-import { createRider, deleteRider, fetchRiders, fetchTimetable, updateTimetable } from "../../../src/redux/admin/admin.actions";
+import {
+    createRider,
+    deleteRider,
+    fetchRiders,
+    fetchTimetable,
+    updateTimetable
+} from "../../../src/redux/admin/admin.actions";
 import AdminActionType from "../../../src/redux/admin/admin.types";
 import AlertTypes from "../../../src/redux/alerts/alert.types";
 
@@ -11,6 +17,8 @@ jest.mock('axios');
 
 describe('admin actions', () => {
 
+    const stateWToken = { user: { data: { token: 'token' } } }
+
     it('should return pending and success actions on fetchRiders success', () => {
         const riders = ['rider1', 'rider2']
         const expectedActions = [
@@ -18,7 +26,7 @@ describe('admin actions', () => {
             { type: AdminActionType.FETCH_RIDERS_SUCCESS, payload: riders }
         ]
 
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
         axios.get.mockImplementation(() => Promise.resolve({ data: riders }))
 
         return store.dispatch(fetchRiders()).then(() => {
@@ -34,7 +42,7 @@ describe('admin actions', () => {
             { type: AlertTypes.SUCCESS, payload: 'Rider removed' },
         ]
 
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
         axios.delete.mockImplementation(() => Promise.resolve())
 
         return store.dispatch(deleteRider(riderId)).then(() => {
@@ -53,7 +61,7 @@ describe('admin actions', () => {
         ]
         const fakeRider = { name: 'rider' }
 
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
 
         axios.post.mockImplementation(() => Promise.resolve())
         axios.get.mockImplementation(() => Promise.resolve({ data: riders }))
@@ -71,7 +79,7 @@ describe('admin actions', () => {
             { type: AdminActionType.FETCH_TIMETABLE_SUCCESS, payload: timetable }
         ]
 
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
 
         axios.get.mockImplementation(() => Promise.resolve({ data: timetable }))
 
@@ -87,7 +95,7 @@ describe('admin actions', () => {
             { type: AdminActionType.UPDATE_TIMETABLE_SUCCESS },
             { type: AlertTypes.SUCCESS, payload: 'Timetable updated' },
         ]
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
 
         axios.put.mockImplementation(() => Promise.resolve())
 

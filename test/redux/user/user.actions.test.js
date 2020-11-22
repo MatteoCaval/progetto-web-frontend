@@ -12,6 +12,8 @@ jest.mock('axios');
 
 describe('user actions', () => {
 
+    const stateWToken = { user: { data: { token: 'token' } } }
+
     it('should create SUCCESS action on login success', () => {
         const userData = { email: 'email@prova.it' }
         const expectedAction = {
@@ -51,7 +53,7 @@ describe('user actions', () => {
 
         axios.post.mockImplementation(() => Promise.resolve())
 
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
 
         return store.dispatch(logout())
             .then(() => expect(store.getActions()).toContainEqual(expectedAction))
@@ -67,7 +69,7 @@ describe('user actions', () => {
 
         axios.get.mockImplementation(() => Promise.resolve({ data: userData }))
 
-        const store = mockStore({ user: { token: 'token' } })
+        const store = mockStore(stateWToken)
 
         return store.dispatch(fetchCurrentUser())
             .then(() => expect(store.getActions()).toEqual(expectedAction))

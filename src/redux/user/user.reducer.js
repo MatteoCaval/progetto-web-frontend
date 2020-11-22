@@ -1,29 +1,45 @@
 import AuthActionType from "../auth/auth.actionType";
 import UserActionTypes from "./user.actionTypes";
 
-const INITIAL_STATE = null
+export const INITIAL_STATE = {
+    data: null,
+    error: null
+}
 
 const userReducer = (state = INITIAL_STATE, action = {}) => {
     switch (action.type) {
         case AuthActionType.LOGIN_SUCCESS:
             return {
-                ...action.payload
+                data: action.payload
             }
         case UserActionTypes.FETCH_CURRENT_USER_SUCCESS: {
             return {
                 ...state,
-                ...action.payload
+                data: {
+                    ...state.data,
+                    ...action.payload,
+                }
             }
         }
         case UserActionTypes.FETCH_CURRENT_USER_FAILED: {
             if (action.payload.code) {
-                return null
+                return INITIAL_STATE
             } else {
                 return state
             }
         }
         case AuthActionType.LOGOUT_SUCCESS:
-            return null
+            return INITIAL_STATE
+
+        case AuthActionType.LOGIN_FAILED:
+        case AuthActionType.LOGOUT_FAILED:
+        case AuthActionType.REGISTRATION_FAILED: {
+            return {
+                ...state,
+                error: action.payload
+            }
+        }
+
         default:
             return state;
     }

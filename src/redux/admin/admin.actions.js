@@ -5,7 +5,7 @@ import { alertActions } from "../alerts/alert.actions";
 export const fetchRiders = () => {
     return (dispatch, getState) => {
         dispatch(fetchRidersPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return adminService.fetchRiders(token)
             .then(response => {
                 dispatch(fetchRidersSuccess(response.data))
@@ -40,7 +40,7 @@ const fetchRidersPending = () => {
 export const deleteRider = (riderId) => {
     return (dispatch, getState) => {
         dispatch(deleteRiderPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return adminService.deleteRider(riderId, token)
             .then(result => {
                 dispatch(deleteRiderSuccess(riderId))
@@ -77,7 +77,7 @@ const deleteRiderSuccess = (id) => {
 export const createRider = (rider) => {
     return (dispatch, getState) => {
         dispatch(createRiderPending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return adminService.createRider(rider, token)
             .then(result => {
                 dispatch(createRiderSuccess())
@@ -112,7 +112,7 @@ const createRiderFailed = (errorMessage) => {
 export const updateTimetable = (timetable) => {
     return (dispatch, getState) => {
         dispatch(updateTimetablePending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return adminService.updateTimetable(timetable, token)
             .then(() => {
                 dispatch(updateTimetableSuccess())
@@ -144,7 +144,7 @@ const updateTimetablePending = () => {
 export const fetchTimetable = () => {
     return (dispatch, getState) => {
         dispatch(fetchTimetablePending())
-        const token = getState().user.token
+        const token = getState().user.data.token
         return adminService.fetchTimetable(token)
             .then((result) => {
                 dispatch(fetchTimetableSuccess(result.data))
