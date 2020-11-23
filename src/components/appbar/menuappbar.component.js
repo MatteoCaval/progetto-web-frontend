@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
-import { Menu, MenuItem, IconButton, Typography, Toolbar, AppBar, Drawer, Fab } from '@material-ui/core';
+import { Menu, MenuItem, IconButton, Typography, Toolbar, AppBar, Drawer, Badge } from '@material-ui/core';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { logout } from "../../redux/user/user.actions";
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const MenuAppBar = ({ currentUser, history, logout }) => {
+const MenuAppBar = ({ currentUser, products, history, logout }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -49,6 +49,15 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
             history.push('/signin')
         }
     };
+
+    //const sum = cart.products.count()
+    var badgeNum = 0
+    if (products) {
+        var badgeNum = 0
+        products.forEach(element => {
+            badgeNum+=element.quantity
+        });
+    }
 
     const handleCartMenu = (e) => {
         history.push('/cart')
@@ -70,32 +79,32 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
                 <Drawer anchor='left' open={drawerOpen} onClose={hideDrawer}>
                     <List className={classes.list}>
                         <ListItem button
-                                  component={RouterLink}
-                                  to="/live-orders"
-                                  onClick={hideDrawer}>
-                            <ListItemIcon>{<ListAltIcon/>}</ListItemIcon>
-                            <ListItemText primary='Live Orders'/>
+                            component={RouterLink}
+                            to="/live-orders"
+                            onClick={hideDrawer}>
+                            <ListItemIcon>{<ListAltIcon />}</ListItemIcon>
+                            <ListItemText primary='Live Orders' />
                         </ListItem>
                         <ListItem button
-                                  component={RouterLink}
-                                  to="/orders"
-                                  onClick={hideDrawer}>
-                            <ListItemIcon>{<ListAltIcon/>}</ListItemIcon>
-                            <ListItemText primary='Order History'/>
+                            component={RouterLink}
+                            to="/orders"
+                            onClick={hideDrawer}>
+                            <ListItemIcon>{<ListAltIcon />}</ListItemIcon>
+                            <ListItemText primary='Order History' />
                         </ListItem>
                         <ListItem button
-                                  component={RouterLink}
-                                  to="/timetable"
-                                  onClick={hideDrawer}>
-                            <ListItemIcon>{<ScheduleIcon/>}</ListItemIcon>
-                            <ListItemText primary='Timetable'/>
+                            component={RouterLink}
+                            to="/timetable"
+                            onClick={hideDrawer}>
+                            <ListItemIcon>{<ScheduleIcon />}</ListItemIcon>
+                            <ListItemText primary='Timetable' />
                         </ListItem>
                         <ListItem button
-                                  component={RouterLink}
-                                  to='/riders'
-                                  onClick={hideDrawer}>
-                            <ListItemIcon>{<DirectionsBikeIcon/>}</ListItemIcon>
-                            <ListItemText primary='Riders'/>
+                            component={RouterLink}
+                            to='/riders'
+                            onClick={hideDrawer}>
+                            <ListItemIcon>{<DirectionsBikeIcon />}</ListItemIcon>
+                            <ListItemText primary='Riders' />
                         </ListItem>
                     </List>
                 </Drawer>
@@ -104,22 +113,24 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
                 <Toolbar>
                     <AdminConstrained>
                         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
-                                    onClick={() => setDrawerOpen(true)}>
-                            <MenuIcon/>
+                            onClick={() => setDrawerOpen(true)}>
+                            <MenuIcon />
                         </IconButton>
                     </AdminConstrained>
                     <Typography variant="h2" className={classes.title}
-                                onClick={handleLogoClick}>FoodDelivery</Typography>
+                        onClick={handleLogoClick}>FoodDelivery</Typography>
                     <div className={classes.headerButtons}>
                         {currentUser && currentUser.role === 'consumer' && (
-                            <IconButton
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleCartMenu}
-                                color="inherit">
-                                <ShoppingCart/>
-                            </IconButton>
+                            <Badge badgeContent={badgeNum} color="secondary">
+                                    <ShoppingCart 
+                                        aria-label="account of current user"
+                                        aria-controls="menu-appbar"
+                                        aria-haspopup="true"
+                                        cursor='pointer'
+                                        onClick={handleCartMenu}
+                                        color="inherit"
+                                    />
+                            </Badge>
                         )}
                         <IconButton
                             aria-label="account of current user"
@@ -127,7 +138,7 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
                             aria-haspopup="true"
                             onClick={handleProfileMenu}
                             color="inherit">
-                            <AccountCircle/>
+                            <AccountCircle />
                         </IconButton>
                         {currentUser && (
                             <Menu
@@ -161,7 +172,8 @@ const MenuAppBar = ({ currentUser, history, logout }) => {
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.user ? state.user.data : null
+        currentUser: state.user ? state.user.data : null,
+        products: state.cart ? state.cart.products : null
     }
 }
 

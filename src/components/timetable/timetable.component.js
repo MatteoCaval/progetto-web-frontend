@@ -71,7 +71,6 @@ export const initialTimeTable = [
 const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) => {
 
     const [timetable, setTimetable] = useState(
-        initialTimeTable
     )
 
     useEffect(() => {
