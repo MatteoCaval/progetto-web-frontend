@@ -23,7 +23,13 @@
             overflow: hidden;
             padding-bottom: 100%;
             display: flex;
-        
+
+            &:hover{
+                .image {
+                    background-size: 200%;
+                }
+            }
+           
             .image {
                 position: absolute;
                 height: 100%;

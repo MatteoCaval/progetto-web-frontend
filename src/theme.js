@@ -1,10 +1,10 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
-import green from '@material-ui/core/colors/green'
-import indigo from '@material-ui/core/colors/indigo'
 
 let theme = createMuiTheme({
     palette: {
-        primary: indigo,
+        primary: {
+            main: '#FFFFFF'
+        },
         secondary: {
             main: '#921C2A'
         }

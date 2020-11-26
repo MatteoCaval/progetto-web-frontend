@@ -26,10 +26,12 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
     },
     title: {
-        cursor: "pointer"
+        cursor: "pointer",
+        margin: 'auto',
     },
     headerButtons: {
-        marginLeft: "auto"
+       position: "absolute",
+       right: 0
     },
     list: {
         width: 250,
@@ -109,7 +111,7 @@ const MenuAppBar = ({ currentUser, products, history, logout }) => {
                     </List>
                 </Drawer>
             </AdminConstrained>
-            <AppBar position="fixed">
+            <AppBar position="fixed" color="secondary">
                 <Toolbar>
                     <AdminConstrained>
                         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
@@ -121,7 +123,7 @@ const MenuAppBar = ({ currentUser, products, history, logout }) => {
                         onClick={handleLogoClick}>FoodDelivery</Typography>
                     <div className={classes.headerButtons}>
                         {currentUser && currentUser.role === 'consumer' && (
-                            <Badge badgeContent={badgeNum} color="secondary">
+                            <Badge badgeContent={badgeNum} color="primary" textColor="secondary">
                                     <ShoppingCart 
                                         aria-label="account of current user"
                                         aria-controls="menu-appbar"
