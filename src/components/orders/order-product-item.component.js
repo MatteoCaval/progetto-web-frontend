@@ -12,7 +12,7 @@ const OrderProductItem = ({ product }) => {
 
             <div className="order-product-price">
                 <Typography color='textPrimary'>
-                    {product.price}€
+                    {product.price.toFixed(2)}€
                 </Typography>
             </div>
         </Container>

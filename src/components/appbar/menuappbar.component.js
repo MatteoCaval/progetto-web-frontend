@@ -111,7 +111,7 @@ const MenuAppBar = ({ currentUser, products, history, logout }) => {
                     </List>
                 </Drawer>
             </AdminConstrained>
-            <AppBar position="fixed" color="secondary">
+            <AppBar position="fixed" color="primary">
                 <Toolbar>
                     <AdminConstrained>
                         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
@@ -123,7 +123,7 @@ const MenuAppBar = ({ currentUser, products, history, logout }) => {
                         onClick={handleLogoClick}>FoodDelivery</Typography>
                     <div className={classes.headerButtons}>
                         {currentUser && currentUser.role === 'consumer' && (
-                            <Badge badgeContent={badgeNum} color="primary" textColor="secondary">
+                            <Badge badgeContent={badgeNum} color="secondary" textColor="primary">
                                     <ShoppingCart 
                                         aria-label="account of current user"
                                         aria-controls="menu-appbar"

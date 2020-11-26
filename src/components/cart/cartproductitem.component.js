@@ -23,7 +23,7 @@ const CartProductItem = ({ product, removeFromCart, updateProductQuantity }) => 
                         {product.name}
                     </Typography>
                     <Typography className='cart-price' variant='h3' color='textPrimary'>
-                        {product.price}€
+                        {product.price.toFixed(2)}€
                     </Typography>
                 </div>
                 <div className="cart-actions">

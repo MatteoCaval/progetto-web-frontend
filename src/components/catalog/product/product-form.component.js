@@ -43,7 +43,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                 name: startingProduct.name,
                 image: startingProduct.image,
                 description: startingProduct.description,
-                price: startingProduct.price,
+                price: startingProduct.price.toFixed(2),
                 ingredients: startingProduct.ingredients
             })
         }
@@ -163,7 +163,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             required
                             type='number'
                             fullWidth
-                            value={productData.price}
+                            value={productData.price.toFixed(2)}
                             onChange={handleChange}
                             label='Price' />
                     </Grid>

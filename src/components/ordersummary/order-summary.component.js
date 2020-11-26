@@ -74,7 +74,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                 <div className="order-summary-header">
                     <div className="summary-total-container">
                         <Typography variant='h2' color='textPrimary'>Total:</Typography>
-                        <Typography variant='h3' color='textPrimary'>{total}€</Typography>
+                        <Typography variant='h3' color='textPrimary'>{total.toFixed(2)}€</Typography>
                     </div>
                     <HorizontalDivider/>
                 </div>

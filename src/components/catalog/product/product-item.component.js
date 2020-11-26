@@ -15,7 +15,7 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
     }
 
     return (
-        <Card>
+        <Card className="product-item">
             <CardActionArea onClick={navigateToProductDetail}>
                 <div className="product-image-container">
                     <CardMedia
@@ -24,12 +24,12 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
                 </div>
             </CardActionArea>
             <CardContent>
-                <Typography className="product-title" variant='h5' color='textPrimary'>
+                <Typography className="product-title" variant='h2' color='textPrimary'>
                     {product.name}
                 </Typography>
                 <div className='product-root'>
                     <Typography variant='h3' color='textPrimary'>
-                        {product.price}€
+                        {product.price.toFixed(2)}€
                     </Typography>
 
                     <ConsumerConstrained>

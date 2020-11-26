@@ -40,7 +40,7 @@ const CartPage = ({ fetchCart, cart, history }) => {
                         <div className="total-container">
                             <Button
                                 variant="contained"
-                                color="secondary"
+                                color="primary"
                                 className="proceed-to-order"
                                 onClick={() => history.push('/summary')}>
                                 Proceed to order
@@ -48,7 +48,7 @@ const CartPage = ({ fetchCart, cart, history }) => {
 
                             <div className="total-info-container">
                                 <Typography variant='h2' color='textPrimary'>Total:</Typography>
-                                <Typography variant='h3' color='textPrimary'>{total}€</Typography>
+                                <Typography variant='h3' color='textPrimary'>{total.toFixed(2)}€</Typography>
                             </div>
                         </div>
                     </div>

@@ -59,7 +59,7 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
 
                         <div className='side-container'>
                             <Typography variant='h3' color='textPrimary'>
-                                {product.price}€
+                                {product.price.toFixed(2)}€
                             </Typography>
                         </div>
                         <div className="info-container">
@@ -85,7 +85,7 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
                                     <Button
                                         className="add-button"
                                         variant="contained"
-                                        color="secondary"
+                                        color="primary"
                                         onClick={() => addToCart(productId, quantity)}
                                         startIcon={<AddToCartIcon />}
                                     >Add to cart</Button>
