@@ -23,8 +23,9 @@ const RidersPage = ({ riders, fetchRiders, loading }) => {
         <React.Fragment>
             <Container maxWidth='md'>
                 <Grid container spacing={3}>
-                    {riders ? riders.map(rider => <Grid key={rider.id} item xs={12}><RiderItem rider={rider}/></Grid>) :
-                        <p>No riders found</p>}
+                    {
+                        riders ? riders.map(rider => <Grid key={rider.id} item xs={12}><RiderItem rider={rider}/></Grid>) : null
+                    }
                 </Grid>
                 <div className="rider-button-container">
                 <Button
