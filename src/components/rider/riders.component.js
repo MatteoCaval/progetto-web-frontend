@@ -28,14 +28,19 @@ const RidersPage = ({ riders, fetchRiders, loading }) => {
                             rider={rider}/></Grid>) : null
                     }
                 </Grid>
-                <div className="rider-button-container">
-                    <Button
-                        onClick={() => setCreationDialogOpen(true)}
-                        variant="contained"
-                        color="primary">
-                        Create new rider
-                    </Button>
-                </div>
+                {
+                    riders &&
+                    (
+                        <div className="rider-button-container">
+                            <Button
+                                onClick={() => setCreationDialogOpen(true)}
+                                variant="contained"
+                                color="primary">
+                                Create new rider
+                            </Button>
+                        </div>
+                    )
+                }
             </Container>
             <CreateRiderDialog open={creationDialogOpen} onCreationCancelled={() => setCreationDialogOpen(false)}/>
             <Progress loading={loading}/>
