@@ -12,7 +12,6 @@ export const fetchRiders = () => {
             })
             .catch(error => {
                 dispatch(fetchRidersFailed(error.message))
-                dispatch(alertActions.error('Error retrieving admin'))
             })
     }
 }
@@ -118,7 +117,10 @@ export const updateTimetable = (timetable) => {
                 dispatch(updateTimetableSuccess())
                 dispatch(alertActions.success('Timetable updated'))
             })
-            .catch(error => dispatch(updateTimetableFailed(error.message)))
+            .catch(error => {
+                dispatch(updateTimetableFailed(error.message))
+                dispatch(alertActions.error('Error fetching timetable'))
+            })
 
     }
 }

@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import "./timetable.style.scss"
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import Progress from "../common/progress.component";
 
 
 export const initialLaunchState = {
@@ -68,7 +69,7 @@ export const initialTimeTable = [
     }
 ]
 
-const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) => {
+const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable, error, loading }) => {
 
     const [timetable, setTimetable] = useState(
     )
@@ -122,6 +123,7 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) =>
                     }
 
                 </form>
+                <Progress loading={loading} />
             </Container>
         </MuiPickersUtilsProvider>
     )
@@ -129,7 +131,9 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) =>
 
 const mapStateToProps = state => {
     return {
-        currentTimetable: state.adminData.timetable
+        currentTimetable: state.adminData.timetable,
+        error: state.adminData.timetableError,
+        loading: state.adminData.timetableLoading
     }
 }
 
