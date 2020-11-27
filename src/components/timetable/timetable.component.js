@@ -102,20 +102,25 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) =>
             <Container maxWidth='md'>
                 <form onSubmit={handleSubmit}>
                     {
-                        timetable && timetable.map(day => {
+                        timetable && (timetable.map(day => {
                             return (
                                 <TimeTableItem key={day.name} day={day} onDayChanged={updateDay} />
                             )
-                        })
+                        }))
                     }
-                    <div className="save-button-container">
-                        <Button
-                            type='submit'
-                            variant='contained'
-                            color='primary'>
-                            Save
-                    </Button>
-                    </div>
+                    {
+                        timetable && (
+                            <div className="save-button-container">
+                                <Button
+                                    type='submit'
+                                    variant='contained'
+                                    color='primary'>
+                                    Save
+                                </Button>
+                            </div>
+                        )
+                    }
+
                 </form>
             </Container>
         </MuiPickersUtilsProvider>
