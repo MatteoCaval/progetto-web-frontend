@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, {useState, useEffect} from "react"
 import TimeTableItem from "./timetable-item.component"
-import { Container, Button } from "@material-ui/core"
-import { updateTimetable, fetchTimetable } from "../../redux/admin/admin.actions";
-import { connect } from "react-redux";
+import {Container, Button} from "@material-ui/core"
+import {updateTimetable, fetchTimetable} from "../../redux/admin/admin.actions";
+import {connect} from "react-redux";
 import "./timetable.style.scss"
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import Progress from "../common/progress.component";
 
 
 export const initialLaunchState = {
@@ -68,7 +69,7 @@ export const initialTimeTable = [
     }
 ]
 
-const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) => {
+const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable, error, loading }) => {
 
     const [timetable, setTimetable] = useState(
     )
@@ -78,7 +79,7 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) =>
     }, [fetchTimetable])
 
     useEffect(() => {
-        if (currentTimetable != null && currentTimetable.length > 0){
+        if (currentTimetable != null && currentTimetable.length > 0) {
             setTimetable(currentTimetable)
         }
     }, [currentTimetable])
@@ -102,21 +103,32 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) =>
             <Container maxWidth='md'>
                 <form onSubmit={handleSubmit}>
                     {
-                        timetable && timetable.map(day => {
+                        timetable && (timetable.map(day => {
                             return (
-                                <TimeTableItem key={day.name} day={day} onDayChanged={updateDay} />
+                                <TimeTableItem key={day.name} day={day} onDayChanged={updateDay}/>
                             )
-                        })
+                        }))
                     }
-                    <div className="save-button-container">
-                        <Button
-                            type='submit'
-                            variant='contained'
-                            color='primary'>
-                            Save
-                    </Button>
-                    </div>
+                    {
+                        timetable && (
+                            <div className="save-button-container">
+                                <Button
+                                    type='submit'
+                                    variant='contained'
+                                    color='primary'>
+                                    Save
+                                </Button>
+                            </div>
+                        )
+                    }
+
                 </form>
+                <Progress loading={loading}/>
+                {
+                    error && (
+                        <p>Error retrieving timetable</p> // TODO error page
+                    )
+                }
             </Container>
         </MuiPickersUtilsProvider>
     )
@@ -124,7 +136,9 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable }) =>
 
 const mapStateToProps = state => {
     return {
-        currentTimetable: state.adminData.timetable
+        currentTimetable: state.adminData.timetable,
+        error: state.adminData.timetableError,
+        loading: state.adminData.timetableLoading
     }
 }
 

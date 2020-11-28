@@ -1,6 +1,10 @@
 import AdminActionType from "./admin.types";
 
-export const INITIAL_STATE = {}
+export const INITIAL_STATE = {
+    timetable: null,
+    timetableLoading: false,
+    timetableError: null
+}
 
 const adminReducer = (state = INITIAL_STATE, action = {}) => {
     switch (action.type) {
@@ -51,7 +55,26 @@ const adminReducer = (state = INITIAL_STATE, action = {}) => {
         case AdminActionType.FETCH_TIMETABLE_SUCCESS: {
             return {
                 ...state,
-                timetable: action.payload
+                timetable: action.payload,
+                timetableError: null,
+                timetableLoading: false
+            }
+        }
+
+        case AdminActionType.FETCH_TIMETABLE_PENDING: {
+            return {
+                ...state,
+                timetable: action.payload,
+                timetableError: null,
+                timetableLoading: true
+            }
+        }
+
+        case AdminActionType.FETCH_TIMETABLE_FAILED: {
+            return {
+                ...state,
+                timetableError: action.payload,
+                timetableLoading: false
             }
         }
 
