@@ -8,6 +8,7 @@ import PaymentType from "./payment-type"
 import "./order-summary.style.scss"
 import { withRouter } from "react-router-dom";
 import HorizontalDivider from "../custom/horizontal-divider.component";
+import OrderCompletedDialog from "../orders/dialogs/order-completed-dialog";
 
 const cities = [
     'San Mauro Pascoli',
@@ -37,13 +38,6 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
     useEffect(() => {
         fetchTodayTimetable()
     }, [fetchTodayTimetable])
-
-    useEffect(() => {
-        if (orderCompleted) {
-            history.push('/')
-            clearOrderData()
-        }
-    }, [orderCompleted])
 
     useEffect(() => {
         setOrderData({ ...orderData, ['paymentType']: cashPayment ? PaymentType.ON_DELIVERY : PaymentType.ONLINE })
@@ -232,6 +226,15 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                     </div>
                 </form>
             </Container>
+            <OrderCompletedDialog open={orderCompleted}
+                                  goHomeAction={() => {
+                                      history.push('/')
+                                      clearOrderData()
+                                  }}
+                                  goMyOrdersAction={() => {
+                                      history.push('/orders')
+                                      clearOrderData()
+                                  }}/>
         </React.Fragment>
     )
 }

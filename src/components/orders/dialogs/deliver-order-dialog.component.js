@@ -11,7 +11,7 @@ import {
 const DeliverOrderDialog = ({ open, handleDiscard, handleConfirm}) => {
     return (
         <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleDiscard}>
-            <DialogTitle>Order deliverty</DialogTitle>
+            <DialogTitle>Order delivery</DialogTitle>
             <DialogContent>
                 <Typography>
                     Do you confirm the delivery of this order?

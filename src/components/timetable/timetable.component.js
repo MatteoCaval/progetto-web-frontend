@@ -31,44 +31,6 @@ export const initialDinnerState = {
     }
 }
 
-export const initialTimeTable = [
-    {
-        name: 'Monday',
-        launchOpen: false,
-        dinnerOpen: false
-    },
-    {
-        name: 'Tuesday',
-        launchOpen: false,
-        dinnerOpen: false
-    },
-    {
-        name: 'Wednesday',
-        launchOpen: false,
-        dinnerOpen: false
-    },
-    {
-        name: 'Thursday',
-        launchOpen: false,
-        dinnerOpen: false
-    },
-    {
-        name: 'Friday',
-        launchOpen: false,
-        dinnerOpen: false
-    },
-    {
-        name: 'Saturday',
-        launchOpen: false,
-        dinnerOpen: false
-    },
-    {
-        name: 'Sunday',
-        launchOpen: false,
-        dinnerOpen: false
-    }
-]
-
 const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable, error, loading }) => {
 
     const [timetable, setTimetable] = useState(
