@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, {useState, useEffect} from "react"
 import TimeTableItem from "./timetable-item.component"
-import { Container, Button } from "@material-ui/core"
-import { updateTimetable, fetchTimetable } from "../../redux/admin/admin.actions";
-import { connect } from "react-redux";
+import {Container, Button} from "@material-ui/core"
+import {updateTimetable, fetchTimetable} from "../../redux/admin/admin.actions";
+import {connect} from "react-redux";
 import "./timetable.style.scss"
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import Progress from "../common/progress.component";
 
@@ -79,7 +79,7 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable, erro
     }, [fetchTimetable])
 
     useEffect(() => {
-        if (currentTimetable != null && currentTimetable.length > 0){
+        if (currentTimetable != null && currentTimetable.length > 0) {
             setTimetable(currentTimetable)
         }
     }, [currentTimetable])
@@ -105,7 +105,7 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable, erro
                     {
                         timetable && (timetable.map(day => {
                             return (
-                                <TimeTableItem key={day.name} day={day} onDayChanged={updateDay} />
+                                <TimeTableItem key={day.name} day={day} onDayChanged={updateDay}/>
                             )
                         }))
                     }
@@ -123,7 +123,12 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable, erro
                     }
 
                 </form>
-                <Progress loading={loading} />
+                <Progress loading={loading}/>
+                {
+                    error && (
+                        <p>Error retrieving timetable</p> // TODO error page
+                    )
+                }
             </Container>
         </MuiPickersUtilsProvider>
     )

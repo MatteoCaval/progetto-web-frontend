@@ -1,6 +1,7 @@
 import AdminActionType from "./admin.types";
 import { adminService } from "../../services/admin-operation.service";
 import { alertActions } from "../alerts/alert.actions";
+import {mapNetworkError} from "../networkUtils";
 
 export const fetchRiders = () => {
     return (dispatch, getState) => {
@@ -119,7 +120,6 @@ export const updateTimetable = (timetable) => {
             })
             .catch(error => {
                 dispatch(updateTimetableFailed(error.message))
-                dispatch(alertActions.error('Error fetching timetable'))
             })
 
     }
@@ -151,7 +151,10 @@ export const fetchTimetable = () => {
             .then((result) => {
                 dispatch(fetchTimetableSuccess(result.data))
             })
-            .catch(error => dispatch(fetchTimetableFailed(error.message)))
+            .catch(error => {
+                dispatch(fetchTimetableFailed(mapNetworkError(error)))
+                dispatch(alertActions.error(mapNetworkError(error).description))
+            })
 
     }
 }

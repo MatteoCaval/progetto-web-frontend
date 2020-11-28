@@ -73,7 +73,7 @@ const adminReducer = (state = INITIAL_STATE, action = {}) => {
         case AdminActionType.FETCH_TIMETABLE_FAILED: {
             return {
                 ...state,
-                timetableError: 'error', // FIXME
+                timetableError: action.payload,
                 timetableLoading: false
             }
         }
