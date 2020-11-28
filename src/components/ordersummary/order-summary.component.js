@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from "react";
-import {Button, Card, CardActionArea, Container, Grid, MenuItem, TextField, Typography} from "@material-ui/core";
-import {completeOrder} from "../../redux/orders/orders.actions";
-import {clearOrderData, fetchTodayTimetable} from "../../redux/cart/cart.actions";
-import {connect} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Button, Card, CardActionArea, Container, Grid, MenuItem, TextField, Typography } from "@material-ui/core";
+import { completeOrder } from "../../redux/orders/orders.actions";
+import { clearOrderData, fetchTodayTimetable } from "../../redux/cart/cart.actions";
+import { connect } from "react-redux";
 import PaymentType from "./payment-type"
 
 import "./order-summary.style.scss"
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import HorizontalDivider from "../custom/horizontal-divider.component";
 
 const cities = [
@@ -68,17 +68,17 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
     }
 
     return (
-        <main>
+        <React.Fragment>
             <Typography variant="h1" className="page-title">Order summary</Typography>
             <Container maxWidth='md'>
-                <div className="order-summary-header">
-                    <div className="summary-total-container">
+                <div className="order-header">
+                    <div className="total">
                         <Typography variant='h2' color='textPrimary'>Total:</Typography>
                         <Typography variant='h3' color='textPrimary'>{total.toFixed(2)}€</Typography>
                     </div>
-                    <HorizontalDivider/>
+                    <HorizontalDivider />
                 </div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="order-form">
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -90,7 +90,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                                 required
                                 fullWidth
                                 onChange={handleChange}
-                                label='Name'/>
+                                label='Name' />
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
@@ -103,7 +103,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                                 required
                                 fullWidth
                                 onChange={handleChange}
-                                label='Surname'/>
+                                label='Surname' />
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
@@ -115,7 +115,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                                 required
                                 fullWidth
                                 onChange={handleChange}
-                                label='Address'/>
+                                label='Address' />
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
@@ -147,7 +147,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                                 fullWidth
                                 type='tel'
                                 onChange={handleChange}
-                                label='Telephone Number'/>
+                                label='Telephone Number' />
                         </Grid>
 
                         <Grid item xs={12} sm={6}>
@@ -176,12 +176,12 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
 
                         <Grid item xs={12} sm={6}>
                             <Card className={cashPayment ? 'card-selected' : ''}
-                                  variant='outlined'>
+                                variant='outlined'>
                                 <CardActionArea className='payment-card'
-                                                onClick={handleCashPaymentSelect}>
+                                    onClick={handleCashPaymentSelect}>
                                     <div
-                                        className='payment-card-content'>
-                                        <Typography variant='h3' color='textPrimary' className="payment-title">
+                                        className='content'>
+                                        <Typography variant='h3' color='textPrimary' className="title">
                                             Paga in contanti
                                         </Typography>
                                         <Typography color='textPrimary'>
@@ -197,12 +197,12 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
 
                         <Grid item xs={12} sm={6}>
                             <Card className={cashPayment ? '' : 'card-selected'}
-                                  variant='outlined'>
+                                variant='outlined'>
                                 <CardActionArea className='payment-card'
-                                                onClick={handlePayNowSelect}>
+                                    onClick={handlePayNowSelect}>
                                     <div
-                                        className='payment-card-content'>
-                                        <Typography variant='h3' color='textPrimary' className="payment-title">
+                                        className='content'>
+                                        <Typography variant='h3' color='textPrimary' className="title">
                                             Paga ora
                                         </Typography>
                                         <Typography color='textPrimary'>
@@ -215,9 +215,9 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
 
 
                     </Grid>
-                    <div className="summary-button-container">
+                    <div className="button-container">
                         <Button
-                            className="place-order"
+                            className="submit"
                             variant='contained'
                             type='submit'
                             disabled={timeSlots.length < 1}
@@ -232,7 +232,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                     </div>
                 </form>
             </Container>
-        </main>
+        </React.Fragment>
     )
 }
 

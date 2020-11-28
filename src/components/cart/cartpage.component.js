@@ -20,7 +20,7 @@ const CartPage = ({ fetchCart, cart, history }) => {
 
     if (products && products.length) {
         return (
-            <main>
+            <React.Fragment>
                 <Typography variant="h1" className="page-title">Cart</Typography>
                 <Container maxWidth='md'>
                     <Grid className="products-list" container spacing={2}>
@@ -54,7 +54,7 @@ const CartPage = ({ fetchCart, cart, history }) => {
                     </div>
                     <Progress loading={loading}/>
                 </Container>
-            </main>
+            </React.Fragment>
         )
     } else {
         if (error && error.description) {

@@ -57,15 +57,15 @@ const TimeTableItem = ({ day, onDayChanged }) => {
     }
 
     return (
-        <Grid container spacing={4}>
-            <Grid className="day-name" item xs={12} sm={12}>
+        <Grid container spacing={4} className="day">
+            <Grid className="name" item xs={12} sm={12}>
                 <Typography variant='h3' color='textPrimary'>
                     {day.name}
                 </Typography>
             </Grid>
 
-            <Grid className="day-component" item xs={12} sm={6}>
-                <div className="day-header-container">
+            <Grid className="element" item xs={12} sm={6}>
+                <div className="header">
                     <Typography color='textPrimary'>
                         Launch
                     </Typography>
@@ -79,7 +79,7 @@ const TimeTableItem = ({ day, onDayChanged }) => {
                 </div>
                 {
                     day.launchOpen ? (
-                        <div className="time-selector-container">
+                        <div className="time-selector">
                             <TimePicker
                                 ampm={false}
                                 label="Inizio"
@@ -87,7 +87,7 @@ const TimeTableItem = ({ day, onDayChanged }) => {
                                 minutesStep={30}
                                 onChange={handleLaunchStart}
                             />
-                            <span className="timetable-space">-</span>
+                            <span className="space">-</span>
                             <TimePicker
                                 ampm={false}
                                 label="Fine"
@@ -99,8 +99,8 @@ const TimeTableItem = ({ day, onDayChanged }) => {
                     ) : null
                 }
             </Grid>
-            <Grid className="day-component" item xs={12} sm={6}>
-                <div className="day-header-container">
+            <Grid className="element" item xs={12} sm={6}>
+                <div className="header">
                     <Typography color='textPrimary'>
                         Dinner
                     </Typography>
@@ -115,7 +115,7 @@ const TimeTableItem = ({ day, onDayChanged }) => {
                 {
                     day.dinnerOpen ?
                         (
-                            <div className="time-selector-container">
+                            <div className="time-selector">
                                 <TimePicker
                                     ampm={false}
                                     label="Inizio"
@@ -123,7 +123,7 @@ const TimeTableItem = ({ day, onDayChanged }) => {
                                     minutesStep={30}
                                     onChange={handleDinnerStart}
                                 />
-                                <span className="timetable-space">-</span>
+                                <span className="space">-</span>
                                 <TimePicker
                                     ampm={false}
                                     label="Fine"

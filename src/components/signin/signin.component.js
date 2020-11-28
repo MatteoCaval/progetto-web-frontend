@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import './signin.style.scss'
 import {connect} from "react-redux";
 import {loginUser} from "../../redux/user/user.actions";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';

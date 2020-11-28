@@ -1,56 +1,56 @@
-.payment-card {
-    height: 12em;
-    display: flex !important;
-    flex-direction: column;
-    align-items: flex-start !important;
-}
-
-.payment-card-content {
-    margin-bottom: auto !important;
-    padding: 1em  !important;
-    width: 100%;
-}
-
-.summary-total-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.summary-divider {
-    margin-bottom: 2em !important;
-}
-
-.place-order {
-    padding: 1em;
-}
-
-.summary-button-container {
-    margin-top: 2em;
+.order-header{
     margin-bottom: 2em;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.card-selected {
-    border: 2px solid !important;
-    border-color: green !important;
-    .payment-title {
-        color: green !important;
-        font-weight: 800;
+    .total {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
-.summary-payment-buttons {
-    display: flex;
-    margin-top: 5em;
+.order-form {
+    .submit {
+        padding: 1em;
+    }
+
+    .card-selected {
+        border: 2px solid !important;
+        border-color: green !important;
+        .title {
+            color: green !important;
+            font-weight: 800;
+        }
+    }
+
+    .payment-card {
+        height: 12em;
+        display: flex !important;
+        flex-direction: column;
+        align-items: flex-start !important;
+    
+        .content {
+            margin-bottom: auto !important;
+            padding: 1em  !important;
+            width: 100%;
+        }
+    }
+
+    .button-container {
+        margin-top: 2em;
+        margin-bottom: 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .no-slots-label{
+            color: red;
+        }
+    }
 }
 
-.no-slots-label{
-    color: red;
-}
 
-.order-summary-header{
-    margin-bottom: 2em;
-}
+
+
+
+
+
+

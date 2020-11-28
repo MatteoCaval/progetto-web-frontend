@@ -5,12 +5,12 @@ import "./order-product-item.style.scss"
 
 const OrderProductItem = ({ product }) => {
     return (
-        <Container className='order-product-row'>
+        <Container className='order-product'>
             <Typography color='textPrimary'>
                 {product.quantity} x {product.name}
             </Typography>
 
-            <div className="order-product-price">
+            <div className="price">
                 <Typography color='textPrimary'>
                     {product.price.toFixed(2)}€
                 </Typography>

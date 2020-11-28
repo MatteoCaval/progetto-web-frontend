@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import "./product-page.style.scss";
 
-import { Button, CardMedia, Grid, Typography } from "@material-ui/core";
+import { Button, CardMedia, Grid, Typography, List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import { fetchProductDetail } from "../../../redux/catalog/catalog.actions";
 import { connect } from "react-redux";
 import QuantityPicker from "../../custom/quantity-picker.component"
@@ -13,6 +13,9 @@ import { Link as RouterLink, withRouter } from 'react-router-dom'
 import { deleteProduct, resetCatalogOperationsState } from "../../../redux/catalog/catalog-operations.actions";
 import Link from "@material-ui/core/Link";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import HorizontalDivider from "../../custom/horizontal-divider.component";
+import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
+
 
 const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, deleteProduct, resetCatalogOperationsState, productDeletionCompleted }) => {
 
@@ -30,86 +33,92 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
 
     return (
         product ? (
-            <main>
-                <Grid container>
-                    <Grid item xs={12} sm={4}>
-                        <Typography>
-                            <Link component={RouterLink} className="page-title" variant="h2" to={`/${product.categoryId}`}>
-                            <ArrowBackIosIcon/>{product.categoryName}
-                            </Link>
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Typography className="page-title" variant='h1'>{product.name}</Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                    </Grid>
-                </Grid>
-
+            <React.Fragment>
                 <Grid container className='prod-details' spacing={2}>
-                    <Grid item xs={12} sm={6}>
-                        <div className='center-container'>
-                            <CardMedia
-                                className='media'
-                                image={product.image}
-                            />
-                        </div>
+                    <Grid item xs={12} sm={6} className='left'>
+                        <CardMedia
+                            className='media'
+                            image={product.image}
+                        />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
 
-                        <div className='side-container'>
-                            <Typography variant='h3' color='textPrimary'>
-                                {product.price.toFixed(2)}€
-                            </Typography>
-                        </div>
-                        <div className="info-container">
-                            <p>{product.description}</p>
+                    <Grid item xs={12} sm={6} className="right">
+                        <Typography className="page-title" variant='h1'>{product.name}</Typography>
+
+                        <div className="info">
+                            <Typography variant='p'>{product.description}</Typography>
+
+                            <Typography variant='h3' color='textPrimary'>€ {product.price.toFixed(2)}</Typography>
+
+                            <Typography variant='p'>Vat included</Typography>
+
+                            <HorizontalDivider />
+
                             <div className="ingredients-container">
-                                <Typography className='ingredients' variant='h3' color='textPrimary'>
+                                <Typography variant='h3' color='textPrimary'>
                                     Ingredienti:
                                 </Typography>
-                                <ul>
+                                <List className='ingredients' >
                                     {
                                         product.ingredients.map((ingredient, index) =>
-                                            <li key={index}>{ingredient}</li>
+                                            <ListItem className="ingredient">
+                                                <ListItemIcon className="icon">
+                                                    <DoubleArrowIcon color="primary" />
+                                                </ListItemIcon>
+                                                <ListItemText primary={ingredient} />
+                                            </ListItem>
                                         )
                                     }
-                                </ul>
+                                </List>
                             </div>
+
+                            <HorizontalDivider />
+
                             <ConsumerConstrained>
-                                <div className='add-to-cart-container'>
-                                    <QuantityPicker
-                                        quantity={quantity}
-                                        onQuantityIncremented={() => setQuantity(quantity + 1)}
-                                        onQuantityDecremented={() => setQuantity(quantity - 1)} />
+                                <div className='quantity-container'>
+                                    <Typography variant="p">Quantity</Typography>
+
+                                    <div className="quantity-picker">
+                                        <QuantityPicker
+                                            quantity={quantity}
+                                            onQuantityIncremented={() => setQuantity(quantity + 1)}
+                                            onQuantityDecremented={() => setQuantity(quantity - 1)} />
+                                    </div>
+                                </div>
+
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => addToCart(productId, quantity)}
+                                    startIcon={<AddToCartIcon />}
+                                >Add to cart</Button>
+                            </ConsumerConstrained>
+                            <AdminConstrained>
+                                <div className='admin-commands'>
                                     <Button
-                                        className="add-button"
                                         variant="contained"
                                         color="primary"
-                                        onClick={() => addToCart(productId, quantity)}
-                                        startIcon={<AddToCartIcon />}
-                                    >Add to cart</Button>
+                                        onClick={() => deleteProduct(product.id)}
+                                    >Remove</Button>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        component={RouterLink}
+                                        to={`${productId}/edit`}
+                                    >Edit</Button>
                                 </div>
-                            </ConsumerConstrained>
+                            </AdminConstrained>
                         </div>
-                        <AdminConstrained>
-                            <div className='admin-commands'>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => deleteProduct(product.id)}
-                                >Remove</Button>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    component={RouterLink}
-                                    to={`${productId}/edit`}
-                                >Edit</Button>
-                            </div>
-                        </AdminConstrained>
                     </Grid>
                 </Grid>
-            </main>
+                <div className="bottom">
+                    <Typography>
+                        <Link component={RouterLink} className="page-title" variant="h2" to={`/${product.categoryId}`}>
+                            <ArrowBackIosIcon fontSize="small"/>Back to {product.categoryName}
+                        </Link>
+                    </Typography>
+                </div>
+            </React.Fragment>
         ) : null
     )
 }

@@ -1,45 +1,50 @@
-.order-root {
+.order-item {
   display: flex;
   flex-direction: row;
   padding: 0em 1em;
   width: 100%;
-}
 
-.right-container {
-  margin-left: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
+  .right {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 
-.order-products-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.rider-chip {
-  margin-top: 0.5em;
-}
-
-.collapsed-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.delivery-info-container {
-  display: flex;
-  flex-direction: row;
-}
-
-.telephone-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-left: auto;
-
-  h5 {
-    text-align: right;
+    .rider-chip {
+      margin-top: 0.5em;
+    }
   }
-
 }
+
+.collapsed-detail {
+  display: flex;
+  flex-direction: column;
+
+  .products {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .delivery-info {
+    display: flex;
+    flex-direction: row;
+
+    .telephone-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin-left: auto;
+    
+      h5 {
+        text-align: right;
+      }
+    }
+  }
+}
+
+
+
+
+
+

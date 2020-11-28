@@ -18,7 +18,7 @@ import PaginatedOrderList from "./components/orders/order-history.component";
 import LiveUpdatedOrderList from "./components/orders/live-orders.component";
 import { fetchCurrentUser } from "./redux/user/user.actions";
 
-function App({ user, history, clearAlerts,fetchCurrentUser }) {
+function App({ user, history, clearAlerts, fetchCurrentUser }) {
 
     useEffect(() => {
         history.listen((location, action) => {
@@ -31,34 +31,36 @@ function App({ user, history, clearAlerts,fetchCurrentUser }) {
 
     return (
         <React.Fragment>
-            <CssBaseline/>
-            <MenuAppBar/>
-            <Switch>
-                <Route exact path="/signin" render={() => user ? <Redirect to='/'/> : <SignIn/>}/>
-                <Route exact path="/signup" render={() => user ? <Redirect to='/'/> : <SignUp/>}/>
+            <CssBaseline />
+            <MenuAppBar />
+            <div className="main">
+                <Switch>
+                    <Route exact path="/signin" render={() => user ? <Redirect to='/' /> : <SignIn />} />
+                    <Route exact path="/signup" render={() => user ? <Redirect to='/' /> : <SignUp />} />
 
-                <Route exact path="/createcategory" component={CategoryForm}/>
+                    <Route exact path="/createcategory" component={CategoryForm} />
 
-                <Route exact path='/riders'
-                       render={() => (user && user.role === 'admin') ? <RidersPage/> : <Redirect to='/signin'/>}/>
+                    <Route exact path='/riders'
+                        render={() => (user && user.role === 'admin') ? <RidersPage /> : <Redirect to='/signin' />} />
 
 
-                <Route exact path="/orders" render={() => user ? <PaginatedOrderList/> : <Redirect to='/'/>}/>
+                    <Route exact path="/orders" render={() => user ? <PaginatedOrderList /> : <Redirect to='/' />} />
 
-                <Route exact path="/live-orders"
-                       render={() => (user && user.role !== 'consumer') ? <LiveUpdatedOrderList/> :
-                           <Redirect to='/'/>}/>
+                    <Route exact path="/live-orders"
+                        render={() => (user && user.role !== 'consumer') ? <LiveUpdatedOrderList /> :
+                            <Redirect to='/' />} />
 
-                <Route exact path="/summary" render={() => user ? <OrderSummaryPage/> : <Redirect to='/'/>}/>
-                <Route exact path='/cart'
-                       render={() => (user && user.role === 'consumer') ? <CartPage/> : <Redirect to='/signin'/>}/>
-                <Route exact path='/timetable'
-                       render={() => (user && user.role === 'admin') ? <TimeTablePage/> : <Redirect to='/signin'/>}/>
+                    <Route exact path="/summary" render={() => user ? <OrderSummaryPage /> : <Redirect to='/' />} />
+                    <Route exact path='/cart'
+                        render={() => (user && user.role === 'consumer') ? <CartPage /> : <Redirect to='/signin' />} />
+                    <Route exact path='/timetable'
+                        render={() => (user && user.role === 'admin') ? <TimeTablePage /> : <Redirect to='/signin' />} />
 
-                <Route path='/'
-                       render={() => (!user || user.role !== 'rider') ? <Categories/> : <LiveUpdatedOrderList/>}/>
-            </Switch>
-            <Alert/>
+                    <Route path='/'
+                        render={() => (!user || user.role !== 'rider') ? <Categories /> : <LiveUpdatedOrderList />} />
+                </Switch>
+            </div>
+            <Alert />
 
         </React.Fragment>
     );
@@ -73,7 +75,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         clearAlerts: () => dispatch(alertActions.clear()),
-        fetchCurrentUser : () => dispatch(fetchCurrentUser())
+        fetchCurrentUser: () => dispatch(fetchCurrentUser())
     }
 }
 

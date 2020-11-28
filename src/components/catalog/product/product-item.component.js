@@ -17,24 +17,24 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
     return (
         <Card className="product-item">
             <CardActionArea onClick={navigateToProductDetail}>
-                <div className="product-image-container">
+                <div className="image-container">
                     <CardMedia
-                        className='product-media'
+                        className='media'
                         image={product.image}/>
                 </div>
             </CardActionArea>
-            <CardContent>
-                <Typography className="product-title" variant='h2' color='textPrimary'>
+            <CardContent className="info">
+                <Typography className="title" variant='h2' color='textPrimary'>
                     {product.name}
                 </Typography>
-                <div className='product-root'>
+                <div className='add-to-cart'>
                     <Typography variant='h3' color='textPrimary'>
                         {product.price}€
                     </Typography>
 
                     <ConsumerConstrained>
                         <IconButton
-                            className="product-details"
+                            className="cart-button"
                             color='primary'
                             onClick={() => addProductToCart(product.id)}>
                             <AddToCartIcon/>

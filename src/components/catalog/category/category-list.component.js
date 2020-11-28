@@ -46,7 +46,6 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
 
     return (
         <React.Fragment>
-            <main>
                 <Grid container className="welcome">
                     <Grid item sm={12} md={6}> 
                         <Typography variant="h2" className="page-title">Il chioschetto ti da il ben venuto!</Typography>
@@ -86,7 +85,6 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
                 </GridList>
                 </div>
       
-            </main>
             <AdminConstrained>
                 <FabFixed icon={<AddIcon />} to={"/createcategory"} />
             </AdminConstrained>

@@ -92,8 +92,8 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                 expandIcon={<ExpandMoreIcon/>}
                 aria-controls="panel1a-content"
                 id="panel1a-header">
-                <div className='order-root'>
-                    <div className="left-container">
+                <div className='order-item'>
+                    <div className="left">
                         <Typography variant='h3' color='textPrimary'>
                             {order.userFullName}
                         </Typography>
@@ -104,7 +104,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                             {delivery_date.toLocaleDateString()} - {order.time}
                         </Typography>
                     </div>
-                    <div className="right-container">
+                    <div className="right">
                         <OrderStateChip state={order.state} handleOnClick={handleChipOpen}/>
                         <AdminConstrained>
                             {
@@ -122,8 +122,8 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                     </div>
                 </div>
             </ExpansionPanelSummary>
-            <ExpansionPanelDetails className="collapsed-container">
-                <div className="order-products-container">
+            <ExpansionPanelDetails className="collapsed-detail">
+                <div className="products">
                     {
                         order.products.map(product => {
                             return (
@@ -134,7 +134,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                         })}
                 </div>
                 <HorizontalDivider/>
-                <div className="delivery-info-container">
+                <div className="delivery-info">
                     <div>
                         <Typography variant='h5' color='textPrimary'>
                             Address

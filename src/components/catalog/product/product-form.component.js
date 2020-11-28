@@ -101,7 +101,9 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
     }
 
     return (
-        <Container className="product-form-root" maxWidth='xs'>
+        <Container className="product-form" maxWidth='xs'>
+            <Typography variant="h2" className="page-title">{editMode ? "Edit product" : "New product"}</Typography>
+
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -121,7 +123,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                         productData.image.length > 0 ?
                             <Grid item xs={12}>
                                 <img
-                                    className="form-product-image"
+                                    className="image"
                                     src={productData.image}
                                     alt='image-preview' />
                             </Grid> : null
@@ -168,7 +170,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             label='Price' />
                     </Grid>
                     <Grid item xs={12}>
-                        <Card className="form-ingredients-card" variant='outlined'>
+                        <Card className="ingredients" variant='outlined'>
                             <Typography>Ingredients</Typography>
                             <StringListPicker strings={productData.ingredients} addItem={addIngredient}
                                 updateItem={updateIngredient} removeItem={deleteIngredient} />

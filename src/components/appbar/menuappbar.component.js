@@ -76,7 +76,7 @@ const MenuAppBar = ({ currentUser, products, history, logout }) => {
     const hideDrawer = () => setDrawerOpen(false)
 
     return (
-        <div className={classes.root}>
+        <div className="toolbar">
             <AdminConstrained>
                 <Drawer anchor='left' open={drawerOpen} onClose={hideDrawer}>
                     <List className={classes.list}>
@@ -165,7 +165,6 @@ const MenuAppBar = ({ currentUser, products, history, logout }) => {
                             </Menu>
                         )}
                     </div>
-
                 </Toolbar>
             </AppBar>
         </div>

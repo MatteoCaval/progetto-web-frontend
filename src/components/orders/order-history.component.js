@@ -32,7 +32,7 @@ const OrderHistoryPage = ({ orders, fetchOrderHistory, pageCount, currentPage, p
             <Container maxWidth='md'>
                 <OrderList orders={orders}/>
                 <div className="order-pagination-conatiner">
-                    <Pagination page={Number(currentPage)} count={pageCount} color='secondary' onChange={onPageChanged}/>
+                    <Pagination page={Number(currentPage)} count={pageCount} color='primary' onChange={onPageChanged}/>
                 </div>
             </Container>
         )

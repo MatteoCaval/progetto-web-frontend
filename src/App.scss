@@ -1,12 +1,13 @@
 $color-primary: #3f51b5;
 $color-secondary: #921C2A;
-$page-margin: 8em;
+$page-margin: 5em;
+$page-margin-top: 7em;
 
 @import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap');
 
 
-main {
-    margin-top: $page-margin;
+.main {
+    margin-top: $page-margin-top;
     margin-bottom: $page-margin;
 
     .page-title {

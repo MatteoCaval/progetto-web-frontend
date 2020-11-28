@@ -1,8 +1,9 @@
-.order-product-row {
+.order-product {
     display: flex !important;
     flex-direction: row;
+
+    .price {
+        margin-left: auto !important;
+    }
 }
 
-.order-product-price {
-    margin-left: auto !important;
-}
