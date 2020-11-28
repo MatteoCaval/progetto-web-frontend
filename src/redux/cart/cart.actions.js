@@ -44,6 +44,7 @@ export const addToCart = (productId, quantity) => {
             .then(result => {
                 dispatch(addToCartSuccess())
                 dispatch(alertActions.success('Product added to cart'))
+                dispatch(fetchCart())
             })
             .catch(error => dispatch(addToCartFailed(mapNetworkError(error))))
 
