@@ -163,7 +163,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                             required
                             type='number'
                             fullWidth
-                            value={productData.price.toFixed(2)}
+                            value={productData.price}
                             onChange={handleChange}
                             label='Price' />
                     </Grid>
