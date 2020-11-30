@@ -24,11 +24,11 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
                 </div>
             </CardActionArea>
             <CardContent className="info">
-                <Typography className="title" variant='h2' color='textPrimary'>
+                <Typography className="title" variant='h4' color='textPrimary'>
                     {product.name}
                 </Typography>
                 <div className='add-to-cart'>
-                    <Typography variant='h3' color='textPrimary'>
+                    <Typography variant='h5' color='textPrimary'>
                         {product.price}€
                     </Typography>
 

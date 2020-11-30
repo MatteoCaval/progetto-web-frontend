@@ -89,34 +89,34 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
     return (
         <ExpansionPanel>
             <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon/>}
+                expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header">
                 <div className='order-item'>
                     <div className="left">
-                        <Typography variant='h3' color='textPrimary'>
+                        <Typography variant='h4' color='textPrimary'>
                             {order.userFullName}
                         </Typography>
-                        <Typography variant='h5' color='textPrimary'>
+                        <Typography color='textPrimary'>
                             Delivery date
                         </Typography>
-                        <Typography variant='h4' color='textPrimary'>
+                        <Typography variant='h5' color='textPrimary'>
                             {delivery_date.toLocaleDateString()} - {order.time}
                         </Typography>
                     </div>
                     <div className="right">
-                        <OrderStateChip state={order.state} handleOnClick={handleChipOpen}/>
+                        <OrderStateChip state={order.state} handleOnClick={handleChipOpen} />
                         <AdminConstrained>
                             {
                                 order.state === OrderState.PENDING || user.role != UserRoles.ADMIN ? null : <Chip className="rider-chip" size="small"
-                                                                                  label={`${order.rider.name} ${order.rider.surname}`}
-                                                                                  onDelete={user.role === UserRoles.ADMIN && order.state === OrderState.IN_DELIVERY ? handleRiderRemove : null}/>
+                                    label={`${order.rider.name} ${order.rider.surname}`}
+                                    onDelete={user.role === UserRoles.ADMIN && order.state === OrderState.IN_DELIVERY ? handleRiderRemove : null} />
                             }
                         </AdminConstrained>
-                        <Typography variant='h5' color='textPrimary'>
+                        <Typography color='textPrimary'>
                             Total Price:
                         </Typography>
-                        <Typography variant='h4' color='textPrimary'>
+                        <Typography variant='h5' color='textPrimary'>
                             {order.totalPrice}€
                         </Typography>
                     </div>
@@ -128,38 +128,38 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                         order.products.map(product => {
                             return (
                                 <Grid key={product._id} item xs={12} sm={12}>
-                                    <OrderProductItem key={product._id} product={product}/>
+                                    <OrderProductItem key={product._id} product={product} />
                                 </Grid>
                             )
                         })}
                 </div>
-                <HorizontalDivider/>
+                <HorizontalDivider />
                 <div className="delivery-info">
                     <div>
-                        <Typography variant='h5' color='textPrimary'>
+                        <Typography color='textPrimary'>
                             Address
                         </Typography>
-                        <Typography color='textPrimary'>
+                        <Typography variant='h5' color='textPrimary'>
                             {order.address}
                         </Typography>
-                        <Typography color='textPrimary'>
+                        <Typography variant='h5' color='textPrimary'>
                             {order.city}
                         </Typography>
                     </div>
                     <div className="telephone-container">
-                        <Typography variant='h5' color='textPrimary'>
+                        <Typography color='textPrimary'>
                             Telephone number
                         </Typography>
-                        <Typography color='textPrimary'>
+                        <Typography variant='h5' color='textPrimary'>
                             {order.telephoneNumber}
                         </Typography>
                     </div>
                 </div>
             </ExpansionPanelDetails>
             <SelectRiderDialog riders={riders} open={adminDialogOpen} handleClose={handleAdminDialogClose}
-                               handleListItemClick={handleListItemClick}/>
+                handleListItemClick={handleListItemClick} />
             <DeliverOrderDialog open={deliveryDialogOpen} handleDiscard={handleDeliveryDialogClose}
-                                handleConfirm={handleDeliveryDialogConfirm}/>
+                handleConfirm={handleDeliveryDialogConfirm} />
         </ExpansionPanel>
     )
 }
