@@ -8,13 +8,14 @@ import CategoryForm from "./category/category-form.component";
 import ProductPage from "./product/product-page.component";
 import Progress from "../common/progress.component";
 import {connect} from "react-redux";
+import NotFoundItem from "../custom/not-found-item.component";
 
 const CatalogPage = ({ match, loading, error }) => {
 
     let errorView;
     if (error) {
         if (error.code === 404) {
-            errorView = (<p>Item not found</p>)
+            errorView = (<NotFoundItem />)
         } else if (!error.code ) {
             errorView = (<p>Something went wrong</p>)
         }
