@@ -16,27 +16,27 @@ let theme = createMuiTheme({
         fontFamily: 'Maven Pro' ,
 
         h1:{
-            fontSize: '2rem',
+            fontSize: '2.6rem',
             fontWeight: 800
         },
         h2:{
-            fontSize: '1.6rem',
+            fontSize: '2rem',
             fontWeight: 600
         },
         h3:{
+            fontSize: '1.8rem',
+            fontWeight: 600
+        },
+        h4:{
+            fontSize: '1.6rem',
+            fontWeight: 600
+        },
+        h5:{
             fontSize: '1.4rem',
             fontWeight: 500
         },
-        h4:{
-            fontSize: '1.2rem',
-            fontWeight: 400
-        },
-        h5:{
-            fontSize: '1rem',
-            fontWeight: 500
-        },
         h6:{
-            fontSize: '1rem',
+            fontSize: '1.2rem',
             fontWeight: 500
         },
         subtitle1:{
@@ -46,7 +46,7 @@ let theme = createMuiTheme({
             
         },
         body1:{
-            
+            fontSize: '1rem',
         },
         body2:{
             

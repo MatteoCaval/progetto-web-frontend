@@ -46,11 +46,11 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
                         <Typography className="page-title" variant='h1'>{product.name}</Typography>
 
                         <div className="info">
-                            <Typography variant='p'>{product.description}</Typography>
+                            <Typography>{product.description}</Typography>
 
                             <Typography variant='h3' color='textPrimary'>€ {product.price.toFixed(2)}</Typography>
 
-                            <Typography variant='p'>Vat included</Typography>
+                            <Typography>Vat included</Typography>
 
                             <HorizontalDivider />
 
@@ -76,7 +76,7 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
 
                             <ConsumerConstrained>
                                 <div className='quantity-container'>
-                                    <Typography variant="p">Quantity</Typography>
+                                    <Typography>Quantity</Typography>
 
                                     <div className="quantity-picker">
                                         <QuantityPicker
@@ -113,7 +113,7 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
                 </Grid>
                 <div className="bottom">
                     <Typography>
-                        <Link component={RouterLink} className="page-title" variant="h2" to={`/${product.categoryId}`}>
+                        <Link component={RouterLink} className="page-title" variant="h4" to={`/${product.categoryId}`}>
                             <ArrowBackIosIcon fontSize="small"/>Back to {product.categoryName}
                         </Link>
                     </Typography>
