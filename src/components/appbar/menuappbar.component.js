@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     title: {
         cursor: "pointer",
         margin: 'auto',
+        height: '2em'
     },
     headerButtons: {
        position: "absolute",
@@ -119,8 +120,7 @@ const MenuAppBar = ({ currentUser, products, history, logout }) => {
                             <MenuIcon />
                         </IconButton>
                     </AdminConstrained>
-                    <Typography variant="h2" className={classes.title}
-                        onClick={handleLogoClick}>FoodDelivery</Typography>
+                    <img src={process.env.PUBLIC_URL + '/logo_title.png'} alt="logo" className={classes.title} onClick={handleLogoClick}/>
                     <div className={classes.headerButtons}>
                         {currentUser && currentUser.role === 'consumer' && (
                             <Badge badgeContent={badgeNum} color="secondary" textColor="primary">
