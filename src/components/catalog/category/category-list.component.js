@@ -59,7 +59,7 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
                         </Typography>                    
                     </Grid>
                     <Grid item  sm={12} md={6} className="image-container">
-                        <img className='home-image' src="https://www.ilchioschettobarpizzeria.it/wp-content/uploads/2019/10/logo-bianco.jpg" alt="Logo"/>
+                        <img  className='home-image' src={process.env.PUBLIC_URL + '/homer.png'} alt="Homer eating hamburger"/>
                     </Grid>
                 </Grid>
 

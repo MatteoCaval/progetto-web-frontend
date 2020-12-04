@@ -219,9 +219,11 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                             Concludi l'ordine
                         </Button>
                         {
-                            timeSlots.length < 1 ?
-                                <Typography variant="h3" className="no-slots-label">Al momento il negozio è chiuso. Non
-                                    è possibile effetuare nessun ordine.</Typography> : null
+                            timeSlots.length < 1 ? 
+                                <div className="no-slots">
+                                <Typography variant="h3" className="primary-label">Al momento il negozio è chiuso.</Typography>
+                                <Typography variant="h3" className="primary-label">Non è possibile effetuare nessun ordine.</Typography>
+                                </div> : null
                         }
                     </div>
                 </form>

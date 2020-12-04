@@ -1,3 +1,5 @@
+@import "./../../App.scss";
+
 .order-header{
     margin-bottom: 2em;
     .total {
@@ -14,9 +16,9 @@
 
     .card-selected {
         border: 2px solid !important;
-        border-color: green !important;
+        border-color: $color-primary !important;
         .title {
-            color: green !important;
+            color: $color-primary !important;
             font-weight: 800;
         }
     }
@@ -41,8 +43,9 @@
         flex-direction: column;
         align-items: flex-end;
 
-        .no-slots-label{
-            color: red;
+        .no-slots{
+            width: 100%;
+            text-align: center;
         }
     }
 }
