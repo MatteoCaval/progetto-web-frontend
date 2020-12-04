@@ -3,9 +3,10 @@ import OrderList from "./orders-list.component";
 import {connect} from "react-redux";
 import {Pagination} from "@material-ui/lab";
 import {fetchOrderHistory} from "../../redux/orders/orders.actions";
-import {Container} from "@material-ui/core";
 import "./order-history.style.scss";
 import Progress from "../common/progress.component";
+import { Container, Typography } from "@material-ui/core";
+import RoleConstrained from "./../common/role-constrained-container.component";
 
 const OrderHistoryPage = ({ orders, fetchOrderHistory, pageCount, currentPage, pending, error }) => {
 
@@ -30,6 +31,8 @@ const OrderHistoryPage = ({ orders, fetchOrderHistory, pageCount, currentPage, p
     } else {
         return (
             <Container maxWidth='md'>
+                <RoleConstrained role='admin'><Typography variant="h1" className="page-title">Order history</Typography></RoleConstrained>
+                <RoleConstrained role='consumer'><Typography variant="h1" className="page-title">My orders</Typography></RoleConstrained>
                 <OrderList orders={orders}/>
                 <div className="order-pagination-conatiner">
                     <Pagination page={Number(currentPage)} count={pageCount} color='primary' onChange={onPageChanged}/>

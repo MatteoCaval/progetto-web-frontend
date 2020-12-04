@@ -1,27 +1,27 @@
 import React from "react"
-import { Grid, Switch, TextField, Typography } from "@material-ui/core"
+import { Grid, Switch, Typography } from "@material-ui/core"
 import "./timetable-item.style.scss"
 import { initialDinnerState, initialLaunchState } from "./timetable.component"
 import { TimePicker } from '@material-ui/pickers';
 
 const TimeTableItem = ({ day, onDayChanged }) => {
     const handleLaunchStart = (date) => {
-        const newDay = { ...day, launch: { ...day.launch, ['timeStart']: { hour: date.getHours(), minute: date.getMinutes() } } }
+        const newDay = { ...day, launch: { ...day.launch, 'timeStart': { hour: date.getHours(), minute: date.getMinutes() } } }
         onDayChanged(newDay)
     }
 
     const handleLaunchEnd = (date) => {
-        const newDay = { ...day, launch: { ...day.launch, ['timeEnd']: { hour: date.getHours(), minute: date.getMinutes() } } }
+        const newDay = { ...day, launch: { ...day.launch, 'timeEnd': { hour: date.getHours(), minute: date.getMinutes() } } }
         onDayChanged(newDay)
     }
 
     const handleDinnerStart = (date) => {
-        const newDay = { ...day, dinner: { ...day.dinner, ['timeStart']: { hour: date.getHours(), minute: date.getMinutes() } } }
+        const newDay = { ...day, dinner: { ...day.dinner, 'timeStart': { hour: date.getHours(), minute: date.getMinutes() } } }
         onDayChanged(newDay)
     }
 
     const handleDinnerEnd = (date) => {
-        const newDay = { ...day, dinner: { ...day.dinner, ['timeEnd']: { hour: date.getHours(), minute: date.getMinutes() } } }
+        const newDay = { ...day, dinner: { ...day.dinner, 'timeEnd': { hour: date.getHours(), minute: date.getMinutes() } } }
         onDayChanged(newDay)
     }
 

@@ -19,6 +19,8 @@ const OrderStateChip = ({ state, handleOnClick }) => {
             className = 'state-delivered'
             label = 'DELIVERED'
             break;
+        default:
+            break;
     }
     return (
         <Chip size="small" label={label} className={className} onClick={handleOnClick} />

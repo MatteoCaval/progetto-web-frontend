@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
-import { Menu, MenuItem, IconButton, Typography, Toolbar, AppBar, Drawer, Badge } from '@material-ui/core';
+import { Menu, MenuItem, IconButton, Toolbar, AppBar, Drawer, Badge } from '@material-ui/core';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { logout } from "../../redux/user/user.actions";
@@ -56,7 +56,6 @@ const MenuAppBar = ({ currentUser, products, history, logout }) => {
     //const sum = cart.products.count()
     var badgeNum = 0
     if (products) {
-        var badgeNum = 0
         products.forEach(element => {
             badgeNum+=element.quantity
         });

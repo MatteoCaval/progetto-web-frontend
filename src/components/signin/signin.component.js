@@ -51,9 +51,7 @@ const SignIn = ({login}) => {
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon/>
                     </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign in
-                    </Typography>
+                    <Typography variant="h2" className="page-title">Sign in</Typography>
                     <form className={classes.form} onSubmit={handleSubmit}>
                         <TextField
                             variant="outlined"

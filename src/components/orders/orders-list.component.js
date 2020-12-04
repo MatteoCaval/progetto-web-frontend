@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Container, Typography } from "@material-ui/core";
 import OrderItem from "./order-item.component";
+import RoleConstrained from "../common/role-constrained-container.component";
 import "./orders-list.style.scss";
 
 const OrderList = ({ orders }) => {

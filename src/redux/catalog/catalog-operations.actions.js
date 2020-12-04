@@ -1,5 +1,4 @@
 import CatalogOperationType from "./catalog-operations.type";
-import { fetchCategories, fetchProductsForCategory } from "./catalog.actions";
 import { catalogService } from "../../services/catalog.service";
 
 export const createProduct = (product) => {

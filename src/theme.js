@@ -51,9 +51,6 @@ let theme = createMuiTheme({
         body2:{
             
         },
-        button:{
-            
-        },
         caption:{
             
         },

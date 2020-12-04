@@ -40,7 +40,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
     }, [fetchTodayTimetable])
 
     useEffect(() => {
-        setOrderData({ ...orderData, ['paymentType']: cashPayment ? PaymentType.ON_DELIVERY : PaymentType.ONLINE })
+        setOrderData({ ...orderData, 'paymentType': cashPayment ? PaymentType.ON_DELIVERY : PaymentType.ONLINE })
     }, [cashPayment])
 
     const handleCashPaymentSelect = () => {
@@ -221,8 +221,8 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                         {
                             timeSlots.length < 1 ? 
                                 <div className="no-slots">
-                                <Typography variant="h3" className="primary-label">Al momento il negozio è chiuso.</Typography>
-                                <Typography variant="h3" className="primary-label">Non è possibile effetuare nessun ordine.</Typography>
+                                <Typography variant="h3" color="primary">Al momento il negozio è chiuso.</Typography>
+                                <Typography variant="h3" color="primary">Non è possibile effetuare nessun ordine.</Typography>
                                 </div> : null
                         }
                     </div>

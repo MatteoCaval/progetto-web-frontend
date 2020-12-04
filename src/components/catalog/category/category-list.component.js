@@ -5,7 +5,6 @@ import { Grid, GridList, GridListTile, Typography, CardMedia } from "@material-u
 import AddIcon from '@material-ui/icons/Add';
 import { AdminConstrained } from "../../common/constrained-containers.component";
 import FabFixed from "../../custom/fab-fixed.component"
-import GridListTileBar from '@material-ui/core/GridListTileBar';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import './category-list.style.scss'

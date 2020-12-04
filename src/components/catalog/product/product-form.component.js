@@ -55,11 +55,6 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
         setProductData({ ...productData, [name]: value })
     }
 
-    const handleIngredientsChanged = (ingredients) => {
-        console.log(ingredients)
-        setProductData({ ...productData, ['ingredients']: ingredients })
-    }
-
     const handleSubmit = event => {
         event.preventDefault()
         if (editMode) {
@@ -83,21 +78,21 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
         if (index < 0) {
             ingredients.push(newIngredient)
         }
-        setProductData({ ...productData, ['ingredients']: ingredients })
+        setProductData({ ...productData, 'ingredients': ingredients })
     }
 
     const updateIngredient = (oldValue, newValue) => {
         const ingredients = productData.ingredients
         const index = ingredients.indexOf(oldValue)
         ingredients[index] = newValue
-        setProductData({ ...productData, ['ingredients']: ingredients })
+        setProductData({ ...productData, 'ingredients': ingredients })
     }
 
     const deleteIngredient = (ingredient) => {
         const filtered = productData.ingredients.filter(function (item) {
             return item !== ingredient
         })
-        setProductData({ ...productData, ['ingredients']: filtered })
+        setProductData({ ...productData, 'ingredients': filtered })
     }
 
     return (
@@ -125,7 +120,7 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
                                 <img
                                     className="image"
                                     src={productData.image}
-                                    alt='image-preview' />
+                                    alt='product' />
                             </Grid> : null
                     }
 
@@ -193,7 +188,6 @@ const ProductForm = ({ history, match, startingProduct, editMode, fetchProductDe
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const { productId } = ownProps.match
     const { loading, error, completed } = state.catalogOperations
     return {
         startingProduct: state.catalog.productDetails,

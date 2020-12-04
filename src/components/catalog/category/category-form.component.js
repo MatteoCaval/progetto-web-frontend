@@ -71,7 +71,7 @@ const CategoryForm = ({ history, loading, error, completed, createCategory, rese
                         <img
                             className={classes.image}
                             src={categoryData.imageUrl}
-                            alt='image-preview'/>
+                            alt='category'/>
                         </Grid> : null
                     }
                     <Grid item xs={12}>

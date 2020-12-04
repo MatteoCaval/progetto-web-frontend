@@ -37,7 +37,7 @@ const CartPage = ({ fetchCart, cart, history }) => {
 
                     <div className="cart-page-end-list">
                         <HorizontalDivider/>
-                        <div className="total-container">
+                        <div className="total">
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -46,7 +46,7 @@ const CartPage = ({ fetchCart, cart, history }) => {
                                 Proceed to order
                             </Button>
 
-                            <div className="total-info-container">
+                            <div className="info">
                                 <Typography variant='h2' color='textPrimary'>Total:</Typography>
                                 <Typography variant='h3' color='textPrimary'>{total.toFixed(2)}€</Typography>
                             </div>
@@ -67,7 +67,7 @@ const CartPage = ({ fetchCart, cart, history }) => {
                 <Container maxWidth='md'>
                     {(products && !loading && !error) ? (
                         <div className="empty-shop-button-container">
-                            <Typography variant='h2' color='textPrimary'>
+                            <Typography variant='h2' color='primary'>
                                 Il carrello è vuoto
                             </Typography>
                             <Typography color='textPrimary'>

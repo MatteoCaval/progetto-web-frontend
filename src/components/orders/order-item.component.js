@@ -23,7 +23,6 @@ import { AdminConstrained } from "../common/constrained-containers.component";
 
 const OrderItem = ({ order, user, riders, updateOrder }) => {
 
-    const order_date = new Date(order.creationDate)
     const delivery_date = new Date(order.date)
 
     const [adminDialogOpen, setAdminDialogOpen] = useState(false);
@@ -108,7 +107,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                         <OrderStateChip state={order.state} handleOnClick={handleChipOpen} />
                         <AdminConstrained>
                             {
-                                order.state === OrderState.PENDING || user.role != UserRoles.ADMIN ? null : <Chip className="rider-chip" size="small"
+                                order.state === OrderState.PENDING || user.role !== UserRoles.ADMIN ? null : <Chip className="rider-chip" size="small"
                                     label={`${order.rider.name} ${order.rider.surname}`}
                                     onDelete={user.role === UserRoles.ADMIN && order.state === OrderState.IN_DELIVERY ? handleRiderRemove : null} />
                             }

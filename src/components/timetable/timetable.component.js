@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import TimeTableItem from "./timetable-item.component"
-import {Container, Button} from "@material-ui/core"
+import {Container, Button, Typography} from "@material-ui/core"
 import {updateTimetable, fetchTimetable} from "../../redux/admin/admin.actions";
 import {connect} from "react-redux";
 import "./timetable.style.scss"
@@ -61,8 +61,8 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable, erro
 
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-
             <Container maxWidth='md'>
+                <Typography variant="h1" className="page-title">Timetable</Typography>
                 <form onSubmit={handleSubmit}>
                     {
                         timetable && (timetable.map(day => {

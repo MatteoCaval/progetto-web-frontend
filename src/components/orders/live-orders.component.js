@@ -3,7 +3,7 @@ import OrderList from "./orders-list.component";
 import {connect} from "react-redux";
 import {startLiveOrderUpdated, stopLiveOrderUpdated} from "../../redux/orders/orders.actions";
 import UserRoles from "../../common/UserRoles";
-import {Container} from "@material-ui/core";
+import {Container, Typography} from "@material-ui/core";
 import {fetchRiders} from "../../redux/admin/admin.actions";
 
 const LiveOrdersPage = ({ startLiveOrderUpdated, orders, stopLiveOrderUpdated, fetchRiders, userRole }) => {
@@ -23,6 +23,7 @@ const LiveOrdersPage = ({ startLiveOrderUpdated, orders, stopLiveOrderUpdated, f
 
     return (
         <Container maxWidth='md'>
+            <Typography variant="h1" className="page-title">Live orders</Typography>
             <OrderList orders={orders}/>
         </Container>
     )

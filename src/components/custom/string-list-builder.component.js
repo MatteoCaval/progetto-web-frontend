@@ -33,7 +33,7 @@ const StringListPicker = ({ strings, addItem, updateItem, removeItem }) => {
     }
 
     const handleSaveInputPressed = () => {
-        if (selectedValue != "") {
+        if (selectedValue !== "") {
             if (oldValue) {
                 updateItem(oldValue, selectedValue)
             } else {
