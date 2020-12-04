@@ -48,7 +48,9 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
                         <div className="info">
                             <Typography>{product.description}</Typography>
 
-                            <Typography variant='h3' color='textPrimary'>€ {product.price.toFixed(2)}</Typography>
+                            <Typography variant='h3' color='textPrimary'>
+                                {product.price && product.price.toFixed(2)}€
+                            </Typography>
 
                             <Typography>Vat included</Typography>
 
@@ -56,7 +58,7 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
 
                             <div className="ingredients-container">
                                 <Typography variant='h3' color='textPrimary'>
-                                    Ingredienti:
+                                    Ingredients:
                                 </Typography>
                                 <List className='ingredients' >
                                     {

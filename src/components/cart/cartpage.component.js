@@ -68,10 +68,10 @@ const CartPage = ({ fetchCart, cart, history }) => {
                     {(products && !loading && !error) ? (
                         <div className="empty-shop-button-container">
                             <Typography variant='h2' color='primary'>
-                                Il carrello è vuoto
+                                Your cart is empty
                             </Typography>
                             <Typography color='textPrimary'>
-                                Al momento all'interno del tuo carrello non sono presenti prodotti.
+                                At the moment there isn't any item inside your cart.
                             </Typography>
                             <Button
                                 variant="contained"

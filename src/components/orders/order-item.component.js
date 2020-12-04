@@ -116,7 +116,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                             Total Price:
                         </Typography>
                         <Typography variant='h5' color='textPrimary'>
-                            {order.totalPrice}€
+                            {order.totalPrice && order.totalPrice.toFixed(2)}€
                         </Typography>
                     </div>
                 </div>

@@ -94,7 +94,6 @@ const CategoryForm = ({ history, loading, error, completed, createCategory, rese
                         className={classes.button}
                     >Done
                     </Button>
-
                 </Grid>
             </form>
             <Progress loading={loading}/>

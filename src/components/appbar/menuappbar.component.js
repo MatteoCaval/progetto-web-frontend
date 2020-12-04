@@ -16,6 +16,8 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike';
 import { Link as RouterLink } from 'react-router-dom'
 import { AdminConstrained } from "../common/constrained-containers.component";
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -158,9 +160,19 @@ const MenuAppBar = ({ currentUser, products, history, logout }) => {
                                 onClose={handleClose}>
                                 {
                                     currentUser.role === 'consumer' &&
-                                    <MenuItem onClick={() => history.push('/orders')}>My Orders</MenuItem>
+                                    <MenuItem onClick={() => history.push('/orders')}>
+                                    <ListItemIcon>
+                                        <ShoppingBasketIcon color="primary"/>
+                                    </ListItemIcon>
+                                    My orders
+                                    </MenuItem>
                                 }
-                                <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                                <MenuItem onClick={() => logout()}>
+                                    <ListItemIcon>
+                                        <ExitToAppIcon color="primary"/>
+                                    </ListItemIcon>
+                                    Logout
+                                </MenuItem>
                             </Menu>
                         )}
                     </div>

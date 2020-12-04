@@ -47,7 +47,7 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
         <React.Fragment>
                 <Grid container className="welcome">
                     <Grid item sm={12} md={6}> 
-                        <Typography variant="h2" className="page-title">Il chioschetto ti da il ben venuto!</Typography>
+                        <Typography variant="h2" className="page-title">Welcome into UniBurger!</Typography>
                         <Typography>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lorem mi, suscipit et scelerisque vitae, aliquet et augue. 
                         Praesent maximus suscipit mauris, nec mollis arcu egestas ac. Aenean et ornare libero. Suspendisse potenti. Proin non tincidunt ipsum. 
@@ -63,7 +63,7 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
                 </Grid>
 
                 <div className="categories-container">
-                <Typography variant="h2" className="page-title">Dai una occhiata alle nostre pietanze!</Typography>
+                <Typography variant="h2" className="page-title">Take a look at our fantastic dishes!</Typography>
                 <GridList spacing={25} cols={getScreenWidth()}>
                 {
                     categories.map((category) => (

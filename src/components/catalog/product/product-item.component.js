@@ -29,7 +29,7 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
                 </Typography>
                 <div className='add-to-cart'>
                     <Typography variant='h5' color='textPrimary'>
-                        {product.price}€
+                        {product.price && product.price.toFixed(2)}€
                     </Typography>
 
                     <ConsumerConstrained>

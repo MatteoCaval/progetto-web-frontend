@@ -119,7 +119,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                                 name="city"
                                 value={orderData.city}
                                 required
-                                label="Città"
+                                label="City"
                                 fullWidth
                                 onChange={handleChange}
                                 variant="outlined">
@@ -153,7 +153,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                                     disabled={timeSlots.length < 1}
                                     value={orderData.timeSlot}
                                     required
-                                    label="Orario di consegna"
+                                    label="Delivery time"
                                     fullWidth
                                     onChange={handleChange}
                                     children={[]}
@@ -176,13 +176,13 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                                     <div
                                         className='content'>
                                         <Typography variant='h3' color='textPrimary' className="title">
-                                            Paga in contanti
+                                            Cash payment
                                         </Typography>
                                         <Typography color='textPrimary'>
-                                            Paga in contanti all'arrivo del fattorino.
+                                            Pay your food on the rider arrival.
                                         </Typography>
                                         <Typography color='textPrimary'>
-                                            Nessuna spesa aggiunta, ma ti chiediamo di preparare i contanti.
+                                            No extra costs, but we kindly ask you to prepare your money.
                                         </Typography>
                                     </div>
                                 </CardActionArea>
@@ -197,10 +197,10 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                                     <div
                                         className='content'>
                                         <Typography variant='h3' color='textPrimary' className="title">
-                                            Paga ora
+                                            Pay now
                                         </Typography>
                                         <Typography color='textPrimary'>
-                                            La comodità di pagare subito con la tua carta.
+                                            Conforts of online payment are unbeatable.
                                         </Typography>
                                     </div>
                                 </CardActionArea>
@@ -215,14 +215,14 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                             variant='contained'
                             type='submit'
                             disabled={timeSlots.length < 1}
-                            color='secondary'>
-                            Concludi l'ordine
+                            color='primary'>
+                           Place your order
                         </Button>
                         {
                             timeSlots.length < 1 ? 
                                 <div className="no-slots">
-                                <Typography variant="h3" color="primary">Al momento il negozio è chiuso.</Typography>
-                                <Typography variant="h3" color="primary">Non è possibile effetuare nessun ordine.</Typography>
+                                <Typography variant="h3" color="primary">The shop is actually closed.</Typography>
+                                <Typography variant="h3" color="primary">Please, place your order in an other day.</Typography>
                                 </div> : null
                         }
                     </div>
