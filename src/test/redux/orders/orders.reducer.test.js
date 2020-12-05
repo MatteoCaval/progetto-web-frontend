@@ -1,5 +1,5 @@
-import ordersReducer, { INITIAL_STATE as orderInitialState } from "../../../src/redux/orders/orders.reducer";
-import OrderActionTypes from "../../../src/redux/orders/orders.types";
+import ordersReducer, { INITIAL_STATE as orderInitialState } from "../../../redux/orders/orders.reducer";
+import OrderActionTypes from "../../../redux/orders/orders.types";
 import {sampleMappedError} from "../networkTestUtils";
 
 

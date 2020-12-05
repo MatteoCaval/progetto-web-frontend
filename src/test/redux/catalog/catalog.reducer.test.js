@@ -1,6 +1,6 @@
-import catalogReducer, {INITIAL_STATE as catalogInitialState} from "../../../src/redux/catalog/catalog.reducer";
-import CatalogActionType from "../../../src/redux/catalog/catalog.types";
-import CatalogOperationType from "../../../src/redux/catalog/catalog-operations.type";
+import catalogReducer, {INITIAL_STATE as catalogInitialState} from "../../../redux/catalog/catalog.reducer";
+import CatalogActionType from "../../../redux/catalog/catalog.types";
+import CatalogOperationType from "../../../redux/catalog/catalog-operations.type";
 import {sampleErrorResponse, sampleMappedError} from "../networkTestUtils";
 
 describe('catalogReducer', () => {

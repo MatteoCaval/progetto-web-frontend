@@ -1,4 +1,4 @@
-import {getErrorResponseDescription, mapNetworkError} from "../../src/redux/networkUtils";
+import {getErrorResponseDescription, mapNetworkError} from "../../redux/networkUtils";
 
 describe("getErrorResponseDescription", () => {
 

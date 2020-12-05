@@ -1,6 +1,6 @@
-import userReducer, {INITIAL_STATE} from "../../../src/redux/user/user.reducer";
-import AuthActionType from "../../../src/redux/auth/auth.actionType";
-import UserActionTypes from "../../../src/redux/user/user.actionTypes";
+import userReducer, {INITIAL_STATE} from "../../../redux/user/user.reducer";
+import AuthActionType from "../../../redux/auth/auth.actionType";
+import UserActionTypes from "../../../redux/user/user.actionTypes";
 
 describe('user reducer', () => {
 

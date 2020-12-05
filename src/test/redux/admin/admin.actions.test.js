@@ -7,9 +7,9 @@ import {
     fetchRiders,
     fetchTimetable,
     updateTimetable
-} from "../../../src/redux/admin/admin.actions";
-import AdminActionType from "../../../src/redux/admin/admin.types";
-import AlertTypes from "../../../src/redux/alerts/alert.types";
+} from "../../../redux/admin/admin.actions";
+import AdminActionType from "../../../redux/admin/admin.types";
+import AlertTypes from "../../../redux/alerts/alert.types";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)

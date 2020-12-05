@@ -1,7 +1,7 @@
-import { INITIAL_STATE as cartInitialState } from "../../../src/redux/cart/cart.reducer";
-import cartReducer from "../../../src/redux/cart/cart.reducer";
-import CartActionTypes from "../../../src/redux/cart/cart.actionTypes";
-import OrderActionTypes from "../../../src/redux/orders/orders.types";
+import { INITIAL_STATE as cartInitialState } from "../../../redux/cart/cart.reducer";
+import cartReducer from "../../../redux/cart/cart.reducer";
+import CartActionTypes from "../../../redux/cart/cart.actionTypes";
+import OrderActionTypes from "../../../redux/orders/orders.types";
 
 describe('cart reducer', () => {
 

@@ -1,5 +1,5 @@
-import catalogOperationsReducer, { INITIAL_STATE as operationInitialState } from "../../../src/redux/catalog/catalog-operations.reducer";
-import CatalogOperationType from "../../../src/redux/catalog/catalog-operations.type";
+import catalogOperationsReducer, { INITIAL_STATE as operationInitialState } from "../../../redux/catalog/catalog-operations.reducer";
+import CatalogOperationType from "../../../redux/catalog/catalog-operations.type";
 
 describe('product operations reducer', () => {
 

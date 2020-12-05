@@ -1,15 +1,15 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios'
-import CartActionTypes from "../../../src/redux/cart/cart.actionTypes";
+import CartActionTypes from "../../../redux/cart/cart.actionTypes";
 import {
     addToCart,
     fetchCart,
     fetchTodayTimetable,
     removeProductFromCart,
     updateCartProductQuantity
-} from "../../../src/redux/cart/cart.actions";
-import AlertTypes from "../../../src/redux/alerts/alert.types";
+} from "../../../redux/cart/cart.actions";
+import AlertTypes from "../../../redux/alerts/alert.types";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)
@@ -28,9 +28,10 @@ describe('cart actions', () => {
         const store = mockStore(stateWToken)
         axios.get.mockImplementation(() => Promise.resolve({ data: result }))
 
-        return store.dispatch(fetchCart()).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
-        })
+        return store.dispatch(fetchCart())
+            .then(() => {
+                expect(store.getActions()).toEqual(expectedActions)
+            })
     })
 
     it('should create PENDIND and SUCCESS actions and refresh cart on addToCart success', () => {

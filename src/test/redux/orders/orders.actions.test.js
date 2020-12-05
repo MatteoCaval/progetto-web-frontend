@@ -1,9 +1,9 @@
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios'
-import OrderActionTypes from "../../../src/redux/orders/orders.types";
-import {completeOrder, fetchOrderHistory, updateOrder} from "../../../src/redux/orders/orders.actions";
-import UserRoles from "../../../src/common/UserRoles";
+import OrderActionTypes from "../../../redux/orders/orders.types";
+import {completeOrder, fetchOrderHistory, updateOrder} from "../../../redux/orders/orders.actions";
+import UserRoles from "../../../common/UserRoles";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)

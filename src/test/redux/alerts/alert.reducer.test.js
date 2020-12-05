@@ -1,6 +1,6 @@
-import alertReducer from "../../../src/redux/alerts/alert.reducer";
-import AlertTypes from "../../../src/redux/alerts/alert.types";
-import { alertActions } from "../../../src/redux/alerts/alert.actions";
+import alertReducer from "../../../redux/alerts/alert.reducer";
+import AlertTypes from "../../../redux/alerts/alert.types";
+import { alertActions } from "../../../redux/alerts/alert.actions";
 
 const initialState = {}
 

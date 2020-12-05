@@ -6,8 +6,8 @@ import {
     createProduct,
     resetCatalogOperationsState,
     updateProduct
-} from "../../../src/redux/catalog/catalog-operations.actions";
-import CatalogOperationType from "../../../src/redux/catalog/catalog-operations.type";
+} from "../../../redux/catalog/catalog-operations.actions";
+import CatalogOperationType from "../../../redux/catalog/catalog-operations.type";
 
 const middlewares = [thunk]
 const mockStore = configureStore(middlewares)

@@ -1,5 +1,5 @@
-import {alertActions} from "../../../src/redux/alerts/alert.actions";
-import AlertTypes from "../../../src/redux/alerts/alert.types";
+import {alertActions} from "../../../redux/alerts/alert.actions";
+import AlertTypes from "../../../redux/alerts/alert.types";
 import thunk from 'redux-thunk'
 import configureStore from "redux-mock-store";
 
