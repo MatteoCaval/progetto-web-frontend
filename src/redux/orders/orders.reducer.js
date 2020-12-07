@@ -2,7 +2,7 @@ import OrderActionTypes from "./orders.types";
 
 export const INITIAL_STATE = {
     orderHistory: {},
-    realTimeOrders: []
+    realTimeOrders: null
 }
 
 const ordersReducer = (state = INITIAL_STATE, action = {}) => {

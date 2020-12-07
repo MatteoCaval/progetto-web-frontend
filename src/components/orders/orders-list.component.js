@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Container, Typography } from "@material-ui/core";
+import {Grid, Container, Typography} from "@material-ui/core";
 import OrderItem from "./order-item.component";
 import "./orders-list.style.scss";
 
@@ -14,7 +14,7 @@ const OrderList = ({ orders }) => {
                                 orders.map(order => {
                                     return (
                                         <Grid key={order._id} item xs={12} sm={12}>
-                                            <OrderItem key={order._id} order={order} />
+                                            <OrderItem key={order._id} order={order}/>
                                         </Grid>
                                     )
                                 })
@@ -22,14 +22,14 @@ const OrderList = ({ orders }) => {
                         }
                     </Grid>
                     :
-                    <div className="empty-list">
+                    (orders ? (<div className="empty-list">
                         <Typography variant='h2'>
                             Non ci sono ordini
-                         </Typography>
+                        </Typography>
                         <Typography color='textPrimary'>
                             Al momento non ci sono ordini in attesa.
                         </Typography>
-                    </div>
+                    </div>) : null)
             }
         </Container>
     )

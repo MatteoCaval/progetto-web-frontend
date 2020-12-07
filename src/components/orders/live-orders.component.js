@@ -35,10 +35,11 @@ const riderFilter = ['IN_DELIVERY']
 
 const mapStateToProps = state => {
     const userRole = (state.user && state.user.data) ? state.user.data.role : null
+    const realTimeOrders = state.orders.realTimeOrders
     return {
-        orders: state.orders.realTimeOrders.filter(order => {
+        orders: realTimeOrders ? realTimeOrders.filter(order => {
             return userRole === UserRoles.RIDER ? riderFilter.includes(order.state) : adminFilters.includes(order.state)
-        }),
+        }) : null,
         userRole: userRole
     }
 }
