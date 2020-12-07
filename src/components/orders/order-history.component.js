@@ -5,8 +5,9 @@ import {Pagination} from "@material-ui/lab";
 import {fetchOrderHistory} from "../../redux/orders/orders.actions";
 import "./order-history.style.scss";
 import Progress from "../common/progress.component";
-import { Container, Typography } from "@material-ui/core";
+import {Container, Typography} from "@material-ui/core";
 import RoleConstrained from "./../common/role-constrained-container.component";
+import OpsPage from "../error/ops-page.component";
 
 const OrderHistoryPage = ({ orders, fetchOrderHistory, pageCount, currentPage, pending, error }) => {
 
@@ -21,8 +22,9 @@ const OrderHistoryPage = ({ orders, fetchOrderHistory, pageCount, currentPage, p
 
     if (error) {
         return (
-            // TODO visualizzazione migliore errore
-            <p>{error.description}</p>
+            <Container maxWidth='md'>
+                <OpsPage/>
+            </Container>
         )
     } else if (pending) {
         return (

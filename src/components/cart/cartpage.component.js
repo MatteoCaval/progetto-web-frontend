@@ -8,6 +8,7 @@ import {withRouter} from "react-router-dom";
 import "./cartpage.style.scss"
 import Progress from "../common/progress.component";
 import HorizontalDivider from "../custom/horizontal-divider.component";
+import OpsPage from "../error/ops-page.component";
 
 const CartPage = ({ fetchCart, cart, history }) => {
 
@@ -59,8 +60,9 @@ const CartPage = ({ fetchCart, cart, history }) => {
     } else {
         if (error && error.description) {
             return (
-                // TODO visualizzare errore più bello
-                <p>{error.description}</p>
+                <Container maxWidth='md'>
+                    <OpsPage/>
+                </Container>
             )
         } else {
             return (
