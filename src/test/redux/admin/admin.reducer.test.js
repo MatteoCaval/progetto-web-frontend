@@ -61,9 +61,6 @@ describe('admin reducer', () => {
         })
     })
 
-
-    // todo parte di create rider
-
     it('should set pending rider creation on CREATE_RIDER_PENDING', () => {
         const prevState = adminInitialState
         expect(adminReducer(prevState, {

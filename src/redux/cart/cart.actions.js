@@ -138,7 +138,6 @@ export const fetchTodayTimetable = () => {
     return (dispatch, getState) => {
         dispatch(fetchTodayTimetablePending())
         const token = getState().user.data.token
-        // TODO potrebbe anche non essere autenticata
         return userService.fetchTodayTimetable(token)
             .then(result => {
                 dispatch(fetchTodayTimetableSuccess(result.data))
