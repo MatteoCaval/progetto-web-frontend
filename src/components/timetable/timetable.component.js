@@ -7,6 +7,7 @@ import "./timetable.style.scss"
 import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import Progress from "../common/progress.component";
+import OpsPage from "../error/ops-page.component";
 
 
 export const initialLaunchState = {
@@ -88,7 +89,7 @@ const TimeTablePage = ({ currentTimetable, updateTimetable, fetchTimetable, erro
                 <Progress loading={loading}/>
                 {
                     error && (
-                        <p>Error retrieving timetable</p> // TODO error page
+                        <OpsPage/>
                     )
                 }
             </Container>
