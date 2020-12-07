@@ -45,8 +45,8 @@ describe('cart actions', () => {
         axios.post.mockImplementation(() => Promise.resolve())
         axios.get.mockImplementation(() => Promise.resolve({ data: result }))
 
-        store.dispatch(addToCart('id', 1)).then(() => {
-            expect(store.getActions()).toEqual(expectedActions)
+        return store.dispatch(addToCart('id', 1)).then(() => {
+            expect(store.getActions()).toEqual(expect.arrayContaining(expectedActions))
         })
     })
 
@@ -63,7 +63,7 @@ describe('cart actions', () => {
         axios.delete.mockImplementation(() => Promise.resolve())
         axios.get.mockImplementation(() => Promise.resolve({ data: result }))
 
-        store.dispatch(removeProductFromCart()).then(() => {
+        return store.dispatch(removeProductFromCart()).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })
     })
@@ -81,7 +81,7 @@ describe('cart actions', () => {
         axios.put.mockImplementation(() => Promise.resolve())
         axios.get.mockImplementation(() => Promise.resolve({ data: result }))
 
-        store.dispatch(updateCartProductQuantity('id', 2)).then(() => {
+        return store.dispatch(updateCartProductQuantity('id', 2)).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })
     })
@@ -97,7 +97,7 @@ describe('cart actions', () => {
 
         axios.get.mockImplementation(() => Promise.resolve({ data: result }))
 
-        store.dispatch(fetchTodayTimetable()).then(() => {
+        return store.dispatch(fetchTodayTimetable()).then(() => {
             expect(store.getActions()).toEqual(expectedActions)
         })
     })

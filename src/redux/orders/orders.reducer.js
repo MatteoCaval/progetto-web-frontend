@@ -50,7 +50,7 @@ const ordersReducer = (state = INITIAL_STATE, action = {}) => {
             return {
                 ...state,
                 realTimeOrders: [
-                    ...state.realTimeOrders,
+                    ...(state.realTimeOrders ? state.realTimeOrders : []),
                     action.payload
                 ]
             }
