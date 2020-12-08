@@ -78,7 +78,7 @@ export const fetchOrderHistory = (page = 1) => {
     return (dispatch, getState) => {
         dispatch(fetchOrderHistoryPending())
         const token = getState().user.data.token
-        return orderService.fetchOrderHistory(token, getState().user.role, page)
+        return orderService.fetchOrderHistory(token, getState().user.data.role, page)
             .then(result => dispatch(fetchOrderHistorySuccess(result.data)))
             .catch(error => {
                 dispatch(fetchOrderHistoryFailed(mapNetworkError(error)))
