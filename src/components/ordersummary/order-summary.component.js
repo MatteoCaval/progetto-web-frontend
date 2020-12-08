@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, CardActionArea, Container, Grid, MenuItem, TextField, Typography } from "@material-ui/core";
 import { completeOrder } from "../../redux/orders/orders.actions";
-import { clearOrderData, fetchTodayTimetable } from "../../redux/cart/cart.actions";
+import {clearOrderData, fetchCart, fetchTodayTimetable} from "../../redux/cart/cart.actions";
 import { connect } from "react-redux";
 import PaymentType from "./payment-type"
 
@@ -22,7 +22,7 @@ const cities = [
     'Borghi'
 ]
 
-const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTimetable, orderCompleted, clearOrderData, history }) => {
+const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTimetable, orderCompleted, clearOrderData, history, products, fetchCart }) => {
     const [cashPayment, setCashPayment] = useState(1);
     const [orderData, setOrderData] = useState({
         name: user.name,
@@ -42,6 +42,12 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
     useEffect(() => {
         setOrderData({ ...orderData, 'paymentType': cashPayment ? PaymentType.ON_DELIVERY : PaymentType.ONLINE })
     }, [cashPayment])
+
+    useEffect(() => {
+        if (!products) {
+            fetchCart()
+        }
+    }, [products])
 
     const handleCashPaymentSelect = () => {
         setCashPayment(true)
@@ -245,7 +251,8 @@ const mapDispatchToProps = dispatch => {
     return {
         completeOrder: (orderData) => dispatch(completeOrder(orderData)),
         fetchTodayTimetable: () => dispatch(fetchTodayTimetable()),
-        clearOrderData: () => dispatch(clearOrderData())
+        clearOrderData: () => dispatch(clearOrderData()),
+        fetchCart: () => dispatch(fetchCart())
     }
 }
 
@@ -254,7 +261,8 @@ const mapStateToProps = state => {
         total: state.cart.total,
         timeSlots: state.cart.timetable,
         orderCompleted: state.cart.orderCompleted,
-        user: state.user
+        user: state.user,
+        products: state.cart.products
     }
 }
 
