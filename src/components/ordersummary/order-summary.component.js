@@ -219,7 +219,7 @@ const OrderSummaryPage = ({ user, completeOrder, total, timeSlots, fetchTodayTim
                            Place your order
                         </Button>
                         {
-                            timeSlots.length < 1 ? 
+                            timeSlots && timeSlots.length < 1 ?
                                 <div className="no-slots">
                                 <Typography variant="h3" color="primary">The shop is actually closed.</Typography>
                                 <Typography variant="h3" color="primary">Please, place your order in an other day.</Typography>
