@@ -1,8 +1,8 @@
-name: ci
+name: Docker
 
 on:
   push:
-    branches: master
+    branches: docker_action_test
 
 jobs:
   main:
