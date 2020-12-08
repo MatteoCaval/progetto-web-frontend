@@ -9,6 +9,7 @@ export const INITIAL_STATE = {
 const userReducer = (state = INITIAL_STATE, action = {}) => {
     switch (action.type) {
         case AuthActionType.LOGIN_SUCCESS:
+        case AuthActionType.REGISTRATION_SUCCESS:
             return {
                 data: action.payload
             }

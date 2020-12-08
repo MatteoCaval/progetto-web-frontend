@@ -54,8 +54,12 @@ export const registerUser = (user) => {
             .then(result => {
                 dispatch(registrationSuccess(result.data))
                 dispatch(alertActions.success('Registration Successful'))
+                fetchCurrentUserByToken(dispatch, result.data.token)
             })
-            .catch(error => dispatch(registrationFailed(mapNetworkError(error))))
+            .catch(error => {
+                dispatch(registrationFailed(mapNetworkError(error)))
+                dispatch(alertActions.error(mapNetworkError(error).description))
+            })
     }
 }
 
@@ -86,13 +90,16 @@ const logoutFailed = (error) => {
 export const fetchCurrentUser = () => {
     return (dispatch, getState) => {
         const token = getState().user.data.token
-        return userService.fetchCurrentUser(token)
-            .then(result => {
-                dispatch(fetchCurrentUserSuccess(result.data))
-            })
-            .catch(error => dispatch(fetchCurrentUserFailed(mapNetworkError(error))))
-
+        return fetchCurrentUserByToken(dispatch, token)
     }
+}
+
+const fetchCurrentUserByToken = (dispatch, token) => {
+    return userService.fetchCurrentUser(token)
+        .then(result => {
+            dispatch(fetchCurrentUserSuccess(result.data))
+        })
+        .catch(error => dispatch(fetchCurrentUserFailed(mapNetworkError(error))))
 }
 
 const fetchCurrentUserSuccess = (user) => {
