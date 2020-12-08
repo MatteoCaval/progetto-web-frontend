@@ -15,6 +15,7 @@ import OrderStateChip from "../custom/order-state-chip.component"
 import { connect } from "react-redux";
 import UserRoles from "./../../common/UserRoles"
 import OrderState from '../../common/OrderState'
+import PaymentType from '../../common/PaymentType'
 import { updateOrder } from './../../redux/orders/orders.actions'
 import HorizontalDivider from '../custom/horizontal-divider.component'
 import DeliverOrderDialog from './dialogs/deliver-order-dialog.component'
@@ -117,6 +118,9 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                         </Typography>
                         <Typography variant='h5' color='textPrimary'>
                             {order.totalPrice && order.totalPrice.toFixed(2)}€
+                        </Typography>
+                        <Typography variant='h6' color='primary' fontWeight="fontWeightBold">
+                            {order.paymentType == PaymentType.ON_DELIVERY ? "Cash payment" : "Payed online"}
                         </Typography>
                     </div>
                 </div>

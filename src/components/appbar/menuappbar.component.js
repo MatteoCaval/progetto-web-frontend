@@ -86,28 +86,28 @@ const MenuAppBar = ({ currentUser, products, history, logout }) => {
                             component={RouterLink}
                             to="/live-orders"
                             onClick={hideDrawer}>
-                            <ListItemIcon>{<ListAltIcon />}</ListItemIcon>
+                            <ListItemIcon>{<ListAltIcon color="primary"/>}</ListItemIcon>
                             <ListItemText primary='Live Orders' />
                         </ListItem>
                         <ListItem button
                             component={RouterLink}
                             to="/orders"
                             onClick={hideDrawer}>
-                            <ListItemIcon>{<ListAltIcon />}</ListItemIcon>
+                            <ListItemIcon>{<ListAltIcon color="primary"/>}</ListItemIcon>
                             <ListItemText primary='Order History' />
                         </ListItem>
                         <ListItem button
                             component={RouterLink}
                             to="/timetable"
                             onClick={hideDrawer}>
-                            <ListItemIcon>{<ScheduleIcon />}</ListItemIcon>
+                            <ListItemIcon>{<ScheduleIcon color="primary"/>}</ListItemIcon>
                             <ListItemText primary='Timetable' />
                         </ListItem>
                         <ListItem button
                             component={RouterLink}
                             to='/riders'
                             onClick={hideDrawer}>
-                            <ListItemIcon>{<DirectionsBikeIcon />}</ListItemIcon>
+                            <ListItemIcon>{<DirectionsBikeIcon color="primary"/>}</ListItemIcon>
                             <ListItemText primary='Riders' />
                         </ListItem>
                     </List>

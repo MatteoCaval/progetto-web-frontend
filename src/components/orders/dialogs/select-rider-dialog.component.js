@@ -5,11 +5,10 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    Avatar,
     List,
     ListItem,
-    ListItemAvatar,
-    ListItemText
+    ListItemText,
+    ListItemIcon
 } from "@material-ui/core";
 
 import DirectionsBikeIcon from '@material-ui/icons/DirectionsBike'
@@ -23,11 +22,9 @@ const SelectRiderDialog = ({ riders, open, handleClose, handleListItemClick}) =>
                 <List>
                     {riders && riders.map((rider) => (
                         <ListItem button onClick={() => handleListItemClick(rider)} key={rider.id}>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <DirectionsBikeIcon />
-                                </Avatar>
-                            </ListItemAvatar>
+                            <ListItemIcon>
+                            <DirectionsBikeIcon color="primary"/>
+                            </ListItemIcon>
                             <ListItemText primary={`${rider.name} ${rider.surname}`} />
                         </ListItem>
                     ))}
