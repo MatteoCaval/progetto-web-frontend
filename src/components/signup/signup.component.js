@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.primary.main
     },
     form: {
         marginTop: theme.spacing(3),
@@ -51,7 +51,7 @@ const SignUp = ({ registerUser }) => {
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon/>
+                    <LockOutlinedIcon color="secondary"/>
                 </Avatar>
                 <Typography variant="h2" className="page-title">Sign up</Typography>
                 <form className={classes.form} onSubmit={handleSubmit}>
