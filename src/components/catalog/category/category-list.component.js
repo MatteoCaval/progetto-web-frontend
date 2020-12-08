@@ -49,12 +49,9 @@ const CategoryList = ({ categories, fetchCategories, history, match }) => {
                     <Grid item sm={12} md={6}> 
                         <Typography variant="h2" className="page-title">Welcome into UniBurger!</Typography>
                         <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur lorem mi, suscipit et scelerisque vitae, aliquet et augue. 
-                        Praesent maximus suscipit mauris, nec mollis arcu egestas ac. Aenean et ornare libero. Suspendisse potenti. Proin non tincidunt ipsum. 
-                        Vivamus sit amet purus vel lectus sagittis cursus at eget tellus. In eget justo sed elit venenatis mollis. 
-                        Curabitur ac erat vel ipsum interdum lobortis. Morbi dapibus, nulla vitae efficitur consectetur, turpis quam rutrum enim, vitae pretium arcu magna et nisi. 
-                        Proin elementum et ex sit amet varius. Sed in sollicitudin dolor. Proin ullamcorper volutpat orci nec malesuada. 
-                        Vestibulum magna nisi, mattis vitae efficitur id, pulvinar quis tortor. Sed ultrices lacus quis nisl cursus pellentesque eu id risus.
+                        Juicy <strong>burgers</strong>, crunchy bacon and layers of cheddar cheese. All cooked to perfection and served under a pouring rain of crispy <strong>French fries</strong>.<br/>
+                        Here you will find only the best quality for a stars and stripes taste! And what about that smoky flavor that comes out every time you bite into a glazed <strong>Barbecue Ribs</strong> in BBQ sauce? A real lust for the palate.
+                        <br/><strong>Be careful though:</strong> you won't be able to do without us anymore!
                         </Typography>                    
                     </Grid>
                     <Grid item  sm={12} md={6} className="image-container">

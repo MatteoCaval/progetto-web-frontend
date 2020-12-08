@@ -3,6 +3,15 @@ $color-secondary: #FFFFFF;
 $page-margin: 5em;
 $page-margin-top: 7em;
 
+$chip-pending-background: #921C2A;
+$chip-pending-text: #FFFFFF;
+
+$chip-in-delivery-background: rgb(255, 136, 0);
+$chip-in-delivery-text: #FFFFFF;
+
+$chip-delivered-background: green;
+$chip-delivered-text: #FFFFFF;
+
 @import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap');
 
 .main {

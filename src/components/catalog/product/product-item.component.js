@@ -13,7 +13,7 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
     const navigateToProductDetail = () => {
         history.push(`${match.url}/${product.id}`)
     }
-
+    
     return (
         <Card className="product-item">
             <CardActionArea onClick={navigateToProductDetail}>
@@ -29,7 +29,7 @@ const ProductItem = ({ product, addProductToCart, history, match }) => {
                 </Typography>
                 <div className='add-to-cart'>
                     <Typography variant='h5' color='textPrimary'>
-                        {product.price && product.price.toFixed(2)}€
+                        {product.price && parseFloat(product.price).toFixed(2)}€
                     </Typography>
 
                     <ConsumerConstrained>
