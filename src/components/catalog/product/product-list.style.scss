@@ -1,8 +1,12 @@
-.delete-category-button {
-  margin-top: 2em !important;
-}
-
 .category-name-header {
   padding-top: .2em;
   padding-bottom: 1em;
+}
+
+.empty-shop-button-container {
+  text-align: center;
+
+  .delete-category-button {
+    margin-top: 2em !important;
+  }
 }

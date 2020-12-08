@@ -25,7 +25,9 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(10)
     },
     menuButton: {
-        marginRight: theme.spacing(2),
+        marginLeft: theme.spacing(2),
+        position: "absolute",
+        left: 0
     },
     title: {
         cursor: "pointer",

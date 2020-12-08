@@ -18,7 +18,6 @@ const CatalogPage = ({ match, loading, error }) => {
         if (error.code === 404) {
             errorView = (<NotFoundItem />)
         } else if (!error.code ) {
-            // errorView = (<p>Something went wrong</p>)
             errorView = (<OpsPage />)
         }
     }
