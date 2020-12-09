@@ -4,6 +4,7 @@ import {authService} from "../../services/auth.service";
 import {userService} from "../../services/user.service";
 import UserActionTypes from "./user.actionTypes";
 import {mapNetworkError} from "../networkUtils"
+import {fetchCart} from "../cart/cart.actions";
 
 const loginSuccess = user => {
     return {
@@ -98,6 +99,7 @@ const fetchCurrentUserByToken = (dispatch, token) => {
     return userService.fetchCurrentUser(token)
         .then(result => {
             dispatch(fetchCurrentUserSuccess(result.data))
+            dispatch(fetchCart())
         })
         .catch(error => dispatch(fetchCurrentUserFailed(mapNetworkError(error))))
 }

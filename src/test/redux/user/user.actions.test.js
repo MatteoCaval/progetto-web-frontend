@@ -72,7 +72,7 @@ describe('user actions', () => {
         const store = mockStore(stateWToken)
 
         return store.dispatch(fetchCurrentUser())
-            .then(() => expect(store.getActions()).toEqual(expectedAction))
+            .then(() => expect(store.getActions()).toEqual(expect.arrayContaining(expectedAction)))
     })
 
 })
