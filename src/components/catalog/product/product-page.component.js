@@ -68,8 +68,8 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
                                                 </Typography>
                                                 <List className='ingredients' >
                                                     {
-                                                        product.ingredients.map((ingredient) =>
-                                                            <ListItem className="ingredient">
+                                                        product.ingredients.map((ingredient, index) =>
+                                                            <ListItem className="ingredient" key={index}>
                                                                 <ListItemIcon className="icon">
                                                                     <DoubleArrowIcon color="primary" />
                                                                 </ListItemIcon>
