@@ -19,6 +19,10 @@ const CartPage = ({ fetchCart, cart, history }) => {
 
     const { products, error, loading, total } = cart
 
+    if (loading) {
+        return <Progress loading={loading}/>
+    }
+
     if (products && products.length) {
         return (
             <React.Fragment>
@@ -53,7 +57,6 @@ const CartPage = ({ fetchCart, cart, history }) => {
                             </div>
                         </div>
                     </div>
-                    <Progress loading={loading}/>
                 </Container>
             </React.Fragment>
         )
