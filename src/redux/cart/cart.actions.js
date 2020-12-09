@@ -142,7 +142,10 @@ export const fetchTodayTimetable = () => {
             .then(result => {
                 dispatch(fetchTodayTimetableSuccess(result.data))
             })
-            .catch(error => dispatch(fetchTodayTimetableFailed(mapNetworkError(error))))
+            .catch(error => {
+                dispatch(fetchTodayTimetableFailed(mapNetworkError(error)))
+                dispatch(alertActions.error("Error retrieving today's timetable"))
+            })
     }
 }
 
