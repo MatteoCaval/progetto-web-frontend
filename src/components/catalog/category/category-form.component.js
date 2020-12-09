@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, Grid, makeStyles, TextField } from "@material-ui/core";
+import { Button, Container, Grid, makeStyles, TextField, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
 import { createCategory, resetCatalogOperationsState } from "../../../redux/catalog/catalog-operations.actions";
 import { withRouter } from "react-router-dom";
@@ -51,6 +51,8 @@ const CategoryForm = ({ history, loading, error, completed, createCategory, rese
 
     return (
         <Container className={classes.root} maxWidth='xs'>
+            <Typography variant="h2" className="page-title">{"New category"}</Typography>
+
             <form className={classes.form} onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>

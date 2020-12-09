@@ -19,10 +19,10 @@ const CartProductItem = ({ product, removeFromCart, updateProductQuantity }) => 
             </div>
             <div className="cart-row-container">
                 <div className="cart-info">
-                    <Typography className='cart-title' variant='h2' color='textPrimary'>
+                    <Typography className='cart-title' variant='h3' color='textPrimary'>
                         {product.name}
                     </Typography>
-                    <Typography className='cart-price' variant='h3' color='textPrimary'>
+                    <Typography className='cart-price' variant='h4' color='textPrimary'>
                         {product.price.toFixed(2)}€
                     </Typography>
                 </div>

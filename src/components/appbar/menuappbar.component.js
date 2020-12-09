@@ -25,7 +25,9 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(10)
     },
     menuButton: {
-        marginRight: theme.spacing(2),
+        marginLeft: theme.spacing(2),
+        position: "absolute",
+        left: 0
     },
     title: {
         cursor: "pointer",
@@ -124,7 +126,7 @@ const MenuAppBar = ({ currentUser, products, history, logout }) => {
                     <img src={process.env.PUBLIC_URL + '/logo_title.png'} alt="logo" className={classes.title} onClick={handleLogoClick}/>
                     <div className={classes.headerButtons}>
                         {currentUser && currentUser.role === 'consumer' && (
-                            <Badge badgeContent={badgeNum} color="secondary" textColor="primary">
+                            <Badge badgeContent={badgeNum} color="secondary">
                                     <ShoppingCart 
                                         aria-label="account of current user"
                                         aria-controls="menu-appbar"

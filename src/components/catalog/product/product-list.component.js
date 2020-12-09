@@ -28,11 +28,11 @@ const ProductList = ({ history, fetchCategoryProducts, match, products, isEmptyC
         <React.Fragment>
             {isEmptyCategory && (
                 <div className="empty-shop-button-container">
-                    <Typography variant='h2' color='textPrimary'>
-                        La categoria è vuota
+                    <Typography variant='h2' color='primary'>
+                        Category is empty
                     </Typography>
                     <Typography color='textPrimary'>
-                        Al momento all'interno di questa categoria non sono presenti prodotti.
+                        Actually the category doesn't contain any products.
                     </Typography>
                     <AdminConstrained>
                         <Button

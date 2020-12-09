@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, ButtonGroup } from "@material-ui/core";
+import "./quantity-picker.style.scss"
 
 const QuantityPicker = ({ quantity, onQuantityIncremented, onQuantityDecremented }) => {
 
@@ -8,7 +9,7 @@ const QuantityPicker = ({ quantity, onQuantityIncremented, onQuantityDecremented
     return (
         <ButtonGroup size="small" aria-label="small outlined button group">
             <Button disabled={!clickable} onClick={onQuantityDecremented}>-</Button>
-            <Button disabled>{quantity}</Button>
+            <Button disabled><span className="counter">{quantity}</span></Button>
             <Button onClick={onQuantityIncremented}>+</Button>
         </ButtonGroup>
     );

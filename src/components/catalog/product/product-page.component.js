@@ -31,8 +31,10 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
         fetchProductDetail(productId)
     }, [fetchProductDetail])
 
+
     return (
         product ? (
+            
             <React.Fragment>
                 <Grid container className='prod-details' spacing={2}>
                     <Grid item xs={12} sm={6} className='left'>
@@ -54,25 +56,32 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
 
                             <Typography>Vat included</Typography>
 
-                            <HorizontalDivider />
+                            {                               
+                                product.ingredients && product.ingredients.length > 0
+                                    ? (
+                                        <div>
+                                            <HorizontalDivider />
 
-                            <div className="ingredients-container">
-                                <Typography variant='h3' color='textPrimary'>
-                                    Ingredients:
-                                </Typography>
-                                <List className='ingredients' >
-                                    {
-                                        product.ingredients.map((ingredient, index) =>
-                                            <ListItem className="ingredient">
-                                                <ListItemIcon className="icon">
-                                                    <DoubleArrowIcon color="primary" />
-                                                </ListItemIcon>
-                                                <ListItemText primary={ingredient} />
-                                            </ListItem>
-                                        )
-                                    }
-                                </List>
-                            </div>
+                                            <div className="ingredients-container">
+                                                <Typography variant='h3' color='textPrimary'>
+                                                    Ingredients:
+                                                </Typography>
+                                                <List className='ingredients' >
+                                                    {
+                                                        product.ingredients.map((ingredient, index) =>
+                                                            <ListItem className="ingredient" key={index}>
+                                                                <ListItemIcon className="icon">
+                                                                    <DoubleArrowIcon color="primary" />
+                                                                </ListItemIcon>
+                                                                <ListItemText primary={ingredient} />
+                                                            </ListItem>
+                                                        )
+                                                    }
+                                                </List>
+                                            </div>
+                                        </div>
+                                    ) : null
+                            }
 
                             <HorizontalDivider />
 
@@ -116,7 +125,7 @@ const ProductPage = ({ history, match, fetchProductDetail, addToCart, product, d
                 <div className="bottom">
                     <Typography>
                         <Link component={RouterLink} className="page-title" variant="h4" to={`/${product.categoryId}`}>
-                            <ArrowBackIosIcon fontSize="small"/>Back to {product.categoryName}
+                            <ArrowBackIosIcon fontSize="small" />Back to {product.categoryName}
                         </Link>
                     </Typography>
                 </div>

@@ -5,7 +5,7 @@ import "./orders-list.style.scss";
 
 const OrderList = ({ orders }) => {
     return (
-        <Container>
+        <React.Fragment>
             {
                 orders && orders.length > 0 ?
                     <Grid className="orders-list" container spacing={2}>
@@ -31,7 +31,7 @@ const OrderList = ({ orders }) => {
                         </Typography>
                     </div>) : null)
             }
-        </Container>
+        </React.Fragment>
     )
 }
 
