@@ -72,7 +72,7 @@ const NotFoundItem = () => {
             </div>
 
             <div className="error-text">
-                <Typography variant="h1">Some ate this item!</Typography>
+                <Typography variant="h1">Someone ate this item!</Typography>
                 <Typography variant="h3">Cannot find the item your are looking for.</Typography>
             </div>
         </div>
