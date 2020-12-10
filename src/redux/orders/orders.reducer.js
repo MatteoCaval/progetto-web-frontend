@@ -43,16 +43,16 @@ const ordersReducer = (state = INITIAL_STATE, action = {}) => {
         case OrderActionTypes.REAL_TIME_ORDERS: {
             return {
                 ...state,
-                realTimeOrders: action.payload
+                realTimeOrders: sortOrders(action.payload)
             }
         }
         case OrderActionTypes.NEW_ORDER_RECEIVED: {
             return {
                 ...state,
-                realTimeOrders: [
+                realTimeOrders: sortOrders([
                     ...(state.realTimeOrders ? state.realTimeOrders : []),
                     action.payload
-                ]
+                ])
             }
         }
         case OrderActionTypes.ORDER_UPDATED: {
@@ -60,17 +60,28 @@ const ordersReducer = (state = INITIAL_STATE, action = {}) => {
             const orderPresent = state.realTimeOrders.find(order => order._id === updatedOrder._id)
             return {
                 ...state,
-                realTimeOrders: orderPresent ? state.realTimeOrders.map(
+                realTimeOrders: sortOrders(orderPresent ? state.realTimeOrders.map(
                     order => { // se l'ordine aggiornato era presente in lista lo aggiorno
                         return order._id === updatedOrder._id ? updatedOrder : order
                     })
-                    : [updatedOrder, ...state.realTimeOrders] // se l'ordine aggiornato non era presente in lista lo aggiungo
+                    : [updatedOrder, ...state.realTimeOrders]) // se l'ordine aggiornato non era presente in lista lo aggiungo
             }
         }
 
         default:
             return state
     }
+}
+
+
+const sortOrders = (orders) => {
+    const mapped = orders.map(order => {
+        return ({
+            ...order,
+            formattedDate: order.creationDate.split('T')[0]
+        })
+    })
+    return mapped.sort((a, b) => a.formattedDate.localeCompare(b.formattedDate) || a.time.localeCompare(b.time))
 }
 
 export default ordersReducer
