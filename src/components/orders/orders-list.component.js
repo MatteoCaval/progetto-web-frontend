@@ -1,5 +1,5 @@
 import React from "react";
-import {Grid, Container, Typography} from "@material-ui/core";
+import {Grid, Typography} from "@material-ui/core";
 import OrderItem from "./order-item.component";
 import "./orders-list.style.scss";
 

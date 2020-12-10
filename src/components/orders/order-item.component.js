@@ -120,7 +120,7 @@ const OrderItem = ({ order, user, riders, updateOrder }) => {
                             {order.totalPrice && order.totalPrice.toFixed(2)}€
                         </Typography>
                         <Typography variant='h6' color='primary' fontWeight="fontWeightBold">
-                            {order.paymentType == PaymentType.ON_DELIVERY ? "Cash payment" : "Payed online"}
+                            {order.paymentType === PaymentType.ON_DELIVERY ? "Cash payment" : "Payed online"}
                         </Typography>
                     </div>
                 </div>
