@@ -58,7 +58,14 @@ describe('order reducer', () => {
 
     it('set realTimeOrders on REAL_TIME_ORDERS', () => {
         const prevState = orderInitialState
-        const orders = ['order1', 'order2']
+        const orders = [{
+            time: '19:30',
+            creationDate: '2020-12-10T18:30:00.000Z'
+        }, {
+            time: '20:30',
+            creationDate: '2020-12-10T18:30:00.000Z'
+        }]
+
         expect(ordersReducer(prevState, {
             type: OrderActionTypes.REAL_TIME_ORDERS,
             payload: orders
@@ -70,7 +77,9 @@ describe('order reducer', () => {
     it('add the new order to realTimeOrders on NEW_ORDER_RECEIVED', () => {
         const prevState = orderInitialState
         const newOrder = {
-            id: 1
+            id: 1,
+            time: '19:30',
+            creationDate: '2020-12-10T18:30:00.000Z'
         }
         expect(ordersReducer(prevState, {
             type: OrderActionTypes.NEW_ORDER_RECEIVED,
@@ -87,10 +96,16 @@ describe('order reducer', () => {
         it('should add order to list if was not present before', () => {
             const prevState = {
                 ...orderInitialState,
-                realTimeOrders: [{ _id: 1 }]
+                realTimeOrders: [{
+                    _id: 1,
+                    time: '19:30',
+                    creationDate: '2020-12-10T18:30:00.000Z'
+                }]
             }
             const updatedOrder = {
-                _id: 2
+                _id: 2,
+                time: '19:30',
+                creationDate: '2020-12-10T18:30:00.000Z'
             }
             expect(ordersReducer(prevState, {
                 type: OrderActionTypes.ORDER_UPDATED,
@@ -106,10 +121,16 @@ describe('order reducer', () => {
         it('should update the list if was present before', () => {
             const prevState = {
                 ...orderInitialState,
-                realTimeOrders: [{ _id: 1 }]
+                realTimeOrders: [{
+                    _id: 1,
+                    time: '19:30',
+                    creationDate: '2020-12-10T18:30:00.000Z'
+                }]
             }
             const updatedOrder = {
-                _id: 1
+                _id: 1,
+                time: '19:30',
+                creationDate: '2020-12-10T18:30:00.000Z'
             }
             expect(ordersReducer(prevState, {
                 type: OrderActionTypes.ORDER_UPDATED,
