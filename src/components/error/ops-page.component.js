@@ -5,7 +5,7 @@ import './ops-page.style.scss'
 const OpsPage = () => {
     return (
         <div className="ops-page-main">
-            <div class="error-wrapper">
+            <div className="error-wrapper">
                 <svg version="1.1" id="OBJECTS" xmlns="http://www.w3.org/2000/svg"
                      xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                      viewBox="0 0 377.54 232.72" xmlSpace="preserve">
